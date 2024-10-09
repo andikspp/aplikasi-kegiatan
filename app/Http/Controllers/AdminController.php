@@ -15,4 +15,19 @@ class AdminController extends Controller
     {
         return view('admin.menu.dashboard');
     }
+
+    public function kegiatan()
+    {
+        return view('admin.menu.kegiatan');
+    }
+
+    public function tambahKegiatan()
+    {
+        return view('admin.menu.tambah-kegiatan');
+    }
+
+    public function qrcode()
+    {
+        return view('admin.menu.qrcode');
+    }
 }

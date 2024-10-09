@@ -19,3 +19,6 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+Route::get('/kegiatan', [AdminController::class, 'kegiatan'])->name('kegiatan');
+Route::get('/tambah-kegiatan', [AdminController::class, 'tambahKegiatan'])->name('tambah-kegiatan');
+Route::get('/qrcode', [AdminController::class, 'qrcode'])->name('qrcode');
