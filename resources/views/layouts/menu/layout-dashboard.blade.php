@@ -48,7 +48,7 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light bg-custom border-bottom">
-                <button class="btn btn-primary" id="menu-toggle">
+                <button class="btn bg-custom text-white" id="menu-toggle">
                     <i class="fas fa-bars"></i>
                 </button>
                 <form class="d-flex me-auto ms-4" role="search">
