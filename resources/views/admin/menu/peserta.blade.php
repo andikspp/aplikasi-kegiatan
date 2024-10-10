@@ -22,9 +22,9 @@
                                     <th>No</th>
                                     <th>Nama Kegiatan</th>
                                     <th>Tanggal Buka/Tutup</th>
-                                    <th>Created At</th>
+                                    <th>Lokasi</th>
                                     <th>Status</th>
-                                    <th>#</th>
+                                    <th>Jumlah Peserta</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,7 +34,7 @@
                                     <td>2023-11-14 19:34:00</td>
                                     <td>2023-11-14T12:56:57.000000Z</td>
                                     <td><span class="badge bg-primary">Template</span></td>
-                                    <td>0 Tanggapan</td>
+                                    <td>0 Peserta</td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
@@ -42,7 +42,7 @@
                                     <td>2023-08-09 17:20:00</td>
                                     <td>2023-08-09T10:26:33.000000Z</td>
                                     <td><span class="badge bg-primary">Template</span></td>
-                                    <td>0 Tanggapan</td>
+                                    <td>0 Peserta</td>
                                 </tr>
                             </tbody>
                         </table>
