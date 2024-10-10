@@ -40,4 +40,9 @@ class AdminController extends Controller
     {
         return view('admin.menu.detail-kegiatan', compact('id'));
     }
+    
+    public function pertanyaan()
+    {
+        return view('admin.menu.pertanyaan');
+    }
 }
