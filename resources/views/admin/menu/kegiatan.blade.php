@@ -40,7 +40,7 @@
                         <th>Pokja</th>
                         <th>Status Sertifikat</th>
                         <th>Status Ajuan SK Sertifikat</th>
-                        <th>#</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,6 +58,7 @@
                         <td>Belum ada</td>
                         <td>Tidak ada ajuan.</td>
                         <td>
+                        <a href="{{ route('detail-kegiatan', ['id' => 'V32X7']) }}" class="text-decoration-none text-dark">
                             <button class="btn btn-sm btn-outline-secondary">
                                 <i class="fas fa-ellipsis-v"></i>
                             </button>
@@ -66,6 +67,7 @@
                     <tr>
                         <td>2</td>
                         <td>
+                        <a href="{{ route('detail-kegiatan', ['id' => 'AH6VL']) }}" class="text-decoration-none text-dark">
                             Rapat Koordinasi Pemenuhan Formasi Guru ASN PPPK pada Instansi Daerah Tahun 2024 [REG 2 - Timur]
                             <br>
                             <small class="text-muted">Kode Kegiatan: AH6VL</small>

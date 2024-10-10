@@ -30,4 +30,14 @@ class AdminController extends Controller
     {
         return view('admin.menu.qrcode');
     }
+
+    public function peserta()
+    {
+        return view('admin.menu.peserta');
+    }
+
+    public function detailKegiatan($id)
+    {
+        return view('admin.menu.detail-kegiatan', compact('id'));
+    }
 }
