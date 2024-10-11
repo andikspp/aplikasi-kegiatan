@@ -10,9 +10,12 @@
                     <div class="card-body">
                         <!-- Tombol Tambah Kegiatan -->
                         <div class="mb-3 text-start">
-                            <button class="btn btn-primary" id="tambah-kegiatan">
+                            <a href="{{ route('pertanyaan') }}" class="btn btn-primary" id="tambah-kegiatan">
                                 <i class="fa fa-plus"></i> Tambahkan Pertanyaan
-                            </button>
+                            </a>
+                            {{-- <button class="btn btn-primary" id="tambah-kegiatan">
+                                <i class="fa fa-plus"></i> Tambahkan Pertanyaan
+                            </button> --}}
                         </div>
 
                         <!-- Tabel Daftar Kegiatan -->
@@ -30,7 +33,8 @@
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td><a href="https://gurudikdas.kemdikbud.go.id/presensi/kegiatan/1" target="_blank">Evaluasi Kegiatan</a></td>
+                                    <td><a href="https://gurudikdas.kemdikbud.go.id/presensi/kegiatan/1"
+                                            target="_blank">Evaluasi Kegiatan</a></td>
                                     <td>2023-11-14 19:34:00</td>
                                     <td>2023-11-14T12:56:57.000000Z</td>
                                     <td><span class="badge bg-primary">Template</span></td>
@@ -38,7 +42,8 @@
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td><a href="https://gurudikdas.kemdikbud.go.id/presensi/kegiatan/2" target="_blank">Dampak Ngopi Selam</a></td>
+                                    <td><a href="https://gurudikdas.kemdikbud.go.id/presensi/kegiatan/2"
+                                            target="_blank">Dampak Ngopi Selam</a></td>
                                     <td>2023-08-09 17:20:00</td>
                                     <td>2023-08-09T10:26:33.000000Z</td>
                                     <td><span class="badge bg-primary">Template</span></td>

@@ -8,9 +8,9 @@
                     <div class="card-header text-center">Kelola Quiz</div>
 
                     <div class="card-body">
-                        <form action="{{ route('tambahkan pertanyaan') }}" method="POST">
+                        <form action="#" method="POST">
                             @csrf
-                            
+
                             <div class="form-group mb-3">
                                 <label for="judul">Judul *</label>
                                 <input type="text" class="form-control" id="judul" name="judul" required>
@@ -24,11 +24,13 @@
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="tanggal_mulai">Tanggal Quiz * - Mulai</label>
-                                    <input type="datetime-local" class="form-control" id="tanggal_mulai" name="tanggal_mulai" required>
+                                    <input type="datetime-local" class="form-control" id="tanggal_mulai"
+                                        name="tanggal_mulai" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="tanggal_selesai">Selesai</label>
-                                    <input type="datetime-local" class="form-control" id="tanggal_selesai" name="tanggal_selesai" required>
+                                    <input type="datetime-local" class="form-control" id="tanggal_selesai"
+                                        name="tanggal_selesai" required>
                                 </div>
                             </div>
 
@@ -72,13 +74,13 @@
 @endpush
 
 @push('scripts')
-<script src="https://cdn.tiny.cloud/1/YOUR_API_KEY/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<script>
-    tinymce.init({
-        selector: '#deskripsi',
-        plugins: 'link lists',
-        toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright | bullist numlist | link',
-        menubar: false,
-    });
-</script>
+    <script src="https://cdn.tiny.cloud/1/YOUR_API_KEY/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#deskripsi',
+            plugins: 'link lists',
+            toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright | bullist numlist | link',
+            menubar: false,
+        });
+    </script>
 @endpush
