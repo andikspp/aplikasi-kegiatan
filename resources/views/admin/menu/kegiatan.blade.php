@@ -47,9 +47,11 @@
                     <tr>
                         <td>1</td>
                         <td>
-                            Rapat Koordinasi Pengelolaan Kinerja Guru dan Kepala Sekolah Bagi PIC Dinas Pendidikan Region 1
+                            <a href="#" class="kegiatan-link">
+                                Rapat Koordinasi Pengelolaan Kinerja Guru dan Kepala Sekolah Bagi PIC Dinas Pendidikan Region 1
+                            </a>
                             <br>
-                            <small class="text-muted">Kode Kegiatan: V32X7</small>
+                            <span class="kode-kegiatan">Kode Kegiatan: <strong>V32X7</strong></span>
                         </td>
                         <td>16 s.d. 18 Oktober 2024</td>
                         <td>0</td>
@@ -58,30 +60,53 @@
                         <td>Belum ada</td>
                         <td>Tidak ada ajuan.</td>
                         <td>
-                        <a href="{{ route('detail-kegiatan', ['id' => 'V32X7']) }}" class="text-decoration-none text-dark">
-                            <button class="btn btn-sm btn-outline-secondary">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="#">Lihat/Ubah</a></li>
+                                    <li><a class="dropdown-item" href="#">Daftar Peserta</a></li>
+                                    <li><a class="dropdown-item" href="#">Unggah Ajuan SK Sertifikat</a></li>
+                                    <li><a class="dropdown-item" href="#">Unduh Presensi</a></li>
+                                    <li><a class="dropdown-item" href="#">Unduh Biodata</a></li>
+                                    <li><a class="dropdown-item" href="#">Unduh Sertifikat</a></li>
+                                    <li><a class="dropdown-item" href="#">Sebaran Peserta</a></li>
+                                </ul>
+                            </div>
                         </td>
                     </tr>
+
                     <tr>
                         <td>2</td>
                         <td>
-                        <a href="{{ route('detail-kegiatan', ['id' => 'AH6VL']) }}" class="text-decoration-none text-dark">
-                            Rapat Koordinasi Pemenuhan Formasi Guru ASN PPPK pada Instansi Daerah Tahun 2024 [REG 2 - Timur]
+                            <a href="#" class="kegiatan-link">
+                                Rapat Pembuatan Buku Saku
+                            </a>
                             <br>
-                            <small class="text-muted">Kode Kegiatan: AH6VL</small>
+                            <span class="kode-kegiatan">Kode Kegiatan: <strong>K3421</strong></span>
                         </td>
-                        <td>17 s.d. 19 September 2024</td>
+                        <td>16 s.d. 19 Desember 2024</td>
                         <td>0</td>
-                        <td>501</td>
+                        <td>0</td>
                         <td>PPPK</td>
                         <td>Belum ada</td>
                         <td>Tidak ada ajuan.</td>
                         <td>
-                            <button class="btn btn-sm btn-outline-secondary">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="#">Lihat/Ubah</a></li>
+                                    <li><a class="dropdown-item" href="#">Daftar Peserta</a></li>
+                                    <li><a class="dropdown-item" href="#">Unggah Ajuan SK Sertifikat</a></li>
+                                    <li><a class="dropdown-item" href="#">Unduh Presensi</a></li>
+                                    <li><a class="dropdown-item" href="#">Unduh Biodata</a></li>
+                                    <li><a class="dropdown-item" href="#">Unduh Sertifikat</a></li>
+                                    <li><a class="dropdown-item" href="#">Sebaran Peserta</a></li>
+                                </ul>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -105,8 +130,23 @@
             background-color: #f8f9fa;
         }
 
+        .kode-kegiatan {
+            color: #6c757d; /* Warna abu-abu untuk kode kegiatan */
+            font-size: 0.9em; /* Ukuran font lebih kecil */
+        }
+
         .table td {
             vertical-align: middle;
+        }
+
+        .kegiatan-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .kegiatan-link:hover {
+            text-decoration: none;
+            color: #0056b3; /* Warna biru yang sedikit lebih gelap saat dihover */
         }
     </style>
 @endsection

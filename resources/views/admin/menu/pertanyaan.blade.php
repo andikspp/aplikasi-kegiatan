@@ -42,7 +42,33 @@
                                 </select>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <div class="item-quiz mt-4">
+                                <h5>Item Quiz</h5>
+                                <hr>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <input type="text" class="form-control mr-2" placeholder="Pertanyaan" style="flex-grow: 1;">
+                                    <select class="form-control ml-2" style="width: 150px;">
+                                        <option>Essai</option>
+                                        <!-- Tambahkan opsi lain jika diperlukan -->
+                                    </select>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <button type="button" class="btn btn-success mr-2"><i class="fas fa-arrow-down"></i></button>
+                                    <button type="button" class="btn btn-primary mr-2"><i class="fas fa-copy"></i></button>
+                                    <button type="button" class="btn btn-danger mr-2"><i class="fas fa-trash"></i></button>
+                                    <div class="custom-control custom-switch ml-2">
+                                        <input type="checkbox" class="custom-control-input" id="wajibDiisi">
+                                        <label class="custom-control-label" for="wajibDiisi">Wajib diisi</label>
+                                    </div>
+                                    <button type="button" class="btn btn-link ml-auto"><i class="fas fa-ellipsis-v"></i></button>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-primary mt-3">
+                                <i class="fas fa-plus"></i> Tambah Item
+                            </button>
+
+                            <button type="submit" class="btn btn-primary mt-3">Simpan</button>
                         </form>
                     </div>
                 </div>
@@ -70,11 +96,31 @@
         .btn-primary {
             border-radius: 4px;
         }
+
+        .item-quiz {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .btn-success, .btn-primary, .btn-danger {
+            padding: 5px 10px;
+        }
+
+        .custom-switch {
+            padding-left: 2.25rem;
+        }
+
+        .custom-control-input:checked ~ .custom-control-label::before {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
     </style>
 @endpush
 
 @push('scripts')
     <script src="https://cdn.tiny.cloud/1/YOUR_API_KEY/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
     <script>
         tinymce.init({
             selector: '#deskripsi',
