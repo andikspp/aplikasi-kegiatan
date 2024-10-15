@@ -50,4 +50,14 @@ class AdminController extends Controller
     {
         return view('admin.menu.hasilkegiatan'); // Pastikan view ini ada
     }
+
+    public function kelolapeserta()
+    {
+        return view('admin.menu.kelolapeserta');
+    }
+
+    public function kelolalainya()
+    {
+        return view('admin.menu.kelolalainya');
+    }
 }
