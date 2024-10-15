@@ -60,21 +60,21 @@
                         <td>Belum ada</td>
                         <td>Tidak ada ajuan.</td>
                         <td>
-                            <div class="dropdown">
-                                <button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">Lihat/Ubah</a></li>
-                                    <li><a class="dropdown-item" href="#">Daftar Peserta</a></li>
-                                    <li><a class="dropdown-item" href="#">Unggah Ajuan SK Sertifikat</a></li>
-                                    <li><a class="dropdown-item" href="#">Unduh Presensi</a></li>
-                                    <li><a class="dropdown-item" href="#">Unduh Biodata</a></li>
-                                    <li><a class="dropdown-item" href="#">Unduh Sertifikat</a></li>
-                                    <li><a class="dropdown-item" href="#">Sebaran Peserta</a></li>
-                                </ul>
-                            </div>
-                        </td>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="#">Lihat/Ubah</a></li>
+                                <li><a class="dropdown-item" href="#">Daftar Peserta</a></li>
+                                <li><a class="dropdown-item" href="#">Unggah Ajuan SK Sertifikat</a></li>
+                                <li><a class="dropdown-item" href="#">Unduh Presensi</a></li>
+                                <li><a class="dropdown-item" href="#">Unduh Biodata</a></li>
+                                <li><a class="dropdown-item" href="#">Unduh Sertifikat</a></li>
+                                <li><a class="dropdown-item" href="#">Sebaran Peserta</a></li>
+                            </ul>
+                        </div>
+                    </td>
                     </tr>
 
                     <tr>

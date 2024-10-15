@@ -1,48 +1,87 @@
 @extends('layouts.menu.layout-dashboard')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">QR Generator</div>
+    <div class="main-wrapper">
+        <nav class="navbar navbar-expand-lg main-navbar">
+            <!-- ... existing navbar code ... -->
+        </nav>
+        <div class="main-sidebar">
+            <aside id="sidebar-wrapper">
+                <!-- ... existing sidebar code ... -->
+            </aside>
+        </div>
 
-                    <div class="card-body">
-                        <form action="{{ route('qrcode') }}" method="POST">
-                            @csrf
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="url" placeholder="Masukan tautan"
-                                    required>
+        <div class="main-content">
+            <section class="section">
+                <div class="section-header">
+                    <h1>QR Generator</h1>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">QR Generator</h4>
                             </div>
-                            <div class="text-center mt-3">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-qrcode mr-2"></i> Generate
-                                </button>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 col-md-8 mx-auto text-center">
+                                        <input type="text" class="form-control mb-2" id="url" placeholder="Masukkan tautan" required>
+                                        <button class="btn btn-primary btn-sm" id="generate-btn"><i class="fas fa-qrcode"></i> Generate</button>
+                                    </div>
+                                    <div class="col-12 text-center mt-3 d-none" id="img-container">
+                                        <img src="" id="img-result" width="320px">
+                                    </div>
+                                </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
+        <footer class="main-footer">
+            <div class="footer-left">
+                Copyright © 2024 Direktorat Guru Dikdas
+            </div>
+        </footer>
     </div>
+
+    <!-- General JS Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const urlInput = $('#url');
+            const imgResult = $('#img-result');
+            const imgContainer = $('#img-container');
+            const generateBtn = $('#generate-btn');
+
+            generateBtn.on('click', function() {
+                const urlValue = urlInput.val();
+                if (urlValue) {
+                    imgContainer.removeClass('d-none');
+                    imgResult.attr('src', `https://your-api-url/qr/generate?link=${encodeURIComponent(urlValue)}`);
+                } else {
+                    alert("Silakan masukkan tautan yang valid.");
+                }
+            });
+        });
+    </script>
 @endsection
 
 @push('styles')
     <style>
-        .card {
+        .main-wrapper {
             margin-top: 50px;
+        }
+        .card {
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
         .card-header {
             background-color: #f8f9fa;
             font-weight: bold;
         }
-
         .form-control {
             border-radius: 0;
         }
-
         .btn-primary {
             border-radius: 0;
         }
