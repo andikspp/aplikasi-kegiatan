@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-5">
         <h1 class="mb-4">Kelola Peserta</h1>
-        
+
         <div class="filter-section mb-4">
             <h5>Filter</h5>
             <div class="row">
@@ -27,8 +27,9 @@
         </div>
 
         <div class="actions mb-4">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="dropdown mb-4">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     Aksi Masal
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -36,9 +37,9 @@
                     <li><a class="dropdown-item" href="#">Aksi 2</a></li>
                 </ul>
             </div>
-            <button class="btn btn-outline-primary">Cetak Biodata</button>
-            <button class="btn btn-danger">Unduh</button>
-            <button class="btn btn-success">Unggah</button>
+            <button class="btn btn-outline-primary"><i class="fas fa-print"></i> Cetak Biodata</button>
+            <button class="btn btn-primary"><i class="fas fa-download"></i> Unduh</button>
+            <button class="btn btn-success"><i class="fas fa-upload"></i> Unggah</button>
         </div>
 
         <div class="mt-3">
@@ -91,7 +92,8 @@
                     <td>p</td>
                     <td>
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Pilih Predikat
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

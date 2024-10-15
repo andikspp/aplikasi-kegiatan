@@ -27,4 +27,4 @@ Route::get('/detail-kegiatan/{id}', [AdminController::class, 'detailKegiatan'])-
 Route::get('/pertanyaan', [AdminController::class, 'pertanyaan'])->name('pertanyaan');
 Route::get('/hasilkegiatan', [AdminController::class, 'hasilkegiatan'])->name('hasilkegiatan');
 Route::get('/kelolapeserta', [AdminController::class, 'kelolapeserta'])->name('kelolapeserta');
-Route::get('/kelolalainya', [AdminController::class, 'kelolalainya'])->name('kelolalainya');
+Route::get('/kelolalainya', [AdminController::class, 'kelolalainya'])->name('kelolalainnya');
