@@ -47,8 +47,9 @@
                     <tr>
                         <td>1</td>
                         <td>
-                            <a href="#" class="kegiatan-link">
-                                Rapat Koordinasi Pengelolaan Kinerja Guru dan Kepala Sekolah Bagi PIC Dinas Pendidikan Region 1
+                            <a href="{{ route('hasilkegiatan') }}" class="kegiatan-link">
+                                Rapat Koordinasi Pengelolaan Kinerja Guru dan Kepala Sekolah Bagi PIC Dinas Pendidikan
+                                Region 1
                             </a>
                             <br>
                             <span class="kode-kegiatan">Kode Kegiatan: <strong>V32X7</strong></span>
@@ -60,21 +61,22 @@
                         <td>Belum ada</td>
                         <td>Tidak ada ajuan.</td>
                         <td>
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="#">Lihat/Ubah</a></li>
-                                <li><a class="dropdown-item" href="#">Daftar Peserta</a></li>
-                                <li><a class="dropdown-item" href="#">Unggah Ajuan SK Sertifikat</a></li>
-                                <li><a class="dropdown-item" href="#">Unduh Presensi</a></li>
-                                <li><a class="dropdown-item" href="#">Unduh Biodata</a></li>
-                                <li><a class="dropdown-item" href="#">Unduh Sertifikat</a></li>
-                                <li><a class="dropdown-item" href="#">Sebaran Peserta</a></li>
-                            </ul>
-                        </div>
-                    </td>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="#">Lihat/Ubah</a></li>
+                                    <li><a class="dropdown-item" href="#">Daftar Peserta</a></li>
+                                    <li><a class="dropdown-item" href="#">Unggah Ajuan SK Sertifikat</a></li>
+                                    <li><a class="dropdown-item" href="#">Unduh Presensi</a></li>
+                                    <li><a class="dropdown-item" href="#">Unduh Biodata</a></li>
+                                    <li><a class="dropdown-item" href="#">Unduh Sertifikat</a></li>
+                                    <li><a class="dropdown-item" href="#">Sebaran Peserta</a></li>
+                                </ul>
+                            </div>
+                        </td>
                     </tr>
 
                     <tr>
@@ -94,7 +96,8 @@
                         <td>Tidak ada ajuan.</td>
                         <td>
                             <div class="dropdown">
-                                <button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-ellipsis-v"></i>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -131,8 +134,10 @@
         }
 
         .kode-kegiatan {
-            color: #6c757d; /* Warna abu-abu untuk kode kegiatan */
-            font-size: 0.9em; /* Ukuran font lebih kecil */
+            color: #6c757d;
+            /* Warna abu-abu untuk kode kegiatan */
+            font-size: 0.9em;
+            /* Ukuran font lebih kecil */
         }
 
         .table td {
@@ -146,7 +151,8 @@
 
         .kegiatan-link:hover {
             text-decoration: none;
-            color: #0056b3; /* Warna biru yang sedikit lebih gelap saat dihover */
+            color: #0056b3;
+            /* Warna biru yang sedikit lebih gelap saat dihover */
         }
     </style>
 @endsection

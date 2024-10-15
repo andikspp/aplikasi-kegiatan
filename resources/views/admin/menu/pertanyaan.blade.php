@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header text-center">Kelola Quiz</div>
+                    <div class="card-header text-center">Kelola Kegiatan</div>
 
                     <div class="card-body">
                         <form action="#" method="POST">
@@ -23,7 +23,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="tanggal_mulai">Tanggal Quiz * - Mulai</label>
+                                    <label for="tanggal_mulai">Tanggal Kegiatan * - Mulai</label>
                                     <input type="datetime-local" class="form-control" id="tanggal_mulai"
                                         name="tanggal_mulai" required>
                                 </div>
@@ -42,25 +42,28 @@
                                 </select>
                             </div>
 
-                            <div class="item-quiz mt-4">
-                                <h5>Item Quiz</h5>
+                            <div class="item-Kegiatan mt-4">
+                                <h5>Item Kegiatan</h5>
                                 <hr>
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <input type="text" class="form-control mr-2" placeholder="Pertanyaan" style="flex-grow: 1;">
+                                    <input type="text" class="form-control mr-2" placeholder="Pertanyaan"
+                                        style="flex-grow: 1;">
                                     <select class="form-control ml-2" style="width: 150px;">
                                         <option>Essai</option>
                                         <!-- Tambahkan opsi lain jika diperlukan -->
                                     </select>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <button type="button" class="btn btn-success mr-2"><i class="fas fa-arrow-down"></i></button>
+                                    <button type="button" class="btn btn-success mr-2"><i
+                                            class="fas fa-arrow-down"></i></button>
                                     <button type="button" class="btn btn-primary mr-2"><i class="fas fa-copy"></i></button>
                                     <button type="button" class="btn btn-danger mr-2"><i class="fas fa-trash"></i></button>
                                     <div class="custom-control custom-switch ml-2">
                                         <input type="checkbox" class="custom-control-input" id="wajibDiisi">
                                         <label class="custom-control-label" for="wajibDiisi">Wajib diisi</label>
                                     </div>
-                                    <button type="button" class="btn btn-link ml-auto"><i class="fas fa-ellipsis-v"></i></button>
+                                    <button type="button" class="btn btn-link ml-auto"><i
+                                            class="fas fa-ellipsis-v"></i></button>
                                 </div>
                             </div>
 
@@ -97,13 +100,15 @@
             border-radius: 4px;
         }
 
-        .item-quiz {
+        .item-Kegiatan {
             background-color: #f8f9fa;
             border-radius: 8px;
             padding: 20px;
         }
 
-        .btn-success, .btn-primary, .btn-danger {
+        .btn-success,
+        .btn-primary,
+        .btn-danger {
             padding: 5px 10px;
         }
 
@@ -111,7 +116,7 @@
             padding-left: 2.25rem;
         }
 
-        .custom-control-input:checked ~ .custom-control-label::before {
+        .custom-control-input:checked~.custom-control-label::before {
             background-color: #28a745;
             border-color: #28a745;
         }

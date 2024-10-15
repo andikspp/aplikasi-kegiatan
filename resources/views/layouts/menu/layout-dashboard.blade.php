@@ -39,7 +39,7 @@
                     </a>
 
                     <a href="{{ route('peserta') }}" class="list-group-item list-group-item-action">
-                        <i class="fas fa-user me-2"></i> Biodata Peserta
+                        <i class="fas fa-user me-2"></i> Data Peserta
                     </a>
 
                     <a href="{{ route('qrcode') }}" class="list-group-item list-group-item-action">
