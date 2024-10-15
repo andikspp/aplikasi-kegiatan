@@ -45,4 +45,9 @@ class AdminController extends Controller
     {
         return view('admin.menu.pertanyaan');
     }
+
+    public function hasilkegiatan()
+    {
+        return view('admin.menu.hasilkegiatan'); // Pastikan view ini ada
+    }
 }
