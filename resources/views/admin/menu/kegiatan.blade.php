@@ -58,19 +58,22 @@
                         <td>Belum ada</td>
                         <td>Tidak ada ajuan.</td>
                         <td>
-                        <a href="{{ route('detail-kegiatan', ['id' => 'V32X7']) }}" class="text-decoration-none text-dark">
-                            <button class="btn btn-sm btn-outline-secondary">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
+                            <a href="{{ route('detail-kegiatan', ['id' => 'V32X7']) }}"
+                                class="text-decoration-none text-dark">
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
                         </td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>
-                        <a href="{{ route('detail-kegiatan', ['id' => 'AH6VL']) }}" class="text-decoration-none text-dark">
-                            Rapat Koordinasi Pemenuhan Formasi Guru ASN PPPK pada Instansi Daerah Tahun 2024 [REG 2 - Timur]
-                            <br>
-                            <small class="text-muted">Kode Kegiatan: AH6VL</small>
+                            <a href="{{ route('detail-kegiatan', ['id' => 'AH6VL']) }}"
+                                class="text-decoration-none text-dark">
+                                Rapat Koordinasi Pemenuhan Formasi Guru ASN PPPK pada Instansi Daerah Tahun 2024 [REG 2 -
+                                Timur]
+                                <br>
+                                <small class="text-muted">Kode Kegiatan: AH6VL</small>
                         </td>
                         <td>17 s.d. 19 September 2024</td>
                         <td>0</td>
