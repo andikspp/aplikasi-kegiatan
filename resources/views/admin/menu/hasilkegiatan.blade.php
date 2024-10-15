@@ -3,9 +3,9 @@
 @section('content')
     <div class="container-fluid">
         <div class="d-flex mb-4">
-            <button class="btn btn-primary me-2">Kelola Kegiatan</button>
+            <a href="{{ route('hasilkegiatan') }}" class="btn btn-primary me-2">Kelola Kegiatan</a>
             <a href="{{ route('kelolapeserta') }}" class="btn btn-link">Kelola Peserta</a>
-            <a href="{{ route('kelolalainnya') }}" class="btn btn-link">Kelola Peserta</a>
+            <a href="{{ route('kelolalainnya') }}" class="btn btn-link">Kelola Lainnya</a>
         </div>
 
         <h2 class="mb-4">Ubah Kegiatan</h2>

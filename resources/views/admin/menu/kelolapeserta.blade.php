@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="container mt-5">
+        <div class="d-flex mb-4">
+            <a href="{{ route('hasilkegiatan') }}" class="btn btn-primary me-2">Kelola Kegiatan</a>
+            <a href="{{ route('kelolapeserta') }}" class="btn btn-link">Kelola Peserta</a>
+            <a href="{{ route('kelolalainnya') }}" class="btn btn-link">Kelola Lainnya</a>
+        </div>
         <h1 class="mb-4">Kelola Peserta</h1>
 
         <div class="filter-section mb-4">
