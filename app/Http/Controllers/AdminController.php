@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Admin;
 
 class AdminController extends Controller
 {
@@ -40,7 +42,7 @@ class AdminController extends Controller
     {
         return view('admin.menu.detail-kegiatan', compact('id'));
     }
-    
+
     public function pertanyaan()
     {
         return view('admin.menu.pertanyaan');
@@ -48,7 +50,7 @@ class AdminController extends Controller
 
     public function hasilkegiatan()
     {
-        return view('admin.menu.hasilkegiatan'); // Pastikan view ini ada
+        return view('admin.menu.hasilkegiatan');
     }
 
     public function kelolapeserta()
@@ -59,5 +61,31 @@ class AdminController extends Controller
     public function kelolalainya()
     {
         return view('admin.menu.kelolalainya');
+    }
+
+    public function prosesLogin(Request $request)
+    {
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+
+        $admin = Admin::where('username', $request->username)->first();
+
+        if ($admin && $admin->password === $request->password) {
+            Auth::guard('admin')->login($admin);
+            return redirect()->route('dashboard')->with('success', 'Berhasil login.');
+        }
+
+        return redirect()->back()->with('error', 'Username atau password salah.')->withInput();
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('admin')->logout();
+        $request->session()->invalidate(); // Menghapus semua data sesi
+        $request->session()->regenerateToken(); // Menghasilkan token CSRF baru
+
+        return redirect()->to('/')->with('success', 'Berhasil Logout.');
     }
 }

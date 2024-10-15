@@ -18,13 +18,18 @@ Route::get('/', function () {
     return view('admin.auth.login');
 });
 
-Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-Route::get('/kegiatan', [AdminController::class, 'kegiatan'])->name('kegiatan');
-Route::get('/tambah-kegiatan', [AdminController::class, 'tambahKegiatan'])->name('tambah-kegiatan');
-Route::get('/qrcode', [AdminController::class, 'qrcode'])->name('qrcode');
-Route::get('/peserta', [AdminController::class, 'peserta'])->name('peserta');
-Route::get('/detail-kegiatan/{id}', [AdminController::class, 'detailKegiatan'])->name('detail-kegiatan');
-Route::get('/pertanyaan', [AdminController::class, 'pertanyaan'])->name('pertanyaan');
-Route::get('/hasilkegiatan', [AdminController::class, 'hasilkegiatan'])->name('hasilkegiatan');
-Route::get('/kelolapeserta', [AdminController::class, 'kelolapeserta'])->name('kelolapeserta');
-Route::get('/kelolalainya', [AdminController::class, 'kelolalainya'])->name('kelolalainnya');
+Route::post('/login', [AdminController::class, 'prosesLogin'])->name('login');
+Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/kegiatan', [AdminController::class, 'kegiatan'])->name('kegiatan');
+    Route::get('/tambah-kegiatan', [AdminController::class, 'tambahKegiatan'])->name('tambah-kegiatan');
+    Route::get('/qrcode', [AdminController::class, 'qrcode'])->name('qrcode');
+    Route::get('/peserta', [AdminController::class, 'peserta'])->name('peserta');
+    Route::get('/detail-kegiatan/{id}', [AdminController::class, 'detailKegiatan'])->name('detail-kegiatan');
+    Route::get('/pertanyaan', [AdminController::class, 'pertanyaan'])->name('pertanyaan');
+    Route::get('/hasilkegiatan', [AdminController::class, 'hasilkegiatan'])->name('hasilkegiatan');
+    Route::get('/kelolapeserta', [AdminController::class, 'kelolapeserta'])->name('kelolapeserta');
+    Route::get('/kelolalainya', [AdminController::class, 'kelolalainya'])->name('kelolalainnya');
+});
