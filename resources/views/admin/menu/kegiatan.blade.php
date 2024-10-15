@@ -47,7 +47,7 @@
                     <tr>
                         <td>1</td>
                         <td>
-                            <a href="#" class="kegiatan-link">
+                            <a href="{{ route('hasilkegiatan') }}" class="kegiatan-link">
                                 Rapat Koordinasi Pengelolaan Kinerja Guru dan Kepala Sekolah Bagi PIC Dinas Pendidikan
                                 Region 1
                             </a>
@@ -76,11 +76,6 @@
                                     <li><a class="dropdown-item" href="#">Sebaran Peserta</a></li>
                                 </ul>
                             </div>
-                            <a href="{{ route('detail-kegiatan', ['id' => 'V32X7']) }}"
-                                class="text-decoration-none text-dark">
-                                <button class="btn btn-sm btn-outline-secondary">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
                         </td>
                     </tr>
 
