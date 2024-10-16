@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Kegiatan extends Model
+{
+    use HasFactory;
+
+    protected $table = 'kegiatans';
+
+    protected $fillable = [
+        'nama',
+        'role',
+        'tanggal_pendaftaran',
+        'selesai_pendaftaran',
+        'tanggal_kegiatan',
+        'tempat_kegiatan',
+        'jenis_kegiatan',
+        'link_meeting',
+        'jumlah_jp',
+        'membutuhkan_mapel',
+        'membutuhkan_nomor_rekening',
+        'membutuhkan_lokasi',
+        'membutuhkan_foto_presensi',
+        'menggunakan_sertifikat',
+        'nomor_sertifikat',
+        'nomor_seri_sertifikat',
+        'template_sertifikat',
+        'tanggal_ttd_sertifikat',
+        'peran',
+    ];
+}
