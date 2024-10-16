@@ -25,7 +25,11 @@ class AdminController extends Controller
 
     public function tambahKegiatan()
     {
-        return view('admin.menu.tambah-kegiatan');
+        $roles = ['Tata Kelola', 'Kemitraan', 'Publikasi', 'Pembelajaran', 'PAUD HI', 'Tata Usaha'];
+
+        $perans = ['Narasumber', 'Fasilitator', 'Panitia'];
+
+        return view('admin.menu.tambah-kegiatan', compact('roles', 'perans'));
     }
 
     public function qrcode()
