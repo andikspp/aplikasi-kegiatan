@@ -88,4 +88,10 @@ class AdminController extends Controller
 
         return redirect()->to('/')->with('success', 'Berhasil Logout.');
     }
+
+    public function showProfile()
+    {
+        $user = Auth::user(); // Ambil data pengguna yang sedang login
+        return view('admin.menu.profil', compact('user'));
+    }
 }

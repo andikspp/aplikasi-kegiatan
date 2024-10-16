@@ -32,4 +32,5 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/hasilkegiatan', [AdminController::class, 'hasilkegiatan'])->name('hasilkegiatan');
     Route::get('/kelolapeserta', [AdminController::class, 'kelolapeserta'])->name('kelolapeserta');
     Route::get('/kelolalainya', [AdminController::class, 'kelolalainya'])->name('kelolalainnya');
+    Route::get('/profil', [AdminController::class, 'profil'])->name('profil');
 });
