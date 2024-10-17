@@ -8,6 +8,7 @@
             <a href="{{ route('kelolalainnya') }}" class="btn btn-link">Kelola Lainnya</a>
         </div>
 
+        <div class="d-flex mb-4 bg-light p-3">
         <h2 class="mb-4">Ubah Kegiatan</h2>
 
         <form id="formUbahKegiatan">
@@ -81,6 +82,7 @@
             font-weight: bold;
         }
     </style>
+    </div>
 @endsection
 
 @push('scripts')

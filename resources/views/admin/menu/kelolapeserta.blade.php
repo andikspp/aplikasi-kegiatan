@@ -7,7 +7,8 @@
             <a href="{{ route('kelolapeserta') }}" class="btn btn-primary me-2">Kelola Peserta</a>
             <a href="{{ route('kelolalainnya') }}" class="btn btn-link">Kelola Lainnya</a>
         </div>
-        
+
+        <div class="container mt-5">
         <h1 class="mb-4">Kelola Peserta</h1>
 
         <div class="filter-section mb-4">
@@ -113,6 +114,7 @@
                 <!-- Tambahkan baris data lainnya di sini -->
             </tbody>
         </table>
+    </div>
     </div>
 @endsection
 
