@@ -2,11 +2,12 @@
 
 @section('content')
     <div class="container mt-5">
-        <div class="d-flex mb-4">
-            <a href="{{ route('hasilkegiatan') }}" class="btn btn-primary me-2">Kelola Kegiatan</a>
+        <div class="d-flex mb-4 bg-light p-3">
+            <a href="{{ route('hasilkegiatan') }}" class="btn btn-link">Kelola Kegiatan</a>
             <a href="{{ route('kelolapeserta') }}" class="btn btn-link">Kelola Peserta</a>
-            <a href="{{ route('kelolalainnya') }}" class="btn btn-link">Kelola Lainnya</a>
+            <a href="{{ route('kelolalainnya') }}" class="btn btn-primary me-2">Kelola Lainnya</a>
         </div>
+
         <h1 class="mb-4">Kelola Lainnya</h1>
         <ul class="list-unstyled">
             <li>

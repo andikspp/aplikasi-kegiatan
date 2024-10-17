@@ -1,8 +1,8 @@
 @extends('layouts.menu.layout-dashboard')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="d-flex mb-4">
+    <div class="container mt-5">
+        <div class="d-flex mb-4 bg-light p-3">
             <a href="{{ route('hasilkegiatan') }}" class="btn btn-primary me-2">Kelola Kegiatan</a>
             <a href="{{ route('kelolapeserta') }}" class="btn btn-link">Kelola Peserta</a>
             <a href="{{ route('kelolalainnya') }}" class="btn btn-link">Kelola Lainnya</a>

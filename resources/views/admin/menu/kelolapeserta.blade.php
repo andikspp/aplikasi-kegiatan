@@ -2,11 +2,12 @@
 
 @section('content')
     <div class="container mt-5">
-        <div class="d-flex mb-4">
-            <a href="{{ route('hasilkegiatan') }}" class="btn btn-primary me-2">Kelola Kegiatan</a>
-            <a href="{{ route('kelolapeserta') }}" class="btn btn-link">Kelola Peserta</a>
+        <div class="d-flex mb-4 bg-light p-3">
+            <a href="{{ route('hasilkegiatan') }}" class="btn btn-link">Kelola Kegiatan</a>
+            <a href="{{ route('kelolapeserta') }}" class="btn btn-primary me-2">Kelola Peserta</a>
             <a href="{{ route('kelolalainnya') }}" class="btn btn-link">Kelola Lainnya</a>
         </div>
+        
         <h1 class="mb-4">Kelola Peserta</h1>
 
         <div class="filter-section mb-4">
@@ -98,13 +99,13 @@
                     <td>
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Pilih Predikat
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Sangat Baik</a>
-                                <a class="dropdown-item" href="#">Baik</a>
-                                <a class="dropdown-item" href="#">Cukup Baik</a>
+                                <a class="dropdown-item" href="#" onclick="selectPredikat('Sangat Baik')">Sangat Baik</a>
+                                <a class="dropdown-item" href="#" onclick="selectPredikat('Baik')">Baik</a>
+                                <a class="dropdown-item" href="#" onclick="selectPredikat('Cukup Baik')">Cukup Baik</a>
                             </div>
                         </div>
                     </td>
@@ -114,3 +115,10 @@
         </table>
     </div>
 @endsection
+
+<script>
+    function selectPredikat(predikat) {
+        alert('Predikat terpilih: ' + predikat);
+        // Tambahkan logika untuk menyimpan predikat yang dipilih
+    }
+</script>
