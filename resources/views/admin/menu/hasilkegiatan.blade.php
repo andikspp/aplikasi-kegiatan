@@ -15,7 +15,7 @@
         </div>
 
         <form id="formUbahKegiatan" class="bg-light p-4 rounded shadow">
-        <h1 class="mb-4" style="font-size: larger;">Ubah Kegiatan</h1>
+        <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Ubah Kegiatan</h1>
             <div class="mb-3">
                 <label for="kodeKegiatan" class="form-label">Kode Kegiatan</label>
                 <input type="text" class="form-control" id="kodeKegiatan" name="kodeKegiatan" value="V32X7" readonly>
@@ -71,7 +71,6 @@
                 <textarea class="form-control" id="linkWebMeeting" name="linkWebMeeting" rows="3"></textarea>
             </div>
 
-            <!-- Tambahan pertanyaan di bawah link web meeting -->
             <div class="mb-3">
                 <label class="form-label">Jumlah JP</label>
                 <input type="number" class="form-control" id="jumlahJP" name="jumlahJP" value="0">
@@ -80,54 +79,60 @@
             <div class="mb-3">
                 <label class="form-label">Membutuhkan Mata Pelajaran?</label>
                 <div>
-                    <label><input type="radio" name="mataPelajaran" value="ya"> Ya</label>
-                    <label><input type="radio" name="mataPelajaran" value="tidak"> Tidak</label>
+                    <label><input type="radio" name="mataPelajaran" value="ya" style="accent-color: blue;"> Ya</label>
+                    <label><input type="radio" name="mataPelajaran" value="tidak" style="accent-color: blue;"> Tidak</label>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Membutuhkan Nomor Rekening?</label>
                 <div>
-                    <label><input type="radio" name="nomorRekening" value="ya"> Ya</label>
-                    <label><input type="radio" name="nomorRekening" value="tidak"> Tidak</label>
+                    <label><input type="radio" name="nomorRekening" value="ya" style="accent-color: blue;"> Ya</label>
+                    <label><input type="radio" name="nomorRekening" value="tidak" style="accent-color: blue;"> Tidak</label>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Membutuhkan Lokasi?</label>
                 <div>
-                    <label><input type="radio" name="lokasi" value="ya"> Ya</label>
-                    <label><input type="radio" name="lokasi" value="tidak"> Tidak</label>
+                    <label><input type="radio" name="lokasi" value="ya" style="accent-color: blue;"> Ya</label>
+                    <label><input type="radio" name="lokasi" value="tidak" style="accent-color: blue;"> Tidak</label>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Membutuhkan foto presensi?</label>
                 <div>
-                    <label><input type="radio" name="fotoPresensi" value="ya"> Ya</label>
-                    <label><input type="radio" name="fotoPresensi" value="tidak"> Tidak</label>
+                    <label><input type="radio" name="fotoPresensi" value="ya" style="accent-color: blue;"> Ya</label>
+                    <label><input type="radio" name="fotoPresensi" value="tidak" style="accent-color: blue;"> Tidak</label>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Menggunakan Sertifikat?</label>
                 <div>
-                    <label><input type="radio" name="sertifikat" value="ya"> Ya</label>
-                    <label><input type="radio" name="sertifikat" value="tidak"> Tidak</label>
+                    <label><input type="radio" name="sertifikat" value="ya" style="accent-color: blue;" class="sertifikat-radio"> Ya</label>
+                    <label><input type="radio" name="sertifikat" value="tidak" style="accent-color: blue;" class="sertifikat-radio"> Tidak</label>
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="peran" class="form-label">Peran Dalam Kegiatan</label>
-                <div class="input-group">
-                    <select class="form-select" id="peran" name="peran">
-                        <option selected>Pilih Peran</option>
-                        <option value="peserta">Peserta</option>
-                        <!-- Tambahkan opsi peran lainnya di sini -->
-                    </select>
-                    <button class="btn btn-outline-primary" type="button" id="btnTambahPeran">+ Tambah Peran</button>
+            <div id="sertifikatFields" style="display: none;">
+                <div class="mb-3">
+                    <label for="nomorSertifikat" class="form-label">Nomor Sertifikat</label>
+                    <input type="text" class="form-control" id="nomorSertifikat" name="nomorSertifikat">
                 </div>
-                <small class="form-text text-muted">(default: Peserta)</small>
+                <div class="mb-3">
+                    <label for="nomorSeriSertifikat" class="form-label">Nomor Seri Sertifikat</label>
+                    <input type="text" class="form-control" id="nomorSeriSertifikat" name="nomorSeriSertifikat">
+                </div>
+                <div class="mb-3">
+                    <label for="templateSertifikat" class="form-label">Template Sertifikat</label>
+                    <input type="text" class="form-control" id="templateSertifikat" name="templateSertifikat">
+                </div>
+                <div class="mb-3">
+                    <label for="tanggalTTDSertifikat" class="form-label">Tanggal TTD Sertifikat</label>
+                    <input type="date" class="form-control" id="tanggalTTDSertifikat" name="tanggalTTDSertifikat">
+                </div>
             </div>
 
             <div class="mb-3">
@@ -218,58 +223,55 @@
         .shadow {
             box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
         }
+        .btn-link {
+            text-decoration: none; /* Menghilangkan garis bawah */
+            color: #0d6efd; /* Warna teks */
+        }
     </style>
 @endsection
 
 @push('scripts')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $('#formUbahKegiatan').submit(function(e) {
-            e.preventDefault();
-            // Di sini Anda dapat menambahkan logika untuk mengirim data formulir ke server
-            console.log('Form submitted');
-        });
+        $(document).ready(function() {
+            $('#formUbahKegiatan').submit(function(e) {
+                e.preventDefault();
+                // Di sini Anda dapat menambahkan logika untuk mengirim data formulir ke server
+                console.log('Form submitted');
+            });
 
-        $('#btnBatal').click(function() {
-            if (confirm('Apakah Anda yakin ingin membatalkan pengisian formulir?')) {
-                window.history.back();
-            }
-        });
-    </script>
-@endpush
+            $('#btnBatal').click(function() {
+                if (confirm('Apakah Anda yakin ingin membatalkan pengisian formulir?')) {
+                    window.history.back();
+                }
+            });
 
-@push('scripts')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $('#formUbahKegiatan').submit(function(e) {
-            e.preventDefault();
-            // Di sini Anda dapat menambahkan logika untuk mengirim data formulir ke server
-            console.log('Form submitted');
-        });
+            $('#btnTambahPeran').click(function() {
+                const peran = $('#peran').val();
+                const link = 'https://example.com'; // Ganti dengan logika untuk mendapatkan link
+                const kodeRekening = 'U27PD'; // Ganti dengan logika untuk mendapatkan kode rekening
 
-        $('#btnBatal').click(function() {
-            if (confirm('Apakah Anda yakin ingin membatalkan pengisian formulir?')) {
-                window.history.back();
-            }
-        });
+                if (peran !== 'Pilih Peran') {
+                    const rowCount = $('#tabelPeran tr').length + 1;
+                    $('#tabelPeran').append(`
+                        <tr>
+                            <td>${rowCount}</td>
+                            <td>${peran}</td>
+                            <td><a href="${link}" target="_blank">${link}</a></td>
+                            <td>${kodeRekening}</td>
+                            <td><button class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
+                        </tr>
+                    `);
+                }
+            });
 
-        $('#btnTambahPeran').click(function() {
-            const peran = $('#peran').val();
-            const link = 'https://example.com'; // Ganti dengan logika untuk mendapatkan link
-            const kodeRekening = 'U27PD'; // Ganti dengan logika untuk mendapatkan kode rekening
-
-            if (peran !== 'Pilih Peran') {
-                const rowCount = $('#tabelPeran tr').length + 1;
-                $('#tabelPeran').append(`
-                    <tr>
-                        <td>${rowCount}</td>
-                        <td>${peran}</td>
-                        <td><a href="${link}" target="_blank">${link}</a></td>
-                        <td>${kodeRekening}</td>
-                        <td><button class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
-                    </tr>
-                `);
-            }
+            $('input[name="sertifikat"]').change(function() {
+                if ($(this).val() === 'ya') {
+                    $('#sertifikatFields').show(); // Menampilkan field sertifikat
+                } else {
+                    $('#sertifikatFields').hide(); // Menyembunyikan field sertifikat
+                }
+            });
         });
 
         function removeRow(button) {

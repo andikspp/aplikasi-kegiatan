@@ -15,7 +15,7 @@
         </div>
 
         <form id="formUbahKegiatan" class="bg-light p-4 rounded shadow">
-            <h1 class="mb-4" style="font-size: larger;">Kelola Lainnya</h1>
+        <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Ubah Peserta</h1>
             <div class="filter-section mb-4">
                 <h5>Filter</h5>
                 <div class="row">
@@ -171,6 +171,25 @@
             </div>
         </form>
     </div>
+
+    <style>
+        .form-label {
+            font-weight: bold;
+        }
+        .bg-light {
+            background-color: #f8f9fa !important;
+        }
+        .rounded {
+            border-radius: 0.5rem;
+        }
+        .shadow {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        .btn-link {
+        text-decoration: none; /* Menghilangkan garis bawah */
+        color: #0d6efd; /* Warna teks */
+        }
+    </style>
 @endsection
 
 <script>
