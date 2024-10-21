@@ -87,15 +87,15 @@ class AdminController extends Controller
     public function logout(Request $request)
     {
         Auth::guard('admin')->logout();
-        $request->session()->invalidate(); // Menghapus semua data sesi
-        $request->session()->regenerateToken(); // Menghasilkan token CSRF baru
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return redirect()->to('/')->with('success', 'Berhasil Logout.');
     }
 
     public function showProfile()
     {
-        $user = Auth::user(); // Ambil data pengguna yang sedang login
+        $user = Auth::user();
         return view('admin.menu.profil', compact('user'));
     }
 }

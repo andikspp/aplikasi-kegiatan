@@ -25,8 +25,10 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12 col-md-8 mx-auto text-center">
-                                        <input type="text" class="form-control mb-2" id="url" placeholder="Masukkan tautan" required>
-                                        <button class="btn btn-primary btn-sm" id="generate-btn"><i class="fas fa-qrcode"></i> Generate</button>
+                                        <input type="text" class="form-control mb-2" id="url"
+                                            placeholder="Masukkan tautan" required>
+                                        <button class="btn btn-primary btn-sm" id="generate-btn"><i
+                                                class="fas fa-qrcode"></i> Generate</button>
                                     </div>
                                     <div class="col-12 text-center mt-3 d-none" id="img-container">
                                         <img src="" id="img-result" width="320px">
@@ -38,11 +40,6 @@
                 </div>
             </section>
         </div>
-        <footer class="main-footer">
-            <div class="footer-left">
-                Copyright © 2024 Direktorat Guru Dikdas
-            </div>
-        </footer>
     </div>
 
     <!-- General JS Scripts -->
@@ -58,7 +55,8 @@
                 const urlValue = urlInput.val();
                 if (urlValue) {
                     imgContainer.removeClass('d-none');
-                    imgResult.attr('src', `https://your-api-url/qr/generate?link=${encodeURIComponent(urlValue)}`);
+                    imgResult.attr('src',
+                        `https://your-api-url/qr/generate?link=${encodeURIComponent(urlValue)}`);
                 } else {
                     alert("Silakan masukkan tautan yang valid.");
                 }
@@ -72,16 +70,20 @@
         .main-wrapper {
             margin-top: 50px;
         }
+
         .card {
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         .card-header {
             background-color: #f8f9fa;
             font-weight: bold;
         }
+
         .form-control {
             border-radius: 0;
         }
+
         .btn-primary {
             border-radius: 0;
         }
