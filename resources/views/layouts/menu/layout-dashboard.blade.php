@@ -38,8 +38,8 @@
                         <i class="fas fa-calendar-alt me-2"></i> Kegiatan
                     </a>
 
-                    <a href="{{ route('peserta') }}" class="list-group-item list-group-item-action">
-                        <i class="fas fa-user me-2"></i> Data Peserta
+                    <a href="{{ route('quizz') }}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-user me-2"></i> Quizz
                     </a>
 
                     <a href="{{ route('qrcode') }}" class="list-group-item list-group-item-action">

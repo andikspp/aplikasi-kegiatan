@@ -37,9 +37,9 @@ class AdminController extends Controller
         return view('admin.menu.qrcode');
     }
 
-    public function peserta()
+    public function quizz()
     {
-        return view('admin.menu.peserta');
+        return view('admin.menu.quizz');
     }
 
     public function detailKegiatan($id)

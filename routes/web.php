@@ -26,7 +26,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/kegiatan', [AdminController::class, 'kegiatan'])->name('kegiatan');
     Route::get('/tambah-kegiatan', [AdminController::class, 'tambahKegiatan'])->name('tambah-kegiatan');
     Route::get('/qrcode', [AdminController::class, 'qrcode'])->name('qrcode');
-    Route::get('/peserta', [AdminController::class, 'peserta'])->name('peserta');
+    Route::get('/quizz', [AdminController::class, 'quizz'])->name('quizz');
     Route::get('/detail-kegiatan/{id}', [AdminController::class, 'detailKegiatan'])->name('detail-kegiatan');
     Route::get('/pertanyaan', [AdminController::class, 'pertanyaan'])->name('pertanyaan');
     Route::get('/hasilkegiatan', [AdminController::class, 'hasilkegiatan'])->name('hasilkegiatan');
