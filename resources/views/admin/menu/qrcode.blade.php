@@ -1,7 +1,7 @@
 @extends('layouts.menu.layout-dashboard')
 
 @section('content')
-    <div class="main-wrapper">
+    <div class="container mt-5">
         <nav class="navbar navbar-expand-lg main-navbar">
             <!-- ... existing navbar code ... -->
         </nav>

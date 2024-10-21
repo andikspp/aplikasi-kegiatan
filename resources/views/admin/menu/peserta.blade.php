@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header text-center">Daftar Peserta Kegiatan</div>
+                    <div class="card-header text-center"><strong style="font-size: 24px;">Daftar Peserta Kegiatan</strong></div>
 
                     <div class="card-body">
                         <!-- Tombol Tambah Kegiatan -->
