@@ -56,7 +56,7 @@
                 if (urlValue) {
                     imgContainer.removeClass('d-none');
                     imgResult.attr('src',
-                        `https://your-api-url/qr/generate?link=${encodeURIComponent(urlValue)}`);
+                        `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(urlValue)}&size=200x200`);
                 } else {
                     alert("Silakan masukkan tautan yang valid.");
                 }

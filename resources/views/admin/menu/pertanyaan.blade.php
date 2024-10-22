@@ -49,61 +49,196 @@
     <div class="container mt-4">
         <form id="formTambahSoal" class="bg-light p-4 rounded shadow">
             <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Tambahkan Soal</h1>
-            <div class="item-Kegiatan mt-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <input type="text" class="form-control mr-2" placeholder="Pertanyaan" style="flex-grow: 1;" id="pertanyaan">
-                    <select class="form-control ml-2" style="width: 150px; margin-left: 10px;" id="kategori_soal" name="kategori_soal" onchange="showInputFields()">
-                        <option value="essai">Essai</option>
-                        <option value="nomor">Nomor</option>
-                        <option value="tanggal">Tanggal</option>
-                        <option value="email">Email</option>
-                        <option value="url">Url</option>
-                        <option value="pilihan_ganda">Pilihan Ganda</option>
-                        <option value="pilihan_ganda_multiple">Pilihan Ganda (jawaban lebih dari satu)</option>
-                        <option value="skala">Skala</option>
-                        <option value="label">Label</option>
-                        <option value="drop_down">Drop-down</option>
-                        <option value="file">File</option>
-                    </select>
-                </div>
+            <hr style="border-top: 4px solid #000;"> <!-- Garis pembatas di bawah teks Tambahkan Soal -->
+            <div id="soalContainer">
+                <div class="item-Kegiatan mt-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <input type="text" class="form-control mr-2" placeholder="Pertanyaan" style="flex-grow: 1;" name="pertanyaan[]">
+                        <select class="form-control ml-2" style="width: 150px; margin-left: 10px;" name="kategori_soal[]" onchange="showInputFields(this)">
+                            <option value="essai">Essai</option>
+                            <option value="nomor">Nomor</option>
+                            <option value="tanggal">Tanggal</option>
+                            <option value="email">Email</option>
+                            <option value="url">Url</option>
+                            <option value="pilihan_ganda">Pilihan Ganda</option>
+                            <option value="pilihan_ganda_multiple">Pilihan Ganda (jawaban lebih dari satu)</option>
+                            <option value="skala">Skala</option>
+                            <option value="label">Label</option>
+                            <option value="drop_down">Drop-down</option>
+                            <option value="file">File</option>
+                        </select>
+                    </div>
+                    <div class="deskripsiContainer" style="display: none;">
+                        <textarea class="form-control" rows="3" placeholder="Masukkan deskripsi..."></textarea>
+                    </div>
+                    
+                    <div id="inputFields" class="d-flex align-items-start flex-column" style="margin-top: 15px;"></div> <!-- Tempat untuk input tambahan -->
 
-                <div id="deskripsiContainer" style="display: none;">
-                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" placeholder="Masukkan deskripsi..."></textarea>
-                </div>
-                
-                <div id="inputFields" class="d-flex align-items-start flex-column" style="margin-top: 15px;"></div> <!-- Tempat untuk input tambahan -->
-
-                <div class="d-flex align-items-center justify-content-end">
-                    <div style="margin-left: 10px;">
-                        <button type="button" class="btn btn-success mr-5"><i class="fas fa-arrow-down"></i></button>
-                    </div>
-                    <div style="margin-left: 10px;">
-                        <button type="button" class="btn btn-primary mr-5"><i class="fas fa-copy"></i></button>
-                    </div>
-                    <div style="margin-left: 10px;">
-                        <button type="button" class="btn btn-danger mr-5"><i class="fas fa-trash"></i></button>
-                    </div>
-                    <div class="custom-control custom-switch mr-5" style="margin-left: 10px;">
-                        <input type="checkbox" class="custom-control-input" id="wajibDiisi">
-                        <label class="custom-control-label" for="wajibDiisi">Wajib diisi</label>
-                    </div>
-                    <div style="margin-left: 10px;">
-                        <button type="button" class="btn btn-link" onclick="toggleDeskripsi()"><i class="fas fa-ellipsis-v"></i></button>
+                    <div class="d-flex align-items-center justify-content-end">
+                        <div style="margin-left: 10px;">
+                            <button type="button" class="btn btn-success mr-5"><i class="fas fa-arrow-down"></i></button>
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <button type="button" class="btn btn-primary mr-5" onclick="duplikatSoal(this)"><i class="fas fa-copy"></i></button> <!-- Button duplikat -->
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <button type="button" class="btn btn-danger mr-5" onclick="hapusSoal(this)"><i class="fas fa-trash"></i></button> <!-- Button hapus -->
+                        </div>
+                        <div class="custom-control custom-switch mr-5" style="margin-left: 10px;">
+                            <input type="checkbox" class="custom-control-input" id="wajibDiisi">
+                            <label class="custom-control-label" for="wajibDiisi">Wajib diisi</label>
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <button type="button" class="btn btn-link" onclick="toggleDeskripsi(this)"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
                     </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary mt-3" style="background-color: blue; color: white;">
-                    <i class="fas fa-plus"></i> Tambah Item
-                </button>
+                <hr style="border-top: 4px solid #000;"> <!-- Garis pembatas tebal -->
             </div>
+
+            <button type="button" class="btn btn-primary mt-3" onclick="tambahSoal()">+ Tambah Soal</button>
         </form>
     </div>
 </div>
 
 <script>
-    function toggleDeskripsi() {
-        const deskripsiContainer = document.getElementById('deskripsiContainer');
+    function tambahSoal() {
+        const soalContainer = document.getElementById('soalContainer');
+        const newSoal = document.createElement('div');
+        newSoal.className = 'item-Kegiatan mt-4';
+        newSoal.innerHTML = `
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <input type="text" class="form-control mr-2" placeholder="Pertanyaan" style="flex-grow: 1;" name="pertanyaan[]">
+                <select class="form-control ml-2" style="width: 150px; margin-left: 10px;" name="kategori_soal[]" onchange="showInputFields(this)">
+                    <option value="essai">Essai</option>
+                    <option value="nomor">Nomor</option>
+                    <option value="tanggal">Tanggal</option>
+                    <option value="email">Email</option>
+                    <option value="url">Url</option>
+                    <option value="pilihan_ganda">Pilihan Ganda</option>
+                    <option value="pilihan_ganda_multiple">Pilihan Ganda (jawaban lebih dari satu)</option>
+                    <option value="skala">Skala</option>
+                    <option value="label">Label</option>
+                    <option value="drop_down">Drop-down</option>
+                    <option value="file">File</option>
+                </select>
+            </div>
+            <div class="deskripsiContainer" style="display: none;">
+                <textarea class="form-control" rows="3" placeholder="Masukkan deskripsi..."></textarea>
+            </div>
+                
+            <div id="inputFields" class="d-flex align-items-start flex-column" style="margin-top: 15px;"></div> <!-- Tempat untuk input tambahan -->
+
+            <div class="d-flex align-items-center justify-content-end">
+                <div style="margin-left: 10px;">
+                    <button type="button" class="btn btn-success mr-5"><i class="fas fa-arrow-down"></i></button>
+                </div>
+                <div style="margin-left: 10px;">
+                    <button type="button" class="btn btn-primary mr-5" onclick="duplikatSoal(this)"><i class="fas fa-copy"></i></button> <!-- Button duplikat -->
+                </div>
+                <div style="margin-left: 10px;">
+                    <button type="button" class="btn btn-danger mr-5" onclick="hapusSoal(this)"><i class="fas fa-trash"></i></button> <!-- Button hapus -->
+                </div>
+                <div class="custom-control custom-switch mr-5" style="margin-left: 10px;">
+                    <input type="checkbox" class="custom-control-input" id="wajibDiisi">
+                    <label class="custom-control-label" for="wajibDiisi">Wajib diisi</label>
+                </div>
+                <div style="margin-left: 10px;">
+                    <button type="button" class="btn btn-link" onclick="toggleDeskripsi(this)"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+            </div>
+            <hr style="border-top: 4px solid #000;"> <!-- Garis pembatas tebal untuk soal baru -->
+        `;
+        soalContainer.appendChild(newSoal);
+    }
+
+    function toggleDeskripsi(button) {
+        const deskripsiContainer = button.closest('.item-Kegiatan').querySelector('.deskripsiContainer');
         deskripsiContainer.style.display = deskripsiContainer.style.display === 'none' ? 'block' : 'none';
     }
+
+    function hapusSoal(button) {
+        const soalItem = button.closest('.item-Kegiatan');
+        soalItem.remove(); // Menghapus elemen soal
+    }
+
+    function duplikatSoal(button) {
+        const soalItem = button.closest('.item-Kegiatan');
+        const newSoal = soalItem.cloneNode(true); // Menggandakan elemen soal
+        newSoal.querySelector('input[type="text"]').value = ''; // Mengosongkan input pertanyaan
+        newSoal.querySelector('textarea').value = ''; // Mengosongkan textarea deskripsi
+        const inputFields = newSoal.querySelector('#inputFields');
+        inputFields.innerHTML = ''; // Mengosongkan input tambahan
+        document.getElementById('soalContainer').appendChild(newSoal); // Menambahkan soal baru ke container
+    }
+
+    function showInputFields(selectElement) {
+        const selectedValue = selectElement.value;
+        const inputFieldsContainer = selectElement.closest('.item-Kegiatan').querySelector('#inputFields');
+        inputFieldsContainer.innerHTML = ''; // Kosongkan input fields sebelumnya
+
+        if (selectedValue === 'pilihan_ganda' || selectedValue === 'pilihan_ganda_multiple') {
+            const pilihanContainer = document.createElement('div');
+            pilihanContainer.className = 'pilihan-container';
+
+            const tambahOpsiButton = document.createElement('button');
+            tambahOpsiButton.type = 'button';
+            tambahOpsiButton.className = 'btn btn-link';
+            tambahOpsiButton.innerText = 'Tambah Opsi';
+            tambahOpsiButton.onclick = function() {
+                const newOption = document.createElement('div');
+                newOption.className = 'input-group mb-2'; // Tambahkan kelas untuk styling
+                newOption.innerHTML = `
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" style="border: none; background: none;">
+                            <input type="radio" name="jawabanBenar" class="ml-2" style="margin: 0; accent-color: blue;"/> <!-- Radio button -->
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Opsi baru" style="border: none;">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-danger" type="button" onclick="this.parentElement.parentElement.remove();">X</button>
+                    </div>
+                `;
+                pilihanContainer.insertBefore(newOption, tambahOpsiButton); // Menambahkan opsi baru di atas tombol
+            };
+
+            pilihanContainer.appendChild(tambahOpsiButton);
+            inputFieldsContainer.appendChild(pilihanContainer);
+        } else if (selectedValue === 'skala') {
+            const scaleInput = document.createElement('input');
+            scaleInput.type = 'number';
+            scaleInput.className = 'form-control mb-2';
+            scaleInput.placeholder = 'Masukkan skala (misal: 1-5)';
+            inputFieldsContainer.appendChild(scaleInput);
+        } else if (selectedValue === 'drop_down') {
+            for (let i = 0; i < 4; i++) { // Menambahkan 4 pilihan untuk dropdown
+                const inputField = document.createElement('input');
+                inputField.type = 'text';
+                inputField.className = 'form-control mb-2';
+                inputField.placeholder = `Pilihan ${i + 1}`;
+                inputFieldsContainer.appendChild(inputField);
+            }
+        } else if (selectedValue === 'file') {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.className = 'form-control mb-2';
+            inputFieldsContainer.appendChild(fileInput);
+        }
+    }
 </script>
+
+<style>
+    .input-group-text {
+        display: flex;
+        align-items: center; /* Menempatkan titik di tengah secara vertikal */
+    }
+    .input-group {
+        display: flex;
+        align-items: center; /* Menempatkan elemen di tengah secara vertikal */
+    }
+    .input-group .btn-outline-danger {
+        border: none; /* Menghilangkan border */
+        color: blue; /* Warna tombol X */
+    }
+</style>
 @endsection
