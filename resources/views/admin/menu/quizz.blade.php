@@ -11,7 +11,7 @@
                         <!-- Tombol Tambah Kegiatan -->
                         <div class="mb-3 text-start">
                             <a href="{{ route('pertanyaan') }}" class="btn btn-primary" id="tambah-kegiatan">
-                                <i class="fa fa-plus"></i> Tambahkan Kegiatan
+                                <i class="fa fa-plus"></i> Buat Quizz
                             </a>
                             {{-- <button class="btn btn-primary" id="tambah-kegiatan">
                                 <i class="fa fa-plus"></i> Tambahkan Pertanyaan
