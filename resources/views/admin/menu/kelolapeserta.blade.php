@@ -70,7 +70,6 @@
                             <th>Instansi</th>
                             <th>Email</th>
                             <th>HP</th>
-                            <th>Mapel diampu</th>
                             <th>Peran</th>
                             <th>Status Presensi</th>
                             <th>Predikat</th>
