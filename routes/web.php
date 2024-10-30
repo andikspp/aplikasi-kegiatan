@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Models\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/kegiatan', [AdminController::class, 'kegiatan'])->name('kegiatan');
+    Route::get('/profil', [AdminController::class, 'showProfile'])->name('profil');
     Route::get('/tambah-kegiatan', [AdminController::class, 'tambahKegiatan'])->name('tambah-kegiatan');
     Route::get('/qrcode', [AdminController::class, 'qrcode'])->name('qrcode');
     Route::get('/quizz', [AdminController::class, 'quizz'])->name('quizz');
@@ -32,5 +34,4 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/hasilkegiatan', [AdminController::class, 'hasilkegiatan'])->name('hasilkegiatan');
     Route::get('/kelolapeserta', [AdminController::class, 'kelolapeserta'])->name('kelolapeserta');
     Route::get('/kelolalainya', [AdminController::class, 'kelolalainya'])->name('kelolalainnya');
-    Route::get('/profil', [AdminController::class, 'profil'])->name('profil');
 });
