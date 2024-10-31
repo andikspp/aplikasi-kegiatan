@@ -31,24 +31,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="https://gurudikdas.kemdikbud.go.id/presensi/kegiatan/1"
-                                            target="_blank">Evaluasi Kegiatan</a></td>
-                                    <td>2023-11-14 19:34:00</td>
-                                    <td>2023-11-14T12:56:57.000000Z</td>
-                                    <td><span class="badge bg-primary">Template</span></td>
-                                    <td>0 Peserta</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td><a href="https://gurudikdas.kemdikbud.go.id/presensi/kegiatan/2"
-                                            target="_blank">Dampak Ngopi Selam</a></td>
-                                    <td>2023-08-09 17:20:00</td>
-                                    <td>2023-08-09T10:26:33.000000Z</td>
-                                    <td><span class="badge bg-primary">Template</span></td>
-                                    <td>0 Peserta</td>
-                                </tr>
+                                @foreach($quizzes as $index => $quiz)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td><a href="https://gurudikdas.kemdikbud.go.id/presensi/kegiatan/{{ $quiz->id }}" target="_blank">{{ $quiz->nama_quiz }}</a></td>
+                                        <td>{{ $quiz->tanggal_buka }} / {{ $quiz->tanggal_tutup }}</td>
+                                        <td>{{ $quiz->lokasi ?? 'N/A' }}</td>
+                                        <td><span class="badge bg-primary">{{ $quiz->status }}</span></td>
+                                        <td>{{ $quiz->jumlah_peserta ?? '0 Peserta' }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
 
