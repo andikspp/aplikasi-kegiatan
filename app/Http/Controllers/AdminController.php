@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
+use App\Models\Kegiatan;
+use App\Models\PeranKegiatan;
 
 class AdminController extends Controller
 {
@@ -20,7 +22,9 @@ class AdminController extends Controller
 
     public function kegiatan()
     {
-        return view('admin.menu.kegiatan');
+        $kegiatans = Kegiatan::all();
+
+        return view('admin.menu.kegiatan', compact('kegiatans'));
     }
 
     public function tambahKegiatan()
@@ -52,9 +56,13 @@ class AdminController extends Controller
         return view('admin.menu.pertanyaan');
     }
 
-    public function hasilkegiatan()
+    public function hasilkegiatan($id)
     {
-        return view('admin.menu.hasilkegiatan');
+        $kegiatan = Kegiatan::findOrFail($id);
+
+        $peran_kegiatan = PeranKegiatan::where('id_kegiatan', $id)->get();
+
+        return view('admin.menu.hasilkegiatan', compact('kegiatan', 'peran_kegiatan'));
     }
 
     public function kelolapeserta()

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-5">
         <div class="d-flex mb-4 bg-light p-3">
-            <a href="{{ route('hasilkegiatan') }}" class="btn btn-link">
+            <a href="{{ route('hasilkegiatan', ['id' => $kegiatan->id]) }}" class="btn btn-primary me-2">
                 <i class="fas fa-calendar"></i> Kelola Kegiatan
             </a>
             <a href="{{ route('kelolapeserta') }}" class="btn btn-primary me-2">
@@ -15,7 +15,7 @@
         </div>
 
         <form id="formUbahKegiatan" class="bg-light p-4 rounded shadow">
-        <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Ubah Peserta</h1>
+            <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Ubah Peserta</h1>
             <div class="filter-section mb-4">
                 <h5>Filter</h5>
                 <div class="row">
@@ -99,9 +99,11 @@
                                         Pilih Predikat
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#" onclick="selectPredikat('Sangat Baik')">Sangat Baik</a>
+                                        <a class="dropdown-item" href="#"
+                                            onclick="selectPredikat('Sangat Baik')">Sangat Baik</a>
                                         <a class="dropdown-item" href="#" onclick="selectPredikat('Baik')">Baik</a>
-                                        <a class="dropdown-item" href="#" onclick="selectPredikat('Cukup Baik')">Cukup Baik</a>
+                                        <a class="dropdown-item" href="#" onclick="selectPredikat('Cukup Baik')">Cukup
+                                            Baik</a>
                                     </div>
                                 </div>
                             </td>
@@ -128,9 +130,11 @@
                                         Pilih Predikat
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#" onclick="selectPredikat('Sangat Baik')">Sangat Baik</a>
+                                        <a class="dropdown-item" href="#"
+                                            onclick="selectPredikat('Sangat Baik')">Sangat Baik</a>
                                         <a class="dropdown-item" href="#" onclick="selectPredikat('Baik')">Baik</a>
-                                        <a class="dropdown-item" href="#" onclick="selectPredikat('Cukup Baik')">Cukup Baik</a>
+                                        <a class="dropdown-item" href="#" onclick="selectPredikat('Cukup Baik')">Cukup
+                                            Baik</a>
                                     </div>
                                 </div>
                             </td>
@@ -157,9 +161,11 @@
                                         Pilih Predikat
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#" onclick="selectPredikat('Sangat Baik')">Sangat Baik</a>
+                                        <a class="dropdown-item" href="#"
+                                            onclick="selectPredikat('Sangat Baik')">Sangat Baik</a>
                                         <a class="dropdown-item" href="#" onclick="selectPredikat('Baik')">Baik</a>
-                                        <a class="dropdown-item" href="#" onclick="selectPredikat('Cukup Baik')">Cukup Baik</a>
+                                        <a class="dropdown-item" href="#" onclick="selectPredikat('Cukup Baik')">Cukup
+                                            Baik</a>
                                     </div>
                                 </div>
                             </td>
@@ -175,18 +181,24 @@
         .form-label {
             font-weight: bold;
         }
+
         .bg-light {
             background-color: #f8f9fa !important;
         }
+
         .rounded {
             border-radius: 0.5rem;
         }
+
         .shadow {
             box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
         }
+
         .btn-link {
-        text-decoration: none; /* Menghilangkan garis bawah */
-        color: #0d6efd; /* Warna teks */
+            text-decoration: none;
+            /* Menghilangkan garis bawah */
+            color: #0d6efd;
+            /* Warna teks */
         }
     </style>
 @endsection

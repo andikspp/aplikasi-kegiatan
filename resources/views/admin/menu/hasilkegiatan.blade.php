@@ -1,9 +1,9 @@
 @extends('layouts.menu.layout-dashboard')
-
+@section('title', 'Kelola Kegiatan')
 @section('content')
     <div class="container mt-5">
         <div class="d-flex mb-4 bg-light p-3">
-            <a href="{{ route('hasilkegiatan') }}" class="btn btn-primary me-2">
+            <a href="{{ route('hasilkegiatan', ['id' => $kegiatan->id]) }}" class="btn btn-primary me-2">
                 <i class="fas fa-calendar"></i> Kelola Kegiatan
             </a>
             <a href="{{ route('kelolapeserta') }}" class="btn btn-link">
@@ -14,157 +14,227 @@
             </a>
         </div>
 
-        <form id="formUbahKegiatan" class="bg-light p-4 rounded shadow">
-        <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Ubah Kegiatan</h1>
-            <div class="mb-3">
+        <form id="formUbahKegiatan" class="bg-light p-4 rounded shadow"
+            action="{{ route('kegiatan.update', $kegiatan->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+
+            <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Ubah Kegiatan</h1>
+
+            {{-- <div class="mb-3">
                 <label for="kodeKegiatan" class="form-label">Kode Kegiatan</label>
-                <input type="text" class="form-control" id="kodeKegiatan" name="kodeKegiatan" value="V32X7" readonly>
-            </div>
+                <input type="text" class="form-control" id="kodeKegiatan" name="kodeKegiatan"
+                    value="{{ $kegiatan->id }}">
+            </div> --}}
 
             <div class="mb-3">
                 <label for="role" class="form-label">Role</label>
                 <select class="form-select" id="role" name="role">
-                    <option selected>PPPK</option>
-                    <!-- Tambahkan opsi pokja di sini -->
+                    <option value="Tata Kelola" {{ $kegiatan->role == 'Tata Kelola' ? 'selected' : '' }}>Tata Kelola
+                    </option>
+                    <option value="Kemitraan" {{ $kegiatan->role == 'Kemitraan' ? 'selected' : '' }}>Kemitraan</option>
+                    <option value="Publikasi" {{ $kegiatan->role == 'Publikasi' ? 'selected' : '' }}>Publikasi</option>
+                    <option value="Pembelajaran" {{ $kegiatan->role == 'Pembelajaran' ? 'selected' : '' }}>Pembelajaran
+                    </option>
+                    <option value="Paud HI" {{ $kegiatan->role == 'PAUD HI' ? 'selected' : '' }}>PAUD HI</option>
+                    <option value="Tata Usaha" {{ $kegiatan->role == 'Tata Usaha' ? 'selected' : '' }}>Tata Usaha</option>
+
                 </select>
             </div>
 
             <div class="mb-3">
-                <label for="namaKegiatan" class="form-label">Nama Kegiatan</label>
-                <input type="text" class="form-control" id="namaKegiatan" name="namaKegiatan"
-                    value="Rapat Koordinasi Pengelolaan Kinerja Guru dan Kepala Sekolah Bagi PIC Dinas Pendidikan Region 1">
+                <label for="nama" class="form-label">Nama Kegiatan</label>
+                <input type="text" class="form-control" id="nama" name="nama" value="{{ $kegiatan->nama }}">
             </div>
 
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Tanggal Pendaftaran</label>
                 <div class="col-sm-5">
-                    <label for="tanggalMulai">Mulai</label>
-                    <input type="datetime-local" class="form-control" id="tanggalMulai" name="tanggalMulai"
-                        value="2024-07-10T12:00">
+                    <label for="tanggal_pendaftaran">Mulai</label>
+                    <input type="date" class="form-control" id="tanggal_pendaftaran" name="tanggal_pendaftaran"
+                        value="{{ $kegiatan->tanggal_pendaftaran }}">
                 </div>
                 <div class="col-sm-5">
-                    <label for="tanggalSelesai">Selesai</label>
-                    <input type="datetime-local" class="form-control" id="tanggalSelesai" name="tanggalSelesai"
-                        value="2024-10-18T12:00">
+                    <label for="selesai_pendaftaran">Selesai</label>
+                    <input type="date" class="form-control" id="selesai_pendaftaran" name="selesai_pendaftaran"
+                        value="{{ $kegiatan->selesai_pendaftaran }}">
                 </div>
             </div>
 
             <div class="mb-3">
-                <label for="tanggalKegiatan" class="form-label">Tanggal Kegiatan</label>
-                <input type="text" class="form-control" id="tanggalKegiatan" name="tanggalKegiatan"
-                    value="16 s.d. 18 Oktober 2024">
+                <label for="tanggal_kegiatan" class="form-label">Tanggal Kegiatan</label>
+                <input type="date" class="form-control" id="tanggal_kegiatan" name="tanggal_kegiatan"
+                    value="{{ $kegiatan->tanggal_kegiatan }}">
             </div>
 
             <div class="mb-3">
                 <label for="tempatKegiatan" class="form-label">Tempat Kegiatan</label>
-                <input type="text" class="form-control" id="tempatKegiatan" name="tempatKegiatan"
-                    value="Surabaya, Jawa Timur">
+                <input type="text" class="form-control" id="tempat_kegiatan" name="tempat_kegiatan"
+                    value="{{ $kegiatan->tempat_kegiatan }}">
             </div>
 
             <div class="mb-3">
-                <label for="jenisKegiatan" class="form-label">Jenis Kegiatan</label>
-                <input type="text" class="form-control" id="jenisKegiatan" name="jenisKegiatan" value="Luring">
+                <label for="jenis_kegiatan" class="form-label">Jenis Kegiatan</label>
+                <input type="text" class="form-control" id="jenis_kegiatan" name="jenis_kegiatan"
+                    value="{{ $kegiatan->jenis_kegiatan }}">
             </div>
 
             <div class="mb-3">
-                <label for="linkWebMeeting" class="form-label">Link Web Meeting</label>
-                <textarea class="form-control" id="linkWebMeeting" name="linkWebMeeting" rows="3"></textarea>
+                <label for="link_meeting" class="form-label">Link Web Meeting</label>
+                <input type="text" class="form-control" id="link_meeting" name="link_meeting"
+                    value="{{ $kegiatan->link_meeting }}">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Jumlah JP</label>
-                <input type="number" class="form-control" id="jumlahJP" name="jumlahJP" value="0">
+                <input type="number" class="form-control" id="jumlah_jp" name="jumlah_jp"
+                    value="{{ $kegiatan->jumlah_jp }}">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Membutuhkan Mata Pelajaran?</label>
                 <div>
-                    <label><input type="radio" name="mataPelajaran" value="ya" style="accent-color: blue;"> Ya</label>
-                    <label><input type="radio" name="mataPelajaran" value="tidak" style="accent-color: blue;"> Tidak</label>
+                    <label><input type="radio" name="membutuhkan_mapel" value="ya"
+                            {{ $kegiatan->membutuhkan_mapel == 'ya' ? 'checked' : '' }} style="accent-color: blue;">
+                        Ya</label>
+                    <label><input type="radio" name="membutuhkan_mapel" value="tidak"
+                            {{ $kegiatan->membutuhkan_mapel == 'tidak' ? 'checked' : '' }} style="accent-color: blue;">
+                        Tidak</label>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Membutuhkan Nomor Rekening?</label>
                 <div>
-                    <label><input type="radio" name="nomorRekening" value="ya" style="accent-color: blue;"> Ya</label>
-                    <label><input type="radio" name="nomorRekening" value="tidak" style="accent-color: blue;"> Tidak</label>
+                    <label><input type="radio" name="membutuhkan_nomor_rekening" value="ya"
+                            {{ $kegiatan->membutuhkan_nomor_rekening == 'ya' ? 'checked' : '' }}
+                            style="accent-color: blue;">
+                        Ya</label>
+                    <label><input type="radio" name="membutuhkan_nomor_rekening" value="tidak"
+                            {{ $kegiatan->membutuhkan_nomor_rekening == 'tidak' ? 'checked' : '' }}
+                            style="accent-color: blue;">
+                        Tidak</label>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Membutuhkan Lokasi?</label>
                 <div>
-                    <label><input type="radio" name="lokasi" value="ya" style="accent-color: blue;"> Ya</label>
-                    <label><input type="radio" name="lokasi" value="tidak" style="accent-color: blue;"> Tidak</label>
+                    <label><input type="radio" name="membutuhkan_lokasi" value="ya"
+                            {{ $kegiatan->membutuhkan_lokasi == 'ya' ? 'checked' : '' }} style="accent-color: blue;">
+                        Ya</label>
+                    <label><input type="radio" name="membutuhkan_lokasi" value="tidak"
+                            {{ $kegiatan->membutuhkan_lokasi == 'tidak' ? 'checked' : '' }} style="accent-color: blue;">
+                        Tidak</label>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Membutuhkan foto presensi?</label>
                 <div>
-                    <label><input type="radio" name="fotoPresensi" value="ya" style="accent-color: blue;"> Ya</label>
-                    <label><input type="radio" name="fotoPresensi" value="tidak" style="accent-color: blue;"> Tidak</label>
+                    <label><input type="radio" name="membutuhkan_foto_presensi" value="ya"
+                            {{ $kegiatan->membutuhkan_foto_presensi == 'ya' ? 'checked' : '' }}
+                            style="accent-color: blue;">
+                        Ya</label>
+                    <label><input type="radio" name="membutuhkan_foto_presensi" value="tidak"
+                            {{ $kegiatan->membutuhkan_foto_presensi == 'tidak' ? 'checked' : '' }}
+                            style="accent-color: blue;">
+                        Tidak</label>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Menggunakan Sertifikat?</label>
                 <div>
-                    <label><input type="radio" name="sertifikat" value="ya" style="accent-color: blue;" class="sertifikat-radio"> Ya</label>
-                    <label><input type="radio" name="sertifikat" value="tidak" style="accent-color: blue;" class="sertifikat-radio"> Tidak</label>
+                    <label><input type="radio" name="menggunakan_sertifikat" value="ya"
+                            {{ $kegiatan->menggunakan_sertifikat == 'ya' ? 'checked' : '' }} style="accent-color: blue;">
+                        Ya</label>
+                    <label><input type="radio" name="menggunakan_sertifikat" value="tidak"
+                            {{ $kegiatan->menggunakan_sertifikat == 'tidak' ? 'checked' : '' }}
+                            style="accent-color: blue;">
+                        Tidak</label>
                 </div>
             </div>
 
-            <div id="sertifikatFields" style="display: none;">
-                <div class="mb-3">
-                    <label for="nomorSertifikat" class="form-label">Nomor Sertifikat</label>
-                    <input type="text" class="form-control" id="nomorSertifikat" name="nomorSertifikat">
-                </div>
-                <div class="mb-3">
-                    <label for="nomorSeriSertifikat" class="form-label">Nomor Seri Sertifikat</label>
-                    <input type="text" class="form-control" id="nomorSeriSertifikat" name="nomorSeriSertifikat">
-                </div>
-                <div class="mb-3">
-                    <label for="templateSertifikat" class="form-label">Template Sertifikat</label>
-                    <input type="text" class="form-control" id="templateSertifikat" name="templateSertifikat">
-                </div>
-                <div class="mb-3">
-                    <label for="tanggalTTDSertifikat" class="form-label">Tanggal TTD Sertifikat</label>
-                    <input type="date" class="form-control" id="tanggalTTDSertifikat" name="tanggalTTDSertifikat">
-                </div>
-            </div>
-
+            <!-- Nomor Sertifikat -->
             <div class="mb-3">
-                <label for="peran" class="form-label">Peran Dalam Kegiatan</label>
-                <div class="input-group">
-                    <select class="form-select" id="peran" name="peran">
-                        <option selected>Pilih Peran</option>
-                        <option value="peserta">Peserta</option>
-                        <!-- Tambahkan opsi peran lainnya di sini -->
-                    </select>
-                    <button class="btn btn-outline-primary" type="button" id="btnTambahPeran">+ Tambah Peran</button>
-                </div>
-                <small class="form-text text-muted">(default: Peserta)</small>
+                <label for="nomor_sertifikat" class="form-label">Nomor Sertifikat (Opsional)</label>
+                <input type="text" name="nomor_sertifikat" id="nomor_sertifikat" class="form-control"
+                    maxlength="255" value="{{ old('nomor_sertifikat', $kegiatan->nomor_sertifikat) }}">
             </div>
 
-            <!-- Tabel untuk menampilkan peran yang telah ditambahkan -->
-            <table class="table table-bordered mt-3">
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Peran</th>
-                        <th>Link</th>
-                        <th>Kode Rekening?</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="tabelPeran">
-                    <!-- Baris peran akan ditambahkan di sini melalui JavaScript -->
-                </tbody>
-            </table>
-
+            <!-- Nomor Seri Sertifikat -->
             <div class="mb-3">
+                <label for="nomor_seri_sertifikat" class="form-label">Nomor Seri Sertifikat (Opsional)</label>
+                <input type="text" name="nomor_seri_sertifikat" id="nomor_seri_sertifikat" class="form-control"
+                    maxlength="255" value="{{ old('nomor_seri_sertifikat', $kegiatan->nomor_seri_sertifikat) }}">
+            </div>
+
+            <!-- Template Sertifikat -->
+            <div class="mb-3">
+                <label for="template_sertifikat" class="form-label">Template Sertifikat (Opsional)</label>
+                <input type="text" name="template_sertifikat" id="template_sertifikat" class="form-control"
+                    maxlength="255" value="{{ old('template_sertifikat', $kegiatan->template_sertifikat) }}">
+            </div>
+
+            <!-- Tanggal TTD Sertifikat -->
+            <div class="mb-3">
+                <label for="tanggal_ttd_sertifikat" class="form-label">Tanggal TTD Sertifikat (Opsional)</label>
+                <input type="date" name="tanggal_ttd_sertifikat" id="tanggal_ttd_sertifikat" class="form-control"
+                    value="{{ old('tanggal_ttd_sertifikat', $kegiatan->tanggal_ttd_sertifikat) }}">
+            </div>
+
+
+            <!-- Table for editing Peran -->
+            <div class="mb-3">
+                <label class="form-label">Peran <span class="text-danger">*</span></label>
+                <div class="d-flex justify-content-end mb-2">
+                    <button type="button" class="btn btn-success ms-auto" onclick="addPeranRow()">Tambah Peran</button>
+                </div>
+                <table class="table table-bordered mt-3" id="peranTable">
+                    <thead>
+                        <tr>
+                            <th class="text-center">No.</th>
+                            <th class="text-center">Peran</th>
+                            <th class="text-center">Nomor Rekening</th>
+                            <th class="text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Existing rows should be generated from the peran_kegiatan table -->
+                        @foreach ($peran_kegiatan as $index => $peran)
+                            <tr>
+                                <td class="text-center">{{ $index + 1 }}</td>
+                                <td>
+                                    <select name="peran[]" class="form-control text-center" required>
+                                        <option value="">Pilih Peran</option>
+                                        <option value="Narasumber" {{ $peran->peran === 'Narasumber' ? 'selected' : '' }}>
+                                            Narasumber</option>
+                                        <option value="Fasilitator"
+                                            {{ $peran->peran === 'Fasilitator' ? 'selected' : '' }}>Fasilitator</option>
+                                        <option value="Panitia" {{ $peran->peran === 'Panitia' ? 'selected' : '' }}>
+                                            Panitia</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="nomor_rekening[]" class="form-control text-center" required>
+                                        <option value="ya" {{ $peran->nomor_rekening === 'Ya' ? 'selected' : '' }}>Ya
+                                        </option>
+                                        <option value="tidak" {{ $peran->nomor_rekening === 'Tidak' ? 'selected' : '' }}>
+                                            Tidak</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger"
+                                        onclick="deleteRow(this)">Hapus</button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            {{-- <div class="mb-3">
                 <h5>Tautan Presensi</h5>
                 <table class="table table-bordered mt-3">
                     <thead>
@@ -180,10 +250,10 @@
                     </tbody>
                 </table>
                 <button class="btn btn-outline-primary" type="button" id="btnTambahPresensi">+ Tambah Presensi</button>
-            </div>
+            </div> --}}
 
             <!-- Quiz/Evaluasi -->
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <h5>Quiz/Evaluasi</h5>
                 <table class="table table-bordered mt-3">
                     <thead>
@@ -199,12 +269,12 @@
                     </tbody>
                 </table>
                 <button class="btn btn-outline-primary" type="button" id="btnTambahQuiz">+ Tambah Quiz</button>
-            </div>
+            </div> --}}
 
             <div class="row">
-                <div class="col-sm-10 offset-sm-2">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                    <button type="button" class="btn btn-secondary ms-2" id="btnBatal">Batal</button>
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-success">Simpan</button>
+                    <a href="{{ route('kegiatan') }}" class="btn btn-danger ms-2">Kembali</a>
                 </div>
             </div>
         </form>
@@ -214,68 +284,119 @@
         .form-label {
             font-weight: bold;
         }
+
         .bg-light {
             background-color: #f8f9fa !important;
         }
+
         .rounded {
             border-radius: 0.5rem;
         }
+
         .shadow {
             box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
         }
+
         .btn-link {
-            text-decoration: none; /* Menghilangkan garis bawah */
-            color: #0d6efd; /* Warna teks */
+            text-decoration: none;
+            /* Menghilangkan garis bawah */
+            color: #0d6efd;
+            /* Warna teks */
         }
     </style>
 @endsection
 
 @push('scripts')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#formUbahKegiatan').submit(function(e) {
-                e.preventDefault();
-                // Di sini Anda dapat menambahkan logika untuk mengirim data formulir ke server
-                console.log('Form submitted');
-            });
+        let peranCounter = {{ count($peran_kegiatan) + 1 }}; // Start counter after existing rows
 
-            $('#btnBatal').click(function() {
-                if (confirm('Apakah Anda yakin ingin membatalkan pengisian formulir?')) {
-                    window.history.back();
-                }
-            });
+        // Function to add a new row
+        function addPeranRow() {
+            const tableBody = document.querySelector("#peranTable tbody");
+            const newRow = document.createElement("tr");
 
-            $('#btnTambahPeran').click(function() {
-                const peran = $('#peran').val();
-                const link = 'https://example.com'; // Ganti dengan logika untuk mendapatkan link
-                const kodeRekening = 'U27PD'; // Ganti dengan logika untuk mendapatkan kode rekening
+            newRow.innerHTML = `
+        <td class="text-center">${peranCounter}</td>
+        <td>
+            <select name="peran[]" class="form-control text-center" required>
+                <option value="">Pilih Peran</option>
+                <option value="Narasumber">Narasumber</option>
+                <option value="Fasilitator">Fasilitator</option>
+                <option value="Panitia">Panitia</option>
+            </select>
+        </td>
+        <td>
+            <select name="nomor_rekening[]" class="form-control text-center" required>
+                <option value="ya">Ya</option>
+                <option value="tidak">Tidak</option>
+            </select>
+        </td>
+        <td>
+            <button type="button" class="btn btn-danger" onclick="deleteRow(this)">Hapus</button>
+        </td>
+    `;
 
-                if (peran !== 'Pilih Peran') {
-                    const rowCount = $('#tabelPeran tr').length + 1;
-                    $('#tabelPeran').append(`
-                        <tr>
-                            <td>${rowCount}</td>
-                            <td>${peran}</td>
-                            <td><a href="${link}" target="_blank">${link}</a></td>
-                            <td>${kodeRekening}</td>
-                            <td><button class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
-                        </tr>
-                    `);
-                }
-            });
-
-            $('input[name="sertifikat"]').change(function() {
-                if ($(this).val() === 'ya') {
-                    $('#sertifikatFields').show(); // Menampilkan field sertifikat
-                } else {
-                    $('#sertifikatFields').hide(); // Menyembunyikan field sertifikat
-                }
-            });
-        });
-
-        function removeRow(button) {
-            $(button).closest('tr').remove();
+            tableBody.appendChild(newRow);
+            peranCounter++;
         }
+
+        // Function to delete a row
+        function deleteRow(button) {
+            const row = button.closest("tr");
+            row.remove();
+
+            // Update row numbers
+            const rows = document.querySelectorAll("#peranTable tbody tr");
+            rows.forEach((row, index) => {
+                row.cells[0].innerText = index + 1;
+            });
+            peranCounter = rows.length + 1; // Adjust counter based on remaining rows
+        }
+
+
+        // $(document).ready(function() {
+        //     $('#formUbahKegiatan').submit(function(e) {
+        //         e.preventDefault();
+        //         // Di sini Anda dapat menambahkan logika untuk mengirim data formulir ke server
+        //         console.log('Form submitted');
+        //     });
+
+        //     $('#btnBatal').click(function() {
+        //         if (confirm('Apakah Anda yakin ingin membatalkan pengisian formulir?')) {
+        //             window.history.back();
+        //         }
+        //     });
+
+        //     $('#btnTambahPeran').click(function() {
+        //         const peran = $('#peran').val();
+        //         const link = 'https://example.com'; // Ganti dengan logika untuk mendapatkan link
+        //         const kodeRekening = 'U27PD'; // Ganti dengan logika untuk mendapatkan kode rekening
+
+        //         if (peran !== 'Pilih Peran') {
+        //             const rowCount = $('#tabelPeran tr').length + 1;
+        //             $('#tabelPeran').append(`
+    //                 <tr>
+    //                     <td>${rowCount}</td>
+    //                     <td>${peran}</td>
+    //                     <td><a href="${link}" target="_blank">${link}</a></td>
+    //                     <td>${kodeRekening}</td>
+    //                     <td><button class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
+    //                 </tr>
+    //             `);
+        //         }
+        //     });
+
+        //     $('input[name="sertifikat"]').change(function() {
+        //         if ($(this).val() === 'ya') {
+        //             $('#sertifikatFields').show(); // Menampilkan field sertifikat
+        //         } else {
+        //             $('#sertifikatFields').hide(); // Menyembunyikan field sertifikat
+        //         }
+        //     });
+        // });
+
+        // function removeRow(button) {
+        //     $(button).closest('tr').remove();
+        // }
     </script>
 @endpush

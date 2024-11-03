@@ -1,11 +1,11 @@
 @extends('layouts.menu.layout-dashboard')
-
+@section('title', 'Kegiatan')
 @section('content')
     <div class="container-fluid">
         <h1 class="mb-4">Daftar Kegiatan</h1>
 
         <div class="d-flex justify-content-between mb-3">
-            <a href="{{ route('tambah-kegiatan') }}" class="btn btn-primary">
+            <a href="{{ route('tambah-kegiatan') }}" class="btn btn-success">
                 <i class="fas fa-plus"></i> Tambah Kegiatan</a>
             <button class="btn btn-primary">
                 <i class="fas fa-filter"></i> Filter
@@ -44,74 +44,49 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>
-                            <a href="{{ route('hasilkegiatan') }}" class="kegiatan-link">
-                                Rapat Koordinasi Pengelolaan Kinerja Guru dan Kepala Sekolah Bagi PIC Dinas Pendidikan
-                                Region 1
-                            </a>
-                            <br>
-                            <span class="kode-kegiatan">Kode Kegiatan: <strong>V32X7</strong></span>
-                        </td>
-                        <td>16 s.d. 18 Oktober 2024</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>PPPK</td>
-                        <td>Belum ada</td>
-                        <td>Tidak ada ajuan.</td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v"></i>
+                    @foreach ($kegiatans as $index => $kegiatan)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>
+                                <a href="{{ route('hasilkegiatan', ['id' => $kegiatan->id]) }}" class="kegiatan-link">
+                                    {{ $kegiatan->nama }}
+                                </a>
+                                <br>
+                                <span class="kode-kegiatan">Kode Kegiatan:
+                                    <strong>{{ $kegiatan->id }}</strong></span>
+                            </td>
+                            <td>{{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('d-m-Y') }}</td>
+                            <td>{{ $kegiatan->jumlah_jp }}</td>
+                            <td>{{ $kegiatan->jumlah_peserta ?? 'Tidak Ada' }}</td>
+                            <td>{{ $kegiatan->role }}</td>
+                            <td>{{ $kegiatan->menggunakan_sertifikat === 'ya' ? 'Ada' : 'Tidak Ada' }}</td>
+                            <td>{{ $kegiatan->menggunakan_sertifikat === 'ya' ? 'Ada' : 'Tidak Ada' }}</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                    onclick="confirmDelete({{ $kegiatan->id }})">
+                                    <i class="fas fa-trash-alt"></i> Hapus
                                 </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">Lihat/Ubah</a></li>
-                                    <li><a class="dropdown-item" href="#">Daftar Peserta</a></li>
-                                    <li><a class="dropdown-item" href="#">Unggah Ajuan SK Sertifikat</a></li>
-                                    <li><a class="dropdown-item" href="#">Unduh Presensi</a></li>
-                                    <li><a class="dropdown-item" href="#">Unduh Biodata</a></li>
-                                    <li><a class="dropdown-item" href="#">Unduh Sertifikat</a></li>
-                                    <li><a class="dropdown-item" href="#">Sebaran Peserta</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
 
-                    <tr>
-                        <td>2</td>
-                        <td>
-                            <a href="#" class="kegiatan-link">
-                                Rapat Pembuatan Buku Saku
-                            </a>
-                            <br>
-                            <span class="kode-kegiatan">Kode Kegiatan: <strong>K3421</strong></span>
-                        </td>
-                        <td>16 s.d. 19 Desember 2024</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>PPPK</td>
-                        <td>Belum ada</td>
-                        <td>Tidak ada ajuan.</td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">Lihat/Ubah</a></li>
-                                    <li><a class="dropdown-item" href="#">Daftar Peserta</a></li>
-                                    <li><a class="dropdown-item" href="#">Unggah Ajuan SK Sertifikat</a></li>
-                                    <li><a class="dropdown-item" href="#">Unduh Presensi</a></li>
-                                    <li><a class="dropdown-item" href="#">Unduh Biodata</a></li>
-                                    <li><a class="dropdown-item" href="#">Unduh Sertifikat</a></li>
-                                    <li><a class="dropdown-item" href="#">Sebaran Peserta</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('hasilkegiatan', ['id' => $kegiatan->id]) }}">Lihat/Ubah</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">Daftar Peserta</a></li>
+                                        <li><a class="dropdown-item" href="#">Unggah Ajuan SK Sertifikat</a></li>
+                                        <li><a class="dropdown-item" href="#">Unduh Presensi</a></li>
+                                        <li><a class="dropdown-item" href="#">Unduh Biodata</a></li>
+                                        <li><a class="dropdown-item" href="#">Unduh Sertifikat</a></li>
+                                        <li><a class="dropdown-item" href="#">Sebaran Peserta</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
             <div class="d-flex justify-content-between align-items-center mt-3">
@@ -155,4 +130,22 @@
             /* Warna biru yang sedikit lebih gelap saat dihover */
         }
     </style>
+
+    <script>
+        function confirmDelete(id) {
+            Swal.fire({
+                title: "Apakah Anda yakin?",
+                text: "Data yang dihapus tidak dapat dikembalikan!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Ya, hapus!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `/kegiatan-delete/${id}`;
+                }
+            });
+        }
+    </script>
 @endsection

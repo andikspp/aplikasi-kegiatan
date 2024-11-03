@@ -30,6 +30,10 @@ class Kegiatan extends Model
         'nomor_seri_sertifikat',
         'template_sertifikat',
         'tanggal_ttd_sertifikat',
-        'peran',
     ];
+
+    public function peranKegiatan()
+    {
+        return $this->hasMany(PeranKegiatan::class, 'id_kegiatan');
+    }
 }

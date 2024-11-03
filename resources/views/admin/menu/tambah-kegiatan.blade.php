@@ -1,243 +1,173 @@
 @extends('layouts.menu.layout-dashboard')
-
+@section('title', 'Tambah Kegiatan')
 @section('content')
     <div class="container mt-5">
-        <form id="formUbahKegiatan" class="bg-light p-4 rounded shadow">
-        <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Tambah Kegiatan</h1>
+        <h2>Tambah Kegiatan</h2>
+        <form action="{{ route('kegiatan.store') }}" method="POST" class="shadow p-4 bg-light rounded form-background"
+            id="formKegiatan">
+            @csrf
 
-            <form id="formTambahKegiatan">
-                <div class="row mb-3">
-                    <label for="role" class="col-sm-2 col-form-label">Role</label>
-                    <div class="col-sm-10">
-                        <select class="form-select" id="role" name="role">
-                            <option selected disabled>Pilih Pokja</option>
-                            @foreach ($roles as $role)
-                                <option value="{{ $role }}">{{ ucfirst($role) }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
+            <!-- Role -->
+            <div class="mb-3">
+                <label for="role" class="form-label">Pokja <span class="text-danger">*</span></label>
+                <select name="role" id="role" class="form-control" required>
+                    <option value="">Pilih Role</option>
+                    <option value="Tata Kelola">Tata Kelola</option>
+                    <option value="Kemitraan">Kemitraan</option>
+                    <option value="Publikasi">Publikasi</option>
+                    <option value="Pembelajaran">Pembelajaran</option>
+                    <option value="PAUD HI">PAUD HI</option>
+                    <option value="Tata Usaha">Tata Usaha</option>
+                </select>
+            </div>
 
-                <div class="row mb-3">
-                    <label for="namaKegiatan" class="col-sm-2 col-form-label">Nama Kegiatan</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="namaKegiatan" name="namaKegiatan">
-                    </div>
-                </div>
+            <!-- Nama -->
+            <div class="mb-3">
+                <label for="nama" class="form-label">Nama Kegiatan <span class="text-danger">*</span></label>
+                <input type="text" name="nama" id="nama" class="form-control" required maxlength="255">
+            </div>
 
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Tanggal Pendaftaran</label>
-                    <div class="col-sm-5">
-                        <label for="tanggalMulai">Mulai</label>
-                        <input type="datetime-local" class="form-control" id="tanggalMulai" name="tanggalMulai">
-                    </div>
-                    <div class="col-sm-5">
-                        <label for="tanggalSelesai">Selesai</label>
-                        <input type="datetime-local" class="form-control" id="tanggalSelesai" name="tanggalSelesai">
-                    </div>
-                </div>
+            <!-- Tanggal Pendaftaran -->
+            <div class="mb-3">
+                <label for="tanggal_pendaftaran" class="form-label">Tanggal Pendaftaran <span
+                        class="text-danger">*</span></label>
+                <input type="date" name="tanggal_pendaftaran" id="tanggal_pendaftaran" class="form-control" required>
+            </div>
 
-                <div class="row mb-3">
-                    <label for="tanggalKegiatan" class="col-sm-2 col-form-label">Tanggal Kegiatan</label>
-                    <div class="col-sm-10">
-                        <input type="date" class="form-control" id="tanggalKegiatan" name="tanggalKegiatan">
-                    </div>
-                </div>
+            <!-- Selesai Pendaftaran -->
+            <div class="mb-3">
+                <label for="selesai_pendaftaran" class="form-label">Selesai Pendaftaran <span
+                        class="text-danger">*</span></label>
+                <input type="date" name="selesai_pendaftaran" id="selesai_pendaftaran" class="form-control" required>
+            </div>
 
-                <div class="row mb-3">
-                    <label for="tempatKegiatan" class="col-sm-2 col-form-label">Tempat Kegiatan</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="tempatKegiatan" name="tempatKegiatan">
-                    </div>
-                </div>
+            <!-- Tanggal Kegiatan -->
+            <div class="mb-3">
+                <label for="tanggal_kegiatan" class="form-label">Tanggal Kegiatan <span class="text-danger">*</span></label>
+                <input type="date" name="tanggal_kegiatan" id="tanggal_kegiatan" class="form-control" required>
+            </div>
 
-                <div class="row mb-3">
-                    <label for="jenisKegiatan" class="col-sm-2 col-form-label">Jenis Kegiatan</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="jenisKegiatan" name="jenisKegiatan">
-                    </div>
-                </div>
+            <!-- Tempat Kegiatan -->
+            <div class="mb-3">
+                <label for="tempat_kegiatan" class="form-label">Tempat Kegiatan <span class="text-danger">*</span></label>
+                <input type="text" name="tempat_kegiatan" id="tempat_kegiatan" class="form-control" required
+                    maxlength="255">
+            </div>
 
-                <div class="row mb-3">
-                    <label for="linkWebMeeting" class="col-sm-2 col-form-label">Link Web Meeting</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="linkWebMeeting" name="linkWebMeeting"
-                            placeholder="Masukkan link web meeting di sini...">
-                    </div>
-                </div>
+            <!-- Jenis Kegiatan -->
+            <div class="mb-3">
+                <label for="jenis_kegiatan" class="form-label">Jenis Kegiatan <span class="text-danger">*</span></label>
+                <input type="text" name="jenis_kegiatan" id="jenis_kegiatan" class="form-control" required
+                    maxlength="255">
+            </div>
 
-                <div class="row mb-3">
-                    <label for="jumlahJP" class="col-sm-2 col-form-label">Jumlah JP</label>
-                    <div class="col-sm-10">
-                        <input type="number" class="form-control" id="jumlahJP" name="jumlahJP" value="0">
-                    </div>
-                </div>
+            <!-- Link Meeting -->
+            <div class="mb-3">
+                <label for="link_meeting" class="form-label">Link Meeting (Opsional)</label>
+                <input type="url" name="link_meeting" id="link_meeting" class="form-control">
+            </div>
 
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Membutuhkan Mata Pelajaran?</label>
-                    <div class="col-sm-10">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="mataPelajaran" id="mataPelajaranYa"
-                                value="Ya">
-                            <label class="form-check-label" for="mataPelajaranYa">Ya</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="mataPelajaran" id="mataPelajaranTidak"
-                                value="Tidak" checked>
-                            <label class="form-check-label" for="mataPelajaranTidak">Tidak</label>
-                        </div>
-                    </div>
-                </div>
+            <!-- Jumlah JP -->
+            <div class="mb-3">
+                <label for="jumlah_jp" class="form-label">Jumlah JP <span class="text-danger">*</span></label>
+                <input type="number" name="jumlah_jp" id="jumlah_jp" class="form-control" required>
+            </div>
 
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Membutuhkan Nomor Rekening?</label>
-                    <div class="col-sm-10">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="nomorRekening" id="nomorRekeningYa"
-                                value="Ya">
-                            <label class="form-check-label" for="nomorRekeningYa">Ya</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="nomorRekening" id="nomorRekeningTidak"
-                                value="Tidak" checked>
-                            <label class="form-check-label" for="nomorRekeningTidak">Tidak</label>
-                        </div>
-                    </div>
-                </div>
+            <!-- Membutuhkan Mapel -->
+            <div class="mb-3">
+                <label class="form-label">Membutuhkan Mapel <span class="text-danger">*</span></label>
+                <select name="membutuhkan_mapel" class="form-control" required>
+                    <option value="ya">Ya</option>
+                    <option value="tidak">Tidak</option>
+                </select>
+            </div>
 
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Membutuhkan Lokasi?</label>
-                    <div class="col-sm-10">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="lokasi" id="lokasiYa" value="Ya">
-                            <label class="form-check-label" for="lokasiYa">Ya</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="lokasi" id="lokasiTidak" value="Tidak"
-                                checked>
-                            <label class="form-check-label" for="lokasiTidak">Tidak</label>
-                        </div>
-                    </div>
-                </div>
+            <!-- Membutuhkan Nomor Rekening -->
+            <div class="mb-3">
+                <label class="form-label">Membutuhkan Nomor Rekening <span class="text-danger">*</span></label>
+                <select name="membutuhkan_nomor_rekening" id="nomor_rekening" class="form-control" required>
+                    <option value="ya">Ya</option>
+                    <option value="tidak">Tidak</option>
+                </select>
+            </div>
 
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Membutuhkan foto presensi?</label>
-                    <div class="col-sm-10">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="fotoPresensi" id="fotoPresensiYa"
-                                value="Ya">
-                            <label class="form-check-label" for="fotoPresensiYa">Ya</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="fotoPresensi" id="fotoPresensiTidak"
-                                value="Tidak" checked>
-                            <label class="form-check-label" for="fotoPresensiTidak">Tidak</label>
-                        </div>
-                    </div>
-                </div>
+            <!-- Membutuhkan Lokasi -->
+            <div class="mb-3">
+                <label class="form-label">Membutuhkan Lokasi <span class="text-danger">*</span></label>
+                <select name="membutuhkan_lokasi" class="form-control" required>
+                    <option value="ya">Ya</option>
+                    <option value="tidak">Tidak</option>
+                </select>
+            </div>
 
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Menggunakan Sertifikat?</label>
-                    <div class="col-sm-10">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="sertifikat" id="sertifikatYa"
-                                value="Ya">
-                            <label class="form-check-label" for="sertifikatYa">Ya</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="sertifikat" id="sertifikatTidak"
-                                value="Tidak" checked>
-                            <label class="form-check-label" for="sertifikatTidak">Tidak</label>
-                        </div>
-                    </div>
-                </div>
+            <!-- Membutuhkan Foto Presensi -->
+            <div class="mb-3">
+                <label class="form-label">Membutuhkan Foto Presensi <span class="text-danger">*</span></label>
+                <select name="membutuhkan_foto_presensi" class="form-control" required>
+                    <option value="ya">Ya</option>
+                    <option value="tidak">Tidak</option>
+                </select>
+            </div>
 
-                <div class="row mb-3">
-                    <label for="nomorSertifikat" class="col-sm-2 col-form-label">Nomor Sertifikat</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nomorSertifikat" name="nomorSertifikat">
-                    </div>
-                </div>
+            <!-- Menggunakan Sertifikat -->
+            <div class="mb-3">
+                <label class="form-label">Menggunakan Sertifikat <span class="text-danger">*</span></label>
+                <select name="menggunakan_sertifikat" class="form-control" required>
+                    <option value="ya">Ya</option>
+                    <option value="tidak">Tidak</option>
+                </select>
+            </div>
 
-                <div class="row mb-3">
-                    <label for="nomorSeriSertifikat" class="col-sm-2 col-form-label">Nomor Seri Sertifikat</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nomorSeriSertifikat" name="nomorSeriSertifikat">
-                    </div>
-                </div>
+            <!-- Nomor Sertifikat -->
+            <div class="mb-3">
+                <label for="nomor_sertifikat" class="form-label">Nomor Sertifikat (Opsional)</label>
+                <input type="text" name="nomor_sertifikat" id="nomor_sertifikat" class="form-control"
+                    maxlength="255">
+            </div>
 
-                <div class="row mb-3">
-                    <label for="pintasan" class="col-sm-2 col-form-label">*) Pintasan {nomor_peserta}</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="pintasan" name="pintasan">
-                    </div>
-                </div>
+            <!-- Nomor Seri Sertifikat -->
+            <div class="mb-3">
+                <label for="nomor_seri_sertifikat" class="form-label">Nomor Seri Sertifikat (Opsional)</label>
+                <input type="text" name="nomor_seri_sertifikat" id="nomor_seri_sertifikat" class="form-control"
+                    maxlength="255">
+            </div>
 
-                <div class="row mb-3">
-                    <label for="templateSertifikat" class="col-sm-2 col-form-label">Template Sertifikat</label>
-                    <div class="col-sm-10">
-                        <input type="file" class="form-control" id="templateSertifikat" name="templateSertifikat">
-                    </div>
-                </div>
+            <!-- Template Sertifikat -->
+            <div class="mb-3">
+                <label for="template_sertifikat" class="form-label">Template Sertifikat (Opsional)</label>
+                <input type="text" name="template_sertifikat" id="template_sertifikat" class="form-control"
+                    maxlength="255">
+            </div>
 
-                <div class="row mb-3">
-                    <label for="tanggalTTDSertifikat" class="col-sm-2 col-form-label">Tanggal TTD Sertifikat</label>
-                    <div class="col-sm-10">
-                        <input type="date" class="form-control" id="tanggalTTDSertifikat" name="tanggalTTDSertifikat">
-                    </div>
-                </div>
+            <!-- Tanggal TTD Sertifikat -->
+            <div class="mb-3">
+                <label for="tanggal_ttd_sertifikat" class="form-label">Tanggal TTD Sertifikat (Opsional)</label>
+                <input type="date" name="tanggal_ttd_sertifikat" id="tanggal_ttd_sertifikat" class="form-control">
+            </div>
 
-                <div class="row mb-3">
-                    <label for="peranDalamKegiatan" class="col-sm-2 col-form-label">Peran Dalam Kegiatan</label>
-                    <div class="col-sm-10">
-                        <div class="d-flex align-items-center">
-                            <select class="form-select" id="peranDalamKegiatan" name="peranDalamKegiatan">
-                                <option value="" selected disabled>Pilih Peran</option>
-                                @foreach ($perans as $peran)
-                                    <option value="{{ $peran }}">{{ ucfirst($peran) }}</option>
-                                @endforeach
-                                <option value="Peserta">Peserta</option>
-                                <!-- Tambahkan opsi peran lainnya di sini -->
-                            </select>
-                            <button type="button" class="btn btn-primary ms-2" id="tambahPeran">+ Tambah Peran</button>
-                        </div>
-                    </div>
+            <!-- Table for adding Peran -->
+            <div class="mb-3">
+                <label class="form-label">Peran <span class="text-danger">*</span></label>
+                <div class="d-flex justify-content-end mb-2">
+                    <button type="button" class="btn btn-success ms-auto" onclick="addPeranRow()">Tambah Peran</button>
                 </div>
+                <table class="table table-bordered mt-3" id="peranTable">
+                    <thead>
+                        <tr>
+                            <th class="text-center">No.</th>
+                            <th class="text-center">Peran</th>
+                            <th class="text-center">Nomor Rekening</th>
+                            <th class="text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows will be dynamically added here -->
+                    </tbody>
+                </table>
+            </div>
 
-                <div class="row mb-3">
-                    <div class="col-sm-10 offset-sm-2">
-                        <table class="table table-bordered" id="tabelPeran">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Peran</th>
-                                    <th>Nomor Rekening?</th>
-                                    <th>Kode Kegiatan</th>
-                                    <th>#</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Peserta</td>
-                                    <td>-</td>
-                                    <td>undefined</td>
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-danger hapusPeran">Hapus</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-10 offset-sm-2">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                        <button type="button" class="btn btn-secondary ms-2" id="btnBatal">Batal</button>
-                    </div>
-                </div>
-            </form>
+            <button type="submit" class="btn btn-success">Simpan</button>
+            <a href="{{ route('kegiatan') }}" class="btn btn-danger ms-2">Kembali</a>
         </form>
     </div>
 
@@ -245,61 +175,61 @@
         .form-label {
             font-weight: bold;
         }
+
+        .form-background {
+            background-color: #f7f9fc;
+            /* Soft background color */
+            border: 1px solid #e3e6f0;
+            /* Light border for subtle framing */
+        }
     </style>
 @endsection
 
 @push('scripts')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            let nomorUrut = 1;
+        let peranCounter = 1;
 
-            $('#tambahPeran').click(function() {
-                const peran = $('#peranDalamKegiatan').val();
-                if (peran) {
-                    nomorUrut++;
-                    const newRow = `
-                    <tr>
-                        <td>${nomorUrut}</td>
-                        <td>${peran}</td>
-                        <td>-</td>
-                        <td>undefined</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-danger hapusPeran">Hapus</button>
-                        </td>
-                    </tr>
-                `;
-                    $('#tabelPeran tbody').append(newRow);
-                    $('#peranDalamKegiatan').val('');
-                }
+        // Function to add a new row
+        function addPeranRow() {
+            const tableBody = document.querySelector("#peranTable tbody");
+            const newRow = document.createElement("tr");
+
+            newRow.innerHTML = `
+        <td class="text-center">${peranCounter}</td>
+        <td>
+            <select name="peran[]" class="form-control text-center" required>
+                <option value="">Pilih Peran</option>
+                <option value="Narasumber">Narasumber</option>
+                <option value="Fasilitator">Fasilitator</option>
+                <option value="Panitia">Panitia</option>
+            </select>
+        </td>
+        <td>
+            <select name="nomor_rekening[]" class="form-control text-center" required>
+                <option value="ya">Ya</option>
+                <option value="tidak">Tidak</option>
+            </select>
+        </td>
+        <td>
+            <button type="button" class="btn btn-danger" onclick="deleteRow(this)">Hapus</button>
+        </td>
+    `;
+
+            tableBody.appendChild(newRow);
+            peranCounter++;
+        }
+
+        // Function to delete a row
+        function deleteRow(button) {
+            const row = button.closest("tr");
+            row.remove();
+
+            // Update row numbers
+            const rows = document.querySelectorAll("#peranTable tbody tr");
+            rows.forEach((row, index) => {
+                row.cells[0].innerText = index + 1;
             });
-
-            $(document).on('click', '.hapusPeran', function() {
-                $(this).closest('tr').remove();
-                updateNomorUrut();
-            });
-
-            function updateNomorUrut() {
-                $('#tabelPeran tbody tr').each(function(index) {
-                    $(this).find('td:first').text(index + 1);
-                });
-                nomorUrut = $('#tabelPeran tbody tr').length;
-            }
-
-            $('#formTambahKegiatan').submit(function(e) {
-                e.preventDefault();
-                // Di sini Anda dapat menambahkan logika untuk mengirim data formulir ke server
-                console.log('Form submitted');
-            });
-
-            $('#btnBatal').click(function() {
-                // Di sini Anda dapat menambahkan logika untuk membatalkan pengisian formulir
-                if (confirm('Apakah Anda yakin ingin membatalkan pengisian formulir?')) {
-                    // Misalnya, kembali ke halaman sebelumnya atau ke dashboard
-                    window.history.back();
-                    // Atau gunakan: window.location.href = '/dashboard';
-                }
-            });
-        });
+            peranCounter = rows.length + 1;
+        }
     </script>
 @endpush
