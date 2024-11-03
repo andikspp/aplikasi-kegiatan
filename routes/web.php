@@ -35,10 +35,9 @@ Route::middleware(['auth:admin'])->group(function () {
 
     Route::get('/tambah-kegiatan', [AdminController::class, 'tambahKegiatan'])->name('tambah-kegiatan');
     Route::get('/qrcode', [AdminController::class, 'qrcode'])->name('qrcode');
-    Route::get('/quizz', [AdminController::class, 'quizz'])->name('quizz');
+    Route::get('/quizz', [QuizzController::class, 'index'])->name('quizz.index');
     Route::get('/detail-kegiatan/{id}', [AdminController::class, 'detailKegiatan'])->name('detail-kegiatan');
     Route::get('/pertanyaan', [AdminController::class, 'pertanyaan'])->name('pertanyaan');
     Route::get('/kelolapeserta', [AdminController::class, 'kelolapeserta'])->name('kelolapeserta');
     Route::get('/kelolalainya', [AdminController::class, 'kelolalainya'])->name('kelolalainnya');
-    Route::get('/profil', [AdminController::class, 'profil'])->name('profil');
 });

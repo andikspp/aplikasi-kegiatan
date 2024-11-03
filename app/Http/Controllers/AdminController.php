@@ -41,6 +41,12 @@ class AdminController extends Controller
         return view('admin.menu.qrcode');
     }
 
+    public function profile()
+    {
+        $user = auth()->user(); // Ambil data pengguna yang sedang login
+        return view('admin.menu.profil', compact('user')); // Kirim variabel ke view
+    }
+
     public function quizz()
     {
         return view('admin.menu.quizz');
