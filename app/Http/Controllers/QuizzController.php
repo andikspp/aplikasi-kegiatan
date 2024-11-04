@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pertanyaan;
 use Illuminate\Http\Request;
 use App\Models\Quizz;
 

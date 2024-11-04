@@ -1,4 +1,3 @@
-
 @extends('layouts.menu.layout-dashboard')
 
 @section('content')
@@ -6,34 +5,37 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <form id="formUbahKegiatan" class="bg-light p-4 rounded shadow">
-                    <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Ubah Pertanyaan</h1>
+                    <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Kelola Kuis</h1>
                     <div class="card-body">
                         <form action="#" method="POST">
                             @csrf
                             <div class="form-group mb-3">
-                                <label for="judul">Judul *</label>
+                                <label for="judul">Judul <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="judul" name="judul" required>
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="deskripsi">Deskripsi</label>
+                                <label for="deskripsi">Deskripsi <span class="text-danger">*</span></label>
                                 <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" placeholder="Masukkan deskripsi..."></textarea>
                             </div>
 
                             <div class="row mb-3">
-                                <label for="tanggal_mulai">Tanggal Quizz <span style="color: red;">*</span></label>
+                                <label for="tanggal_mulai">Tanggal Kuis <span class="text-danger">*</span></label>
                                 <div class="col-md-6">
                                     <label for="tanggal_mulai">Mulai</label>
-                                    <input type="datetime-local" class="form-control" id="tanggal_mulai" name="tanggal_mulai" required>
+                                    <input type="datetime-local" class="form-control" id="tanggal_mulai"
+                                        name="tanggal_mulai" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="tanggal_selesai">Selesai</label>
-                                    <input type="datetime-local" class="form-control" id="tanggal_selesai" name="tanggal_selesai" required>
+                                    <input type="datetime-local" class="form-control" id="tanggal_selesai"
+                                        name="tanggal_selesai" required>
                                 </div>
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="syarat_unduh">Syarat untuk mengunduh sertifikat</label>
+                                <label for="syarat_unduh">Syarat untuk mengunduh sertifikat <span
+                                        class="text-danger">*</span></label>
                                 <select class="form-control" id="syarat_unduh" name="syarat_unduh">
                                     <option value="tidak">Tidak</option>
                                     <option value="ya">Ya</option>
@@ -47,16 +49,18 @@
     </div>
 
     <div class="container mt-4">
-        <form id="formTambahSoal" class="bg-light p-4 rounded shadow" action="{{ route('pertanyaan.store') }}">
+        <form id="formTambahSoal" class="bg-light p-4 rounded shadow" action="#">
             @csrf
-            
+
             <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Tambahkan Soal</h1>
             <hr style="border-top: 4px solid #000;">
             <div id="soalContainer">
                 <div class="item-Kegiatan mt-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <input type="text" class="form-control mr-2" placeholder="Pertanyaan" style="flex-grow: 1;" name="pertanyaan[]">
-                        <select class="form-control ml-2" style="width: 150px; margin-left: 10px;" name="kategori_soal[]" onchange="showInputFields(this)">
+                        <input type="text" class="form-control mr-2" placeholder="Pertanyaan" style="flex-grow: 1;"
+                            name="pertanyaan[]">
+                        <select class="form-control ml-2" style="width: 150px; margin-left: 10px;" name="kategori_soal[]"
+                            onchange="showInputFields(this)">
                             <option value="essai">Essai</option>
                             <option value="nomor">Nomor</option>
                             <option value="tanggal">Tanggal</option>
@@ -73,7 +77,7 @@
                     <div class="deskripsiContainer" style="display: none;">
                         <textarea class="form-control" rows="3" placeholder="Masukkan deskripsi..."></textarea>
                     </div>
-                    
+
                     <div id="inputFields" class="d-flex align-items-start flex-column" style="margin-top: 15px;"></div>
 
                     <div class="d-flex align-items-center justify-content-end">
@@ -81,17 +85,20 @@
                             <button type="button" class="btn btn-success mr-5"><i class="fas fa-arrow-down"></i></button>
                         </div>
                         <div style="margin-left: 10px;">
-                            <button type="button" class="btn btn-primary mr-5" onclick="duplikatSoal(this)"><i class="fas fa-copy"></i></button>
+                            <button type="button" class="btn btn-primary mr-5" onclick="duplikatSoal(this)"><i
+                                    class="fas fa-copy"></i></button>
                         </div>
                         <div style="margin-left: 10px;">
-                            <button type="button" class="btn btn-danger mr-5" onclick="hapusSoal(this)"><i class="fas fa-trash"></i></button>
+                            <button type="button" class="btn btn-danger mr-5" onclick="hapusSoal(this)"><i
+                                    class="fas fa-trash"></i></button>
                         </div>
                         <div class="custom-control custom-switch mr-5" style="margin-left: 10px;">
                             <input type="checkbox" class="custom-control-input" id="wajibDiisi">
                             <label class="custom-control-label" for="wajibDiisi">Wajib diisi</label>
                         </div>
                         <div style="margin-left: 10px;">
-                            <button type="button" class="btn btn-link" onclick="toggleDeskripsi(this)"><i class="fas fa-ellipsis-v"></i></button>
+                            <button type="button" class="btn btn-link" onclick="toggleDeskripsi(this)"><i
+                                    class="fas fa-ellipsis-v"></i></button>
                         </div>
                     </div>
                 </div>
@@ -239,32 +246,32 @@
             });
 
             // Mengambil CSRF token
-            const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
-            if (!csrfTokenMeta) {
-                console.error('CSRF token meta tag not found.');
-                return; // Hentikan eksekusi jika tidak ada
-            }
+            // const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
+            // if (!csrfTokenMeta) {
+            //     console.error('CSRF token meta tag not found.');
+            //     return; // Hentikan eksekusi jika tidak ada
+            // }
 
             // Mengirim data ke server
             fetch('/pertanyaan/store', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': csrfTokenMeta.getAttribute('content')
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Pertanyaan berhasil disimpan!');
-                } else {
-                    alert('Gagal menyimpan pertanyaan: ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Terjadi kesalahan saat menyimpan pertanyaan.');
-            });
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': csrfTokenMeta.getAttribute('content')
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Pertanyaan berhasil disimpan!');
+                    } else {
+                        alert('Gagal menyimpan pertanyaan: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat menyimpan pertanyaan.');
+                });
         }
     </script>
 
@@ -273,10 +280,12 @@
             display: flex;
             align-items: center;
         }
+
         .input-group {
             display: flex;
             align-items: center;
         }
+
         .input-group .btn-outline-danger {
             border: none;
             color: blue;
