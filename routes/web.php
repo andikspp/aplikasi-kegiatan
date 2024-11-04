@@ -32,4 +32,5 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::post('/pertanyaan/store', [PertanyaanController::class, 'store'])->name('pertanyaan.store');
     Route::get('/kelolapeserta', [AdminController::class, 'kelolapeserta'])->name('kelolapeserta');
     Route::get('/kelolalainya', [AdminController::class, 'kelolalainya'])->name('kelolalainnya');
+    Route::get('/isi-biodata', [IsiBiodataController::class, 'index'])->name('isi.biodata');
 });
