@@ -4,17 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\QuizzController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\PertanyaanController;
+use App\Http\Controllers\ProfilController;
 
 Route::get('/', function () {
     return view('admin.auth.login');
@@ -32,12 +23,13 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::put('/kegiatan-update/{id}', [KegiatanController::class, 'update'])->name('kegiatan.update');
     Route::get('/hasilkegiatan/{id}', [AdminController::class, 'hasilkegiatan'])->name('hasilkegiatan');
     Route::get('/kegiatan-delete/{id}', [KegiatanController::class, 'destroy'])->name('kegiatan.delete');
-
+    Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
     Route::get('/tambah-kegiatan', [AdminController::class, 'tambahKegiatan'])->name('tambah-kegiatan');
     Route::get('/qrcode', [AdminController::class, 'qrcode'])->name('qrcode');
     Route::get('/quizz', [QuizzController::class, 'index'])->name('quizz.index');
     Route::get('/detail-kegiatan/{id}', [AdminController::class, 'detailKegiatan'])->name('detail-kegiatan');
     Route::get('/pertanyaan', [AdminController::class, 'pertanyaan'])->name('pertanyaan');
+    Route::post('/pertanyaan/store', [PertanyaanController::class, 'store'])->name('pertanyaan.store');
     Route::get('/kelolapeserta', [AdminController::class, 'kelolapeserta'])->name('kelolapeserta');
     Route::get('/kelolalainya', [AdminController::class, 'kelolalainya'])->name('kelolalainnya');
 });

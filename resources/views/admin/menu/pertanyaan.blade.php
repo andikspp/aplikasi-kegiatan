@@ -1,4 +1,3 @@
-
 @extends('layouts.menu.layout-dashboard')
 
 @section('content')
@@ -246,7 +245,7 @@
             }
 
             // Mengirim data ke server
-            fetch('/pertanyaan/store', {
+            fetch('/pertanyaan/store', { // Pastikan rute ini sesuai
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -256,14 +255,14 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert('Pertanyaan berhasil disimpan!');
+                    alert('Quizz dan pertanyaan berhasil disimpan!');
                 } else {
-                    alert('Gagal menyimpan pertanyaan: ' + data.message);
+                    alert('Gagal menyimpan quizz: ' + data.message);
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Terjadi kesalahan saat menyimpan pertanyaan.');
+                alert('Terjadi kesalahan saat menyimpan quizz.');
             });
         }
     </script>
