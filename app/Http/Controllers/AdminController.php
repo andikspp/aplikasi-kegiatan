@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
 use App\Models\Kegiatan;
 use App\Models\PeranKegiatan;
+use Illuminate\Support\Carbon;
 
 class AdminController extends Controller
 {
@@ -17,12 +18,16 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('admin.menu.dashboard');
+        $totalKegiatan = Kegiatan::count();
+        $kegiatanMendatang = Kegiatan::where('tanggal_kegiatan', '>', Carbon::now())->count();
+        $kegiatanSelesai = Kegiatan::where('tanggal_kegiatan', '<', Carbon::now())->count();
+
+        return view('admin.menu.dashboard', compact('totalKegiatan', 'kegiatanSelesai', 'kegiatanMendatang'));
     }
 
     public function kegiatan()
     {
-        $kegiatans = Kegiatan::all();
+        $kegiatans = Kegiatan::paginate(10);
 
         return view('admin.menu.kegiatan', compact('kegiatans'));
     }
