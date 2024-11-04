@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Quizz;
+use App\Models\Pertanyaan;
 
 class PertanyaanController extends Controller
 {
@@ -15,10 +15,11 @@ class PertanyaanController extends Controller
             'deskripsi' => 'nullable|string',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date',
+            // Tambahkan validasi untuk soal jika perlu
         ]);
 
         // Simpan data ke database
-        $pertanyaan = new Quizz();
+        $pertanyaan = new Pertanyaan();
         $pertanyaan->judul = $request->judul;
         $pertanyaan->deskripsi = $request->deskripsi;
         $pertanyaan->tanggal_mulai = $request->tanggal_mulai;
