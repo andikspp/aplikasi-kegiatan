@@ -5,14 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pertanyaan extends Model
+class Quizz extends Model
 {
     use HasFactory;
 
+    protected $table = 'quizz';
+
     protected $fillable = [
-        'quizz_id',
-        'pertanyaan',
-        'kategori_soal',
-        'deskripsi',
+        'kegiatan_id',
+        'nama_quiz',
+        'tanggal_buka',
+        'tanggal_tutup',
+        'status',
     ];
 }

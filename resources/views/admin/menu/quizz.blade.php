@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <!-- Tombol Tambah Kegiatan -->
                         <div class="mb-3 text-start">
-                            <a href="{{ route('pertanyaan') }}" class="btn btn-primary" id="tambah-kegiatan">
+                            <a href="{{ route('pertanyaan') }}" class="btn btn-success" id="tambah-kegiatan">
                                 <i class="fa fa-plus"></i> Buat Quizz
                             </a>
                             {{-- <button class="btn btn-primary" id="tambah-kegiatan">
@@ -31,10 +31,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($quizzes as $index => $quiz)
+                                @foreach ($quizzes as $index => $quiz)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
-                                        <td><a href="https://gurudikdas.kemdikbud.go.id/presensi/kegiatan/{{ $quiz->id }}" target="_blank">{{ $quiz->nama_quiz }}</a></td>
+                                        <td><a href="https://gurudikdas.kemdikbud.go.id/presensi/kegiatan/{{ $quiz->id }}"
+                                                target="_blank">{{ $quiz->nama_quiz }}</a></td>
                                         <td>{{ $quiz->tanggal_buka }} / {{ $quiz->tanggal_tutup }}</td>
                                         <td>{{ $quiz->lokasi ?? 'N/A' }}</td>
                                         <td><span class="badge bg-primary">{{ $quiz->status }}</span></td>
