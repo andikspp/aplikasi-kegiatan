@@ -90,7 +90,9 @@
                 </tbody>
             </table>
             <div class="d-flex justify-content-between align-items-center mt-3">
-                <p class="mb-0">Menampilkan 1 sampai 10 dari 20 entri</p>
+                <p class="mb-0">Menampilkan {{ $kegiatans->firstItem() }} sampai {{ $kegiatans->lastItem() }} dari
+                    {{ $kegiatans->total() }}
+                    entri</p>
                 <nav aria-label="Page navigation">
                     <ul class="pagination mb-0">
                         <li class="page-item"><a class="page-link" href="#">Prev</a></li>
