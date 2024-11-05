@@ -208,6 +208,8 @@
                                 <td>
                                     <select name="peran[]" class="form-control text-center" required>
                                         <option value="">Pilih Peran</option>
+                                        <option value="Peserta" {{ $peran->peran === 'Peserta' ? 'selected' : '' }}>
+                                            Peserta</option>
                                         <option value="Narasumber" {{ $peran->peran === 'Narasumber' ? 'selected' : '' }}>
                                             Narasumber</option>
                                         <option value="Fasilitator"

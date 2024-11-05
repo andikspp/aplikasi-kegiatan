@@ -94,9 +94,10 @@ class KegiatanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $kegiatan = Kegiatan::find($id); // Ganti dengan logika yang sesuai untuk mendapatkan kegiatan
+        return view('admin.menu.kelolapeserta', compact('kegiatan'));
     }
 
     /**
@@ -184,4 +185,6 @@ class KegiatanController extends Controller
 
         return redirect()->route('kegiatan')->with('success', 'Kegiatan berhasil dihapus!');
     }
+
+
 }

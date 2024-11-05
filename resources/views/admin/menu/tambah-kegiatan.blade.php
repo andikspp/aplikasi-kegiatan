@@ -199,6 +199,7 @@
         <td>
             <select name="peran[]" class="form-control text-center" required>
                 <option value="">Pilih Peran</option>
+                <option value="Peserta">Peserta</option>
                 <option value="Narasumber">Narasumber</option>
                 <option value="Fasilitator">Fasilitator</option>
                 <option value="Panitia">Panitia</option>
