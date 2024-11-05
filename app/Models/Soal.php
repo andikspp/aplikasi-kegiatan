@@ -9,10 +9,16 @@ class Soal extends Model
 {
     use HasFactory;
 
+    protected $table = 'soal';
+
     protected $fillable = [
-        'quizz_id',
+        'quiz_id',
         'pertanyaan',
         'kategori_soal',
-        'deskripsi',
     ];
+
+    public function quiz()
+    {
+        return $this->belongsTo(Quizz::class, 'quiz_id');
+    }
 }

@@ -23,12 +23,16 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::put('/kegiatan-update/{id}', [KegiatanController::class, 'update'])->name('kegiatan.update');
     Route::get('/hasilkegiatan/{id}', [AdminController::class, 'hasilkegiatan'])->name('hasilkegiatan');
     Route::get('/kegiatan-delete/{id}', [KegiatanController::class, 'destroy'])->name('kegiatan.delete');
-    Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
     Route::get('/tambah-kegiatan', [AdminController::class, 'tambahKegiatan'])->name('tambah-kegiatan');
-    Route::get('/qrcode', [AdminController::class, 'qrcode'])->name('qrcode');
+
+    // Kuis
     Route::get('/quizz', [QuizzController::class, 'index'])->name('quizz.index');
-    Route::get('/detail-kegiatan/{id}', [AdminController::class, 'detailKegiatan'])->name('detail-kegiatan');
     Route::get('/pertanyaan', [AdminController::class, 'pertanyaan'])->name('pertanyaan');
+    Route::post('/kuis-store', [PertanyaanController::class, 'store'])->name('kuis.store');
+
+    //Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+    Route::get('/qrcode', [AdminController::class, 'qrcode'])->name('qrcode');
+    Route::get('/detail-kegiatan/{id}', [AdminController::class, 'detailKegiatan'])->name('detail-kegiatan');
     Route::post('/pertanyaan/store', [PertanyaanController::class, 'store'])->name('pertanyaan.store');
     Route::get('/kelolapeserta', [AdminController::class, 'kelolapeserta'])->name('kelolapeserta');
     Route::get('/kelolalainya', [AdminController::class, 'kelolalainya'])->name('kelolalainnya');

@@ -1,4 +1,6 @@
 @extends('layouts.menu.layout-dashboard')
+@section('title', 'QR Code Generator')
+
 
 @section('content')
     <div class="container mt-5">
@@ -56,7 +58,8 @@
                 if (urlValue) {
                     imgContainer.removeClass('d-none');
                     imgResult.attr('src',
-                        `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(urlValue)}&size=200x200`);
+                        `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(urlValue)}&size=200x200`
+                        );
                 } else {
                     alert("Silakan masukkan tautan yang valid.");
                 }

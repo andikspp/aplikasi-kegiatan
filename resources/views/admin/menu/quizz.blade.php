@@ -1,4 +1,5 @@
 @extends('layouts.menu.layout-dashboard')
+@section('title', 'Kuis')
 
 @section('content')
     <div class="container">
@@ -35,9 +36,11 @@
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td><a href="https://gurudikdas.kemdikbud.go.id/presensi/kegiatan/{{ $quiz->id }}"
-                                                target="_blank">{{ $quiz->nama_quiz }}</a></td>
-                                        <td>{{ $quiz->tanggal_buka }} / {{ $quiz->tanggal_tutup }}</td>
-                                        <td>{{ $quiz->lokasi ?? 'N/A' }}</td>
+                                                target="_blank">{{ $quiz->judul }}</a></td>
+                                        <td>{{ \Carbon\Carbon::parse($quiz->tanggal_mulai)->format('d-m-Y H:i') }} WIB /
+                                            {{ \Carbon\Carbon::parse($quiz->tanggal_selesai)->format('d-m-Y H:i') }} WIB
+                                        </td>
+                                        <td>{{ $quiz->kegiatan->tempat_kegiatan ?? 'N/A' }}</td>
                                         <td><span class="badge bg-primary">{{ $quiz->status }}</span></td>
                                         <td>{{ $quiz->jumlah_peserta ?? '0 Peserta' }}</td>
                                     </tr>
@@ -47,7 +50,7 @@
 
                         <!-- Pagination -->
                         <div class="d-flex justify-content-between align-items-center mt-3">
-                            <div>Showing 1 to 2 of 2 entries</div>
+                            <div>Showing of {{ $total_quizz }} kuis</div>
                             <nav aria-label="Page navigation">
                                 <ul class="pagination">
                                     <li class="page-item"><a class="page-link" href="#">Prev</a></li>

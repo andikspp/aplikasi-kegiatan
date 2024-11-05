@@ -64,7 +64,9 @@ class AdminController extends Controller
 
     public function pertanyaan()
     {
-        return view('admin.menu.pertanyaan');
+        $kegiatans = Kegiatan::all();
+
+        return view('admin.menu.pertanyaan', compact('kegiatans'));
     }
 
     public function hasilkegiatan($id)

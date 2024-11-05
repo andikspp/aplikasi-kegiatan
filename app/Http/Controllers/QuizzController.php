@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pertanyaan;
+use App\Models\Soal;
 use Illuminate\Http\Request;
 use App\Models\Quizz;
 
@@ -10,8 +10,9 @@ class QuizzController extends Controller
 {
     public function index()
     {
-        $quizzes = Quizz::all();
-        return view('admin.menu.quizz', compact('quizzes'));
+        $quizzes = Quizz::with('kegiatan')->get();
+        $total_quizz = $quizzes->count();
+        return view('admin.menu.quizz', compact('quizzes', 'total_quizz'));
     }
 
     public function store(Request $request)
@@ -35,7 +36,7 @@ class QuizzController extends Controller
 
         // Simpan pertanyaan terkait
         foreach ($request->pertanyaan as $index => $soal) {
-            Pertanyaan::create([
+            Soal::create([
                 'quizz_id' => $quizz->id,
                 'pertanyaan' => $soal,
                 'kategori_soal' => $request->kategori_soal[$index],
