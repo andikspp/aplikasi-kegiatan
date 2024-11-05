@@ -2,12 +2,10 @@
 
 @section('content')
     <div class="container mt-5">
-        <div class="d-flex mb-4 bg-light p-3">
-            <!-- ... existing buttons ... -->
-        </div>
 
-        <form id="formUbahKegiatan" class="bg-light p-4 rounded shadow">
-            <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Biodata</h1>
+        <form id="formUbahKegiatan" class="bg-light p-4 rounded shadow" action="{{ route('isi.biodata.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <h1 class="mb-4 text-center" style="font-size: larger; font-weight: bold;">Biodata</h1>
             <div class="mb-3">
                 <label for="namaLengkap" class="form-label">1. Nama Lengkap</label>
                 <input type="text" class="form-control" id="namaLengkap" placeholder="Masukkan Nama Lengkap" required>
@@ -75,6 +73,20 @@
             <div class="mb-3">
                 <label for="npwp" class="form-label">14. NPWP</label>
                 <input type="text" class="form-control" id="npwp" placeholder="Masukkan NPWP" required>
+            </div>
+            <div class="mb-3">
+                <label for="jenisKelamin" class="form-label">15. Peran</label>
+                <select class="form-select" id="jenisKelamin" required>
+                    <option value="">Pilih Peran</option>
+                    <option value="Laki-laki">Peserta</option>
+                    <option value="Perempuan">Narasumber</option>
+                    <option value="Perempuan">Pasilitator</option>
+                    <option value="Perempuan">Panitia</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="fileUpload" class="form-label">16. Upload File (Surat Tugas, Bukti Perjalanan, Tiket, Bording Pas, SPPD)</label>
+                <input type="file" class="form-control" id="fileUpload" name="file_upload" accept=".pdf,.doc,.docx,.jpg,.png">
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
         </form>

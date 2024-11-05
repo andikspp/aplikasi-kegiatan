@@ -6,6 +6,7 @@ use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\QuizzController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\IsiBiodataController;
 
 Route::get('/', function () {
     return view('admin.auth.login');
@@ -33,4 +34,6 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/kelolapeserta', [AdminController::class, 'kelolapeserta'])->name('kelolapeserta');
     Route::get('/kelolalainya', [AdminController::class, 'kelolalainya'])->name('kelolalainnya');
     Route::get('/isi-biodata', [IsiBiodataController::class, 'index'])->name('isi.biodata');
+    Route::post('/isi-biodata', [IsiBiodataController::class, 'store'])->name('isi.biodata.store');
+    
 });
