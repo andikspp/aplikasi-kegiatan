@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('alamat_email')->nullable();
             $table->string('npwp')->nullable();
             $table->string('file_upload')->nullable(); // Kolom untuk menyimpan hasil upload file
+            $table->date('tanggal_daftar')->nullable(); // Menambahkan kolom tanggal_daftar
             $table->timestamps();
         });
     }

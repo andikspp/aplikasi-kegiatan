@@ -8,6 +8,7 @@ use App\Http\Controllers\QuizzController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\IsiBiodataController;
+use App\Http\Controllers\KelolapesertaController;
 
 Route::get('/', function () {
     return view('admin.auth.login');
@@ -37,10 +38,11 @@ Route::middleware(['auth:admin'])->group(function () {
 
     // Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
     Route::get('/qrcode', [AdminController::class, 'qrcode'])->name('qrcode');
+
     Route::get('/detail-kegiatan/{id}', [AdminController::class, 'detailKegiatan'])->name('detail-kegiatan');
     Route::post('/pertanyaan/store', [PertanyaanController::class, 'store'])->name('pertanyaan.store');
-    Route::get('/kelolapeserta/{id}', [AdminController::class, 'kelolapeserta'])->name('kelolapeserta');
-    Route::get('/kelolalainya/{id}', [AdminController::class, 'kelolalainya'])->name('kelolalainnya');
+    Route::get('/kelolapeserta', [AdminController::class, 'kelolapeserta'])->name('kelolapeserta');
+    Route::get('/kelolalainya', [AdminController::class, 'kelolalainya'])->name('kelolalainnya');
     Route::get('/isi-biodata', [IsiBiodataController::class, 'index'])->name('isi.biodata');
     Route::post('/isi-biodata', [IsiBiodataController::class, 'store'])->name('isi.biodata.store');
 });
