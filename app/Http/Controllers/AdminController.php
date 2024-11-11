@@ -78,14 +78,16 @@ class AdminController extends Controller
         return view('admin.menu.hasilkegiatan', compact('kegiatan', 'peran_kegiatan'));
     }
 
-    public function kelolapeserta()
+    public function kelolapeserta($id)
     {
-        return view('admin.menu.kelolapeserta');
+        $kegiatan = Kegiatan::find($id);
+        return view('admin.menu.kelolapeserta', compact('kegiatan'));
     }
 
-    public function kelolalainya()
+    public function kelolalainya($id)
     {
-        return view('admin.menu.kelolalainya');
+        $kegiatan = Kegiatan::find($id);
+        return view('admin.menu.kelolalainya', compact('kegiatan'));
     }
 
     public function prosesLogin(Request $request)

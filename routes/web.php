@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ExamController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\QuizzController;
 use App\Http\Controllers\PertanyaanController;
@@ -14,6 +15,9 @@ Route::get('/', function () {
 
 Route::post('/login', [AdminController::class, 'prosesLogin'])->name('login');
 Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
+// halaman kuis
+Route::get('/kuis-page', [ExamController::class, 'examPage'])->name('exam.page');
 
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -31,12 +35,12 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/pertanyaan', [AdminController::class, 'pertanyaan'])->name('pertanyaan');
     Route::post('/kuis-store', [PertanyaanController::class, 'store'])->name('kuis.store');
 
-    Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+    // Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
     Route::get('/qrcode', [AdminController::class, 'qrcode'])->name('qrcode');
     Route::get('/detail-kegiatan/{id}', [AdminController::class, 'detailKegiatan'])->name('detail-kegiatan');
     Route::post('/pertanyaan/store', [PertanyaanController::class, 'store'])->name('pertanyaan.store');
-    Route::get('/kelolapeserta', [AdminController::class, 'kelolapeserta'])->name('kelolapeserta');
-    Route::get('/kelolalainya', [AdminController::class, 'kelolalainya'])->name('kelolalainnya');
+    Route::get('/kelolapeserta/{id}', [AdminController::class, 'kelolapeserta'])->name('kelolapeserta');
+    Route::get('/kelolalainya/{id}', [AdminController::class, 'kelolalainya'])->name('kelolalainnya');
     Route::get('/isi-biodata', [IsiBiodataController::class, 'index'])->name('isi.biodata');
     Route::post('/isi-biodata', [IsiBiodataController::class, 'store'])->name('isi.biodata.store');
 });

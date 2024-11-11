@@ -1,95 +1,422 @@
-@extends('layouts.menu.layout-dashboard')
+<!-- resources/views/layouts/dashboard.blade.php -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title')</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="{{ asset('assets/logo kemendikbudristek.png') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <!-- Heading utama untuk sidebar -->
+            <div
+                class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom heading-dashboard">
+                Guru PAUD Dikmas
+            </div>
+
+            <!-- Div Dashboard: Menandakan menu Dashboard -->
+            <div class="menu-section">
+                <div class="section-heading text-uppercase fw-bold py-2 ps-3">Dashboard</div>
+                <!-- Penanda untuk div Dashboard -->
+                <div class="list-group list-group-flush my-3">
+                    <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                    </a>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <div class="section-heading text-uppercase fw-bold py-2 ps-3">Agenda</div>
+                <div class="list-group list-group-flush my-3">
+                    <a href="{{ route('kegiatan') }}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-calendar-alt me-2"></i> Kegiatan
+                    </a>
+
+                    <a href="{{ route('quizz.index') }}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-user me-2"></i> Quizz
+                    </a>
+
+                    <a href="{{ route('qrcode') }}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-qrcode me-2"></i> QR Code
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <div id="overlay"></div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            {{-- <nav class="navbar navbar-expand-lg navbar-light bg-custom border-bottom">
+                <!-- Icon Sidebar and Search for Mobile -->
+                {{-- <div class="d-flex">
+                    <!-- Sidebar Toggle Icon -->
+                    <button class="btn bg-custom text-white" id="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <!-- Search Icon (Mobile) -->
+                    <button class="btn btn-success ms-2 d-lg-none" type="button" id="mobile-search-toggle">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div> --}}
+
+            <!-- Search Input for Larger Screens (Hidden on Mobile) -->
+            {{-- <form class="d-none d-lg-flex me-auto ms-4" role="search">
+                    <div class="input-group">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-success" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form> --}}
+
+            {{-- <ul class="navbar-nav ms-auto me-2">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user"></i> Hi, {{ auth()->user()->username }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav> --}}
+
+            <!-- Modal-like Search Input -->
+            <div class="modal-search" id="modal-search-box">
+                <form class="d-flex" role="search">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-success" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div class="container-fluid mt-4">
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                <div class="container mt-5">
+
+                    <form id="formUbahKegiatan" class="bg-light p-4 rounded shadow"
+                        action="{{ route('isi.biodata.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <h1 class="mb-4 text-center" style="font-size: larger; font-weight: bold;">Biodata</h1>
+                        <div class="mb-3">
+                            <label for="namaLengkap" class="form-label">1. Nama Lengkap</label>
+                            <input type="text" class="form-control" id="namaLengkap"
+                                placeholder="Masukkan Nama Lengkap" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nip" class="form-label">2. NIP (jika PNS)</label>
+                            <input type="text" class="form-control" id="nip" placeholder="Masukkan NIP"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tempatTanggalLahir" class="form-label">3. Tempat / Tanggal Lahir</label>
+                            <input type="text" class="form-control" id="tempatTanggalLahir"
+                                placeholder="Masukkan Tempat / Tanggal Lahir" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="jenisKelamin" class="form-label">4. Jenis Kelamin</label>
+                            <select class="form-select" id="jenisKelamin" required>
+                                <option value="">Pilih Jenis Kelamin</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="agama" class="form-label">5. Agama</label>
+                            <input type="text" class="form-control" id="agama" placeholder="Masukkan Agama"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pendidikanTerakhir" class="form-label">6. Pendidikan Terakhir</label>
+                            <input type="text" class="form-control" id="pendidikanTerakhir"
+                                placeholder="Masukkan Pendidikan Terakhir" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="jabatan" class="form-label">7. Jabatan</label>
+                            <input type="text" class="form-control" id="jabatan" placeholder="Masukkan Jabatan"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pangkatGolongan" class="form-label">8. Pangkat/Golongan (jika PNS)</label>
+                            <input type="text" class="form-control" id="pangkatGolongan"
+                                placeholder="Masukkan Pangkat/Golongan" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="unitKerja" class="form-label">9. Unit Kerja</label>
+                            <input type="text" class="form-control" id="unitKerja"
+                                placeholder="Masukkan Unit Kerja" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="masaKerja" class="form-label">10. Masa Kerja</label>
+                            <input type="text" class="form-control" id="masaKerja"
+                                placeholder="Masukkan Masa Kerja" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="alamatKantor" class="form-label">11. Alamat Kantor</label>
+                            <input type="text" class="form-control" id="alamatKantor"
+                                placeholder="Masukkan Alamat Kantor" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telpKantor" class="form-label">Telp</label>
+                            <input type="text" class="form-control" id="telpKantor"
+                                placeholder="Masukkan Telp Kantor" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="alamatRumah" class="form-label">12. Alamat Rumah</label>
+                            <input type="text" class="form-control" id="alamatRumah"
+                                placeholder="Masukkan Alamat Rumah" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telpRumah" class="form-label">Telp/HP</label>
+                            <input type="text" class="form-control" id="telpRumah" placeholder="Masukkan Telp/HP"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="alamatEmail" class="form-label">13. Alamat Email</label>
+                            <input type="email" class="form-control" id="alamatEmail"
+                                placeholder="Masukkan Alamat Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="npwp" class="form-label">14. NPWP</label>
+                            <input type="text" class="form-control" id="npwp" placeholder="Masukkan NPWP"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="jenisKelamin" class="form-label">15. Peran</label>
+                            <select class="form-select" id="jenisKelamin" required>
+                                <option value="">Pilih Peran</option>
+                                <option value="Laki-laki">Peserta</option>
+                                <option value="Perempuan">Narasumber</option>
+                                <option value="Perempuan">Pasilitator</option>
+                                <option value="Perempuan">Panitia</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fileUpload" class="form-label">16. Upload File (Surat Tugas, Bukti Perjalanan,
+                                Tiket, Bording
+                                Pas, SPPD)</label>
+                            <input type="file" class="form-control" id="fileUpload" name="file_upload"
+                                accept=".pdf,.doc,.docx,.jpg,.png">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-custom text-white text-center text-lg-start custom-footer">
+        <div class="text-center p-3">
+            © 2024 Guru PAUD Dikmas | All Rights Reserved
+        </div>
+    </footer>
+
+    <!-- Bootstrap and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @stack('scripts')
+    <script>
+        document.getElementById('mobile-search-toggle').addEventListener('click', function() {
+            var searchBox = document.getElementById('modal-search-box');
+
+            searchBox.classList.toggle('show');
+
+            if (searchBox.classList.contains('show')) {
+                searchBox.style.top = '0';
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            var searchBox = document.getElementById('modal-search-box');
+            var toggleButton = document.getElementById('mobile-search-toggle');
+
+            if (!searchBox.contains(event.target) && !toggleButton.contains(event.target)) {
+                searchBox.classList.remove('show');
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuToggle = document.getElementById("menu-toggle");
+            const sidebar = document.getElementById("sidebar-wrapper");
+            const overlay = document.getElementById("overlay");
+
+            menuToggle.addEventListener("click", function() {
+                sidebar.classList.toggle("active");
+                overlay.classList.toggle("active");
+            });
+
+            overlay.addEventListener("click", function() {
+                sidebar.classList.remove("active");
+                overlay.classList.remove("active");
+            });
+        });
+    </script>
+
+    <style>
+        #wrapper {
+            display: flex;
+        }
+
+        #sidebar-wrapper {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 250px;
+            z-index: 1000;
+            background-color: #f8f9fa;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            border-right: 1px solid #ddd;
+        }
+
+        #sidebar-wrapper.active {
+            transform: translateX(0);
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 900;
+            display: none;
+        }
+
+        #overlay.active {
+            display: block;
+        }
+
+        .menu-section {
+            margin-bottom: 20px;
+        }
+
+        .section-heading {
+            font-size: 1rem;
+            color: #343a40;
+            background-color: transparent;
+            padding-left: 10px;
+            opacity: 0.8;
+        }
+
+        #page-content-wrapper {
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+
+        .toggled #sidebar-wrapper {
+            margin-left: -250px;
+        }
+
+        .bg-custom {
+            background-color: #0090D4;
+        }
+
+        .heading-dashboard {
+            background-color: transparent;
+            color: #343a40;
+        }
+
+        .heading-agenda {
+            background-color: transparent;
+            color: #343a40;
+            opacity: 0.8;
+        }
+
+        .list-group-item {
+            padding: 15px 20px;
+        }
+
+        .list-group-item:hover {
+            background-color: #e9ecef;
+            color: #000;
+        }
+
+        .sidebar-heading {
+            font-size: 1.2rem;
+            background-color: #0090D4;
+            color: #fff;
+            padding: 10px;
+        }
+
+        #mobile-search-box {
+            height: 0;
+            opacity: 0;
+            visibility: hidden;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+
+        #mobile-search-box.show {
+            height: auto;
+            opacity: 1;
+            visibility: visible;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .modal-search {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
+            z-index: 1000;
+            transition: top 0.3s ease-in-out;
+        }
+
+        .modal-search.show {
+            display: block;
+        }
+
+        .custom-footer {
+            margin-top: 100px;
+            padding: 20px 0;
+        }
+    </style>
+</body>
+
+</html>
+
 
 @section('content')
-    <div class="container mt-5">
-
-        <form id="formUbahKegiatan" class="bg-light p-4 rounded shadow" action="{{ route('isi.biodata.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <h1 class="mb-4 text-center" style="font-size: larger; font-weight: bold;">Biodata</h1>
-            <div class="mb-3">
-                <label for="namaLengkap" class="form-label">1. Nama Lengkap</label>
-                <input type="text" class="form-control" id="namaLengkap" placeholder="Masukkan Nama Lengkap" required>
-            </div>
-            <div class="mb-3">
-                <label for="nip" class="form-label">2. NIP (jika PNS)</label>
-                <input type="text" class="form-control" id="nip" placeholder="Masukkan NIP" required>
-            </div>
-            <div class="mb-3">
-                <label for="tempatTanggalLahir" class="form-label">3. Tempat / Tanggal Lahir</label>
-                <input type="text" class="form-control" id="tempatTanggalLahir" placeholder="Masukkan Tempat / Tanggal Lahir" required>
-            </div>
-            <div class="mb-3">
-                <label for="jenisKelamin" class="form-label">4. Jenis Kelamin</label>
-                <select class="form-select" id="jenisKelamin" required>
-                    <option value="">Pilih Jenis Kelamin</option>
-                    <option value="Laki-laki">Laki-laki</option>
-                    <option value="Perempuan">Perempuan</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="agama" class="form-label">5. Agama</label>
-                <input type="text" class="form-control" id="agama" placeholder="Masukkan Agama" required>
-            </div>
-            <div class="mb-3">
-                <label for="pendidikanTerakhir" class="form-label">6. Pendidikan Terakhir</label>
-                <input type="text" class="form-control" id="pendidikanTerakhir" placeholder="Masukkan Pendidikan Terakhir" required>
-            </div>
-            <div class="mb-3">
-                <label for="jabatan" class="form-label">7. Jabatan</label>
-                <input type="text" class="form-control" id="jabatan" placeholder="Masukkan Jabatan" required>
-            </div>
-            <div class="mb-3">
-                <label for="pangkatGolongan" class="form-label">8. Pangkat/Golongan (jika PNS)</label>
-                <input type="text" class="form-control" id="pangkatGolongan" placeholder="Masukkan Pangkat/Golongan" required>
-            </div>
-            <div class="mb-3">
-                <label for="unitKerja" class="form-label">9. Unit Kerja</label>
-                <input type="text" class="form-control" id="unitKerja" placeholder="Masukkan Unit Kerja" required>
-            </div>
-            <div class="mb-3">
-                <label for="masaKerja" class="form-label">10. Masa Kerja</label>
-                <input type="text" class="form-control" id="masaKerja" placeholder="Masukkan Masa Kerja" required>
-            </div>
-            <div class="mb-3">
-                <label for="alamatKantor" class="form-label">11. Alamat Kantor</label>
-                <input type="text" class="form-control" id="alamatKantor" placeholder="Masukkan Alamat Kantor" required>
-            </div>
-            <div class="mb-3">
-                <label for="telpKantor" class="form-label">Telp</label>
-                <input type="text" class="form-control" id="telpKantor" placeholder="Masukkan Telp Kantor" required>
-            </div>
-            <div class="mb-3">
-                <label for="alamatRumah" class="form-label">12. Alamat Rumah</label>
-                <input type="text" class="form-control" id="alamatRumah" placeholder="Masukkan Alamat Rumah" required>
-            </div>
-            <div class="mb-3">
-                <label for="telpRumah" class="form-label">Telp/HP</label>
-                <input type="text" class="form-control" id="telpRumah" placeholder="Masukkan Telp/HP" required>
-            </div>
-            <div class="mb-3">
-                <label for="alamatEmail" class="form-label">13. Alamat Email</label>
-                <input type="email" class="form-control" id="alamatEmail" placeholder="Masukkan Alamat Email" required>
-            </div>
-            <div class="mb-3">
-                <label for="npwp" class="form-label">14. NPWP</label>
-                <input type="text" class="form-control" id="npwp" placeholder="Masukkan NPWP" required>
-            </div>
-            <div class="mb-3">
-                <label for="jenisKelamin" class="form-label">15. Peran</label>
-                <select class="form-select" id="jenisKelamin" required>
-                    <option value="">Pilih Peran</option>
-                    <option value="Laki-laki">Peserta</option>
-                    <option value="Perempuan">Narasumber</option>
-                    <option value="Perempuan">Pasilitator</option>
-                    <option value="Perempuan">Panitia</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="fileUpload" class="form-label">16. Upload File (Surat Tugas, Bukti Perjalanan, Tiket, Bording Pas, SPPD)</label>
-                <input type="file" class="form-control" id="fileUpload" name="file_upload" accept=".pdf,.doc,.docx,.jpg,.png">
-            </div>
-            <button type="submit" class="btn btn-primary">Simpan</button>
-        </form>
-    </div>
     <!-- ... existing styles ... -->
 @endsection

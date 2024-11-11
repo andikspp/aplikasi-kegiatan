@@ -6,10 +6,10 @@
             <a href="{{ route('hasilkegiatan', ['id' => $kegiatan->id]) }}" class="btn btn-primary me-2">
                 <i class="fas fa-calendar"></i> Kelola Kegiatan
             </a>
-            <a href="{{ route('kelolapeserta') }}" class="btn btn-link">
+            <a href="{{ route('kelolapeserta', ['id' => $kegiatan->id]) }}" class="btn btn-link me-2">
                 <i class="fas fa-users"></i> Kelola Peserta
             </a>
-            <a href="{{ route('kelolalainnya') }}" class="btn btn-link">
+            <a href="{{ route('kelolalainnya', ['id' => $kegiatan->id]) }}" class="btn btn-link">
                 <i class="fas fa-cogs"></i> Kelola Lainnya
             </a>
         </div>
