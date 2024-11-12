@@ -28,7 +28,7 @@
                 <div class="section-heading text-uppercase fw-bold py-2 ps-3">Dashboard</div>
                 <!-- Penanda untuk div Dashboard -->
                 <div class="list-group list-group-flush my-3">
-                    <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action">
+                    <a href="{{ route('user.dashboard') }}" class="list-group-item list-group-item-action">
                         <i class="fas fa-tachometer-alt me-2"></i> Dashboard
                     </a>
                 </div>
@@ -37,16 +37,17 @@
             <div class="menu-section">
                 <div class="section-heading text-uppercase fw-bold py-2 ps-3">Agenda</div>
                 <div class="list-group list-group-flush my-3">
-                    <a href="{{ route('kegiatan') }}" class="list-group-item list-group-item-action">
+                    <a href="{{ route('user.kegiatan') }}" class="list-group-item list-group-item-action">
                         <i class="fas fa-calendar-alt me-2"></i> Kegiatan
                     </a>
 
-                    <a href="{{ route('quizz.index') }}" class="list-group-item list-group-item-action">
+                    <a href="#" class="list-group-item list-group-item-action">
                         <i class="fas fa-user me-2"></i> Quizz
                     </a>
 
-                    <a href="{{ route('qrcode') }}" class="list-group-item list-group-item-action">
-                        <i class="fas fa-qrcode me-2"></i> QR Code
+                    <a href="{{ route('user.qrcode') }}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-qrcode me-2"></i>
+                        Scan QR Code
                     </a>
                 </div>
             </div>
@@ -57,9 +58,9 @@
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            {{-- <nav class="navbar navbar-expand-lg navbar-light bg-custom border-bottom">
+            <nav class="navbar navbar-expand-lg navbar-light bg-custom border-bottom">
                 <!-- Icon Sidebar and Search for Mobile -->
-                {{-- <div class="d-flex">
+                <div class="d-flex">
                     <!-- Sidebar Toggle Icon -->
                     <button class="btn bg-custom text-white" id="menu-toggle">
                         <i class="fas fa-bars"></i>
@@ -69,19 +70,19 @@
                     <button class="btn btn-success ms-2 d-lg-none" type="button" id="mobile-search-toggle">
                         <i class="fas fa-search"></i>
                     </button>
-                </div> --}}
+                </div>
 
-            <!-- Search Input for Larger Screens (Hidden on Mobile) -->
-            {{-- <form class="d-none d-lg-flex me-auto ms-4" role="search">
+                <!-- Search Input for Larger Screens (Hidden on Mobile) -->
+                <form class="d-none d-lg-flex me-auto ms-4" role="search">
                     <div class="input-group">
                         <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-success" type="submit">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
-                </form> --}}
+                </form>
 
-            {{-- <ul class="navbar-nav ms-auto me-2">
+                <ul class="navbar-nav ms-auto me-2">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -94,7 +95,7 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <form action="{{ route('logout') }}" method="POST">
+                                <form action="{{ route('user.logout') }}" method="POST">
                                     @csrf
                                     <button type="submit" class="dropdown-item">Logout</button>
                                 </form>
@@ -102,7 +103,7 @@
                         </ul>
                     </li>
                 </ul>
-            </nav> --}}
+            </nav>
 
             <!-- Modal-like Search Input -->
             <div class="modal-search" id="modal-search-box">
@@ -122,115 +123,7 @@
                     </div>
                 @endif
 
-                <div class="container mt-5">
-
-                    <form id="formUbahKegiatan" class="bg-light p-4 rounded shadow"
-                        action="{{ route('isi.biodata.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <h1 class="mb-4 text-center" style="font-size: larger; font-weight: bold;">Biodata</h1>
-                        <div class="mb-3">
-                            <label for="namaLengkap" class="form-label">1. Nama Lengkap</label>
-                            <input type="text" class="form-control" id="namaLengkap"
-                                placeholder="Masukkan Nama Lengkap" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="nip" class="form-label">2. NIP (jika PNS)</label>
-                            <input type="text" class="form-control" id="nip" placeholder="Masukkan NIP"
-                                required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="tempatTanggalLahir" class="form-label">3. Tempat / Tanggal Lahir</label>
-                            <input type="text" class="form-control" id="tempatTanggalLahir"
-                                placeholder="Masukkan Tempat / Tanggal Lahir" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="jenisKelamin" class="form-label">4. Jenis Kelamin</label>
-                            <select class="form-select" id="jenisKelamin" required>
-                                <option value="">Pilih Jenis Kelamin</option>
-                                <option value="Laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="agama" class="form-label">5. Agama</label>
-                            <input type="text" class="form-control" id="agama" placeholder="Masukkan Agama"
-                                required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="pendidikanTerakhir" class="form-label">6. Pendidikan Terakhir</label>
-                            <input type="text" class="form-control" id="pendidikanTerakhir"
-                                placeholder="Masukkan Pendidikan Terakhir" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="jabatan" class="form-label">7. Jabatan</label>
-                            <input type="text" class="form-control" id="jabatan" placeholder="Masukkan Jabatan"
-                                required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="pangkatGolongan" class="form-label">8. Pangkat/Golongan (jika PNS)</label>
-                            <input type="text" class="form-control" id="pangkatGolongan"
-                                placeholder="Masukkan Pangkat/Golongan" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="unitKerja" class="form-label">9. Unit Kerja</label>
-                            <input type="text" class="form-control" id="unitKerja"
-                                placeholder="Masukkan Unit Kerja" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="masaKerja" class="form-label">10. Masa Kerja</label>
-                            <input type="text" class="form-control" id="masaKerja"
-                                placeholder="Masukkan Masa Kerja" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="alamatKantor" class="form-label">11. Alamat Kantor</label>
-                            <input type="text" class="form-control" id="alamatKantor"
-                                placeholder="Masukkan Alamat Kantor" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="telpKantor" class="form-label">Telp</label>
-                            <input type="text" class="form-control" id="telpKantor"
-                                placeholder="Masukkan Telp Kantor" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="alamatRumah" class="form-label">12. Alamat Rumah</label>
-                            <input type="text" class="form-control" id="alamatRumah"
-                                placeholder="Masukkan Alamat Rumah" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="telpRumah" class="form-label">Telp/HP</label>
-                            <input type="text" class="form-control" id="telpRumah" placeholder="Masukkan Telp/HP"
-                                required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="alamatEmail" class="form-label">13. Alamat Email</label>
-                            <input type="email" class="form-control" id="alamatEmail"
-                                placeholder="Masukkan Alamat Email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="npwp" class="form-label">14. NPWP</label>
-                            <input type="text" class="form-control" id="npwp" placeholder="Masukkan NPWP"
-                                required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="jenisKelamin" class="form-label">15. Peran</label>
-                            <select class="form-select" id="jenisKelamin" required>
-                                <option value="">Pilih Peran</option>
-                                <option value="Laki-laki">Peserta</option>
-                                <option value="Perempuan">Narasumber</option>
-                                <option value="Perempuan">Pasilitator</option>
-                                <option value="Perempuan">Panitia</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="fileUpload" class="form-label">16. Upload File (Surat Tugas, Bukti Perjalanan,
-                                Tiket, Bording
-                                Pas, SPPD)</label>
-                            <input type="file" class="form-control" id="fileUpload" name="file_upload"
-                                accept=".pdf,.doc,.docx,.jpg,.png">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </form>
-                </div>
+                @yield('content')
             </div>
         </div>
         <!-- /#page-content-wrapper -->
@@ -415,8 +308,3 @@
 </body>
 
 </html>
-
-
-@section('content')
-    <!-- ... existing styles ... -->
-@endsection

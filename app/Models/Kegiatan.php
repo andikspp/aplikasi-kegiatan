@@ -41,4 +41,9 @@ class Kegiatan extends Model
     {
         return $this->hasMany(Quizz::class, 'kegiatan_id');
     }
+
+    public function peserta()
+    {
+        return $this->hasMany(Peserta::class, 'kegiatan_id');
+    }
 }

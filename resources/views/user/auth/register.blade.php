@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         /* body {
@@ -34,43 +34,36 @@
                         style="max-width: 150px;">
                 </div>
                 <div class="card">
-                    <h3 class="text-center" style="margin-top:20px;">Login</h3>
+                    <h3 class="text-center" style="margin-top:20px;">Register</h3>
                     <div class="card-body">
-                        @if (session('success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                {{ session('success') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
-                        @if (session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endif
-                        <form action="{{ route('user.login.store') }}" method="POST">
+                        <form action="{{ route('user.register.store') }}" method="POST">
                             @csrf
                             <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" required
-                                    autofocus placeholder="Masukkan username, email atau NIP">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="text" class="form-control" id="email" name="email" required
+                                    autofocus>
                                 @error('username')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
-                                @error('password')
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" required
+                                    autofocus>
+                                @error('username')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div>
-                                Belum punya akun? <a href="{{ route('user.register') }}"
-                                    style="text-decoration: none">Daftar</a>
+                            <div class="mb-3">
+                                <label for="nama" class="form-label">Nama</label>
+                                <input type="text" class="form-control" id="nama" name="nama" required
+                                    autofocus>
+                                @error('username')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <button type="submit" class="btn btn-primary w-100 mt-3"
-                                style="background-color: #005689">Login</button>
+                                style="background-color: #005689">Daftar</button>
                         </form>
 
                     </div>
