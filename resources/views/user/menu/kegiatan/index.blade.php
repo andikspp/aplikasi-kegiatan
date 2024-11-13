@@ -136,6 +136,17 @@
             color: #0056b3;
             /* Warna biru yang sedikit lebih gelap saat dihover */
         }
+
+        /* Responsif untuk tampilan smartphone */
+        @media (max-width: 768px) {
+            .table-responsive {
+                overflow-x: auto;
+            }
+
+            .table th, .table td {
+                white-space: nowrap;
+            }
+        }
     </style>
 
     <script>
