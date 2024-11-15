@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('peran_kegiatan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_kegiatan')->constrained('kegiatans')->onDelete('cascade');
+            // $table->foreignId('id_kegiatan')->constrained('kegiatans')->onDelete('cascade');
+            $table->bigInteger('id_kegiatan')->unsigned();
             $table->string('peran', 255);
             $table->enum('nomor_rekening', ['Ya', 'Tidak'])->nullable();
 

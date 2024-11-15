@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::table('kegiatan', function (Blueprint $table) {
+        Schema::table('kegiatans', function (Blueprint $table) {
             // Tambahkan kolom baru yang diperlukan
             $table->boolean('butuh_mapel')->default(false);
             $table->boolean('butuh_rekening')->default(false);
@@ -21,7 +21,7 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::table('kegiatan', function (Blueprint $table) {
+        Schema::table('kegiatans', function (Blueprint $table) {
             // Hapus kolom yang ditambahkan
             $table->dropColumn([
                 'butuh_mapel',

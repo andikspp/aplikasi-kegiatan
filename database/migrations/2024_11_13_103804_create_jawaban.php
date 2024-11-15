@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('kegiatans', function (Blueprint $table) {
-            $table->enum('peran', ['Narasumber', 'Fasilitator', 'Panitia'])->after('tanggal_ttd_sertifikat');
+        Schema::create('jawaban', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('soal_id')->unsigned();
+            $table->text('jawaban');
+            $table->timestamps();
+
+            $table->foreign('soal_id')->references('id')->on('soal')->onDelete('cascade');
         });
     }
 
@@ -21,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('kegiatans', function (Blueprint $table) {
-            $table->dropColumn('peran');
-        });
+        Schema::dropIfExists('jawaban');
     }
 };

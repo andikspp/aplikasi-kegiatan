@@ -36,7 +36,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/pertanyaan', [AdminController::class, 'pertanyaan'])->name('pertanyaan');
     Route::post('/kuis-store', [PertanyaanController::class, 'store'])->name('kuis.store');
 
-    // Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+    Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
     Route::get('/qrcode', [AdminController::class, 'qrcode'])->name('qrcode');
 
     Route::get('/detail-kegiatan/{id}', [AdminController::class, 'detailKegiatan'])->name('detail-kegiatan');

@@ -10,6 +10,7 @@ class PertanyaanController extends Controller
 {
     public function store(Request $request)
     {
+        dd($request->all());
         // Validasi data
         $request->validate([
             'kegiatan_id' => 'required|exists:kegiatans,id',

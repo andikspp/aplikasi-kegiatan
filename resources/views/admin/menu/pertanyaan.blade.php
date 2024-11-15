@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <form id="formUbahKegiatan" class="bg-light p-4 rounded shadow" action="{{ route('kuis.store') }}"
-                    method="POST">
+                    method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Kelola Kuis</h1>
@@ -60,6 +60,9 @@
     <div class="container mt-4" class="bg-light p-4 rounded shadow">
         <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Tambahkan Soal</h1>
         <hr style="border-top: 4px solid #000;">
+        {{-- data quiz --}}
+        <textarea name="quiz_data" id="quiz_data"></textarea>
+        {{-- end data quiz --}}
         <div id="soalContainer">
             <div class="item-Kegiatan mt-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -118,6 +121,14 @@
     </div>
 
     <script>
+        const quizData = document.getElementById('quiz_data')
+        // quizData.value = [
+        //     { pertanyaan: '1+1=?', pilihan: ['1', '2', '3', '4'], jawaban: ['2'] },
+        //     { pertanyaan: 'Apa warna apel?', pilihan: ['merah', 'hijau'], jawaban: ['merah', 'hijau'] },
+        // ]
+
+        console.log(quizData.value);
+
         function tambahSoal() {
             const soalContainer = document.getElementById('soalContainer');
             const newSoal = document.createElement('div');
@@ -127,16 +138,16 @@
                     <input type="text" class="form-control mr-2" placeholder="Pertanyaan" style="flex-grow: 1;" name="pertanyaan[]">
                     <select class="form-control ml-2" style="width: 150px; margin-left: 10px;" name="kategori_soal[]" onchange="showInputFields(this)">
                         <option value="essai">Essai</option>
-                        <option value="nomor">Nomor</option>
+                        <!-- <option value="nomor">Nomor</option>
                         <option value="tanggal">Tanggal</option>
                         <option value="email">Email</option>
-                        <option value="url">Url</option>
+                        <option value="url">Url</option> --!>
                         <option value="pilihan_ganda">Pilihan Ganda</option>
                         <option value="pilihan_ganda_multiple">Pilihan Ganda (jawaban lebih dari satu)</option>
-                        <option value="skala">Skala</option>
+                        <!-- <option value="skala">Skala</option>
                         <option value="label">Label</option>
                         <option value="drop_down">Drop-down</option>
-                        <option value="file">File</option>
+                        <option value="file">File</option> --!>
                     </select>
                 </div>
                 <div class="deskripsiContainer" style="display: none;">
@@ -205,7 +216,7 @@
                     newOption.innerHTML = `
                         <div class="input-group-prepend">
                             <div class="input-group-text" style="border: none; background: none;">
-                                <input type="radio" name="jawabanBenar" class="ml-2" style="margin: 0; accent-color: blue;"/>
+                                <input type="${selectedValue == 'pilihan_ganda' ? 'radio':'checkbox'}" name="jawabanBenar" class="ml-2" style="margin: 0; accent-color: blue;"/>
                             </div>
                         </div>
                         <input type="text" class="form-control" placeholder="Opsi baru" style="border: none;">
