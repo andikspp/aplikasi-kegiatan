@@ -19,6 +19,7 @@ class QuizzController extends Controller
     {
         // Validasi data
         $request->validate([
+            'kegiatan_id' => 'required',
             'nama_quiz' => 'required|string|max:255',
             'tanggal_buka' => 'required|date',
             'tanggal_tutup' => 'required|date',

@@ -9,24 +9,24 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('quizz', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('kegiatan_id')->constrained()->onDelete('cascade');
-            $table->string('nama_quiz');
-            $table->dateTime('tanggal_buka');
-            $table->dateTime('tanggal_tutup');
-            $table->enum('status', ['Template', 'Active', 'Inactive'])->default('Template');
-            $table->timestamps();
-        });
-    }
+    // public function up(): void
+    // {
+    //     Schema::create('quizz', function (Blueprint $table) {
+    //         $table->id();
+    //         $table->foreignId('kegiatan_id')->constrained()->onDelete('cascade');
+    //         $table->string('nama_quiz');
+    //         $table->dateTime('tanggal_buka');
+    //         $table->dateTime('tanggal_tutup');
+    //         $table->enum('status', ['Template', 'Active', 'Inactive'])->default('Template');
+    //         $table->timestamps();
+    //     });
+    // }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('quizz');
-    }
+    // /**
+    //  * Reverse the migrations.
+    //  */
+    // public function down(): void
+    // {
+    //     Schema::dropIfExists('quizz');
+    // }
 };
