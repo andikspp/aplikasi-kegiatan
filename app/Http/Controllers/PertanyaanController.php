@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OpsiJawaban;
 use App\Models\Soal;
 use Illuminate\Http\Request;
 use App\Models\Quizz;
@@ -10,7 +11,7 @@ class PertanyaanController extends Controller
 {
     public function store(Request $request)
     {
-        dd($request->all());
+        dd($request->quiz_data);
         // Validasi data
         $request->validate([
             'kegiatan_id' => 'required|exists:kegiatans,id',
@@ -21,10 +22,10 @@ class PertanyaanController extends Controller
             'quiz_data' => 'required|array',
             'quiz_data.*.pertanyaan' => 'required|string',
             'quiz_data.*.kategori_soal' => 'required|string',
+            'quiz_data.*.is_required' => 'boolean',
             'quiz_data.*.pilihan' => 'array',
-            'quiz_data.*.pilihan.*' => 'string',
-            'quiz_data.*.jawaban' => 'array',
-            'quiz_data.*.jawaban.*' => 'string',
+            'quiz_data.*.pilihan.*.opsi' => 'string',
+            'quiz_data.*.pilihan.*.jawaban' => 'boolean',
             // 'pertanyaan.*' => 'required|string|max:255',
             // 'kategori_soal.*' => 'required|string|in:essai,pilihan_ganda,pilihan_ganda_multiple',
             // 'is_required.*' => 'sometimes|boolean',
@@ -40,13 +41,26 @@ class PertanyaanController extends Controller
         $quiz->save();
 
         foreach ($request->pertanyaan as $index => $pertanyaan) {
+            $soal = Soal::create([
+                'quiz_id' => $quiz->id,
+                'pertanyaan' => $pertanyaan->pertanyaan,
+                'kategori_soal' => $pertanyaan->kategori_soal,
+                'wajib_diisi' => $pertanyaan->is_required ? true : false,
+            ]);
+            foreach ($pertanyaan->pilihan as $pilihan) {
+                OpsiJawaban::create([
+                    'soal_id' => $soal->id,
+                    'jawaban' => $pilihan->opsi,
+                    'is_true' => $pilihan->jawaban ? true : false,
+                ]);
+            }
             // Create a new question entry
-            $question = new Soal();
-            $question->quiz_id = $quiz->id;
-            $question->pertanyaan = $pertanyaan;
-            $question->kategori_soal = $request->kategori_soal[$index];
+            // $question = new Soal();
+            // $question->quiz_id = $quiz->id;
+            // $question->pertanyaan = $pertanyaan;
+            // $question->kategori_soal = $request->kategori_soal[$index];
             //$question->is_required = isset($request->is_required[$index]) && $request->is_required[$index] === 'on';
-            $question->save();
+            // $question->save();
 
             // Handle options for multiple-choice questions
             // if (in_array($question->kategori_soal, ['pilihan_ganda', 'pilihan_ganda_multiple'])) {

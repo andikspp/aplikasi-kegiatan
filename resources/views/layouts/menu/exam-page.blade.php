@@ -38,7 +38,7 @@
             <button class="btn btn-primary btn-nav" id="nextBtn" onclick="navigateQuestion(1)">Soal Berikutnya</button>
         </div>
         <div class="text-center mt-3">
-            <button class="btn btn-success" onclick="submitExam()">Kumpulkan Jawaban</button>
+            <button class="btn btn-success" onclick="submitExam()">Kumpulkan OpsiJawaban</button>
         </div>
     </div>
 

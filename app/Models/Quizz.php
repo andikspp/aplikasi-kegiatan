@@ -33,5 +33,5 @@ class Quizz extends Model
     }
 
     // Jika Anda ingin menambahkan relasi, Anda bisa menambahkannya di sini
-    // Contoh: public function jawaban() { return $this->hasMany(Jawaban::class); }
+    // Contoh: public function jawaban() { return $this->hasMany(OpsiJawaban::class); }
 }

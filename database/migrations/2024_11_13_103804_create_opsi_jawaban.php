@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jawaban', function (Blueprint $table) {
+        Schema::create('opsi_jawaban', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('soal_id')->unsigned();
             $table->text('jawaban');
+            $table->boolean('is_true')->default(false);
             $table->timestamps();
 
             $table->foreign('soal_id')->references('id')->on('soal')->onDelete('cascade');
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jawaban');
+        Schema::dropIfExists('opsi_jawaban');
     }
 };
