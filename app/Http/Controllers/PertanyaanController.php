@@ -18,9 +18,16 @@ class PertanyaanController extends Controller
             'deskripsi' => 'nullable|string',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
-            'pertanyaan.*' => 'required|string|max:255',
-            'kategori_soal.*' => 'required|string|in:essai,pilihan_ganda,pilihan_ganda_multiple',
-            'is_required.*' => 'sometimes|boolean',
+            'quiz_data' => 'required|array',
+            'quiz_data.*.pertanyaan' => 'required|string',
+            'quiz_data.*.kategori_soal' => 'required|string',
+            'quiz_data.*.pilihan' => 'array',
+            'quiz_data.*.pilihan.*' => 'string',
+            'quiz_data.*.jawaban' => 'array',
+            'quiz_data.*.jawaban.*' => 'string',
+            // 'pertanyaan.*' => 'required|string|max:255',
+            // 'kategori_soal.*' => 'required|string|in:essai,pilihan_ganda,pilihan_ganda_multiple',
+            // 'is_required.*' => 'sometimes|boolean',
         ]);
 
         // Simpan data ke database
