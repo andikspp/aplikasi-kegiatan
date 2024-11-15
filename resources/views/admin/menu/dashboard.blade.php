@@ -13,7 +13,7 @@
                             <br>Total Kegiatan
                         </h5>
                         <p class="card-text mt-3">
-                            <strong>{{ $totalKegiatan }}</strong> <!-- Data total kegiatan -->
+                            <strong>3</strong> <!-- Data total kegiatan -->
                         </p>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                             <br>Kegiatan Mendatang
                         </h5>
                         <p class="card-text mt-3">
-                            <strong>{{ $kegiatanMendatang }}</strong> <!-- Data kegiatan mendatang -->
+                            <strong>3</strong> <!-- Data kegiatan mendatang -->
                         </p>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                             <br>Kegiatan Selesai
                         </h5>
                         <p class="card-text mt-3">
-                            <strong>{{ $kegiatanSelesai }}</strong> <!-- Data kegiatan selesai -->
+                            <strong>3</strong> <!-- Data kegiatan selesai -->
                         </p>
                     </div>
                 </div>

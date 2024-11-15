@@ -42,9 +42,40 @@
                         <span class="text-danger">📊</span> 5. Sebaran Peserta
                     </a>
                 </li>
+                <li>
+                    <a href="#" class="text-primary text-decoration-none"
+                        onclick="copyToClipboard('{{ url('/user/isi-biodata/' . $kegiatan->id) }}')">
+                        <span class="text-primary">📊</span> 6. Copy Link Biodata
+                    </a>
+                </li>
             </ul>
         </form>
     </div>
+
+    <script>
+        function copyToClipboard(link) {
+            // Buat elemen textarea secara sementara
+            const textarea = document.createElement("textarea");
+            textarea.value = link;
+            document.body.appendChild(textarea);
+
+            // Pilih teks di dalam textarea dan salin ke clipboard
+            textarea.select();
+            textarea.setSelectionRange(0, 99999); // Untuk perangkat mobile
+            document.execCommand("copy");
+
+            // Hapus elemen textarea setelah penyalinan
+            document.body.removeChild(textarea);
+
+            // Gunakan SweetAlert untuk menampilkan notifikasi
+            Swal.fire({
+                icon: 'success',
+                title: 'Link berhasil disalin!',
+                text: 'Link biodata: ' + link,
+                confirmButtonText: 'OK'
+            });
+        }
+    </script>
 
     <style>
         .form-label {
