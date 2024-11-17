@@ -11,14 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('opsi_jawaban', function (Blueprint $table) {
+        Schema::create('quiz_jawaban', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('soal_id')->unsigned();
+            $table->unsignedBigInteger('attempt_id');
+            $table->unsignedBigInteger('soal_id');
             $table->text('jawaban');
             $table->boolean('is_correct')->default(false);
+            $table->integer('point_earned');
             $table->timestamps();
 
-            $table->foreign('soal_id')->references('id')->on('soal')->onDelete('cascade');
+            $table->foreign('attempt_id')->references('id')->on('quiz_attempt');
+            $table->foreign('soal_id')->references('id')->on('soal');
         });
     }
 
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('opsi_jawaban');
+        Schema::dropIfExists('quiz_jawaban');
     }
 };
