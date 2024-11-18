@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biodata {{ $kegiatan->nama }}</title>
+    <title>Edit Biodata {{ $kegiatan->nama }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="{{ asset('assets/logo kemendikbudristek.png') }}">
@@ -19,7 +19,8 @@
         <form class="bg-light p-4 rounded shadow" action="{{ route('isi.biodata.store') }}" method="POST"
             enctype="multipart/form-data">
             @csrf
-            <h1 class="mb-4 text-center" style="font-size: larger; font-weight: bold;">Biodata {{ $kegiatan->nama }}
+            <h1 class="mb-4 text-center" style="font-size: larger; font-weight: bold;">Edit Biodata
+                {{ $kegiatan->nama }}
             </h1>
             <div class="mb-3">
                 <input type="hidden" id="kegiatan_id" name="kegiatan_id" value="{{ $kegiatan->id }}">
@@ -38,69 +39,80 @@
             <div class="mb-3">
                 <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
                 <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
-                    placeholder="Masukkan Tempat Lahir" required>
+                    placeholder="Masukkan Tempat Lahir" value="{{ old('tempat_lahir', $peserta->tempat_lahir) }}"
+                    required>
             </div>
             <div class="mb-3">
                 <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
-                <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" required>
+                <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir"
+                    value="{{ old('tanggal_lahir', $peserta->tanggal_lahir) }}" required>
             </div>
             <div class="mb-3">
                 <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
                 <select class="form-select" id="jenis_kelamin" name="jenis_kelamin" required>
                     <option value="">Pilih Jenis Kelamin</option>
-                    <option value="Laki-laki">Laki-laki</option>
-                    <option value="Perempuan">Perempuan</option>
+                    <option value="Laki-laki"
+                        {{ old('jenis_kelamin', $peserta->jenis_kelamin) == 'Laki-laki' ? 'selected' : '' }}>Laki-laki
+                    </option>
+                    <option value="Perempuan"
+                        {{ old('jenis_kelamin', $peserta->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>Perempuan
+                    </option>
                 </select>
             </div>
             <div class="mb-3">
                 <label for="agama" class="form-label">Agama</label>
                 <input type="text" class="form-control" id="agama" name="agama" placeholder="Masukkan Agama"
-                    required>
+                    value="{{ old('agama', $peserta->agama) }}" required>
             </div>
             <div class="mb-3">
                 <label for="pendidikan_terakhir" class="form-label">Pendidikan Terakhir</label>
                 <input type="text" class="form-control" id="pendidikan_terakhir" name="pendidikan_terakhir"
-                    placeholder="Masukkan Pendidikan Terakhir" required>
+                    placeholder="Masukkan Pendidikan Terakhir"
+                    value="{{ old('pendidikan_terakhir', $peserta->pendidikan_terakhir) }}" required>
             </div>
             <div class="mb-3">
                 <label for="jabatan" class="form-label">Jabatan</label>
                 <input type="text" class="form-control" id="jabatan" name="jabatan" placeholder="Masukkan Jabatan"
-                    required>
+                    value="{{ old('jabatan', $peserta->jabatan) }}" required>
             </div>
             <div class="mb-3">
                 <label for="pangkat_golongan" class="form-label">Pangkat/Golongan (jika PNS)</label>
                 <input type="text" class="form-control" id="pangkat_golongan" name="pangkat_golongan"
-                    placeholder="Masukkan Pangkat/Golongan" required>
+                    placeholder="Masukkan Pangkat/Golongan"
+                    value="{{ old('pangkat_golongan', $peserta->pangkat_golongan) }}" required>
             </div>
             <div class="mb-3">
                 <label for="unit_kerja" class="form-label">Unit Kerja</label>
                 <input type="text" class="form-control" id="unit_kerja" name="unit_kerja"
-                    placeholder="Masukkan Unit Kerja" required>
+                    placeholder="Masukkan Unit Kerja" value="{{ old('unit_kerja', $peserta->unit_kerja) }}" required>
             </div>
             <div class="mb-3">
                 <label for="masa_kerja" class="form-label">Masa Kerja</label>
                 <input type="text" class="form-control" id="masa_kerja" name="masa_kerja"
-                    placeholder="Masukkan Masa Kerja" required>
+                    placeholder="Masukkan Masa Kerja" value="{{ old('masa_kerja', $peserta->masa_kerja) }}" required>
             </div>
             <div class="mb-3">
                 <label for="alamat_kantor" class="form-label">Alamat Kantor</label>
                 <input type="text" class="form-control" id="alamat_kantor" name="alamat_kantor"
-                    placeholder="Masukkan Alamat Kantor" required>
+                    placeholder="Masukkan Alamat Kantor" value="{{ old('alamat_kantor', $peserta->alamat_kantor) }}"
+                    required>
             </div>
             <div class="mb-3">
                 <label for="telp_kantor" class="form-label">Telp</label>
                 <input type="text" class="form-control" id="telp_kantor" name="telp_kantor"
-                    placeholder="Masukkan Telp Kantor" required>
+                    placeholder="Masukkan Telp Kantor" value="{{ old('telp_kantor', $peserta->telp_kantor) }}"
+                    required>
             </div>
             <div class="mb-3">
                 <label for="alamat_rumah" class="form-label">Alamat Rumah</label>
                 <input type="text" class="form-control" id="alamat_rumah" name="alamat_rumah"
-                    placeholder="Masukkan Alamat Rumah" required>
+                    placeholder="Masukkan Alamat Rumah" value="{{ old('alamat_rumah', $peserta->alamat_rumah) }}"
+                    required>
             </div>
             <div class="mb-3">
                 <label for="telp_rumah" class="form-label">Telp/HP</label>
                 <input type="text" class="form-control" id="telp_rumah" name="telp_rumah"
-                    placeholder="Masukkan Telp/HP" required>
+                    placeholder="Masukkan Telp/HP" value="{{ old('telp_rumah', $peserta->telp_rumah) }}" required>
             </div>
             <div class="mb-3">
                 <label for="alamat_email" class="form-label">Alamat Email</label>
@@ -110,16 +122,20 @@
             <div class="mb-3">
                 <label for="npwp" class="form-label">NPWP</label>
                 <input type="text" class="form-control" id="npwp" name="npwp"
-                    placeholder="Masukkan NPWP" required>
+                    placeholder="Masukkan NPWP" value="{{ old('npwp', $peserta->npwp) }}" required>
             </div>
             <div class="mb-3">
                 <label for="jenis_kelamin" class="form-label">Peran</label>
                 <select class="form-select" id="peran" name="peran" required>
                     <option value="">Pilih Peran</option>
-                    <option value="Peserta">Peserta</option>
-                    <option value="Narasumber">Narasumber</option>
-                    <option value="Fasilitator">Fasilitator</option>
-                    <option value="Panitia">Panitia</option>
+                    <option value="Peserta" {{ old('peran', $peserta->peran) == 'peserta' ? 'selected' : '' }}>Peserta
+                    </option>
+                    <option value="Narasumber" {{ old('peran', $peserta->peran) == 'narasumber' ? 'selected' : '' }}>
+                        Narasumber</option>
+                    <option value="Fasilitator"
+                        {{ old('peran', $peserta->peran) == 'fasilitator' ? 'selected' : '' }}>Fasilitator</option>
+                    <option value="Panitia" {{ old('peran', $peserta->peran) == 'panitia' ? 'selected' : '' }}>Panitia
+                    </option>
                 </select>
             </div>
             <div class="mb-3">

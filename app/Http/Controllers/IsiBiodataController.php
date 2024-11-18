@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Kegiatan;
 use App\Models\Peserta;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class IsiBiodataController extends Controller
 {
@@ -20,6 +21,7 @@ class IsiBiodataController extends Controller
     {
         // Validate the input fields
         $validatedData = $request->validate([
+            'user_id' => 'required|exists:users,id',
             'kegiatan_id' => 'required|exists:kegiatans,id',
             'nama_lengkap' => 'required|string|max:255',
             'nip' => 'nullable|string|max:20',
@@ -44,13 +46,17 @@ class IsiBiodataController extends Controller
 
         // Handle the file upload if there is one
         if ($request->hasFile('file_upload')) {
-            $filePath = $request->file('file_upload')->store('uploads');
+            // Simpan file di storage/app/public/uploads
+            $filePath = $request->file('file_upload')->store('public/uploads');
+            // Hapus "public/" dari path untuk menyimpan hanya path relatif
+            $filePath = str_replace('public/', '', $filePath);
         } else {
             $filePath = null;
         }
 
         // Store the Peserta data using create
         Peserta::create([
+            'user_id' => $request->user_id,
             'kegiatan_id' => $request->kegiatan_id, // Getting the kegiatan ID from the form
             'nama_lengkap' => $request->nama_lengkap,
             'nip' => $request->nip,

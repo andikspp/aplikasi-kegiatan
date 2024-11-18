@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'username',
+        'nip',
     ];
 
     /**
@@ -43,4 +44,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function peserta()
+    {
+        return $this->hasMany(Peserta::class, 'user_id'); // Jika satu user hanya memiliki satu peserta
+    }
 }

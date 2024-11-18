@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Peserta;
+use App\Models\Kegiatan;
 
 class UserController extends Controller
 {
@@ -44,10 +46,12 @@ class UserController extends Controller
 
     public function prosesRegister(Request $request)
     {
+        // Validasi input yang diterima dari form
         $validatedData = $request->validate([
-            'username' => 'required|string|max:255|unique:users',
-            'email' => 'required|email|max:255|unique:users',
-            'nama' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',  // Pastikan username unik
+            'email' => 'required|email|max:255|unique:users',  // Pastikan email unik
+            'nama' => 'required|string|max:255',  // Nama wajib diisi
+            'nip' => 'nullable|string|max:20|unique:users',  // NIP opsional dan harus unik jika diisi
         ]);
 
         // Buat pengguna baru dengan password default '654321'
@@ -55,7 +59,8 @@ class UserController extends Controller
             'username' => $validatedData['username'],
             'email' => $validatedData['email'],
             'nama' => $validatedData['nama'],
-            'password' => Hash::make('654321'), // Hash password dengan bcrypt
+            'nip' => $validatedData['nip'],  // Menyimpan NIP jika diisi
+            'password' => Hash::make('654321'),  // Hash password dengan bcrypt
         ]);
 
         // Arahkan ke halaman login dengan pesan sukses
@@ -74,16 +79,45 @@ class UserController extends Controller
 
     public function dashboard()
     {
-        return view('user.menu.dashboard');
+        $user = Auth::user();
+
+        $jumlahKegiatan = Peserta::where('user_id', $user->id)->count();
+
+        $kegiatanMendatang = Peserta::where('user_id', $user->id)
+            ->join('kegiatans', 'peserta.kegiatan_id', '=', 'kegiatans.id')
+            ->where('kegiatans.tanggal_kegiatan', '>', now())
+            ->count();
+
+        $kegiatanSelesai = Peserta::where('user_id', $user->id)
+            ->join('kegiatans', 'peserta.kegiatan_id', '=', 'kegiatans.id')
+            ->where('kegiatans.tanggal_kegiatan', '<', now())
+            ->count();
+
+        return view('user.menu.dashboard.dashboard', compact('jumlahKegiatan', 'kegiatanMendatang', 'kegiatanSelesai'));
     }
 
     public function kegiatan()
     {
-        return view('user.menu.kegiatan.index');
+        $user = Auth::user();
+
+        // Ambil data kegiatan yang diikuti oleh user beserta jumlah pesertanya
+        $kegiatanList = Peserta::where('user_id', $user->id)
+            ->with(['kegiatan', 'kegiatan.peserta']) // Mengambil data kegiatan dan jumlah peserta
+            ->get();
+
+        return view('user.menu.kegiatan.index', compact('kegiatanList'));
     }
+
 
     public function qrcode()
     {
         return view('user.menu.qrcode.index');
+    }
+
+    public function editKegiatan($id)
+    {
+        $kegiatan = Kegiatan::findOrFail($id);
+
+        return view('user.biodata.isibiodata', compact('kegiatan'));
     }
 }

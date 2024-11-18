@@ -8,6 +8,9 @@ use App\Models\Admin;
 use App\Models\Kegiatan;
 use App\Models\PeranKegiatan;
 use Illuminate\Support\Carbon;
+use App\Models\User;
+use App\Models\Peserta;
+use App\Models\Quizz;
 
 class AdminController extends Controller
 {
@@ -21,8 +24,11 @@ class AdminController extends Controller
         $totalKegiatan = Kegiatan::count();
         $kegiatanMendatang = Kegiatan::where('tanggal_kegiatan', '>', Carbon::now())->count();
         $kegiatanSelesai = Kegiatan::where('tanggal_kegiatan', '<', Carbon::now())->count();
+        $jumlahPeserta = User::count();
+        $jumlahPesertaDaftar = Peserta::count();
+        $jumlahkuis = Quizz::count();
 
-        return view('admin.menu.dashboard', compact('totalKegiatan', 'kegiatanSelesai', 'kegiatanMendatang'));
+        return view('admin.menu.dashboard', compact('totalKegiatan', 'kegiatanSelesai', 'kegiatanMendatang', 'jumlahPeserta', 'jumlahPesertaDaftar', 'jumlahkuis'));
     }
 
     public function kegiatan()
@@ -76,12 +82,6 @@ class AdminController extends Controller
         $peran_kegiatan = PeranKegiatan::where('id_kegiatan', $id)->get();
 
         return view('admin.menu.hasilkegiatan', compact('kegiatan', 'peran_kegiatan'));
-    }
-
-    public function kelolapeserta($id)
-    {
-        $kegiatan = Kegiatan::find($id);
-        return view('admin.menu.kelolapeserta', compact('kegiatan'));
     }
 
     public function kelolalainya($id)

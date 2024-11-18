@@ -12,6 +12,7 @@ class Peserta extends Model
     protected $table = 'peserta';
 
     protected $fillable = [
+        'user_id',
         'kegiatan_id',
         'nama_lengkap',
         'nip',
@@ -37,5 +38,10 @@ class Peserta extends Model
     public function kegiatan()
     {
         return $this->belongsTo(Kegiatan::class, 'kegiatan_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

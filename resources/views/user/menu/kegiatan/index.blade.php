@@ -38,60 +38,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach ($kegiatans as $index => $kegiatan)
+                    @foreach ($kegiatanList as $key => $peserta)
                         <tr>
-                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $peserta->kegiatan->nama }}</td>
+                            <td>{{ \Carbon\Carbon::parse($peserta->kegiatan->tanggal_kegiatan)->format('d F Y') }}</td>
+                            <td>{{ $peserta->kegiatan->peserta->count() }}</td> <!-- Menghitung jumlah peserta -->
                             <td>
-                                <a href="{{ route('hasilkegiatan', ['id' => $kegiatan->id]) }}" class="kegiatan-link">
-                                    {{ $kegiatan->nama }}
-                                </a>
-                                <br>
-                                <span class="kode-kegiatan">Kode Kegiatan:
-                                    <strong>{{ $kegiatan->id }}</strong></span>
-                            </td>
-                            <td>{{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('d-m-Y') }}</td>
-                            <td>{{ $kegiatan->jumlah_jp }}</td>
-                            <td>{{ $kegiatan->jumlah_peserta ?? 'Tidak Ada' }}</td>
-                            <td>{{ $kegiatan->role }}</td>
-                            <td>{{ $kegiatan->menggunakan_sertifikat === 'ya' ? 'Ada' : 'Tidak Ada' }}</td>
-                            <td>{{ $kegiatan->menggunakan_sertifikat === 'ya' ? 'Ada' : 'Tidak Ada' }}</td>
-                            <td>
-                                <button type="button" class="btn btn-sm btn-outline-danger"
-                                    onclick="confirmDelete({{ $kegiatan->id }})">
-                                    <i class="fas fa-trash-alt"></i> Hapus
-                                </button>
-
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <li><a class="dropdown-item"
-                                                href="{{ route('hasilkegiatan', ['id' => $kegiatan->id]) }}">Lihat/Ubah</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="#">Daftar Peserta</a></li>
-                                        <li><a class="dropdown-item" href="#">Unggah Ajuan SK Sertifikat</a></li>
-                                        <li><a class="dropdown-item" href="#">Unduh Presensi</a></li>
-                                        <li><a class="dropdown-item" href="#">Unduh Biodata</a></li>
-                                        <li><a class="dropdown-item" href="#">Unduh Sertifikat</a></li>
-                                        <li><a class="dropdown-item" href="#">Sebaran Peserta</a></li>
-                                    </ul>
-                                </div>
+                                <a href="{{ route('user.edit-kegiatan', ['id' => $peserta->kegiatan->id]) }}"
+                                    class="btn btn-primary">Edit</a>
+                                <a href="#" class="btn btn-danger">Hapus</a>
                             </td>
                         </tr>
-                    @endforeach --}}
-
-                    <tr>
-                        <td>1.</td>
-                        <td>Kegiatan A</td>
-                        <td>20 April 2024</td>
-                        <td>25</td>
-                        <td>
-                            <a href="#" class="btn btn-primary">Edit</a>
-                            <a href="#" class="btn btn-danger">Hapus</a>
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
             <div class="d-flex justify-content-between align-items-center mt-3">

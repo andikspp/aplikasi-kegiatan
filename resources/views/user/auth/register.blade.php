@@ -39,26 +39,37 @@
                         <form action="{{ route('user.register.store') }}" method="POST">
                             @csrf
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="email" name="email" required
-                                    autofocus>
-                                @error('username')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" required
-                                    autofocus>
+                                <input type="text" class="form-control" id="username" name="username"
+                                    value="{{ old('username') }}" required>
                                 @error('username')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    value="{{ old('email') }}" required>
+                                @error('email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
                             <div class="mb-3">
                                 <label for="nama" class="form-label">Nama</label>
-                                <input type="text" class="form-control" id="nama" name="nama" required
-                                    autofocus>
-                                @error('username')
+                                <input type="text" class="form-control" id="nama" name="nama"
+                                    value="{{ old('nama') }}" required>
+                                @error('nama')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="nip" class="form-label">NIP (Jika PNS)</label>
+                                <input type="text" class="form-control" id="nip" name="nip"
+                                    value="{{ old('nip') }}" maxlength="20">
+                                @error('nip')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

@@ -4,6 +4,7 @@
 @section('content')
     <div class="container mt-5">
         <div class="row">
+            <!-- Total Kegiatan -->
             <div class="col-md-4">
                 <div class="card text-center shadow-sm bg-primary text-white mb-4">
                     <div class="card-body">
@@ -12,7 +13,7 @@
                             <br>Kegiatan Diikuti
                         </h5>
                         <p class="card-text mt-3">
-                            <strong>3</strong> <!-- Data total kegiatan -->
+                            <strong>{{ $jumlahKegiatan }}</strong> <!-- Data total kegiatan -->
                         </p>
                     </div>
                 </div>
@@ -27,7 +28,7 @@
                             <br>Kegiatan Mendatang
                         </h5>
                         <p class="card-text mt-3">
-                            <strong>3</strong> <!-- Data kegiatan mendatang -->
+                            <strong>{{ $kegiatanMendatang }}</strong> <!-- Data kegiatan mendatang -->
                         </p>
                     </div>
                 </div>
@@ -42,11 +43,25 @@
                             <br>Kegiatan Selesai
                         </h5>
                         <p class="card-text mt-3">
-                            <strong>3</strong> <!-- Data kegiatan selesai -->
+                            <strong>{{ $kegiatanSelesai }}</strong> <!-- Data kegiatan selesai -->
                         </p>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm bg-danger text-white mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-pen fa-2x mb-2"></i> <!-- Ikon Font Awesome -->
+                        <br>Jumlah Kuis Tersedia
+                    </h5>
+                    <p class="card-text mt-3">
+                        <strong>3</strong> <!-- Data kegiatan selesai -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 @endsection

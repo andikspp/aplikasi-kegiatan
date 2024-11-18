@@ -59,118 +59,74 @@
                 <table class="table mt-4">
                     <thead>
                         <tr>
-                            <th><input type="checkbox"></th>
                             <th>No.</th>
-                            <th>Uniq ID</th>
-                            <th>Urut</th>
-                            <th>Timestamp</th>
-                            <th>NIK</th>
+                            <th>Nama Lengkap</th>
                             <th>NIP</th>
-                            <th>Nama</th>
-                            <th>Instansi</th>
+                            <th>Tempat Lahir</th>
+                            <th>Tanggal Lahir</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Agama</th>
+                            <th>Pendidikan Terakhir</th>
+                            <th>Jabatan</th>
+                            <th>Pangkat/Golongan</th>
+                            <th>Unit Kerja</th>
+                            <th>Masa Kerja</th>
+                            <th>Alamat Kantor</th>
+                            <th>Telp Kantor</th>
+                            <th>Alamat Rumah</th>
+                            <th>Telp Rumah</th>
                             <th>Email</th>
-                            <th>HP</th>
+                            <th>NPWP</th>
                             <th>Peran</th>
-                            <th>Status Presensi</th>
-                            <th>Predikat</th>
+                            <th>File</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>GgqaNXiw6L</td>
-                            <td>-</td>
-                            <td>10/15/2024, 1:10:51 PM</td>
-                            <td>5302010204790002</td>
-                            <td>1979040222014061003</td>
-                            <td>JEMRI SALUK</td>
-                            <td>Dinas Pendidikan dan Kebudayaan</td>
-                            <td>jewarelatris1979@gmail.com</td>
-                            <td>62819183739183</td>
-                            <td>p</td>
-                            <td>Peserta</td>
-                            <td>p</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Pilih Predikat
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#"
-                                            onclick="selectPredikat('Sangat Baik')">Sangat Baik</a>
-                                        <a class="dropdown-item" href="#" onclick="selectPredikat('Baik')">Baik</a>
-                                        <a class="dropdown-item" href="#" onclick="selectPredikat('Cukup Baik')">Cukup
-                                            Baik</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>2</td>
-                            <td>Abcde12345</td>
-                            <td>-</td>
-                            <td>10/16/2024, 2:00:00 PM</td>
-                            <td>5302010204790003</td>
-                            <td>1979040222014061004</td>
-                            <td>ANDI SETIAWAN</td>
-                            <td>Dinas Kesehatan</td>
-                            <td>andi.setiawan@example.com</td>
-                            <td>6281234567890</td>
-                            <td>p</td>
-                            <td>Peserta</td>
-                            <td>p</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Pilih Predikat
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#"
-                                            onclick="selectPredikat('Sangat Baik')">Sangat Baik</a>
-                                        <a class="dropdown-item" href="#" onclick="selectPredikat('Baik')">Baik</a>
-                                        <a class="dropdown-item" href="#" onclick="selectPredikat('Cukup Baik')">Cukup
-                                            Baik</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>3</td>
-                            <td>Fghij67890</td>
-                            <td>-</td>
-                            <td>10/17/2024, 3:30:00 PM</td>
-                            <td>5302010204790004</td>
-                            <td>1979040222014061005</td>
-                            <td>SITI NURHALIZA</td>
-                            <td>Dinas Sosial</td>
-                            <td>siti.nurhaliza@example.com</td>
-                            <td>6280987654321</td>
-                            <td>p</td>
-                            <td>Peserta</td>
-                            <td>p</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Pilih Predikat
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#"
-                                            onclick="selectPredikat('Sangat Baik')">Sangat Baik</a>
-                                        <a class="dropdown-item" href="#" onclick="selectPredikat('Baik')">Baik</a>
-                                        <a class="dropdown-item" href="#" onclick="selectPredikat('Cukup Baik')">Cukup
-                                            Baik</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Tambahkan baris data lainnya di sini -->
+                        @forelse ($peserta as $index => $p)
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $p->nama_lengkap }}</td>
+                                <td>{{ $p->nip ?? '-' }}</td>
+                                <td>{{ $p->tempat_lahir }}</td>
+                                <td>{{ \Carbon\Carbon::parse($p->tanggal_lahir)->format('d-m-Y') }}</td>
+                                <td>{{ $p->jenis_kelamin }}</td>
+                                <td>{{ $p->agama }}</td>
+                                <td>{{ $p->pendidikan_terakhir }}</td>
+                                <td>{{ $p->jabatan }}</td>
+                                <td>{{ $p->pangkat_golongan ?? '-' }}</td>
+                                <td>{{ $p->unit_kerja }}</td>
+                                <td>{{ $p->masa_kerja }}</td>
+                                <td>{{ $p->alamat_kantor }}</td>
+                                <td>{{ $p->telp_kantor }}</td>
+                                <td>{{ $p->alamat_rumah }}</td>
+                                <td>{{ $p->telp_rumah }}</td>
+                                <td>{{ $p->alamat_email }}</td>
+                                <td>{{ $p->npwp }}</td>
+                                <td>{{ $p->peran }}</td>
+                                <td>
+                                    @if ($p->file_upload)
+                                        <a href="{{ asset('storage/' . $p->file_upload) }}" target="_blank">Lihat
+                                            File</a>
+                                    @else
+                                        Tidak ada file
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-warning">Edit</a>
+                                    <form action="#" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Apakah Anda yakin ingin menghapus peserta ini?')">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="21" class="text-center">Tidak ada data peserta.</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

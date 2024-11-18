@@ -13,7 +13,7 @@
                             <br>Total Kegiatan
                         </h5>
                         <p class="card-text mt-3">
-                            <strong>3</strong> <!-- Data total kegiatan -->
+                            <strong>{{ $totalKegiatan }}</strong> <!-- Data total kegiatan -->
                         </p>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                             <br>Kegiatan Mendatang
                         </h5>
                         <p class="card-text mt-3">
-                            <strong>3</strong> <!-- Data kegiatan mendatang -->
+                            <strong>{{ $kegiatanMendatang }}</strong> <!-- Data kegiatan mendatang -->
                         </p>
                     </div>
                 </div>
@@ -43,7 +43,48 @@
                             <br>Kegiatan Selesai
                         </h5>
                         <p class="card-text mt-3">
-                            <strong>3</strong> <!-- Data kegiatan selesai -->
+                            <strong>{{ $kegiatanSelesai }}</strong> <!-- Data kegiatan selesai -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm bg-danger text-white mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-user fa-2x mb-2"></i> <!-- Ikon Font Awesome -->
+                            <br>Jumlah Peserta
+                        </h5>
+                        <p class="card-text mt-3">
+                            <strong>{{ $jumlahPeserta }}</strong> <!-- Data kegiatan selesai -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm bg-success text-white mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-users fa-2x mb-2"></i> <!-- Ikon Font Awesome -->
+                            <br>Jumlah Peserta Daftar
+                        </h5>
+                        <p class="card-text mt-3">
+                            <strong>{{ $jumlahPesertaDaftar }}</strong> <!-- Data kegiatan selesai -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm bg-primary text-white mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-pen fa-2x mb-2"></i> <!-- Ikon Font Awesome -->
+                            <br>Jumlah Kuis Tersedia
+                        </h5>
+                        <p class="card-text mt-3">
+                            <strong>{{ $jumlahkuis }}</strong> <!-- Data kegiatan selesai -->
                         </p>
                     </div>
                 </div>

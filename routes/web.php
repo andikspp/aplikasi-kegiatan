@@ -31,6 +31,10 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/hasilkegiatan/{id}', [AdminController::class, 'hasilkegiatan'])->name('hasilkegiatan');
     Route::get('/kegiatan-delete/{id}', [KegiatanController::class, 'destroy'])->name('kegiatan.delete');
     Route::get('/tambah-kegiatan', [AdminController::class, 'tambahKegiatan'])->name('tambah-kegiatan');
+    Route::get('/detail-kegiatan/{id}', [AdminController::class, 'detailKegiatan'])->name('detail-kegiatan');
+    Route::post('/pertanyaan/store', [PertanyaanController::class, 'store'])->name('pertanyaan.store');
+    Route::get('/kelolapeserta/{id}', [KelolapesertaController::class, 'kelolapeserta'])->name('kelolapeserta');
+    Route::get('/kelolalainya/{id}', [AdminController::class, 'kelolalainya'])->name('kelolalainnya');
 
     // Kuis
     Route::get('/quizz', [QuizzController::class, 'index'])->name('quizz.index');
@@ -39,11 +43,6 @@ Route::middleware(['auth:admin'])->group(function () {
 
     Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
     Route::get('/qrcode', [AdminController::class, 'qrcode'])->name('qrcode');
-
-    Route::get('/detail-kegiatan/{id}', [AdminController::class, 'detailKegiatan'])->name('detail-kegiatan');
-    Route::post('/pertanyaan/store', [PertanyaanController::class, 'store'])->name('pertanyaan.store');
-    Route::get('/kelolapeserta/{id}', [AdminController::class, 'kelolapeserta'])->name('kelolapeserta');
-    Route::get('/kelolalainya/{id}', [AdminController::class, 'kelolalainya'])->name('kelolalainnya');
 });
 
 Route::get('/user/login', [UserController::class, 'loginPage'])->name('user.login');
@@ -59,4 +58,5 @@ Route::middleware(['user'])->group(function () {
     Route::get('/user/qrcode', [UserController::class, 'qrcode'])->name('user.qrcode');
     Route::get('/user/isi-biodata/{id}', [IsiBiodataController::class, 'index'])->name('isi.biodata');
     Route::post('/user/isi-biodata', [IsiBiodataController::class, 'store'])->name('isi.biodata.store');
+    Route::get('/user/edit-biodata/{id}', [UserController::class, 'editKegiatan'])->name('user.edit-kegiatan');
 });
