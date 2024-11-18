@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\QuizAttempt;
+use App\Models\QuizJawaban;
 use App\Models\Quizz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,12 +40,11 @@ class UserQuizController extends Controller
         $request->validate([
             'quiz_data' => 'required|array',
             'quiz_data.*.soal_id' => 'required|number',
+            // 'quiz_data.*.point' => 'required|number',
             'quiz_data.*.jawaban' => 'required|array',
-            'quiz_data.*.jawaban.*' => 'required|string',
+            'quiz_data.*.jawaban.*.opsi' => 'required|string',
+            'quiz_data.*.jawaban.*.is_correct' => 'required|boolean',
         ]);
-
-        // $quiz = Quizz::find($quiz_id);
-        // foreach 
 
         $attempt = QuizAttempt::where('user_id', Auth::user()->id)
             ->where('quiz_id', $quiz_id)
@@ -53,7 +53,13 @@ class UserQuizController extends Controller
         if ($attempt->status != 'in_progress') return back()->withErrors('quiz telah disubmit');
 
         foreach ($request->quiz_data as $soal) {
-            
+            QuizJawaban::create([
+                'attempt_id' => $attempt->id,
+                'soal_id' => $soal['soal_id'],
+                'jawaban' => $soal['jawaban']['opsi'],
+                'is_correct' => $soal['jawaban']['is_correct']??false ? true : false,
+                'point_earned' => 0, // dummy
+            ]);
         }
 
         $attempt->update([
@@ -61,5 +67,7 @@ class UserQuizController extends Controller
             'submitted_at' => date('Y-m-d H:i:s'),
             'score' => 0 // dummy
         ]);
+        return 'quiz submitted';
+        // return redirect()->route('<quiz kegiatan page route>')->with('success', 'quiz submitted');
     }
 }

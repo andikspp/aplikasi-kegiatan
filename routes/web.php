@@ -63,6 +63,7 @@ Route::middleware(['user'])->group(function () {
 
     // quiz
     Route::prefix('/user/quiz')->group(function () {
-        Route::get('/attempt/{$quiz_id}', [UserQuizController::class, 'attempt'])->name('user.quiz.attempt');
+        Route::get('/attempt/{quiz_id}', [UserQuizController::class, 'attempt'])->name('user.quiz.attempt');
+        Route::post('/submit/{quiz_id}', [UserQuizController::class, 'submit'])->name('user.quiz.submit');
     });
 });
