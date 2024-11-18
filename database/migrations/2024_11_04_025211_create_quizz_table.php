@@ -14,6 +14,8 @@ return new class extends Migration
             $table->text('deskripsi')->nullable();
             $table->dateTime('tanggal_mulai');
             $table->dateTime('tanggal_selesai');
+            $table->integer('total_point')->default(100);
+            $table->boolean('is_published')->default(false);
             $table->timestamps();
         });
     }

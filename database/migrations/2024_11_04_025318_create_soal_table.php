@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('kategori_soal'); // e.g., essai, nomor, tanggal, etc.
             $table->boolean('wajib_diisi')->default(false); // Required field
             $table->text('deskripsi')->nullable(); // Description, if provided
+            $table->integer('point');
             $table->timestamps();
         });
     }

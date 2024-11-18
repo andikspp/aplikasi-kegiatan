@@ -79,6 +79,7 @@ class UserController extends Controller
 
     public function kegiatan()
     {
+        $kegiatan = null;
         return view('user.menu.kegiatan.index');
     }
 

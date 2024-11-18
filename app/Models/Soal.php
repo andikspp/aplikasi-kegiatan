@@ -12,15 +12,11 @@ class Soal extends Model
 
     protected $table = 'soal';
 
-    protected $fillable = [
-        'quiz_id',
-        'pertanyaan',
-        'kategori_soal',
-    ];
+    protected $guarded = [];
 
     public function quiz()
     {
-        return $this->belongsTo(Quizz::class, 'quiz_id');
+        return $this->belongsTo(Quizz::class, 'quizz_id');
     }
 
     public function jawaban() : HasMany {

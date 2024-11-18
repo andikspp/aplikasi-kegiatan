@@ -11,7 +11,7 @@ class PertanyaanController extends Controller
 {
     public function store(Request $request)
     {
-        dd($request->quiz_data);
+        // dd($request->quiz_data);
         // Validasi data
         $request->validate([
             'kegiatan_id' => 'required|exists:kegiatans,id',
@@ -32,26 +32,38 @@ class PertanyaanController extends Controller
         ]);
 
         // Simpan data ke database
-        $quiz = new Quizz();
-        $quiz->kegiatan_id = $request->kegiatan_id;
-        $quiz->judul = $request->judul;
-        $quiz->deskripsi = $request->deskripsi;
-        $quiz->tanggal_mulai = $request->tanggal_mulai;
-        $quiz->tanggal_selesai = $request->tanggal_selesai;
-        $quiz->save();
+        // $quiz = new Quizz();
+        // $quiz->kegiatan_id = $request->kegiatan_id;
+        // $quiz->judul = $request->judul;
+        // $quiz->deskripsi = $request->deskripsi;
+        // $quiz->tanggal_mulai = $request->tanggal_mulai;
+        // $quiz->tanggal_selesai = $request->tanggal_selesai;
+        // $quiz->save();
 
-        foreach ($request->pertanyaan as $index => $pertanyaan) {
+        $quiz = Quizz::create([
+            'kegiatan_id' => $request->kegiatan_id,
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi,
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_selesai' => $request->tanggal_selesai,
+        ]);
+
+        // dd($quiz->id);
+
+        foreach ($request->quiz_data as $soal) {
+            // dd($soal['is_required']??false);
             $soal = Soal::create([
-                'quiz_id' => $quiz->id,
-                'pertanyaan' => $pertanyaan->pertanyaan,
-                'kategori_soal' => $pertanyaan->kategori_soal,
-                'wajib_diisi' => $pertanyaan->is_required ? true : false,
+                'quizz_id' => $quiz->id,
+                'pertanyaan' => $soal['pertanyaan'],
+                'kategori_soal' => $soal['kategori_soal'],
+                'wajib_diisi' => $soal['is_required']??false ? true : false,
+                'point' => 10, // dummy
             ]);
-            foreach ($pertanyaan->pilihan as $pilihan) {
+            if ($soal['pilihan']??false) foreach ($soal['pilihan'] as $pilihan) {
                 OpsiJawaban::create([
-                    'soal_id' => $soal->id,
-                    'jawaban' => $pilihan->opsi,
-                    'is_true' => $pilihan->jawaban ? true : false,
+                    'soal_id' => $soal['id'],
+                    'jawaban' => $pilihan['opsi'],
+                    'is_correct' => $pilihan['jawaban']??false ? true : false,
                 ]);
             }
             // Create a new question entry

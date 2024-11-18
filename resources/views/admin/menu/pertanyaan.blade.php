@@ -10,7 +10,7 @@
                     @csrf
 
                     <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Kelola Kuis</h1>
-                    {{-- <div class="card-body">
+                    <div class="card-body">
                         <div class="form-group mb-3">
                             <label for="kegiatan">Pilih Kegiatan</label>
                             <select name="kegiatan_id" id="kegiatan" class="form-control">
@@ -52,7 +52,7 @@
                                 <option value="ya">Ya</option>
                             </select>
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="container mt-4" class="bg-light p-4 rounded shadow">
                         <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Tambahkan Soal</h1>
                         <hr style="border-top: 4px solid #000;">
@@ -113,7 +113,7 @@
     <script>
         let indexSoal = 0
         let indexPilihan = 0
-        
+
         function tambahSoal() {
             indexSoal++
             indexPilihan = 0

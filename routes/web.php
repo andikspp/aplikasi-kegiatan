@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\IsiBiodataController;
 use App\Http\Controllers\KelolapesertaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserQuizController;
 
 Route::get('/', function () {
     return view('admin.auth.login');
@@ -59,4 +60,10 @@ Route::middleware(['user'])->group(function () {
     Route::get('/user/qrcode', [UserController::class, 'qrcode'])->name('user.qrcode');
     Route::get('/user/isi-biodata/{id}', [IsiBiodataController::class, 'index'])->name('isi.biodata');
     Route::post('/user/isi-biodata', [IsiBiodataController::class, 'store'])->name('isi.biodata.store');
+
+    // quiz
+    Route::prefix('/user/quiz')->group(function () {
+        Route::get('/attempt/{quiz_id}', [UserQuizController::class, 'attempt'])->name('user.quiz.attempt');
+        Route::post('/submit/{quiz_id}', [UserQuizController::class, 'submit'])->name('user.quiz.submit');
+    });
 });
