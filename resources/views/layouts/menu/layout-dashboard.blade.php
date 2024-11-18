@@ -18,15 +18,13 @@
         <!-- Sidebar -->
         <div class="bg-light border-right" id="sidebar-wrapper">
             <!-- Heading utama untuk sidebar -->
-            <div
-                class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom heading-dashboard">
+            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom heading-dashboard">
                 Guru PAUD Dikmas
             </div>
 
             <!-- Div Dashboard: Menandakan menu Dashboard -->
             <div class="menu-section">
                 <div class="section-heading text-uppercase fw-bold py-2 ps-3">Dashboard</div>
-                <!-- Penanda untuk div Dashboard -->
                 <div class="list-group list-group-flush my-3">
                     <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action">
                         <i class="fas fa-tachometer-alt me-2"></i> Dashboard
@@ -58,20 +56,16 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light bg-custom border-bottom">
-                <!-- Icon Sidebar and Search for Mobile -->
                 <div class="d-flex">
-                    <!-- Sidebar Toggle Icon -->
                     <button class="btn bg-custom text-white" id="menu-toggle">
                         <i class="fas fa-bars"></i>
                     </button>
 
-                    <!-- Search Icon (Mobile) -->
                     <button class="btn btn-success ms-2 d-lg-none" type="button" id="mobile-search-toggle">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
 
-                <!-- Search Input for Larger Screens (Hidden on Mobile) -->
                 <form class="d-none d-lg-flex me-auto ms-4" role="search">
                     <div class="input-group">
                         <input class="form-control" type="search" placeholder="Search" aria-label="Search">
@@ -104,7 +98,6 @@
                 </ul>
             </nav>
 
-            <!-- Modal-like Search Input -->
             <div class="modal-search" id="modal-search-box">
                 <form class="d-flex" role="search">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
@@ -130,8 +123,10 @@
 
     <!-- Footer -->
     <footer class="bg-custom text-white text-center text-lg-start custom-footer">
-        <div class="text-center p-3">
-            © 2024 Guru PAUD Dikmas | All Rights Reserved
+        <div class="container-fluid p-3">
+            <div class="text-center">
+                © 2024 Guru PAUD Dikmas | All Rights Reserved
+            </div>
         </div>
     </footer>
 
@@ -300,8 +295,17 @@
         }
 
         .custom-footer {
-            margin-top: 100px;
-            padding: 20px 0;
+            margin-top: 0;
+            padding: 10px 0;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .custom-footer {
+                padding: 15px 0;
+            }
         }
     </style>
 </body>
