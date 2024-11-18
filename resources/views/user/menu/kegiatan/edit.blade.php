@@ -15,10 +15,10 @@
 
 <body>
     <div class="container mt-5">
-
-        <form class="bg-light p-4 rounded shadow" action="{{ route('isi.biodata.store') }}" method="POST"
-            enctype="multipart/form-data">
+        <form class="bg-light p-4 rounded shadow" action="{{ route('user.update-biodata', $peserta->id) }}"
+            method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <h1 class="mb-4 text-center" style="font-size: larger; font-weight: bold;">Edit Biodata
                 {{ $kegiatan->nama }}
             </h1>
@@ -52,10 +52,12 @@
                 <select class="form-select" id="jenis_kelamin" name="jenis_kelamin" required>
                     <option value="">Pilih Jenis Kelamin</option>
                     <option value="Laki-laki"
-                        {{ old('jenis_kelamin', $peserta->jenis_kelamin) == 'Laki-laki' ? 'selected' : '' }}>Laki-laki
+                        {{ old('jenis_kelamin', $peserta->jenis_kelamin) == 'Laki-laki' ? 'selected' : '' }}>
+                        Laki-laki
                     </option>
                     <option value="Perempuan"
-                        {{ old('jenis_kelamin', $peserta->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>Perempuan
+                        {{ old('jenis_kelamin', $peserta->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>
+                        Perempuan
                     </option>
                 </select>
             </div>
@@ -128,13 +130,15 @@
                 <label for="jenis_kelamin" class="form-label">Peran</label>
                 <select class="form-select" id="peran" name="peran" required>
                     <option value="">Pilih Peran</option>
-                    <option value="Peserta" {{ old('peran', $peserta->peran) == 'peserta' ? 'selected' : '' }}>Peserta
+                    <option value="Peserta" {{ old('peran', $peserta->peran) == 'Peserta' ? 'selected' : '' }}>
+                        Peserta
                     </option>
-                    <option value="Narasumber" {{ old('peran', $peserta->peran) == 'narasumber' ? 'selected' : '' }}>
+                    <option value="Narasumber" {{ old('peran', $peserta->peran) == 'Narasumber' ? 'selected' : '' }}>
                         Narasumber</option>
                     <option value="Fasilitator"
-                        {{ old('peran', $peserta->peran) == 'fasilitator' ? 'selected' : '' }}>Fasilitator</option>
-                    <option value="Panitia" {{ old('peran', $peserta->peran) == 'panitia' ? 'selected' : '' }}>Panitia
+                        {{ old('peran', $peserta->peran) == 'Fasilitator' ? 'selected' : '' }}>Fasilitator</option>
+                    <option value="Panitia" {{ old('peran', $peserta->peran) == 'Panitia' ? 'selected' : '' }}>
+                        Panitia
                     </option>
                 </select>
             </div>
@@ -146,7 +150,9 @@
                     accept=".pdf,.doc,.docx,.jpg,.png">
             </div>
             <button type="submit" class="btn btn-success">Daftar</button>
+            <a href="{{ route('user.kegiatan') }}" class="btn btn-danger">Kembali</a>
         </form>
+
     </div>
 
 

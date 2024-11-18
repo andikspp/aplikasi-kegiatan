@@ -1,5 +1,5 @@
 @extends('layouts.menu.layout-dashboard')
-
+@section('title', 'Kelola Peserta')
 @section('content')
     <div class="container mt-5">
         <div class="d-flex mb-4 bg-light p-3">
@@ -113,12 +113,14 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-sm btn-warning">Edit</a>
-                                    <form action="#" method="POST" style="display:inline;">
+                                    <a href="{{ route('kegiatan.edit-peserta', $p->id) }}"
+                                        class="btn btn-sm btn-warning">Edit</a>
+                                    <form action="{{ route('kegiatan.destroy-peserta', $p->id) }}" method="POST"
+                                        style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger"
-                                            onclick="return confirm('Apakah Anda yakin ingin menghapus peserta ini?')">Hapus</button>
+                                        <button type="button" class="btn btn-sm btn-danger"
+                                            id="deleteButton">Hapus</button>
                                     </form>
                                 </td>
                             </tr>
@@ -160,8 +162,26 @@
 @endsection
 
 <script>
-    function selectPredikat(predikat) {
-        alert('Predikat terpilih: ' + predikat);
-        // Tambahkan logika untuk menyimpan predikat yang dipilih
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+        // Attach SweetAlert to the delete button after the DOM is loaded
+        document.getElementById('deleteButton').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: 'Data peserta ini akan dihapus!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If confirmed, submit the form
+                    event.target.closest('form').submit();
+                }
+            });
+        });
+    });
 </script>

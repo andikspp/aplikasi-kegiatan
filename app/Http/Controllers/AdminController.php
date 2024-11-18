@@ -11,6 +11,7 @@ use Illuminate\Support\Carbon;
 use App\Models\User;
 use App\Models\Peserta;
 use App\Models\Quizz;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -120,5 +121,99 @@ class AdminController extends Controller
     {
         $user = Auth::user();
         return view('admin.menu.profil', compact('user'));
+    }
+
+    public function editPeserta($id)
+    {
+        // Find the Peserta record by its id
+        $peserta = Peserta::findOrFail($id);
+
+        // Fetch the related Kegiatan if needed
+        $kegiatan = Kegiatan::findOrFail($peserta->kegiatan_id);
+
+        // Pass the peserta and kegiatan data to the view
+        return view('admin.menu.edit-peserta', compact('peserta', 'kegiatan'));
+    }
+
+    public function updatePeserta(Request $request, $id)
+    {
+        // Validate the request data
+        $validated = $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
+            'nip' => 'nullable|string|max:20',
+            'tempat_lahir' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
+            'agama' => 'required|string|max:255',
+            'pendidikan_terakhir' => 'required|string|max:255',
+            'jabatan' => 'required|string|max:255',
+            'pangkat_golongan' => 'nullable|string|max:255',
+            'unit_kerja' => 'required|string|max:255',
+            'masa_kerja' => 'required|string|max:255',
+            'alamat_kantor' => 'required|string|max:255',
+            'telp_kantor' => 'required|string|max:20',
+            'alamat_rumah' => 'required|string|max:255',
+            'telp_rumah' => 'required|string|max:20',
+            'alamat_email' => 'required|email|max:255',
+            'npwp' => 'required|string|max:20',
+            'peran' => 'required|string|in:Peserta,Narasumber,Fasilitator,Panitia',
+            'file_upload' => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:2048',
+        ]);
+
+        // Find the peserta by ID
+        $peserta = Peserta::findOrFail($id);
+
+        // Update the peserta data
+        $peserta->update([
+            'nama_lengkap' => $validated['nama_lengkap'],
+            'nip' => $validated['nip'],
+            'tempat_lahir' => $validated['tempat_lahir'],
+            'tanggal_lahir' => $validated['tanggal_lahir'],
+            'jenis_kelamin' => $validated['jenis_kelamin'],
+            'agama' => $validated['agama'],
+            'pendidikan_terakhir' => $validated['pendidikan_terakhir'],
+            'jabatan' => $validated['jabatan'],
+            'pangkat_golongan' => $validated['pangkat_golongan'],
+            'unit_kerja' => $validated['unit_kerja'],
+            'masa_kerja' => $validated['masa_kerja'],
+            'alamat_kantor' => $validated['alamat_kantor'],
+            'telp_kantor' => $validated['telp_kantor'],
+            'alamat_rumah' => $validated['alamat_rumah'],
+            'telp_rumah' => $validated['telp_rumah'],
+            'alamat_email' => $validated['alamat_email'],
+            'npwp' => $validated['npwp'],
+            'peran' => $validated['peran'],
+        ]);
+
+        // Handle the file upload if present
+        if ($request->hasFile('file_upload')) {
+            // Define the file path
+            $filePath = $request->file('file_upload')->store('uploads', 'public');
+
+            // Update the file path in the database
+            $peserta->update([
+                'file_upload' => $filePath,
+            ]);
+        }
+
+        // Redirect back to the peserta page with a success message
+        return redirect()->route('kelolapeserta', ['id' => $peserta->kegiatan_id])->with('success', 'Peserta berhasil diperbarui.');
+    }
+
+    public function destroyPeserta($id)
+    {
+        // Find the peserta by ID
+        $peserta = Peserta::findOrFail($id);
+
+        // Check if the file exists and delete it from storage
+        if ($peserta->file_upload && Storage::disk('public')->exists($peserta->file_upload)) {
+            Storage::disk('public')->delete($peserta->file_upload);
+        }
+
+        // Delete the peserta record
+        $peserta->delete();
+
+        // Redirect back to the peserta page with a success message
+        return redirect()->route('kelolapeserta', ['id' => $peserta->kegiatan_id])->with('success', 'Peserta berhasil dihapus.');
     }
 }

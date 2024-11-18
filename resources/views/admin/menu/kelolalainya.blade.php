@@ -1,5 +1,5 @@
 @extends('layouts.menu.layout-dashboard')
-
+@section('title', 'Kelola Lainnya')
 @section('content')
     <div class="container mt-5">
         <div class="d-flex mb-4 bg-light p-3">

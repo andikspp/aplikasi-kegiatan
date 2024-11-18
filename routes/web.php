@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\IsiBiodataController;
 use App\Http\Controllers\KelolapesertaController;
 use App\Http\Controllers\UserController;
+use App\Models\Admin;
 
 Route::get('/', function () {
     return view('admin.auth.login');
@@ -35,6 +36,9 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::post('/pertanyaan/store', [PertanyaanController::class, 'store'])->name('pertanyaan.store');
     Route::get('/kelolapeserta/{id}', [KelolapesertaController::class, 'kelolapeserta'])->name('kelolapeserta');
     Route::get('/kelolalainya/{id}', [AdminController::class, 'kelolalainya'])->name('kelolalainnya');
+    Route::get('/kegiatan/edit-peserta/{id}', [AdminController::class, 'editPeserta'])->name('kegiatan.edit-peserta');
+    Route::put('/kegiatan/update-peserta/{id}', [AdminController::class, 'updatePeserta'])->name('kegiatan.update-peserta');
+    Route::get('/kegiatan/kelolapeserta/delete/{id}', [AdminController::class, 'destroyPeserta'])->name('kegiatan.destroy-peserta');
 
     // Kuis
     Route::get('/quizz', [QuizzController::class, 'index'])->name('quizz.index');
@@ -59,4 +63,5 @@ Route::middleware(['user'])->group(function () {
     Route::get('/user/isi-biodata/{id}', [IsiBiodataController::class, 'index'])->name('isi.biodata');
     Route::post('/user/isi-biodata', [IsiBiodataController::class, 'store'])->name('isi.biodata.store');
     Route::get('/user/edit-biodata/{id}', [UserController::class, 'editKegiatan'])->name('user.edit-kegiatan');
+    Route::put('user/update-biodata/{id}', [IsiBiodataController::class, 'update'])->name('user.update-biodata');
 });

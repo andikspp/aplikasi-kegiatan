@@ -118,6 +118,10 @@ class UserController extends Controller
     {
         $kegiatan = Kegiatan::findOrFail($id);
 
-        return view('user.biodata.isibiodata', compact('kegiatan'));
+        $peserta = Peserta::where('kegiatan_id', $id)
+            ->where('user_id', Auth::id())
+            ->first();
+
+        return view('user.menu.kegiatan.edit', compact('kegiatan', 'peserta'));
     }
 }

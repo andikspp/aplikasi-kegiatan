@@ -142,7 +142,8 @@
                 showCancelButton: true,
                 confirmButtonColor: "#d33",
                 cancelButtonColor: "#3085d6",
-                confirmButtonText: "Ya, hapus!"
+                confirmButtonText: "Ya, hapus!",
+                cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.href = `/kegiatan-delete/${id}`;
