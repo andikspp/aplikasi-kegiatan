@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Admin;
 use App\Models\Kegiatan;
 use App\Models\PeranKegiatan;
@@ -99,7 +100,7 @@ class AdminController extends Controller
 
         $admin = Admin::where('username', $request->username)->first();
 
-        if ($admin && $admin->password === $request->password) {
+        if ($admin && Hash::check($request->password, $admin->password)) {
             Auth::guard('admin')->login($admin);
             return redirect()->route('dashboard')->with('success', 'Berhasil login.');
         }

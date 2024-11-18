@@ -14,17 +14,17 @@ class DatabaseSeeder extends Seeder
         // Admin Seeder
         DB::table('admins')->insert([
             'username' => 'admin',
-            'password' => Hash::make('admin123'),
+            'password' => Hash::make('admin'),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         // User Seeder
-        DB::table('users')->insert([
-            'name' => 'John Doe',
-            'email' => 'john@example.com',
-            'password' => Hash::make('password123'),
-            'email_verified_at' => now(),
+        $userId = DB::table('users')->insertGetId([
+            'username' => 'user',
+            'email' => 'user@example.com',
+            'nama' => 'user',
+            'password' => Hash::make('user'),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -97,43 +97,169 @@ class DatabaseSeeder extends Seeder
             'kegiatan_id' => $kegiatanId,
             'judul' => 'Evaluasi Pelatihan PAUD',
             'deskripsi' => 'Evaluasi pemahaman peserta tentang materi pelatihan',
-            'tanggal_mulai' => '2024-02-01 13:00:00',
-            'tanggal_selesai' => '2024-02-01 15:00:00',
+            'tanggal_mulai' => now(),
+            'tanggal_selesai' => now()->addHours(2), 
+            'total_point' => 100,
+            'is_published' => true,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         // Soal Seeder
-        $soalId = DB::table('soal')->insertGetId([
-            'quiz_id' => $quizId,
+        $soalId1 = DB::table('soal')->insertGetId([
+            'quizz_id' => $quizId,
             'pertanyaan' => 'Apa yang dimaksud dengan PAUD holistik integratif?',
-            'kategori_soal' => 'Pilihan Ganda',
-            'wajib_diisi' => true,
-            'deskripsi' => 'Pilih jawaban yang paling tepat',
+            'kategori_soal' => 'single_choice',
+            'point' => 20.00,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $soalId2 = DB::table('soal')->insertGetId([
+            'quizz_id' => $quizId,
+            'pertanyaan' => 'Pilih komponen-komponen yang termasuk dalam PAUD holistik integratif:',
+            'kategori_soal' => 'multiple_choice',
+            'point' => 20.00,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $soalId3 = DB::table('soal')->insertGetId([
+            'quizz_id' => $quizId,
+            'pertanyaan' => 'Jelaskan pentingnya pendidikan inklusi dalam PAUD.',
+            'kategori_soal' => 'essay',
+            'point' => 20.00,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         // Opsi Jawaban Seeder
         DB::table('opsi_jawaban')->insert([
+            // Options for soalId1
             [
-                'soal_id' => $soalId,
+                'soal_id' => $soalId1,
                 'jawaban' => 'Pendekatan pembelajaran yang menyeluruh dan terpadu',
-                'is_true' => true,
+                'is_correct' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'soal_id' => $soalId,
+                'soal_id' => $soalId1,
                 'jawaban' => 'Sistem pembelajaran konvensional',
-                'is_true' => false,
+                'is_correct' => false,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'soal_id' => $soalId,
+                'soal_id' => $soalId1,
                 'jawaban' => 'Metode belajar sambil bermain',
-                'is_true' => false,
+                'is_correct' => false,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            
+            // Options for soalId2
+            [
+                'soal_id' => $soalId2,
+                'jawaban' => 'Pendidikan',
+                'is_correct' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'soal_id' => $soalId2,
+                'jawaban' => 'Kesehatan',
+                'is_correct' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'soal_id' => $soalId2,
+                'jawaban' => 'Gizi',
+                'is_correct' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'soal_id' => $soalId2,
+                'jawaban' => 'Pengasuhan',
+                'is_correct' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'soal_id' => $soalId2,
+                'jawaban' => 'Hiburan',
+                'is_correct' => false,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+
+        // Quiz Attempts Seeder
+        $attemptId = DB::table('quiz_attempt')->insertGetId([
+            'user_id' => $userId,
+            'quiz_id' => $quizId,
+            'status' => 'submitted',
+            'score' => 20.00,
+            'started_at' => '2024-02-01 13:30:00',
+            'submitted_at' => '2024-02-01 14:00:00',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Quiz Answers Seeder
+        DB::table('quiz_jawaban')->insert([
+            'attempt_id' => $attemptId,
+            'soal_id' => $soalId1,
+            'jawaban' => 'Pendekatan pembelajaran yang menyeluruh dan terpadu',
+            'is_correct' => true,
+            'point_earned' => 20.00,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    
+        $quizId2 = DB::table('quizz')->insertGetId([
+            'kegiatan_id' => $kegiatanId,
+            'judul' => 'Evaluasi Pelatihan SD',
+            'deskripsi' => 'Evaluasi pemahaman peserta tentang materi pelatihan',
+            'tanggal_mulai' => now(),
+            'tanggal_selesai' => now()->addHours(2), 
+            'total_point' => 100,
+            'is_published' => true,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $soalId6 = DB::table('soal')->insertGetId([
+            'quizz_id' => $quizId2,
+            'pertanyaan' => 'Apa yang dimaksud dengan PAUD holistik integratif?',
+            'kategori_soal' => 'single_choice',
+            'point' => 20.00,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('opsi_jawaban')->insert([
+            // Options for soalId6
+            [
+                'soal_id' => $soalId6,
+                'jawaban' => 'Pendekatan pembelajaran yang menyeluruh dan terpadu',
+                'is_correct' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'soal_id' => $soalId6,
+                'jawaban' => 'Sistem pembelajaran konvensional',
+                'is_correct' => false,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'soal_id' => $soalId6,
+                'jawaban' => 'Metode belajar sambil bermain',
+                'is_correct' => false,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

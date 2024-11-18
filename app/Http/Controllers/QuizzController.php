@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Soal;
 use Illuminate\Http\Request;
+use App\Models\QuizAttempt;
+use App\Models\QuizJawaban;
 use App\Models\Quizz;
 
 class QuizzController extends Controller
@@ -29,7 +31,7 @@ class QuizzController extends Controller
 
         // Simpan data quizz
         $quizz = Quizz::create([
-            'kegiatan_id' => $request->kegiatan_id, // Pastikan ini ada di request
+            'kegiatan_id' => $request->kegiatan_id,
             'nama_quiz' => $request->nama_quiz,
             'tanggal_buka' => $request->tanggal_buka,
             'tanggal_tutup' => $request->tanggal_tutup,

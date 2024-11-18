@@ -30,7 +30,7 @@ class UserController extends Controller
 
             return redirect()->route('user.dashboard')->with('success', 'Login Berhasil');
         }
-
+        
         // Autentikasi gagal
         return back()->withErrors([
             'username' => 'Username atau password salah.',

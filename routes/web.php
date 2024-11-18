@@ -20,7 +20,6 @@ Route::post('/login', [AdminController::class, 'prosesLogin'])->name('login');
 Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
 
 // halaman kuis
-Route::get('/kuis-page', [ExamController::class, 'examPage'])->name('exam.page');
 
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -66,4 +65,10 @@ Route::middleware(['user'])->group(function () {
         Route::get('/attempt/{quiz_id}', [UserQuizController::class, 'attempt'])->name('user.quiz.attempt');
         Route::post('/submit/{quiz_id}', [UserQuizController::class, 'submit'])->name('user.quiz.submit');
     });
+
+    Route::get('/kuis/{quizId}', [ExamController::class, 'examPage'])->name('exam.page');
+    Route::get('/kuis/{quizId}/{quizAttemptId}', [ExamController::class, 'examQuestionPage'])->name('exam.question');
+    Route::post('/kuis/{quizId}/start', [ExamController::class, 'start'])->name('exam.start');
+    Route::post('/kuis/{quizAttemptId}/submit', [ExamController::class, 'submit'])->name('exam.submit');
+    Route::get('/kuis/{attempt}/results', [ExamController::class, 'questionPage'])->name('exam.question.page');
 });
