@@ -4,25 +4,26 @@
     <div class="container-fluid">
         <h1 class="mb-4">Kegiatan Diikuti</h1>
 
-        <div class="d-flex justify-content-between mb-3">
-            <button class="btn btn-primary">
+        <div class="d-flex justify-content-between flex-wrap mb-3">
+            <button class="btn btn-primary mb-2">
                 <i class="fas fa-filter"></i> Filter
             </button>
         </div>
 
-        <div class="mb-3">
-            <label for="showEntries" class="me-2">Show</label>
-            <select id="showEntries" class="form-select d-inline-block w-auto me-2">
-                <option>10</option>
-                <option>25</option>
-                <option>50</option>
-                <option>100</option>
-            </select>
-            <label>entries</label>
-
-            <div class="float-end">
+        <div class="row align-items-center mb-3">
+            <div class="col-12 col-md-auto mb-2">
+                <label for="showEntries" class="me-2">Show</label>
+                <select id="showEntries" class="form-select d-inline-block w-auto me-2">
+                    <option>10</option>
+                    <option>25</option>
+                    <option>50</option>
+                    <option>100</option>
+                </select>
+                <label>entries</label>
+            </div>
+            <div class="col-12 col-md-auto ms-auto">
                 <label for="search" class="me-2">Search:</label>
-                <input type="search" id="search" class="form-control d-inline-block w-auto">
+                <input type="search" id="search" class="form-control d-inline-block w-100 w-md-auto">
             </div>
         </div>
 
@@ -46,26 +47,26 @@
                             <td>{{ $peserta->kegiatan->peserta->count() }}</td> <!-- Menghitung jumlah peserta -->
                             <td>
                                 <a href="{{ route('user.edit-kegiatan', ['id' => $peserta->kegiatan->id]) }}"
-                                    class="btn btn-primary">Edit</a>
-                                <a href="#" class="btn btn-danger">Hapus</a>
+                                    class="btn btn-warning btn-sm">Edit</a>
+                                <button type="button" class="btn btn-danger btn-sm"
+                                    onclick="confirmDelete({{ $peserta->id }})">Hapus</button>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-            <div class="d-flex justify-content-between align-items-center mt-3">
-                <p class="mb-0">Menampilkan 1 sampai 10 dari
-                    20
-                    entri</p>
-                <nav aria-label="Page navigation">
-                    <ul class="pagination mb-0">
-                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-                </nav>
-            </div>
+        </div>
+
+        <div class="d-flex flex-wrap justify-content-between align-items-center mt-3">
+            <p class="mb-0">Menampilkan 1 sampai 10 dari 20 entri</p>
+            <nav aria-label="Page navigation">
+                <ul class="pagination mb-0">
+                    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
         </div>
     </div>
 
@@ -74,36 +75,29 @@
             background-color: #f8f9fa;
         }
 
-        .kode-kegiatan {
-            color: #6c757d;
-            /* Warna abu-abu untuk kode kegiatan */
-            font-size: 0.9em;
-            /* Ukuran font lebih kecil */
-        }
-
         .table td {
             vertical-align: middle;
         }
 
-        .kegiatan-link {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .kegiatan-link:hover {
-            text-decoration: none;
-            color: #0056b3;
-            /* Warna biru yang sedikit lebih gelap saat dihover */
-        }
-
-        /* Responsif untuk tampilan smartphone */
         @media (max-width: 768px) {
+
+            .table th,
+            .table td {
+                white-space: nowrap;
+                font-size: 0.9rem;
+            }
+
             .table-responsive {
                 overflow-x: auto;
             }
 
-            .table th, .table td {
-                white-space: nowrap;
+            .pagination {
+                flex-wrap: wrap;
+            }
+
+            .btn-sm {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.6rem;
             }
         }
     </style>
@@ -120,7 +114,7 @@
                 confirmButtonText: "Ya, hapus!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = `/kegiatan-delete/${id}`;
+                    window.location.href = `/user/destroy-kegiatan/${id}`;
                 }
             });
         }

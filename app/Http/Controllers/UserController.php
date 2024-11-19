@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Peserta;
 use App\Models\Kegiatan;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -123,5 +124,18 @@ class UserController extends Controller
             ->first();
 
         return view('user.menu.kegiatan.edit', compact('kegiatan', 'peserta'));
+    }
+
+    public function destroyKegiatan($id)
+    {
+        $peserta = Peserta::findOrFail($id);
+
+        if ($peserta->file_upload && Storage::disk('public')->exists($peserta->file_upload)) {
+            Storage::disk('public')->delete($peserta->file_upload);
+        }
+
+        $peserta->delete();
+
+        return redirect()->route('user.kegiatan', ['id' => $peserta->kegiatan_id])->with('success', 'Data anda berhasil dihapus');
     }
 }

@@ -64,4 +64,5 @@ Route::middleware(['user'])->group(function () {
     Route::post('/user/isi-biodata', [IsiBiodataController::class, 'store'])->name('isi.biodata.store');
     Route::get('/user/edit-biodata/{id}', [UserController::class, 'editKegiatan'])->name('user.edit-kegiatan');
     Route::put('user/update-biodata/{id}', [IsiBiodataController::class, 'update'])->name('user.update-biodata');
+    Route::get('/user/destroy-kegiatan/{id}', [UserController::class, 'destroyKegiatan'])->name('user.destroy-kegiatan');
 });

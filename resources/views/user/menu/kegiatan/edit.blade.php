@@ -149,7 +149,7 @@
                 <input type="file" class="form-control" id="fileUpload" name="file_upload"
                     accept=".pdf,.doc,.docx,.jpg,.png">
             </div>
-            <button type="submit" class="btn btn-success">Daftar</button>
+            <button type="submit" class="btn btn-success">Simpan</button>
             <a href="{{ route('user.kegiatan') }}" class="btn btn-danger">Kembali</a>
         </form>
 

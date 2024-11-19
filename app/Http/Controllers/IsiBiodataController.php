@@ -88,7 +88,7 @@ class IsiBiodataController extends Controller
         ]);
 
         // Redirect or return a response
-        return redirect()->route('user.kegiatan')->with('success', 'Data peserta berhasil disimpan.');
+        return redirect()->route('user.kegiatan')->with('success', 'Data anda berhasil disimpan.');
     }
 
     public function update(Request $request, $id)
