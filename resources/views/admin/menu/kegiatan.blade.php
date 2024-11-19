@@ -7,7 +7,7 @@
         <div class="d-flex justify-content-between mb-3">
             <a href="{{ route('tambah-kegiatan') }}" class="btn btn-success">
                 <i class="fas fa-plus"></i> Tambah Kegiatan</a>
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" id="filterButton">
                 <i class="fas fa-filter"></i> Filter
             </button>
         </div>
@@ -24,12 +24,12 @@
 
             <div class="float-end">
                 <label for="search" class="me-2">Search:</label>
-                <input type="search" id="search" class="form-control d-inline-block w-auto">
+                <input type="search" id="search" class="form-control d-inline-block w-auto" onkeyup="filterKegiatan()">
             </div>
         </div>
 
         <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped" id="kegiatanTable">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -149,6 +149,25 @@
                     window.location.href = `/kegiatan-delete/${id}`;
                 }
             });
+        }
+
+        function filterKegiatan() {
+            const input = document.getElementById('search');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('kegiatanTable');
+            const tr = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < tr.length; i++) {
+                const td = tr[i].getElementsByTagName('td');
+                let found = false;
+                for (let j = 1; j < td.length - 1; j++) { // Skip No and Aksi columns
+                    if (td[j].textContent.toLowerCase().indexOf(filter) > -1) {
+                        found = true;
+                        break;
+                    }
+                }
+                tr[i].style.display = found ? "" : "none";
+            }
         }
     </script>
 @endsection
