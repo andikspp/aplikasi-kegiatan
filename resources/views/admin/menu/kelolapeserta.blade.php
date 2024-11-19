@@ -21,16 +21,13 @@
                 <div class="row">
                     <div class="col-md-4">
                         <select class="form-select">
-                            <option>Pilih Provinsi/Kabupaten</option>
+                            <option>Provinsi</option>
                             <!-- Tambahkan opsi di sini -->
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" placeholder="Instansi">
-                    </div>
-                    <div class="col-md-4">
                         <select class="form-select">
-                            <option>Pilih Peran</option>
+                            <option>Kabupaten</option>
                             <!-- Tambahkan opsi di sini -->
                         </select>
                     </div>

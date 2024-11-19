@@ -7,9 +7,49 @@
         <div class="d-flex justify-content-between mb-3">
             <a href="{{ route('tambah-kegiatan') }}" class="btn btn-success">
                 <i class="fas fa-plus"></i> Tambah Kegiatan</a>
-            <button class="btn btn-primary" id="filterButton">
+            <button class="btn btn-primary" id="filterButton" data-bs-toggle="modal" data-bs-target="#filterModal">
                 <i class="fas fa-filter"></i> Filter
             </button>
+        </div>
+
+        <!-- Modal Filter -->
+        <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="filterModalLabel">Filter Kegiatan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="bulan" class="form-label">Bulan</label>
+                            <select id="bulan" class="form-select">
+                                <option value="">Pilih Bulan</option>
+                                <option value="1">Januari</option>
+                                <option value="2">Februari</option>
+                                <option value="3">Maret</option>
+                                <option value="4">April</option>
+                                <option value="5">Mei</option>
+                                <option value="6">Juni</option>
+                                <option value="7">Juli</option>
+                                <option value="8">Agustus</option>
+                                <option value="9">September</option>
+                                <option value="10">Oktober</option>
+                                <option value="11">November</option>
+                                <option value="12">Desember</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tahun" class="form-label">Tahun</label>
+                            <input type="number" id="tahun" class="form-control" placeholder="Tahun" value="2024">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-primary" onclick="applyFilter()">Terapkan</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="mb-3">
@@ -45,7 +85,8 @@
                 </thead>
                 <tbody>
                     @foreach ($kegiatans as $index => $kegiatan)
-                        <tr>
+                        <tr data-bulan="{{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('n') }}" 
+                            data-tahun="{{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('Y') }}">
                             <td>{{ $index + 1 }}</td>
                             <td>
                                 <a href="{{ route('hasilkegiatan', ['id' => $kegiatan->id]) }}" class="kegiatan-link">
@@ -168,6 +209,27 @@
                 }
                 tr[i].style.display = found ? "" : "none";
             }
+        }
+
+        function applyFilter() {
+            const bulan = document.getElementById('bulan').value;
+            const tahun = document.getElementById('tahun').value;
+            const tableRows = document.querySelectorAll('#kegiatanTable tbody tr');
+
+            tableRows.forEach(row => {
+                const rowBulan = row.getAttribute('data-bulan');
+                const rowTahun = row.getAttribute('data-tahun');
+
+                if ((bulan === "" || rowBulan == bulan) && (tahun === "" || rowTahun == tahun)) {
+                    row.style.display = ""; // Tampilkan baris
+                } else {
+                    row.style.display = "none"; // Sembunyikan baris
+                }
+            });
+
+            // Tutup modal setelah menerapkan filter
+            const filterModal = bootstrap.Modal.getInstance(document.getElementById('filterModal'));
+            filterModal.hide();
         }
     </script>
 @endsection
