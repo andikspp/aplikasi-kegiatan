@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('status', ['in_progress', 'submitted', 'graded']);
             $table->integer('score')->default(0);
             $table->timestamp('started_at');
-            $table->timestamp('submited_at')->nullable();
+            $table->timestamp('submitted_at')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

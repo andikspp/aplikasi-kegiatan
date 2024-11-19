@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pertanyaan', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('quizz_id')->constrained('quizz')->onDelete('cascade');
-            $table->string('pertanyaan');
-            $table->string('kategori_soal');
-            $table->text('deskripsi')->nullable();
+            $table->string('username')->unique();  // Username yang unik
+            $table->string('email')->unique();     // Email yang unik
+            $table->string('nama');
+            $table->string('password');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pertanyaan');
+        Schema::dropIfExists('users');
     }
 };
