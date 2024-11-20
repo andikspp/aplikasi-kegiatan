@@ -113,7 +113,7 @@
                                     <a href="{{ route('kegiatan.edit-peserta', $p->id) }}"
                                         class="btn btn-sm btn-warning">Edit</a>
                                     <button type="button" class="btn btn-sm btn-danger"
-                                        onclick="confirmDelete({{ $p->id }})">Hapus</button>
+                                        onclick="confirmDelete('{{ $p->id }}')">Hapus</button>
                                 </td>
                             </tr>
                         @empty
