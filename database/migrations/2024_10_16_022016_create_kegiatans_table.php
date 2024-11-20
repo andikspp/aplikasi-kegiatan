@@ -31,7 +31,6 @@ return new class extends Migration
             $table->string('nomor_seri_sertifikat')->nullable();
             $table->string('template_sertifikat')->nullable();
             $table->date('tanggal_ttd_sertifikat')->nullable();
-            $table->enum('peran', ['Narasumber', 'Fasilitator', 'Panitia']);
             $table->timestamps();
         });
     }
