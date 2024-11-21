@@ -196,7 +196,7 @@
                         <tr>
                             <th class="text-center">No.</th>
                             <th class="text-center">Peran</th>
-                            <th class="text-center">Nomor Rekening</th>
+                            <th class="text-center">Jumlah Peserta</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -219,12 +219,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <select name="nomor_rekening[]" class="form-control text-center" required>
-                                        <option value="ya" {{ $peran->nomor_rekening === 'Ya' ? 'selected' : '' }}>Ya
-                                        </option>
-                                        <option value="tidak" {{ $peran->nomor_rekening === 'Tidak' ? 'selected' : '' }}>
-                                            Tidak</option>
-                                    </select>
+                                    <input type="number" name="jumlah_peserta[]" class="form-control text-center" required>
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger"
@@ -310,9 +305,9 @@
 
 @push('scripts')
     <script>
-        let peranCounter = {{ count($peran_kegiatan) + 1 }}; // Start counter after existing rows
+        let peranCounter = {{ count($peran_kegiatan) + 1 }}; // Mulai counter setelah baris yang ada
 
-        // Function to add a new row
+        // Fungsi untuk menambah baris baru
         function addPeranRow() {
             const tableBody = document.querySelector("#peranTable tbody");
             const newRow = document.createElement("tr");
@@ -328,10 +323,7 @@
             </select>
         </td>
         <td>
-            <select name="nomor_rekening[]" class="form-control text-center" required>
-                <option value="ya">Ya</option>
-                <option value="tidak">Tidak</option>
-            </select>
+            <input type="number" name="jumlah_peserta[]" class="form-control text-center" required>
         </td>
         <td>
             <button type="button" class="btn btn-danger" onclick="deleteRow(this)">Hapus</button>
