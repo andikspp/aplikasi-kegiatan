@@ -26,9 +26,10 @@ class KegiatanController extends Controller
      */
     public function store(Request $request)
     {
+
         // Validasi data kegiatan
         $request->validate([
-            'role' => 'required|string|max:255',
+            'pokja_id' => 'required|exists:pokjas,id',
             'nama' => 'required|string|max:255',
             'tanggal_pendaftaran' => 'required|date',
             'selesai_pendaftaran' => 'required|date',
@@ -50,7 +51,7 @@ class KegiatanController extends Controller
 
         // Simpan ke tabel kegiatans
         $kegiatan = Kegiatan::create([
-            'role' => $request->role,
+            'pokja_id' => $request->pokja_id,
             'nama' => $request->nama,
             'tanggal_pendaftaran' => $request->tanggal_pendaftaran,
             'selesai_pendaftaran' => $request->selesai_pendaftaran,
@@ -185,6 +186,4 @@ class KegiatanController extends Controller
 
         return redirect()->route('kegiatan')->with('success', 'Kegiatan berhasil dihapus!');
     }
-
-
 }

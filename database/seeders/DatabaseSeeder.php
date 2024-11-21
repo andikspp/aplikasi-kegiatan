@@ -10,10 +10,79 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
+        DB::table('pokjas')->insert([
+            [
+                'name' => 'Kemitraan',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Publikasi',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Tata Kelola',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Pembelajaran',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Tata Usaha',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
         // Seed Admins
         DB::table('admins')->insert([
             [
-                'username' => 'admin',
+                'username' => 'admin_kemitraan',
+                'pokja_id' => 1,
+                'role' => 'admin',
+                'password' => Hash::make('admin'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'username' => 'admin_tatakelola',
+                'pokja_id' => 3,
+                'role' => 'admin',
+                'password' => Hash::make('admin'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'username' => 'admin_pembelajaran',
+                'pokja_id' => 4,
+                'role' => 'admin',
+                'password' => Hash::make('admin'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'username' => 'admin_publikasi',
+                'pokja_id' => 2,
+                'role' => 'admin',
+                'password' => Hash::make('admin'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'username' => 'admin_tatausaha',
+                'pokja_id' => 5,
+                'role' => 'admin',
+                'password' => Hash::make('admin'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'username' => 'superadmin',
+                'pokja_id' => null,
+                'role' => 'superadmin',
                 'password' => Hash::make('admin'),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -35,8 +104,26 @@ class DatabaseSeeder extends Seeder
         // Seed Kegiatans
         DB::table('kegiatans')->insert([
             [
-                'nama' => 'Workshop Guru',
-                'role' => 'Pembelajaran',
+                'nama' => 'Kegiatan Kemitraan',
+                'pokja_id' => 1,
+                'tanggal_pendaftaran' => '2024-11-01',
+                'selesai_pendaftaran' => '2024-11-10',
+                'tanggal_kegiatan' => '2024-11-15',
+                'tempat_kegiatan' => 'Jakarta',
+                'jenis_kegiatan' => 'Seminar',
+                'link_meeting' => null,
+                'jumlah_jp' => 5,
+                'membutuhkan_mapel' => 'ya',
+                'membutuhkan_nomor_rekening' => 'tidak',
+                'membutuhkan_lokasi' => 'tidak',
+                'membutuhkan_foto_presensi' => 'ya',
+                'menggunakan_sertifikat' => 'ya',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nama' => 'Kegiatan Tata Kelola',
+                'pokja_id' => 3,
                 'tanggal_pendaftaran' => '2024-11-01',
                 'selesai_pendaftaran' => '2024-11-10',
                 'tanggal_kegiatan' => '2024-11-15',
@@ -115,34 +202,6 @@ class DatabaseSeeder extends Seeder
                 'id_kegiatan' => 1,
                 'peran' => 'Pembicara',
                 'nomor_rekening' => 'Tidak',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
-
-        DB::table('pokja')->insert([
-            [
-                'name' => 'Kemitraan',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Publikasi',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Tata Kelola',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Pembelajaran',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Tata Usaha',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

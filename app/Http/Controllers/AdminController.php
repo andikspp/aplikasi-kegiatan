@@ -13,6 +13,7 @@ use App\Models\PeranKegiatan;
 use App\Models\User;
 use App\Models\Peserta;
 use App\Models\Quizz;
+use App\Models\Pokja;
 
 class AdminController extends Controller
 {
@@ -23,19 +24,44 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        $totalKegiatan = Kegiatan::count();
-        $kegiatanMendatang = Kegiatan::where('tanggal_kegiatan', '>', Carbon::now())->count();
-        $kegiatanSelesai = Kegiatan::where('tanggal_kegiatan', '<', Carbon::now())->count();
+        // Ambil data admin yang sedang login
+        $admin = auth()->user();
+
+        // Cek apakah user adalah superadmin atau bukan
+        if ($admin->role == 'superadmin') {
+            // Superadmin bisa melihat semua kegiatan
+            $totalKegiatan = Kegiatan::count();
+            $kegiatanMendatang = Kegiatan::where('tanggal_kegiatan', '>', Carbon::now())->count();
+            $kegiatanSelesai = Kegiatan::where('tanggal_kegiatan', '<', Carbon::now())->count();
+        } else {
+            // Admin hanya melihat kegiatan berdasarkan pokja_id mereka
+            $pokja_id = $admin->pokja_id;
+            $totalKegiatan = Kegiatan::where('pokja_id', $pokja_id)->count();
+            $kegiatanMendatang = Kegiatan::where('pokja_id', $pokja_id)->where('tanggal_kegiatan', '>', Carbon::now())->count();
+            $kegiatanSelesai = Kegiatan::where('pokja_id', $pokja_id)->where('tanggal_kegiatan', '<', Carbon::now())->count();
+        }
+
+        // Data jumlah peserta dan kuis tidak bergantung pada pokja_id, karena bisa melihat semua
         $jumlahPeserta = User::count();
         $jumlahPesertaDaftar = Peserta::count();
         $jumlahkuis = Quizz::count();
 
+        // Mengirimkan data ke view
         return view('admin.menu.dashboard', compact('totalKegiatan', 'kegiatanSelesai', 'kegiatanMendatang', 'jumlahPeserta', 'jumlahPesertaDaftar', 'jumlahkuis'));
     }
 
+
     public function kegiatan()
     {
-        $kegiatans = Kegiatan::paginate(10);
+        $admin = auth()->user();
+        if ($admin->role == 'superadmin') {
+            // Superadmin bisa melihat semua kegiatan, dengan pagination
+            $kegiatans = Kegiatan::paginate(10); // Menampilkan 10 data per halaman
+        } else {
+            // Admin berdasarkan pokja_id, dengan pagination
+            $pokja_id = $admin->pokja_id;
+            $kegiatans = Kegiatan::where('pokja_id', $pokja_id)->paginate(10); // Menampilkan 10 data per halaman
+        }
 
         return view('admin.menu.kegiatan', compact('kegiatans'));
     }
@@ -46,7 +72,9 @@ class AdminController extends Controller
 
         $perans = ['Narasumber', 'Fasilitator', 'Panitia'];
 
-        return view('admin.menu.tambah-kegiatan', compact('roles', 'perans'));
+        $pokjas = Pokja::all();
+
+        return view('admin.menu.tambah-kegiatan', compact('roles', 'perans', 'pokjas'));
     }
 
     public function qrcode()

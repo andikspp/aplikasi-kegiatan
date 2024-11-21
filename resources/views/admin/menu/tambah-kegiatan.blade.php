@@ -9,17 +9,15 @@
 
             <!-- Role -->
             <div class="mb-3">
-                <label for="role" class="form-label">Pokja <span class="text-danger">*</span></label>
-                <select name="role" id="role" class="form-control" required>
-                    <option value="">Pilih Role</option>
-                    <option value="Tata Kelola">Tata Kelola</option>
-                    <option value="Kemitraan">Kemitraan</option>
-                    <option value="Publikasi">Publikasi</option>
-                    <option value="Pembelajaran">Pembelajaran</option>
-                    <option value="PAUD HI">PAUD HI</option>
-                    <option value="Tata Usaha">Tata Usaha</option>
+                <label for="pokja_id" class="form-label">Pokja <span class="text-danger">*</span></label>
+                <select name="pokja_id" id="pokja_id" class="form-control" required>
+                    <option value="">Pilih Pokja</option>
+                    @foreach ($pokjas as $pokja)
+                        <option value="{{ $pokja->id }}">{{ $pokja->name }}</option>
+                    @endforeach
                 </select>
             </div>
+
 
             <!-- Nama -->
             <div class="mb-3">

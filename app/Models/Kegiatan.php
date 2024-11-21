@@ -13,7 +13,7 @@ class Kegiatan extends Model
 
     protected $fillable = [
         'nama',
-        'role',
+        'pokja_id',
         'tanggal_pendaftaran',
         'selesai_pendaftaran',
         'tanggal_kegiatan',
@@ -45,5 +45,10 @@ class Kegiatan extends Model
     public function peserta()
     {
         return $this->hasMany(Peserta::class, 'kegiatan_id');
+    }
+
+    public function pokja()
+    {
+        return $this->belongsTo(Pokja::class);
     }
 }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kegiatans', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->enum('role', ['Tata Kelola', 'Kemitraan', 'Publikasi', 'Pembelajaran', 'PAUD HI', 'Tata Usaha']);
+            $table->unsignedBigInteger('pokja_id')->nullable();
             $table->date('tanggal_pendaftaran');
             $table->date('selesai_pendaftaran');
             $table->date('tanggal_kegiatan');
@@ -32,6 +32,8 @@ return new class extends Migration
             $table->string('template_sertifikat')->nullable();
             $table->date('tanggal_ttd_sertifikat')->nullable();
             $table->timestamps();
+
+            $table->foreign('pokja_id')->references('id')->on('pokjas')->onDelete('cascade');
         });
     }
 
@@ -40,6 +42,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('kegiatans', function (Blueprint $table) {
+            $table->dropForeign(['pokja_id']);
+        });
+
         Schema::dropIfExists('kegiatans');
     }
 };

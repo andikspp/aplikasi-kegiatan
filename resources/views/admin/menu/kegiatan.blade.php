@@ -85,7 +85,7 @@
                 </thead>
                 <tbody>
                     @foreach ($kegiatans as $index => $kegiatan)
-                        <tr data-bulan="{{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('n') }}" 
+                        <tr data-bulan="{{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('n') }}"
                             data-tahun="{{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('Y') }}">
                             <td>{{ $index + 1 }}</td>
                             <td>
@@ -99,7 +99,7 @@
                             <td>{{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('d-m-Y') }}</td>
                             <td>{{ $kegiatan->jumlah_jp }}</td>
                             <td>{{ $kegiatan->peserta->count() ?? 'Tidak Ada' }}</td>
-                            <td>{{ $kegiatan->role }}</td>
+                            <td>{{ $kegiatan->pokja->name }}</td>
                             <td>{{ $kegiatan->menggunakan_sertifikat === 'ya' ? 'Ada' : 'Tidak Ada' }}</td>
                             <td>{{ $kegiatan->menggunakan_sertifikat === 'ya' ? 'Ada' : 'Tidak Ada' }}</td>
                             <td>
@@ -130,7 +130,8 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="d-flex justify-content-between align-items-center mt-3" style="margin-bottom: 40px;"> <!-- Menambahkan margin-bottom -->
+            <div class="d-flex justify-content-between align-items-center mt-3" style="margin-bottom: 40px;">
+                <!-- Menambahkan margin-bottom -->
                 <p class="mb-0">Menampilkan {{ $kegiatans->firstItem() }} sampai {{ $kegiatans->lastItem() }} dari
                     {{ $kegiatans->total() }}
                     entri</p>
