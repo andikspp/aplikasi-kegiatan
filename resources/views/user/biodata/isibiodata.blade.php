@@ -9,16 +9,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="{{ asset('assets/logo kemendikbudristek.png') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
+    {{--
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 </head>
 
 <body>
     <div class="container mt-5">
         @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
         @endif
         <form class="bg-light p-4 rounded shadow" action="{{ route('isi.biodata.store') }}" method="POST"
             enctype="multipart/form-data">
@@ -58,8 +59,7 @@
             </div>
             <div class="mb-3">
                 <label for="agama" class="form-label">Agama</label>
-                <input type="text" class="form-control" id="agama" name="agama" placeholder="Masukkan Agama"
-                    required>
+                <input type="text" class="form-control" id="agama" name="agama" placeholder="Masukkan Agama" required>
             </div>
             <div class="mb-3">
                 <label for="pendidikan_terakhir" class="form-label">Pendidikan Terakhir</label>
@@ -103,8 +103,8 @@
             </div>
             <div class="mb-3">
                 <label for="telp_rumah" class="form-label">Telp/HP</label>
-                <input type="text" class="form-control" id="telp_rumah" name="telp_rumah"
-                    placeholder="Masukkan Telp/HP" required>
+                <input type="text" class="form-control" id="telp_rumah" name="telp_rumah" placeholder="Masukkan Telp/HP"
+                    required>
             </div>
             <div class="mb-3">
                 <label for="alamat_email" class="form-label">Alamat Email</label>
@@ -113,8 +113,7 @@
             </div>
             <div class="mb-3">
                 <label for="npwp" class="form-label">NPWP</label>
-                <input type="text" class="form-control" id="npwp" name="npwp"
-                    placeholder="Masukkan NPWP" required>
+                <input type="text" class="form-control" id="npwp" name="npwp" placeholder="Masukkan NPWP" required>
             </div>
             <div class="mb-3">
                 <label for="jenis_kelamin" class="form-label">Peran</label>
@@ -153,7 +152,7 @@
 
     @stack('scripts')
     {{-- <script>
-            document.getElementById('mobile-search-toggle').addEventListener('click', function() {
+        document.getElementById('mobile-search-toggle').addEventListener('click', function() {
                 var searchBox = document.getElementById('modal-search-box');
 
                 searchBox.classList.toggle('show');
@@ -187,7 +186,7 @@
                     overlay.classList.remove("active");
                 });
             });
-        </script> --}}
+    </script> --}}
 
     <style>
         #wrapper {

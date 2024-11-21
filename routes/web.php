@@ -66,3 +66,8 @@ Route::middleware(['user'])->group(function () {
     Route::put('user/update-biodata/{id}', [IsiBiodataController::class, 'update'])->name('user.update-biodata');
     Route::get('/user/destroy-kegiatan/{id}', [UserController::class, 'destroyKegiatan'])->name('user.destroy-kegiatan');
 });
+
+//Kegiatan Route
+Route::get('/kegiatan/{id}', [KegiatanController::class, 'detailKegiatan'])->name('kegiatan.show');
+Route::get('/kegiatan/{id}/daftar', [KegiatanController::class, 'formKegiatan'])->name('kegiatan.daftar');
+Route::post('/kegiatan/{id}/daftar', [KegiatanController::class, 'daftarKegiatan'])->name('kegiatan.daftar.store');

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,16 +10,20 @@
         .question-card {
             margin: 10px 0;
         }
+
         .question-number {
             font-weight: bold;
         }
+
         .option-label {
             width: 100%;
             cursor: pointer;
         }
+
         .btn-nav {
             width: 48%;
         }
+
         @media (max-width: 576px) {
             .btn-nav {
                 width: 100%;
@@ -27,6 +32,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container my-4">
         <h2 class="text-center">Ujian Pilihan Ganda</h2>
@@ -34,7 +40,8 @@
             <!-- Pertanyaan akan ditampilkan di sini -->
         </div>
         <div class="d-flex justify-content-between mt-3">
-            <button class="btn btn-secondary btn-nav" id="prevBtn" onclick="navigateQuestion(-1)">Soal Sebelumnya</button>
+            <button class="btn btn-secondary btn-nav" id="prevBtn" onclick="navigateQuestion(-1)">Soal
+                Sebelumnya</button>
             <button class="btn btn-primary btn-nav" id="nextBtn" onclick="navigateQuestion(1)">Soal Berikutnya</button>
         </div>
         <div class="text-center mt-3">
@@ -120,4 +127,5 @@
         toggleButtons();
     </script>
 </body>
+
 </html>

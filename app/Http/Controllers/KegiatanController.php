@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kegiatan;
 use App\Models\PeranKegiatan;
+use App\Models\PesertaKegiatan;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
+
+
 
 class KegiatanController extends Controller
 {
@@ -87,10 +92,6 @@ class KegiatanController extends Controller
 
         return redirect()->route('kegiatan')->with('success', 'Kegiatan berhasil disimpan!');
     }
-
-
-
-
 
     /**
      * Display the specified resource.
@@ -185,5 +186,112 @@ class KegiatanController extends Controller
         $kegiatan->delete();
 
         return redirect()->route('kegiatan')->with('success', 'Kegiatan berhasil dihapus!');
+    }
+
+    /**
+     * Menampilkan detail kegiatan
+     */
+    public function detailKegiatan(string $id)
+    {
+        $kegiatan = Kegiatan::with('pokja')->find($id);
+
+        if (!$kegiatan) {
+            return view('user.kegiatan.notfound');
+        }
+
+        return view('user.kegiatan.detail', compact('kegiatan'));
+    }
+
+    /**
+     *  Menampilkan form untuk mendaftar kegiatan
+     */
+    public function formKegiatan(string $id)
+    {
+        $kegiatan = Kegiatan::find($id);
+
+        if (!$kegiatan) {
+            return view('user.kegiatan.notfound');
+        }
+
+        if ($kegiatan->selesai_pendaftaran < Carbon::now()) {
+            return redirect()->route('kegiatan.show', ['id' => $id])->with('error', 'Pendaftaran kegiatan telah ditutup.');
+        }
+
+        if ($kegiatan->mulai_pendaftaran > Carbon::now()) {
+            return redirect()->route('kegiatan.show', ['id' => $id])->with('error', 'Pendaftaran kegiatan belum dibuka.');
+        }
+
+        // return $kegiatan;
+        return view('user.kegiatan.form', compact('kegiatan', 'id'));
+    }
+
+    /**
+     *  Menyimpan data pendaftaran kegiatan
+     */
+    public function daftarKegiatan(Request $request)
+    {
+        $pesertaSudahDaftar = PesertaKegiatan::where('nip', $request->nip)->where('kegiatan_id', $request->kegiatan_id)->first();
+
+        if ($pesertaSudahDaftar) {
+            return redirect()->back()->with('error', 'Peserta sudah terdaftar pada kegiatan ini.');
+        }
+
+        // Validasi data pendaftaran
+        $validated = $request->validate([
+            'kegiatan_id' => 'required|exists:kegiatans,id',
+            'nama_lengkap' => 'required|string|max:255',
+            'nip' => 'nullable|string|max:20',
+            'tempat_lahir' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'jenis_kelamin' => 'required|string',
+            'agama' => 'required|string|max:100',
+            'pendidikan_terakhir' => 'required|string|max:100',
+            'jabatan' => 'required|string|max:100',
+            'pangkat_golongan' => 'nullable|string|max:100',
+            'unit_kerja' => 'required|string|max:100',
+            'masa_kerja' => 'required|string|max:100',
+            'alamat_kantor' => 'required|string|max:255',
+            'telp_kantor' => 'required|string|max:20',
+            'alamat_rumah' => 'required|string|max:255',
+            'telp_rumah' => 'required|string|max:20',
+            'alamat_email' => 'required|email|max:255',
+            'npwp' => 'required|string|max:20',
+            'peran' => 'required|string',
+            'file_upload' => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:10240',
+        ]);
+
+        if ($request->hasFile('file_upload')) {
+            // Simpan file di storage/app/public/uploads
+            $filePath = $request->file('file_upload')->store('public/uploads');
+            // Hapus "public/" dari path untuk menyimpan hanya path relatif
+            $filePath = str_replace('public/', '', $filePath);
+        } else {
+            $filePath = null;
+        }
+
+        PesertaKegiatan::create([
+            'kegiatan_id' => $request->kegiatan_id,
+            'nama_lengkap' => $request->nama_lengkap,
+            'nip' => $request->nip,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'agama' => $request->agama,
+            'pendidikan_terakhir' => $request->pendidikan_terakhir,
+            'jabatan' => $request->jabatan,
+            'pangkat_golongan' => $request->pangkat_golongan,
+            'unit_kerja' => $request->unit_kerja,
+            'masa_kerja' => $request->masa_kerja,
+            'alamat_kantor' => $request->alamat_kantor,
+            'telp_kantor' => $request->telp_kantor,
+            'alamat_rumah' => $request->alamat_rumah,
+            'telp_rumah' => $request->telp_rumah,
+            'alamat_email' => $request->alamat_email,
+            'npwp' => $request->npwp,
+            'peran' => $request->peran,
+            'file_upload' => $filePath,
+        ]);
+
+        return redirect()->route('kegiatan.show', ['id' => $request->kegiatan_id])->with('success', 'Pendaftaran kegiatan berhasil!');
     }
 }
