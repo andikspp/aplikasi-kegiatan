@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('peserta', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('kegiatan_id');
             $table->string('nama_lengkap');
             $table->string('nip')->nullable(); // NIP, nullable because it's optional
@@ -35,6 +36,7 @@ return new class extends Migration
             $table->string('file_upload')->nullable();
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('kegiatan_id')->references('id')->on('kegiatans')->onDelete('cascade');
         });
     }

@@ -10,11 +10,16 @@ return new class extends Migration
     {
         Schema::create('quizz', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('kegiatan_id');
             $table->string('judul');
             $table->text('deskripsi')->nullable();
             $table->dateTime('tanggal_mulai');
             $table->dateTime('tanggal_selesai');
+            $table->integer('total_point')->default(100);
+            $table->boolean('is_published')->default(false);
             $table->timestamps();
+
+            $table->foreign('kegiatan_id')->references('id')->on('kegiatans')->onDelete('cascade');
         });
     }
 };

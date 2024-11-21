@@ -49,7 +49,7 @@
                                 <a href="{{ route('user.edit-kegiatan', ['id' => $peserta->kegiatan->id]) }}"
                                     class="btn btn-warning btn-sm">Edit</a>
                                 <button type="button" class="btn btn-danger btn-sm"
-                                    onclick="confirmDelete({{ $peserta->id }})">Hapus</button>
+                                    onclick="confirmDelete('{{ $peserta->id }}')">Hapus</button>
                             </td>
                         </tr>
                     @endforeach

@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('soal', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('quiz_id');
             $table->text('pertanyaan'); // The main question text
             $table->string('kategori_soal'); // e.g., essai, nomor, tanggal, etc.
             $table->boolean('wajib_diisi')->default(false); // Required field
             $table->text('deskripsi')->nullable(); // Description, if provided
+            $table->integer('point');
             $table->timestamps();
+
+            $table->foreign('quiz_id')->references('id')->on('quizz');
         });
     }
 
