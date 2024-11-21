@@ -119,5 +119,33 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now(),
             ],
         ]);
+
+        DB::table('pokja')->insert([
+            [
+                'name' => 'Kemitraan',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Publikasi',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Tata Kelola',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Pembelajaran',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Tata Usaha',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
     }
 }
