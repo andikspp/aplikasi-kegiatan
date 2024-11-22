@@ -92,10 +92,11 @@ class DatabaseSeeder extends Seeder
         // Seed Users
         DB::table('users')->insert([
             [
-                'name' => 'John Doe',
-                'email' => 'john.doe@example.com',
+                'name' => 'User',
+                'username' => 'user',
+                'email' => 'user@example.com',
                 'nip' => '123456',
-                'password' => Hash::make('johndoe'),
+                'password' => Hash::make('user'),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -202,6 +203,31 @@ class DatabaseSeeder extends Seeder
                 'id_kegiatan' => 1,
                 'peran' => 'Pembicara',
                 'nomor_rekening' => 'Tidak',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+
+        DB::table('peserta_kegiatan')->insert([
+            [
+                'kegiatan_id' => 1,
+                'nama_lengkap' => 'John Doe',
+                'nip' => '123456',
+                'tempat_lahir' => 'Jakarta',
+                'tanggal_lahir' => '1990-01-01',
+                'jenis_kelamin' => 'Laki-laki',
+                'agama' => 'Islam',
+                'pendidikan_terakhir' => 'S1',
+                'jabatan' => 'Guru',
+                'unit_kerja' => 'SDN 1 Jakarta',
+                'masa_kerja' => '5 tahun',
+                'alamat_kantor' => 'Jl. Sudirman No.1',
+                'telp_kantor' => '021123456',
+                'alamat_rumah' => 'Jl. Merdeka No.2',
+                'telp_rumah' => '021654321',
+                'alamat_email' => 'test@gmail.com',
+                'npwp' => '987654321',
+                'peran' => 'Peserta',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
