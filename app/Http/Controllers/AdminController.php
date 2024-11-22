@@ -111,7 +111,9 @@ class AdminController extends Controller
 
         $peran_kegiatan = PeranKegiatan::where('id_kegiatan', $id)->get();
 
-        return view('admin.menu.hasilkegiatan', compact('kegiatan', 'peran_kegiatan'));
+        $pokjas = Pokja::all();
+
+        return view('admin.menu.hasilkegiatan', compact('kegiatan', 'peran_kegiatan', 'pokjas'));
     }
 
     public function kelolalainya($id)

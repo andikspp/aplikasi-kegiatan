@@ -112,10 +112,12 @@ class KegiatanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
+        // dd($request->all());
+        // Validasi data kegiatan
         $request->validate([
-            'role' => 'required|string|max:255',
+            'pokja_id' => 'required|exists:pokjas,id',
             'nama' => 'required|string|max:255',
             'tanggal_pendaftaran' => 'required|date',
             'selesai_pendaftaran' => 'required|date',
@@ -134,9 +136,12 @@ class KegiatanController extends Controller
             'tanggal_ttd_sertifikat' => 'nullable|date',
         ]);
 
+        // Cari kegiatan berdasarkan ID
         $kegiatan = Kegiatan::findOrFail($id);
+
+        // Update data kegiatan
         $kegiatan->update([
-            'role' => $request->role,
+            'pokja_id' => $request->pokja_id,
             'nama' => $request->nama,
             'tanggal_pendaftaran' => $request->tanggal_pendaftaran,
             'selesai_pendaftaran' => $request->selesai_pendaftaran,
@@ -155,11 +160,14 @@ class KegiatanController extends Controller
             'tanggal_ttd_sertifikat' => $request->tanggal_ttd_sertifikat,
         ]);
 
+        // Ambil data peran dan nomor rekening dari form
         $peranData = $request->input('peran');
         $nomorRekeningData = $request->input('nomor_rekening');
 
-        PeranKegiatan::where('id_kegiatan', $id)->delete();
+        // Hapus semua peran terkait kegiatan ini sebelum menambahkan ulang
+        PeranKegiatan::where('id_kegiatan', $kegiatan->id)->delete();
 
+        // Tambahkan data peran baru
         if (is_array($peranData) && count($peranData) > 0) {
             foreach ($peranData as $key => $peran) {
                 PeranKegiatan::create([
@@ -172,6 +180,7 @@ class KegiatanController extends Controller
 
         return redirect()->route('kegiatan')->with('success', 'Kegiatan berhasil diperbarui!');
     }
+
 
     /**
      * Remove the specified resource from storage.

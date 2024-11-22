@@ -27,20 +27,23 @@
                     value="{{ $kegiatan->id }}">
             </div> --}}
 
-            <div class="mb-3">
-                <label for="role" class="form-label">Role</label>
-                <select class="form-select" id="role" name="role">
-                    <option value="Tata Kelola" {{ $kegiatan->role == 'Tata Kelola' ? 'selected' : '' }}>Tata Kelola
-                    </option>
-                    <option value="Kemitraan" {{ $kegiatan->role == 'Kemitraan' ? 'selected' : '' }}>Kemitraan</option>
-                    <option value="Publikasi" {{ $kegiatan->role == 'Publikasi' ? 'selected' : '' }}>Publikasi</option>
-                    <option value="Pembelajaran" {{ $kegiatan->role == 'Pembelajaran' ? 'selected' : '' }}>Pembelajaran
-                    </option>
-                    <option value="Paud HI" {{ $kegiatan->role == 'PAUD HI' ? 'selected' : '' }}>PAUD HI</option>
-                    <option value="Tata Usaha" {{ $kegiatan->role == 'Tata Usaha' ? 'selected' : '' }}>Tata Usaha</option>
+            @if (auth()->user()->role !== 'superadmin')
+                <input type="hidden" name="pokja_id" value="{{ $kegiatan->pokja_id }}">
+            @endif
 
+            <div class="mb-3">
+                <label for="pokja_id" class="form-label">Pokja</label>
+                <select class="form-select" id="pokja_id" name="pokja_id"
+                    {{ auth()->user()->role !== 'superadmin' ? 'disabled' : '' }} required>
+                    <option value="">Pilih Pokja</option>
+                    @foreach ($pokjas as $pokja)
+                        <option value="{{ $pokja->id }}" {{ $kegiatan->pokja_id == $pokja->id ? 'selected' : '' }}>
+                            {{ $pokja->name }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
+
 
             <div class="mb-3">
                 <label for="nama" class="form-label">Nama Kegiatan</label>
@@ -196,7 +199,7 @@
                         <tr>
                             <th class="text-center">No.</th>
                             <th class="text-center">Peran</th>
-                            <th class="text-center">Jumlah Peserta</th>
+                            {{-- <th class="text-center">Jumlah Peserta</th> --}}
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -206,7 +209,7 @@
                             <tr>
                                 <td class="text-center">{{ $index + 1 }}</td>
                                 <td>
-                                    <select name="peran[]" class="form-control text-center" required>
+                                    <select name="peran[]" class="form-control text-center">
                                         <option value="">Pilih Peran</option>
                                         <option value="Peserta" {{ $peran->peran === 'Peserta' ? 'selected' : '' }}>
                                             Peserta</option>
@@ -218,10 +221,10 @@
                                             Panitia</option>
                                     </select>
                                 </td>
-                                <td>
-                                    <input type="number" name="jumlah_peserta[]" class="form-control text-center" required>
-                                </td>
-                                <td>
+                                {{-- <td>
+                                    <input type="number" name="jumlah_peserta[]" class="form-control text-center">
+                                </td> --}}
+                                <td style="text-align: center;">
                                     <button type="button" class="btn btn-danger"
                                         onclick="deleteRow(this)">Hapus</button>
                                 </td>
@@ -322,10 +325,8 @@
                 <option value="Panitia">Panitia</option>
             </select>
         </td>
-        <td>
-            <input type="number" name="jumlah_peserta[]" class="form-control text-center" required>
-        </td>
-        <td>
+        
+        <td style="text-align: center;">
             <button type="button" class="btn btn-danger" onclick="deleteRow(this)">Hapus</button>
         </td>
     `;
