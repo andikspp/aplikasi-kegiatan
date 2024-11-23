@@ -158,7 +158,7 @@ class AdminController extends Controller
     public function editPeserta($id)
     {
         // Find the Peserta record by its id
-        $peserta = Peserta::findOrFail($id);
+        $peserta = PesertaKegiatan::findOrFail($id);
 
         // Fetch the related Kegiatan if needed
         $kegiatan = Kegiatan::findOrFail($peserta->kegiatan_id);
@@ -193,7 +193,7 @@ class AdminController extends Controller
         ]);
 
         // Find the peserta by ID
-        $peserta = Peserta::findOrFail($id);
+        $peserta = PesertaKegiatan::findOrFail($id);
 
         // Update the peserta data
         $peserta->update([
@@ -235,7 +235,7 @@ class AdminController extends Controller
     public function destroyPeserta($id)
     {
         // Find the peserta by ID
-        $peserta = Peserta::findOrFail($id);
+        $peserta = PesertaKegiatan::findOrFail($id);
 
         // Check if the file exists and delete it from storage
         if ($peserta->file_upload && Storage::disk('public')->exists($peserta->file_upload)) {
