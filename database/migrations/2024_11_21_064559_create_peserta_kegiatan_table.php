@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('agama');
             $table->string('pendidikan_terakhir');
             $table->string('jabatan');
-            $table->string('pangkat_golongan')->nullable();
+            $table->string('pangkat_golongan')->nullable(); // Pangkat Golongan, nullable for non-PNS
             $table->string('unit_kerja');
             $table->string('masa_kerja');
             $table->string('alamat_kantor');

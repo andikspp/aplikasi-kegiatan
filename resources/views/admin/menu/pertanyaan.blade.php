@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <form id="formUbahKegiatan" class="bg-light p-4 rounded shadow" action="{{ route('kuis.store') }}"
-                    method="POST">
+                    method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Kelola Kuis</h1>
@@ -53,90 +53,88 @@
                             </select>
                         </div>
                     </div>
+                    <div class="container mt-4" class="bg-light p-4 rounded shadow">
+                        <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Tambahkan Soal</h1>
+                        <hr style="border-top: 4px solid #000;">
+                        <div id="soalContainer">
+                            <div class="item-Kegiatan mt-4">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <input type="text" class="form-control mr-2" placeholder="Pertanyaan" style="flex-grow: 1;"
+                                        name="quiz_data[0][pertanyaan]">
+                                    <select class="form-control ml-2" style="width: 150px; margin-left: 10px;" name="quiz_data[0][kategori_soal]"
+                                        onchange="showInputFields(this)">
+                                        <option value="essai">Essai</option>
+                                        <option value="pilihan_ganda">Pilihan Ganda</option>
+                                        <option value="pilihan_ganda_multiple">Pilihan Ganda (jawaban lebih dari satu)</option>
+                                    </select>
+                                </div>
+                                <div class="deskripsiContainer" style="display: none;">
+                                    <textarea class="form-control" rows="3" placeholder="Masukkan deskripsi..."></textarea>
+                                </div>
+                
+                                <div id="inputFields" class="d-flex align-items-start flex-column" style="margin-top: 15px;"></div>
+                
+                                <div class="d-flex align-items-center justify-content-end">
+                                    <div style="margin-left: 10px;">
+                                        <button type="button" class="btn btn-success mr-5"><i class="fas fa-arrow-down"></i></button>
+                                    </div>
+                                    <div style="margin-left: 10px;">
+                                        <button type="button" class="btn btn-primary mr-5" onclick="duplikatSoal(this)"><i
+                                                class="fas fa-copy"></i></button>
+                                    </div>
+                                    <div style="margin-left: 10px;">
+                                        <button type="button" class="btn btn-danger mr-5" onclick="hapusSoal(this)"><i
+                                                class="fas fa-trash"></i></button>
+                                    </div>
+                                    <div class="custom-control custom-switch mr-5" style="margin-left: 10px;">
+                                        <input type="checkbox" class="custom-control-input" id="wajibDiisi" name="quiz_data[0][is_required]">
+                                        <label class="custom-control-label" for="wajibDiisi">Wajib diisi</label>
+                                    </div>
+                                    <div style="margin-left: 10px;">
+                                        <button type="button" class="btn btn-link" onclick="toggleDeskripsi(this)"><i
+                                                class="fas fa-ellipsis-v"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr style="border-top: 4px solid #000;">
+                        </div>
+                
+                        <button type="button" class="btn btn-primary mt-3 ms-2" onclick="tambahSoal()">+ Tambah Soal</button>
+                        <button type="submit" class="btn btn-success mt-3 ms-2">Simpan</button>
+                        <a href="{{ route('quizz.index') }}" class="btn btn-danger mt-3 ms-2">Kembali</a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
-    <div class="container mt-4" class="bg-light p-4 rounded shadow">
-        <h1 class="mb-4" style="font-size: larger; font-weight: bold;">Tambahkan Soal</h1>
-        <hr style="border-top: 4px solid #000;">
-        <div id="soalContainer">
-            <div class="item-Kegiatan mt-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <input type="text" class="form-control mr-2" placeholder="Pertanyaan" style="flex-grow: 1;"
-                        name="pertanyaan[]">
-                    <select class="form-control ml-2" style="width: 150px; margin-left: 10px;" name="kategori_soal[]"
-                        onchange="showInputFields(this)">
-                        <option value="essai">Essai</option>
-                        {{-- <option value="nomor">Nomor</option> --}}
-                        {{-- <option value="tanggal">Tanggal</option> --}}
-                        {{-- <option value="email">Email</option> --}}
-                        {{-- <option value="url">Url</option> --}}
-                        <option value="pilihan_ganda">Pilihan Ganda</option>
-                        <option value="pilihan_ganda_multiple">Pilihan Ganda (jawaban lebih dari satu)</option>
-                        {{-- <option value="skala">Skala</option> --}}
-                        {{-- <option value="label">Label</option> --}}
-                        {{-- <option value="drop_down">Drop-down</option> --}}
-                        {{-- <option value="file">File</option> --}}
-                    </select>
-                </div>
-                <div class="deskripsiContainer" style="display: none;">
-                    <textarea class="form-control" rows="3" placeholder="Masukkan deskripsi..."></textarea>
-                </div>
-
-                <div id="inputFields" class="d-flex align-items-start flex-column" style="margin-top: 15px;"></div>
-
-                <div class="d-flex align-items-center justify-content-end">
-                    <div style="margin-left: 10px;">
-                        <button type="button" class="btn btn-success mr-5"><i class="fas fa-arrow-down"></i></button>
-                    </div>
-                    <div style="margin-left: 10px;">
-                        <button type="button" class="btn btn-primary mr-5" onclick="duplikatSoal(this)"><i
-                                class="fas fa-copy"></i></button>
-                    </div>
-                    <div style="margin-left: 10px;">
-                        <button type="button" class="btn btn-danger mr-5" onclick="hapusSoal(this)"><i
-                                class="fas fa-trash"></i></button>
-                    </div>
-                    <div class="custom-control custom-switch mr-5" style="margin-left: 10px;">
-                        <input type="checkbox" class="custom-control-input" id="wajibDiisi">
-                        <label class="custom-control-label" for="wajibDiisi">Wajib diisi</label>
-                    </div>
-                    <div style="margin-left: 10px;">
-                        <button type="button" class="btn btn-link" onclick="toggleDeskripsi(this)"><i
-                                class="fas fa-ellipsis-v"></i></button>
-                    </div>
-                </div>
-            </div>
-            <hr style="border-top: 4px solid #000;">
-        </div>
-
-        <button type="button" class="btn btn-primary mt-3 ms-2" onclick="tambahSoal()">+ Tambah Soal</button>
-        <button type="submit" class="btn btn-success mt-3 ms-2">Simpan</button>
-        <a href="{{ route('quizz.index') }}" class="btn btn-danger mt-3 ms-2">Kembali</a>
-        </form>
-    </div>
+    
 
     <script>
+        let indexSoal = 0
+        let indexPilihan = 0
+
         function tambahSoal() {
+            indexSoal++
+            indexPilihan = 0
             const soalContainer = document.getElementById('soalContainer');
             const newSoal = document.createElement('div');
             newSoal.className = 'item-Kegiatan mt-4';
             newSoal.innerHTML = `
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <input type="text" class="form-control mr-2" placeholder="Pertanyaan" style="flex-grow: 1;" name="pertanyaan[]">
-                    <select class="form-control ml-2" style="width: 150px; margin-left: 10px;" name="kategori_soal[]" onchange="showInputFields(this)">
+                    <input type="text" class="form-control mr-2" placeholder="Pertanyaan" style="flex-grow: 1;" name="quiz_data[${indexSoal}][pertanyaan]">
+                    <select class="form-control ml-2" style="width: 150px; margin-left: 10px;" name="quiz_data[${indexSoal}][kategori_soal]" onchange="showInputFields(this)">
                         <option value="essai">Essai</option>
-                        <option value="nomor">Nomor</option>
+                        <!-- <option value="nomor">Nomor</option>
                         <option value="tanggal">Tanggal</option>
                         <option value="email">Email</option>
-                        <option value="url">Url</option>
+                        <option value="url">Url</option> --!>
                         <option value="pilihan_ganda">Pilihan Ganda</option>
                         <option value="pilihan_ganda_multiple">Pilihan Ganda (jawaban lebih dari satu)</option>
-                        <option value="skala">Skala</option>
+                        <!-- <option value="skala">Skala</option>
                         <option value="label">Label</option>
                         <option value="drop_down">Drop-down</option>
-                        <option value="file">File</option>
+                        <option value="file">File</option> --!>
                     </select>
                 </div>
                 <div class="deskripsiContainer" style="display: none;">
@@ -154,7 +152,7 @@
                         <button type="button" class="btn btn-danger mr-5" onclick="hapusSoal(this)"><i class="fas fa-trash"></i></button>
                     </div>
                     <div class="custom-control custom-switch mr-5" style="margin-left: 10px;">
-                        <input type="checkbox" class="custom-control-input" id="wajibDiisi">
+                        <input type="checkbox" class="custom-control-input" id="wajibDiisi" name="quiz_data[${indexSoal}][is_required]">
                         <label class="custom-control-label" for="wajibDiisi">Wajib diisi</label>
                     </div>
                     <div style="margin-left: 10px;">
@@ -205,10 +203,10 @@
                     newOption.innerHTML = `
                         <div class="input-group-prepend">
                             <div class="input-group-text" style="border: none; background: none;">
-                                <input type="radio" name="jawabanBenar" class="ml-2" style="margin: 0; accent-color: blue;"/>
+                                <input type="${selectedValue == 'pilihan_ganda' ? 'radio':'checkbox'}" name="quiz_data[${indexSoal}][pilihan][${indexPilihan}][jawaban]" class="ml-2" style="margin: 0; accent-color: blue;"/>
                             </div>
                         </div>
-                        <input type="text" class="form-control" placeholder="Opsi baru" style="border: none;">
+                        <input type="text" class="form-control" name="quiz_data[${indexSoal}][pilihan][${indexPilihan}][opsi]" placeholder="Opsi baru" style="border: none;">
                         <div class="input-group-append">
                             <button class="btn btn-outline-danger" type="button" onclick="this.parentElement.parentElement.remove();">X</button>
                         </div>
@@ -218,6 +216,7 @@
 
                 pilihanContainer.appendChild(tambahOpsiButton);
                 inputFieldsContainer.appendChild(pilihanContainer);
+                // indexPilihan++
             } else if (selectedValue === 'skala') {
                 const scaleInput = document.createElement('input');
                 scaleInput.type = 'number';
@@ -238,6 +237,7 @@
                 fileInput.className = 'form-control mb-2';
                 inputFieldsContainer.appendChild(fileInput);
             }
+            indexPilihan++
         }
 
         // function simpanPertanyaan() {

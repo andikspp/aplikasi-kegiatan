@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Peserta;
 use App\Models\Kegiatan;
+use App\Models\PesertaKegiatan;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -82,14 +83,14 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $jumlahKegiatan = Peserta::where('user_id', $user->id)->count();
+        $jumlahKegiatan = PesertaKegiatan::where('user_id', $user->id)->count();
 
-        $kegiatanMendatang = Peserta::where('user_id', $user->id)
+        $kegiatanMendatang = PesertaKegiatan::where('user_id', $user->id)
             ->join('kegiatans', 'peserta.kegiatan_id', '=', 'kegiatans.id')
             ->where('kegiatans.tanggal_kegiatan', '>', now())
             ->count();
 
-        $kegiatanSelesai = Peserta::where('user_id', $user->id)
+        $kegiatanSelesai = PesertaKegiatan::where('user_id', $user->id)
             ->join('kegiatans', 'peserta.kegiatan_id', '=', 'kegiatans.id')
             ->where('kegiatans.tanggal_kegiatan', '<', now())
             ->count();
@@ -102,7 +103,7 @@ class UserController extends Controller
         $user = Auth::user();
 
         // Ambil data kegiatan yang diikuti oleh user beserta jumlah pesertanya
-        $kegiatanList = Peserta::where('user_id', $user->id)
+        $kegiatanList = PesertaKegiatan::where('user_id', $user->id)
             ->with(['kegiatan', 'kegiatan.peserta']) // Mengambil data kegiatan dan jumlah peserta
             ->get();
 
@@ -119,7 +120,7 @@ class UserController extends Controller
     {
         $kegiatan = Kegiatan::findOrFail($id);
 
-        $peserta = Peserta::where('kegiatan_id', $id)
+        $peserta = PesertaKegiatan::where('kegiatan_id', $id)
             ->where('user_id', Auth::id())
             ->first();
 
@@ -128,7 +129,7 @@ class UserController extends Controller
 
     public function destroyKegiatan($id)
     {
-        $peserta = Peserta::findOrFail($id);
+        $peserta = PesertaKegiatan::findOrFail($id);
 
         if ($peserta->file_upload && Storage::disk('public')->exists($peserta->file_upload)) {
             Storage::disk('public')->delete($peserta->file_upload);
