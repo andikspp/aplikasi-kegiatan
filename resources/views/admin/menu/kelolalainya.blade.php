@@ -44,7 +44,7 @@
                 </li>
                 <li>
                     <a href="#" class="text-primary text-decoration-none"
-                        onclick="copyToClipboard('{{ url('/user/isi-biodata/' . $kegiatan->id) }}')">
+                        onclick="copyToClipboard('{{ url('kegiatan/' . $kegiatan->id) }}')">
                         <span class="text-primary">📊</span> 6. Copy Link Biodata
                     </a>
                 </li>
