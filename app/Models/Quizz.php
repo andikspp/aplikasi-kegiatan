@@ -29,9 +29,9 @@ class Quizz extends Model
 
     public function soal()
     {
-        return $this->hasMany(Soal::class, 'quiz_id');
+        return $this->hasMany(Soal::class, 'quizz_id');
     }
 
     // Jika Anda ingin menambahkan relasi, Anda bisa menambahkannya di sini
-    // Contoh: public function jawaban() { return $this->hasMany(Jawaban::class); }
+    // Contoh: public function jawaban() { return $this->hasMany(OpsiJawaban::class); }
 }

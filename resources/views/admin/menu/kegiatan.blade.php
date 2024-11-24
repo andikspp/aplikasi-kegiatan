@@ -85,7 +85,7 @@
                 </thead>
                 <tbody>
                     @foreach ($kegiatans as $index => $kegiatan)
-                        <tr data-bulan="{{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('n') }}" 
+                        <tr data-bulan="{{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('n') }}"
                             data-tahun="{{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('Y') }}">
                             <td>{{ $index + 1 }}</td>
                             <td>
@@ -98,8 +98,8 @@
                             </td>
                             <td>{{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('d-m-Y') }}</td>
                             <td>{{ $kegiatan->jumlah_jp }}</td>
-                            <td>{{ $kegiatan->peserta->count() ?? 'Tidak Ada' }}</td>
-                            <td>{{ $kegiatan->role }}</td>
+                            <td>{{ $kegiatan->pesertakegiatan->count() ?? 'Tidak Ada' }}</td>
+                            <td>{{ $kegiatan->pokja->name }}</td>
                             <td>{{ $kegiatan->menggunakan_sertifikat === 'ya' ? 'Ada' : 'Tidak Ada' }}</td>
                             <td>{{ $kegiatan->menggunakan_sertifikat === 'ya' ? 'Ada' : 'Tidak Ada' }}</td>
                             <td>
@@ -123,6 +123,10 @@
                                         <li><a class="dropdown-item" href="#">Unduh Biodata</a></li>
                                         <li><a class="dropdown-item" href="#">Unduh Sertifikat</a></li>
                                         <li><a class="dropdown-item" href="#">Sebaran Peserta</a></li>
+                                        <li><a class="dropdown-item"
+                                                onclick="copyDaftarKegiatan('{{ route('kegiatan.show', $kegiatan->id) }}')">Salin
+                                                Link Kegiatan</a></li>
+
                                     </ul>
                                 </div>
                             </td>
@@ -130,7 +134,8 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="d-flex justify-content-between align-items-center mt-3" style="margin-bottom: 40px;"> <!-- Menambahkan margin-bottom -->
+            <div class="d-flex justify-content-between align-items-center mt-3" style="margin-bottom: 40px;">
+                <!-- Menambahkan margin-bottom -->
                 <p class="mb-0">Menampilkan {{ $kegiatans->firstItem() }} sampai {{ $kegiatans->lastItem() }} dari
                     {{ $kegiatans->total() }}
                     entri</p>
@@ -190,6 +195,29 @@
                     window.location.href = `/kegiatan-delete/${id}`;
                 }
             });
+        }
+
+        const unsecuredCopyToClipboard = (text) => {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy')
+            } catch (err) {
+                console.error('Unable to copy to clipboard', err)
+            }
+            document.body.removeChild(textArea)
+        };
+
+
+        function copyDaftarKegiatan(link) {
+            if (window.isSecureContext && navigator.clipboard) {
+                navigator.clipboard.writeText(link);
+            } else {
+                unsecuredCopyToClipboard(link);
+            }
         }
 
         function filterKegiatan() {

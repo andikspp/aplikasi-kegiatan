@@ -13,7 +13,7 @@ class Kegiatan extends Model
 
     protected $fillable = [
         'nama',
-        'role',
+        'pokja_id',
         'tanggal_pendaftaran',
         'selesai_pendaftaran',
         'tanggal_kegiatan',
@@ -42,8 +42,13 @@ class Kegiatan extends Model
         return $this->hasMany(Quizz::class, 'kegiatan_id');
     }
 
-    public function peserta()
+    public function pesertaKegiatan()
     {
-        return $this->hasMany(Peserta::class, 'kegiatan_id');
+        return $this->hasMany(PesertaKegiatan::class, 'kegiatan_id');
+    }
+
+    public function pokja()
+    {
+        return $this->belongsTo(Pokja::class);
     }
 }

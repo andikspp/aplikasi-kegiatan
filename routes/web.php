@@ -11,6 +11,7 @@ use App\Http\Controllers\IsiBiodataController;
 use App\Http\Controllers\KelolapesertaController;
 use App\Http\Controllers\UserController;
 use App\Models\Admin;
+use App\Http\Controllers\UserQuizController;
 
 Route::get('/', function () {
     return view('admin.auth.login');
@@ -20,7 +21,6 @@ Route::post('/login', [AdminController::class, 'prosesLogin'])->name('login');
 Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
 
 // halaman kuis
-Route::get('/kuis-page', [ExamController::class, 'examPage'])->name('exam.page');
 
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -65,4 +65,21 @@ Route::middleware(['user'])->group(function () {
     Route::get('/user/edit-biodata/{id}', [UserController::class, 'editKegiatan'])->name('user.edit-kegiatan');
     Route::put('user/update-biodata/{id}', [IsiBiodataController::class, 'update'])->name('user.update-biodata');
     Route::get('/user/destroy-kegiatan/{id}', [UserController::class, 'destroyKegiatan'])->name('user.destroy-kegiatan');
+
+    // quiz
+    Route::prefix('/user/quiz')->group(function () {
+        Route::get('/attempt/{quiz_id}', [UserQuizController::class, 'attempt'])->name('user.quiz.attempt');
+        Route::post('/submit/{quiz_id}', [UserQuizController::class, 'submit'])->name('user.quiz.submit');
+    });
+
+    Route::get('/kuis/{quizId}', [ExamController::class, 'examPage'])->name('exam.page');
+    Route::get('/kuis/{quizId}/{quizAttemptId}', [ExamController::class, 'examQuestionPage'])->name('exam.question');
+    Route::post('/kuis/{quizId}/start', [ExamController::class, 'start'])->name('exam.start');
+    Route::post('/kuis/{quizAttemptId}/submit', [ExamController::class, 'submit'])->name('exam.submit');
+    Route::get('/kuis/{attempt}/results', [ExamController::class, 'questionPage'])->name('exam.question.page');
 });
+
+//Kegiatan Route
+Route::get('/kegiatan/{id}', [KegiatanController::class, 'detailKegiatan'])->name('kegiatan.show');
+Route::get('/kegiatan/{id}/daftar', [KegiatanController::class, 'formKegiatan'])->name('kegiatan.daftar');
+Route::post('/kegiatan/{id}/daftar', [KegiatanController::class, 'daftarKegiatan'])->name('kegiatan.daftar.store');

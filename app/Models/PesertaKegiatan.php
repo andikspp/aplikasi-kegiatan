@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Peserta extends Model
+class PesertaKegiatan extends Model
 {
     use HasFactory;
 
-    protected $table = 'peserta';
+    protected $table = 'peserta_kegiatan';
 
     protected $fillable = [
-        'user_id',
         'kegiatan_id',
         'nama_lengkap',
         'nip',
@@ -38,10 +37,5 @@ class Peserta extends Model
     public function kegiatan()
     {
         return $this->belongsTo(Kegiatan::class, 'kegiatan_id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 }

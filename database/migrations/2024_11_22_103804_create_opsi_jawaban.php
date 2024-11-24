@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('opsi_jawaban', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('nip', 20)->nullable()->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-
-            $table->rememberToken();
+            $table->bigInteger('soal_id')->unsigned();
+            $table->text('jawaban');
+            $table->boolean('is_correct')->default(false);
             $table->timestamps();
+
+            $table->foreign('soal_id')->references('id')->on('soal')->onDelete('cascade');
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('opsi_jawaban');
     }
 };
