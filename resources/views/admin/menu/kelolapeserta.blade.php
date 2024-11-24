@@ -61,7 +61,10 @@
                         </select>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary mt-3" onclick="applyFilter()">Terapkan</button>
+                <div class="mt-3">
+                    <label for="search" class="form-label">Search:</label>
+                    <input type="text" id="search" class="form-control" placeholder="Cari peserta..." oninput="applySearch()">
+                </div>
             </div>
 
             <div class="actions mb-4">
@@ -78,7 +81,6 @@
                     <option>100</option>
                 </select>
                 <span>entries</span>
-                <input type="text" class="form-control d-inline w-auto" placeholder="Search:" style="margin-left: 10px;">
             </div>
 
             <div style="overflow-x: auto;">
@@ -238,6 +240,20 @@
                 kabupatenSelect.innerHTML += `<option value="${kabupaten.toLowerCase().replace(/ /g, "_")}">${kabupaten}</option>`;
             });
         }
+    }
+
+    function applySearch() {
+        const searchValue = document.getElementById('search').value.toLowerCase();
+        const rows = document.querySelectorAll('#pesertaBody tr');
+
+        rows.forEach(row => {
+            const namaLengkap = row.cells[1].textContent.toLowerCase(); // Mengambil nama lengkap dari kolom kedua
+            if (namaLengkap.includes(searchValue)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
     }
 
     function applyFilter() {
