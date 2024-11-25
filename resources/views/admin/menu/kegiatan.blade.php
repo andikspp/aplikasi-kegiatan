@@ -192,7 +192,9 @@
                 cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = `/kegiatan-delete/${id}`;
+                    // Gunakan route dari Laravel yang dihasilkan di Blade
+                    const deleteUrl = `{{ route('kegiatan.delete', ':id') }}`.replace(':id', id);
+                    window.location.href = deleteUrl;
                 }
             });
         }
