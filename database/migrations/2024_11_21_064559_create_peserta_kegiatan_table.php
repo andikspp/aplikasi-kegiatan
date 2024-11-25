@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('jabatan');
             $table->string('pangkat_golongan')->nullable(); // Pangkat Golongan, nullable for non-PNS
             $table->string('unit_kerja');
-            $table->string('masa_kerja');
             $table->string('alamat_kantor');
             $table->string('telp_kantor');
             $table->string('alamat_rumah');
@@ -32,7 +31,11 @@ return new class extends Migration
             $table->string('alamat_email');
             $table->string('npwp');
             $table->string('peran', 255);
-            $table->string('file_upload')->nullable();
+            $table->string('surat_tugas')->nullable();
+            $table->string('tiket')->nullable();
+            $table->string('boarding_pass')->nullable();
+            $table->string('bukti_perjalanan')->nullable();
+            $table->string('sppd')->nullable();
             $table->timestamps();
 
             $table->foreign('kegiatan_id')->references('id')->on('kegiatans')->onDelete('cascade');

@@ -180,24 +180,24 @@
     </style>
 
     <script>
-       function confirmDelete(id) {
-    Swal.fire({
-        title: "Apakah Anda yakin?",
-        text: "Data yang dihapus tidak dapat dikembalikan!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#3085d6",
-        confirmButtonText: "Ya, hapus!",
-        cancelButtonText: 'Batal'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Gunakan route dari Laravel yang dihasilkan di Blade
-            const deleteUrl = `{{ route('kegiatan.delete', ':id') }}`.replace(':id', id);
-            window.location.href = deleteUrl;
-        }
-    });
-}
+        function confirmDelete(id) {
+            Swal.fire({
+                title: "Apakah Anda yakin?",
+                text: "Data yang dihapus tidak dapat dikembalikan!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Ya, hapus!",
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Gunakan route dari Laravel yang dihasilkan di Blade
+                    const deleteUrl = `{{ route('kegiatan.delete', ':id') }}`.replace(':id', id);
+                    window.location.href = deleteUrl;
+                }
+            });
+
 
 
         const unsecuredCopyToClipboard = (text) => {

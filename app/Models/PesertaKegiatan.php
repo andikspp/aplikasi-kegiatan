@@ -31,7 +31,11 @@ class PesertaKegiatan extends Model
         'alamat_email',
         'npwp',
         'peran',
-        'file_upload',
+        'surat_tugas',
+        'tiket',
+        'boarding_pass',
+        'bukti_perjalanan',
+        'sppd',
     ];
 
     public function kegiatan()

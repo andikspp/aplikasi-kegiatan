@@ -77,6 +77,9 @@ class KegiatanController extends Controller
             'tanggal_ttd_sertifikat' => $request->tanggal_ttd_sertifikat,
         ]);
 
+
+        $kegiatan->save();
+
         $peranData = $request->input('peran'); // Ambil data peran dari form
         $jumlahPeserta = $request->input('jumlah_peserta');
 
@@ -292,7 +295,6 @@ class KegiatanController extends Controller
             'jabatan' => 'required|string|max:100',
             'pangkat_golongan' => 'nullable|string|max:100',
             'unit_kerja' => 'required|string|max:100',
-            'masa_kerja' => 'required|string|max:100',
             'alamat_kantor' => 'required|string|max:255',
             'telp_kantor' => 'required|string|max:20',
             'alamat_rumah' => 'required|string|max:255',
@@ -300,19 +302,14 @@ class KegiatanController extends Controller
             'alamat_email' => 'required|email|max:255',
             'npwp' => 'required|string|max:20',
             'peran' => 'required|string',
-            'file_upload' => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:10240',
+            'surat_tugas' => 'nullable|file|mimes:pdf,jpg,png|max:5120',
+            'tiket' => 'nullable|file|mimes:pdf,jpg,png|max:5120',
+            'boarding_pass' => 'nullable|file|mimes:pdf,jpg,png|max:5120',
+            'bukti_perjalanan' => 'nullable|file|mimes:pdf,jpg,png|max:5120',
+            'sppd' => 'nullable|file|mimes:pdf,jpg,png|max:5120',
         ]);
 
-        if ($request->hasFile('file_upload')) {
-            // Simpan file di storage/app/public/uploads
-            $filePath = $request->file('file_upload')->store('public/uploads');
-            // Hapus "public/" dari path untuk menyimpan hanya path relatif
-            $filePath = str_replace('public/', '', $filePath);
-        } else {
-            $filePath = null;
-        }
-
-        PesertaKegiatan::create([
+        $peserta = PesertaKegiatan::create([
             'kegiatan_id' => $request->kegiatan_id,
             'nama_lengkap' => $request->nama_lengkap,
             'nip' => $request->nip,
@@ -324,7 +321,6 @@ class KegiatanController extends Controller
             'jabatan' => $request->jabatan,
             'pangkat_golongan' => $request->pangkat_golongan,
             'unit_kerja' => $request->unit_kerja,
-            'masa_kerja' => $request->masa_kerja,
             'alamat_kantor' => $request->alamat_kantor,
             'telp_kantor' => $request->telp_kantor,
             'alamat_rumah' => $request->alamat_rumah,
@@ -332,8 +328,18 @@ class KegiatanController extends Controller
             'alamat_email' => $request->alamat_email,
             'npwp' => $request->npwp,
             'peran' => $request->peran,
-            'file_upload' => $filePath,
         ]);
+
+        $fileColumns = ['surat_tugas', 'tiket', 'boarding_pass', 'bukti_perjalanan', 'sppd'];
+
+        foreach ($fileColumns as $column) {
+            if ($request->hasFile($column)) {
+                $filePath = $request->file($column)->store('public/uploads');
+                $filePath = str_replace('public/', '', $filePath);
+                $peserta->$column = $filePath;
+            }
+        }
+        $peserta->save();
 
         return redirect()->route('kegiatan.show', ['id' => $request->kegiatan_id])->with('success', 'Pendaftaran kegiatan berhasil!');
     }

@@ -12,50 +12,24 @@
                 <div class="card-body p-0">
                     <div class="quiz-details p-4">
                         <div class="info-box">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="date-box mb-3">
-                                        <strong>Pokja</strong>
-                                        <p>{{ $kegiatan->pokja->name }}</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="date-box mb-3">
-                                        <strong>Jenis Kegiatan</strong>
-                                        <p>{{ $kegiatan->jenis_kegiatan }}</p>
-                                    </div>
-                                </div>
+                            <div class="date-box mb-3">
+                                <strong>Tim Kerja</strong>
+                                <p>{{ $kegiatan->pokja->name }}</p>
+                            </div>
+                        
+                            <div class="date-box mb-3">
+                                <strong>Tanggal Kegiatan</strong>
+                                <p>{{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('d M Y') }} - {{ \Carbon\Carbon::parse($kegiatan->tanggal_selesai)->format('d M Y') }}</p>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="date-box mb-3">
-                                        <strong>Tanggal Kegiatan</strong>
-                                        <p>{{ date('d M Y, H:i', strtotime($kegiatan->tanggal_kegiatan)) }}</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="date-box mb-3">
-                                        <strong>Tempat Kegiatan</strong>
-                                        <p>{{ $kegiatan->tempat_kegiatan }}</p>
-                                    </div>
-                                </div>
+                            <div class="date-box mb-3">
+                                <strong>Tempat Kegiatan</strong>
+                                <p>{{ $kegiatan->tempat_kegiatan }}</p>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="date-box mb-3">
-                                        <strong>Tanggal Pendaftaran</strong>
-                                        <p>{{ date('d M Y, H:i', strtotime($kegiatan->tanggal_pendaftaran)) }}</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="date-box mb-3">
-                                        <strong>Selesai Pendaftaran</strong>
-                                        <p>{{ date('d M Y, H:i', strtotime($kegiatan->selesai_pendaftaran)) }}</p>
-                                    </div>
-                                </div>
-                            </div>
+                        </div>
+                    </div>
+                </div>
+    
 
                             @if ($kegiatan->link_meeting)
                             <div class="duration-box mb-3">
@@ -92,9 +66,7 @@
                                 <p class="mb-0 text-muted">Pendaftaran Telah Ditutup</p>
                             </div>
                             @else
-                            <a href="{{ route('kegiatan.daftar', $kegiatan->id) }}" class="daftar-btn">
-                                Daftar Kegiatan
-                            </a>
+                            <a href="{{ route('kegiatan.daftar', $kegiatan->id) }}" class="daftar-btn"> Daftar </a>
                             @endif
                         </div>
                     </div>
