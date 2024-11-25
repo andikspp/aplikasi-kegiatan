@@ -77,10 +77,15 @@
             </div>
 
             <div class="mb-3">
-                <label for="jenis_kegiatan" class="form-label">Jenis Kegiatan</label>
-                <input type="text" class="form-control" id="jenis_kegiatan" name="jenis_kegiatan"
-                    value="{{ $kegiatan->jenis_kegiatan }}">
+                <label for="jenis_kegiatan" class="form-label">Jenis Kegiatan <span class="text-danger">*</span></label>
+                <select name="jenis_kegiatan" id="jenis_kegiatan" class="form-control" required>
+                    <option value="">Pilih Jenis Kegiatan</option>
+                    <option value="luring">Luring</option>
+                    <option value="daring">Daring</option>
+                    <option value="hybrid">Hybrid</option>
+                </select>
             </div>
+
 
             <div class="mb-3">
                 <label for="link_meeting" class="form-label">Link Web Meeting</label>
