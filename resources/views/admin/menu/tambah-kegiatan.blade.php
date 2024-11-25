@@ -10,13 +10,21 @@
             <!-- Role -->
             <div class="mb-3">
                 <label for="pokja_id" class="form-label">Pokja <span class="text-danger">*</span></label>
-                <select name="pokja_id" id="pokja_id" class="form-control" required>
+                <select name="pokja_id" id="pokja_id" class="form-control" @if (auth()->user()->role == 'admin' && auth()->user()->pokja_id) disabled @endif
+                    required>
                     <option value="">Pilih Pokja</option>
                     @foreach ($pokjas as $pokja)
-                        <option value="{{ $pokja->id }}">{{ $pokja->name }}</option>
+                        <option value="{{ $pokja->id }}" @if (auth()->user()->pokja_id == $pokja->id) selected @endif>
+                            {{ $pokja->name }}
+                        </option>
                     @endforeach
                 </select>
+
+                @if (auth()->user()->role == 'admin' && auth()->user()->pokja_id)
+                    <input type="hidden" name="pokja_id" value="{{ auth()->user()->pokja_id }}">
+                @endif
             </div>
+
 
 
             <!-- Nama -->
