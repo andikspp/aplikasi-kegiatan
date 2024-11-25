@@ -80,13 +80,10 @@
                 </select>
             </div>
 
-            <!-- Membutuhkan Nomor Rekening -->
+            <!-- Jumlah Peserta -->
             <div class="mb-3">
-                <label class="form-label">Membutuhkan Nomor Rekening <span class="text-danger">*</span></label>
-                <select name="membutuhkan_nomor_rekening" id="nomor_rekening" class="form-control" required>
-                    <option value="ya">Ya</option>
-                    <option value="tidak">Tidak</option>
-                </select>
+                <label for="jumlah_peserta" class="form-label">Jumlah Peserta <span class="text-danger">*</span></label>
+                <input type="number" name="jumlah_peserta" id="jumlah_peserta" class="form-control" required>
             </div>
 
             <!-- Membutuhkan Lokasi -->
@@ -154,7 +151,7 @@
                         <tr>
                             <th class="text-center">No.</th>
                             <th class="text-center">Peran</th>
-                            <th class="text-center">Nomor Rekening</th>
+                            <th class="text-center">Jumlah Peserta</th> <!-- Diubah dari Nomor Rekening -->
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -204,10 +201,7 @@
             </select>
         </td>
         <td>
-            <select name="nomor_rekening[]" class="form-control text-center" required>
-                <option value="ya">Ya</option>
-                <option value="tidak">Tidak</option>
-            </select>
+            <input type="number" name="jumlah_peserta[]" class="form-control text-center" required>
         </td>
         <td>
             <button type="button" class="btn btn-danger" onclick="deleteRow(this)">Hapus</button>
