@@ -40,7 +40,7 @@ class QuizzController extends Controller
         // Simpan pertanyaan terkait
         foreach ($request->pertanyaan as $index => $soal) {
             Soal::create([
-                'quizz_id' => $quizz->id,
+                'quiz_id' => $quizz->id,
                 'pertanyaan' => $soal,
                 'kategori_soal' => $request->kategori_soal[$index],
                 'deskripsi' => $request->deskripsi[$index] ?? null,

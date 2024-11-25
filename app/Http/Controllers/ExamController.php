@@ -21,9 +21,9 @@ class ExamController extends Controller
         }
 
         $attempt = QuizAttempt::where('user_id', $user->id)
-                            ->where('quiz_id', $quiz->id)
-                            ->orderBy('created_at', 'desc')
-                            ->first();
+            ->where('quiz_id', $quiz->id)
+            ->orderBy('created_at', 'desc')
+            ->first();
 
         return view('layouts.menu.exam-page', compact('quiz', 'attempt'));
     }
@@ -76,7 +76,7 @@ class ExamController extends Controller
 
         // Get all soal in the quiz
         $quizId = $attempt->quiz_id;
-        $soalList = Soal::where('quizz_id', $quizId)->get();
+        $soalList = Soal::where('quiz_id', $quizId)->get();
 
         foreach ($request->answers as $answerData) {
             $soal = $soalList->firstWhere('id', $answerData['soal_id']);

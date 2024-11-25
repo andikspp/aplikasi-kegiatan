@@ -53,17 +53,17 @@ class PertanyaanController extends Controller
         foreach ($request->quiz_data as $soal) {
             // dd($soal['is_required']??false);
             $soal = Soal::create([
-                'quizz_id' => $quiz->id,
+                'quiz_id' => $quiz->id,
                 'pertanyaan' => $soal['pertanyaan'],
                 'kategori_soal' => $soal['kategori_soal'],
-                'wajib_diisi' => $soal['is_required']??false ? true : false,
+                'wajib_diisi' => $soal['is_required'] ?? false ? true : false,
                 'point' => 10, // dummy
             ]);
-            if ($soal['pilihan']??false) foreach ($soal['pilihan'] as $pilihan) {
+            if ($soal['pilihan'] ?? false) foreach ($soal['pilihan'] as $pilihan) {
                 OpsiJawaban::create([
                     'soal_id' => $soal['id'],
                     'jawaban' => $pilihan['opsi'],
-                    'is_correct' => $pilihan['jawaban']??false ? true : false,
+                    'is_correct' => $pilihan['jawaban'] ?? false ? true : false,
                 ]);
             }
             // Create a new question entry
