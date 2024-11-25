@@ -97,7 +97,7 @@
                                     <strong>{{ $kegiatan->id }}</strong></span>
                             </td>
                             <td>{{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('d-m-Y') }}</td>
-                            <td>{{ $kegiatan->jumlah_jp ?? 0 }}</td>
+                            <td>{{ $kegiatan->jumlah_jp }}</td>
                             <td>{{ $kegiatan->pesertakegiatan->count() ?? 'Tidak Ada' }}</td>
                             <td>{{ $kegiatan->pokja->name }}</td>
                             <td>{{ $kegiatan->menggunakan_sertifikat === 'ya' ? 'Ada' : 'Tidak Ada' }}</td>
@@ -192,21 +192,18 @@
                 cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Gunakan route dari Laravel yang dihasilkan di Blade
-                    const deleteUrl = `{{ route('kegiatan.delete', ':id') }}`.replace(':id', id);
-                    window.location.href = deleteUrl;
+                    window.location.href = `/kegiatan-delete/${id}`;
                 }
             });
-
-
+        }
 
         const unsecuredCopyToClipboard = (text) => {
             const textArea = document.createElement("textarea");
             textArea.value = text;
             document.body.appendChild(textArea);
-            textArea.focus();
+           textArea.focus();
             textArea.select();
-            try {
+           try {
                 document.execCommand('copy')
             } catch (err) {
                 console.error('Unable to copy to clipboard', err)
@@ -264,4 +261,3 @@
         }
     </script>
 @endsection
-

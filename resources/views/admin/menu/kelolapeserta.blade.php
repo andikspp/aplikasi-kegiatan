@@ -135,7 +135,7 @@
                                 <td>{{ $p->peran }}</td>
                                 <td>
                                     @if ($p->file_upload)
-                                        <a href="{{ asset('storage/' . $p->file_upload) }}" target="_blank">Lihat File</a>
+                                        <a href="{{ asset('public/storage/' . $p->file_upload) }}" target="_blank">Lihat File</a>
                                     @else
                                         Tidak ada file
                                     @endif
