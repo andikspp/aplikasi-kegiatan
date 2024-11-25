@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('point');
             $table->timestamps();
 
-            $table->foreign('quiz_id')->references('id')->on('quizz');
+            $table->foreign('quiz_id')->references('id')->on('quizz')->onDelete('cascade');;
         });
     }
 

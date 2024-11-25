@@ -8,6 +8,9 @@ use App\Models\PeranKegiatan;
 use App\Models\PesertaKegiatan;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Quizz;
+use App\Models\Soal;
+use App\Models\OpsiJawaban;
 
 
 
@@ -199,12 +202,34 @@ class KegiatanController extends Controller
     {
         $kegiatan = Kegiatan::findOrFail($id);
 
+        // Hapus semua Quiz terkait
+        $quizzes = Quizz::where('kegiatan_id', $kegiatan->id)->get();
+
+        foreach ($quizzes as $quiz) {
+            // Hapus semua Soal terkait dengan Quiz
+            $soals = Soal::where('quiz_id', $quiz->id)->get();
+
+            foreach ($soals as $soal) {
+                // Hapus semua Opsi terkait dengan Soal
+                OpsiJawaban::where('soal_id', $soal->id)->delete();
+
+                // Hapus Soal
+                $soal->delete();
+            }
+
+            // Hapus Quiz
+            $quiz->delete();
+        }
+
+        // Hapus semua Peran Kegiatan terkait
         PeranKegiatan::where('id_kegiatan', $kegiatan->id)->delete();
 
+        // Hapus Kegiatan
         $kegiatan->delete();
 
         return redirect()->route('kegiatan')->with('success', 'Kegiatan berhasil dihapus!');
     }
+
 
     /**
      * Menampilkan detail kegiatan
