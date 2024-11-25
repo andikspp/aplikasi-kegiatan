@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('tempat_kegiatan');
             $table->string('jenis_kegiatan');
             $table->string('link_meeting')->nullable();
-            $table->integer('jumlah_jp');
+            $table->integer('jumlah_jp')->nullable();
             $table->enum('membutuhkan_mapel', ['ya', 'tidak']);
             $table->enum('membutuhkan_nomor_rekening', ['ya', 'tidak']);
             $table->enum('membutuhkan_lokasi', ['ya', 'tidak']);

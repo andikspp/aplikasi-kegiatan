@@ -43,7 +43,7 @@ class KegiatanController extends Controller
             'tanggal_kegiatan' => 'required|date',
             'tempat_kegiatan' => 'required|string|max:255',
             'jenis_kegiatan' => 'required|string|max:255',
-            'jumlah_jp' => 'required|numeric',
+            'jumlah_jp' => 'nullable|numeric',
             'membutuhkan_mapel' => 'required|in:ya,tidak',
             'membutuhkan_nomor_rekening' => 'required|in:ya,tidak',
             'membutuhkan_lokasi' => 'required|in:ya,tidak',

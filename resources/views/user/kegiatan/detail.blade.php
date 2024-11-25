@@ -16,12 +16,10 @@
                                 <strong>Tim Kerja</strong>
                                 <p>{{ $kegiatan->pokja->name }}</p>
                             </div>
-                        
                             <div class="date-box mb-3">
                                 <strong>Tanggal Kegiatan</strong>
                                 <p>{{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('d M Y') }} - {{ \Carbon\Carbon::parse($kegiatan->tanggal_selesai)->format('d M Y') }}</p>
                             </div>
-
                             <div class="date-box mb-3">
                                 <strong>Tempat Kegiatan</strong>
                                 <p>{{ $kegiatan->tempat_kegiatan }}</p>
@@ -29,52 +27,45 @@
                         </div>
                     </div>
                 </div>
-    
 
-                            @if ($kegiatan->link_meeting)
-                            <div class="duration-box mb-3">
-                                <strong class="d-block mb-2 text-center">Link Meeting</strong>
-                                <a href="{{ $kegiatan->link_meeting }}" target=" _blank"
-                                    class="d-block text-center text-truncate" style="
-                                    color: #4338ca; 
-                                    text-decoration: none; 
-                                    overflow: hidden; 
-                                    white-space: nowrap; 
-                                    text-overflow: ellipsis;
-                                    max-width: 100%;
-                                    font-weight: 500;
-                                ">
-                                    {{ $kegiatan->link_meeting }}
-                                </a>
-                            </div>
-                            @endif
+                @if ($kegiatan->link_meeting)
+                <div class="duration-box mb-3">
+                    <strong class="d-block mb-2 text-center">Link Meeting</strong>
+                    <a href="{{ $kegiatan->link_meeting }}" target="_blank" class="d-block text-center text-truncate" style="
+                        color: #4338ca; 
+                        text-decoration: none; 
+                        overflow: hidden; 
+                        white-space: nowrap; 
+                        text-overflow: ellipsis;
+                        max-width: 100%;
+                        font-weight: 500;">
+                        {{ $kegiatan->link_meeting }}
+                    </a>
+                </div>
+                @endif
 
-                            <div class="text-center mt-4">
-                                @php
-                                $now = \Carbon\Carbon::now();
-                                $pendaftaranMulai = \Carbon\Carbon::parse($kegiatan->tanggal_pendaftaran);
-                                $pendaftaranSelesai = \Carbon\Carbon::parse($kegiatan->selesai_pendaftaran);
-                                @endphp
+                <div class="text-center mt-4">
+                    @php
+                    $now = \Carbon\Carbon::now();
+                    $pendaftaranMulai = \Carbon\Carbon::parse($kegiatan->tanggal_pendaftaran);
+                    $pendaftaranSelesai = \Carbon\Carbon::parse($kegiatan->selesai_pendaftaran);
+                    @endphp
 
-                                @if ($now < $pendaftaranMulai) <div class="alert"
-                                    style="background: #fff3cd; border: none; border-radius: 12px;" role="alert">
-                                    <p class="mb-0 text-muted">Pendaftaran Belum Dibuka</p>
-                            </div>
-                            @elseif ($now > $pendaftaranSelesai)
-                            <div class="alert" style="background: #f8d7da; border: none; border-radius: 12px;"
-                                role="alert">
-                                <p class="mb-0 text-muted">Pendaftaran Telah Ditutup</p>
-                            </div>
-                            @else
-                            <a href="{{ route('kegiatan.daftar', $kegiatan->id) }}" class="daftar-btn"> Daftar </a>
-                            @endif
-                        </div>
+                    @if ($now < $pendaftaranMulai)
+                    <div class="alert" style="background: #fff3cd; border: none; border-radius: 12px;" role="alert">
+                        <p class="mb-0 text-muted">Pendaftaran Belum Dibuka</p>
                     </div>
+                    @elseif ($now > $pendaftaranSelesai)
+                    <div class="alert" style="background: #f8d7da; border: none; border-radius: 12px;" role="alert">
+                        <p class="mb-0 text-muted">Pendaftaran Telah Ditutup</p>
+                    </div>
+                    @else
+                    <a href="{{ route('kegiatan.daftar', $kegiatan->id) }}" class="daftar-btn" style="margin-bottom: 20px;"> Daftar </a>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection
 
@@ -127,6 +118,7 @@
         box-shadow: 0 4px 6px rgba(132, 250, 176, 0.2);
         display: inline-block;
         text-decoration: none;
+        margin-top: -50px; /* Tambahkan ini untuk membuat tombol sedikit ke atas */
     }
 
     .daftar-btn:hover {

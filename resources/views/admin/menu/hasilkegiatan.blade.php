@@ -216,14 +216,10 @@
                                 <td>
                                     <select name="peran[]" class="form-control text-center">
                                         <option value="">Pilih Peran</option>
-                                        <option value="Peserta" {{ $peran->peran === 'Peserta' ? 'selected' : '' }}>
-                                            Peserta</option>
-                                        <option value="Narasumber" {{ $peran->peran === 'Narasumber' ? 'selected' : '' }}>
-                                            Narasumber</option>
-                                        <option value="Fasilitator"
-                                            {{ $peran->peran === 'Fasilitator' ? 'selected' : '' }}>Fasilitator</option>
-                                        <option value="Panitia" {{ $peran->peran === 'Panitia' ? 'selected' : '' }}>
-                                            Panitia</option>
+                                        <option value="Peserta" {{ $peran->peran === 'Peserta' ? 'selected' : '' }}>Peserta</option>
+                                        <option value="Narasumber/Fasilitator" {{ $peran->peran === 'Narasumber/Fasilitator' ? 'selected' : '' }}>Narasumber/Fasilitator</option>
+                                        <option value="Pengarah" {{ $peran->peran === 'Pengarah' ? 'selected' : '' }}>Pengarah</option>
+                                        <option value="Panitia" {{ $peran->peran === 'Panitia' ? 'selected' : '' }}>Panitia</option>
                                     </select>
                                 </td>
                                 <td>
@@ -326,8 +322,8 @@
         <td>
             <select name="peran[]" class="form-control text-center" required>
                 <option value="">Pilih Peran</option>
-                <option value="Narasumber">Narasumber</option>
-                <option value="Fasilitator">Fasilitator</option>
+                <option value="Narasumber/Fasilitator">Narasumber/Fasilitator</option>
+                <option value="Pengarah">Pengarah</option>
                 <option value="Panitia">Panitia</option>
                 <option value="Peserta">Peserta</option>
             </select>
