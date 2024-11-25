@@ -195,7 +195,6 @@ class DatabaseSeeder extends Seeder
                 'pendidikan_terakhir' => 'S1',
                 'jabatan' => 'Guru',
                 'unit_kerja' => 'SDN 1 Jakarta',
-                'masa_kerja' => '5 tahun',
                 'alamat_kantor' => 'Jl. Sudirman No.1',
                 'telp_kantor' => '021123456',
                 'alamat_rumah' => 'Jl. Merdeka No.2',
