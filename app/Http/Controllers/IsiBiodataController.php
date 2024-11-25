@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kegiatan;
 use App\Models\Peserta;
+use App\Models\PesertaKegiatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +20,7 @@ class IsiBiodataController extends Controller
 
     public function store(Request $request)
     {
-        $pesertaSudahDaftar = Peserta::where('user_id', $request->user_id)
+        $pesertaSudahDaftar = PesertaKegiatan::where('user_id', $request->user_id)
             ->where('kegiatan_id', $request->kegiatan_id)
             ->first();
 
@@ -61,11 +62,10 @@ class IsiBiodataController extends Controller
         } else {
             $filePath = null;
         }
-
-        // Store the Peserta data using create
-        Peserta::create([
+        // Menyimpan data Peserta menggunakan create
+        \App\Models\Peserta::create([
             'user_id' => $request->user_id,
-            'kegiatan_id' => $request->kegiatan_id, // Getting the kegiatan ID from the form
+            'kegiatan_id' => $request->kegiatan_id, // Mendapatkan ID kegiatan dari form
             'nama_lengkap' => $request->nama_lengkap,
             'nip' => $request->nip,
             'tempat_lahir' => $request->tempat_lahir,
