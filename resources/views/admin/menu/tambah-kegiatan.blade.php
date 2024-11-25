@@ -63,8 +63,12 @@
             <!-- Jenis Kegiatan -->
             <div class="mb-3">
                 <label for="jenis_kegiatan" class="form-label">Jenis Kegiatan <span class="text-danger">*</span></label>
-                <input type="text" name="jenis_kegiatan" id="jenis_kegiatan" class="form-control" required
-                    maxlength="255">
+                <select name="jenis_kegiatan" id="jenis_kegiatan" class="form-control" required>
+                    <option value="">Pilih Jenis Kegiatan</option>
+                    <option value="luring">Luring</option>
+                    <option value="daring">Daring</option>
+                    <option value="hybrid">Hybrid</option>
+                </select>
             </div>
 
             <!-- Link Meeting -->
@@ -75,8 +79,8 @@
 
             <!-- Jumlah JP -->
             <div class="mb-3">
-                <label for="jumlah_jp" class="form-label">Jumlah JP <span class="text-danger">*</span></label>
-                <input type="number" name="jumlah_jp" id="jumlah_jp" class="form-control" required>
+                <label for="jumlah_jp" class="form-label">Jumlah JP</label>
+                <input type="number" name="jumlah_jp" id="jumlah_jp" class="form-control">
             </div>
 
             <!-- Membutuhkan Mapel -->

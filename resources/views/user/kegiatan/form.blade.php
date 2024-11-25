@@ -8,7 +8,7 @@
         <div class="col-md-10">
             <div class="card shadow-lg">
                 <div class="card-header bg-custom">
-                    <h3 class="text-center text-white my-2">Daftar Kegiatan {{ $kegiatan->nama }}</h3>
+                    <h3 class="text-center text-white my-2">Biodata {{ $kegiatan->nama }}</h3>
                 </div>
 
                 <div class="card-body m-3">
