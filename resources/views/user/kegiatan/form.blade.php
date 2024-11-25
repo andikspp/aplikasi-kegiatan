@@ -12,9 +12,7 @@
                 </div>
 
                 <div class="card-body m-3">
-
-                    <form action="{{ route('kegiatan.daftar.store', ['id' => $id]) }}
-                    " method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('kegiatan.daftar.store', ['id' => $id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" id="kegiatan_id" name="kegiatan_id" value="{{ $kegiatan->id }}">
 
@@ -22,8 +20,7 @@
                             <div class="col-md-6">
                                 <div class="date-box">
                                     <strong>Nama Lengkap</strong>
-                                    <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap"
-                                        value="" required>
+                                    <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" required>
                                     @error('nama_lengkap')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -32,14 +29,11 @@
                             <div class="col-md-6">
                                 <div class="date-box">
                                     <strong>NIP (jika PNS)</strong>
-                                    <input type="text" class="form-control" id="nip" name="nip" value="" required>
+                                    <input type="text" class="form-control" id="nip" name="nip" required pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                     @error('nip')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                @error('nip')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
                             </div>
                         </div>
 
@@ -47,8 +41,7 @@
                             <div class="col-md-6">
                                 <div class="date-box">
                                     <strong>Tempat Lahir</strong>
-                                    <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
-                                        placeholder="Masukkan Tempat Lahir" required>
+                                    <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Masukkan Tempat Lahir" required>
                                     @error('tempat_lahir')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -57,8 +50,7 @@
                             <div class="col-md-6">
                                 <div class="date-box">
                                     <strong>Tanggal Lahir</strong>
-                                    <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir"
-                                        required>
+                                    <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" required>
                                     @error('tanggal_lahir')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -83,8 +75,7 @@
                             <div class="col-md-6">
                                 <div class="date-box">
                                     <strong>Agama</strong>
-                                    <input type="text" class="form-control" id="agama" name="agama"
-                                        placeholder="Masukkan Agama" required>
+                                    <input type="text" class="form-control" id="agama" name="agama" placeholder="Masukkan Agama" required>
                                     @error('agama')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -96,8 +87,7 @@
                             <div class="col-md-6">
                                 <div class="date-box">
                                     <strong>Pendidikan Terakhir</strong>
-                                    <input type="text" class="form-control" id="pendidikan_terakhir"
-                                        name="pendidikan_terakhir" placeholder="Masukkan Pendidikan Terakhir" required>
+                                    <input type="text" class="form-control" id="pendidikan_terakhir" name="pendidikan_terakhir" placeholder="Masukkan Pendidikan Terakhir" required>
                                     @error('pendidikan_terakhir')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -106,8 +96,7 @@
                             <div class="col-md-6">
                                 <div class="date-box">
                                     <strong>Jabatan</strong>
-                                    <input type="text" class="form-control" id="jabatan" name="jabatan"
-                                        placeholder="Masukkan Jabatan" required>
+                                    <input type="text" class="form-control" id="jabatan" name="jabatan" placeholder="Masukkan Jabatan" required>
                                     @error('jabatan')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -119,8 +108,7 @@
                             <div class="col-md-6">
                                 <div class="date-box">
                                     <strong>Pangkat/Golongan</strong>
-                                    <input type="text" class="form-control" id="pangkat_golongan"
-                                        name="pangkat_golongan" placeholder="Masukkan Pangkat/Golongan" required>
+                                    <input type="text" class="form-control" id="pangkat_golongan" name="pangkat_golongan" placeholder="Masukkan Pangkat/Golongan" required>
                                     @error('pangkat_golongan')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -129,8 +117,7 @@
                             <div class="col-md-6">
                                 <div class="date-box">
                                     <strong>Unit Kerja</strong>
-                                    <input type="text" class="form-control" id="unit_kerja" name="unit_kerja"
-                                        placeholder="Masukkan Unit Kerja" required>
+                                    <input type="text" class="form-control" id="unit_kerja" name="unit_kerja" placeholder="Masukkan Unit Kerja" required>
                                     @error('unit_kerja')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -141,107 +128,119 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="date-box">
-                                    <strong>Masa Kerja</strong>
-                                    <input type="text" class="form-control" id="masa_kerja" name="masa_kerja"
-                                        placeholder="Masukkan Masa Kerja" required>
-                                    @error('masa_kerja')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="date-box">
                                     <strong>Alamat Kantor</strong>
-                                    <input type="text" class="form-control" id="alamat_kantor" name="alamat_kantor"
-                                        placeholder="Masukkan Alamat Kantor" required>
+                                    <input type="text" class="form-control" id="alamat_kantor" name="alamat_kantor" placeholder="Masukkan Alamat Kantor" required>
                                     @error('alamat_kantor')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="date-box">
                                     <strong>Telp Kantor</strong>
-                                    <input type="text" class="form-control" id="telp_kantor" name="telp_kantor"
-                                        placeholder="Masukkan Telp Kantor" required>
+                                    <input type="text" class="form-control" id="telp_kantor" name="telp_kantor" placeholder="Masukkan Telp Kantor" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                     @error('telp_kantor')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="date-box">
                                     <strong>Alamat Rumah</strong>
-                                    <input type="text" class="form-control" id="alamat_rumah" name="alamat_rumah"
-                                        placeholder="Masukkan Alamat Rumah" required>
+                                    <input type="text" class="form-control" id="alamat_rumah" name="alamat_rumah" placeholder="Masukkan Alamat Rumah" required>
                                     @error('alamat_rumah')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="date-box">
                                     <strong>Telp/HP</strong>
-                                    <input type="text" class="form-control" id="telp_rumah" name="telp_rumah"
-                                        placeholder="Masukkan Telp/HP" required>
+                                    <input type="number" class="form-control" id="telp_rumah" name="telp_rumah" placeholder="Masukkan Telp/HP" required>
                                     @error('telp_rumah')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="date-box">
-                                    <strong>Alamat Email</strong>
-                                    <input type="email" class="form-control" id="alamat_email" name="alamat_email"
-                                        value="" required>
-                                    @error('alamat_email')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="date-box">
-                                    <strong>NPWP</strong>
-                                    <input type="text" class="form-control" id="npwp" name="npwp"
-                                        placeholder="Masukkan NPWP" required>
-                                    @error('npwp')
+                                    <strong>Alamat Email</strong>
+                                    <input type="email" class="form-control" id="alamat_email" name="alamat_email" required>
+                                    @error('alamat_email')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="date-box">
-                                    <strong>Peran</strong>
-                                    <select class="form-select" id="peran" name="peran" required>
-                                        <option value="">Pilih Peran</option>
-                                        <option value="Peserta">Peserta</option>
-                                        <option value="Narasumber">Narasumber</option>
-                                        <option value="Fasilitator">Fasilitator</option>
-                                        <option value="Panitia">Panitia</option>
-                                    </select>
-                                    @error('peran')
+                                    <strong>NPWP</strong>
+                                    <input type="text" class="form-control" id="npwp" name="npwp" placeholder="Masukkan NPWP" required>
+                                    @error('npwp')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
                         </div>
 
-                        <div class="mb-1">
-                            <div class="date-box">
-                                <strong>Upload File</strong>
-                                <input type="file" class="form-control" id="fileUpload" name="file_upload"
-                                    accept=".pdf,.doc,.docx,.jpg,.png">
-                                <small class="text-muted">Surat Tugas, Bukti Perjalanan, Tiket, Boarding Pass,
-                                    SPPD</small>
+                        <div class="date-box">
+                            <strong>Peran</strong>
+                            <select class="form-select" id="peran" name="peran" required>
+                                <option value="">Pilih Peran</option>
+                                <option value="Peserta">Peserta</option>
+                                <option value="Narasumber/Fasilitator">Narasumber/Fasilitator</option>
+                                <option value="Pengarah">Pengarah</option>
+                                <option value="Panitia">Panitia</option>
+                            </select>
+                            @error('peran')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+
+                        
+                        <div class="date-box">
+                        <strong class="text-center" style="font-size: larger;">Bukti Perjalanan Dinas</strong>
+                            <div class="mb-3">
+                                <label id="bukti_perjalanan_label" for="bukti_perjalanan">Surat Tugas</label>
+                                <input type="file" class="form-control" id="bukti_perjalanan" name="file_upload" accept=".pdf,.doc,.docx,.jpg,.png" onchange="updateLabel('bukti_perjalanan_label', this)">
+                                @error('file_upload')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label id="surat_tugas_label" for="surat_tugas">Tiket</label>
+                                <input type="file" class="form-control" id="surat_tugas" name="file_upload" accept=".pdf,.doc,.docx,.jpg,.png" onchange="updateLabel('surat_tugas_label', this)">
+                                @error('file_upload')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label id="tiket_label" for="tiket">Bording Pass</label>
+                                <input type="file" class="form-control" id="tiket" name="file_upload" accept=".pdf,.doc,.docx,.jpg,.png" onchange="updateLabel('tiket_label', this)">
+                                @error('file_upload')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label id="boarding_pass_label" for="boarding_pass">Bukti Perjalanan</label>
+                                <input type="file" class="form-control" id="boarding_pass" name="file_upload" accept=".pdf,.doc,.docx,.jpg,.png" onchange="updateLabel('boarding_pass_label', this)">
+                                @error('file_upload')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label id="sppd_label" for="sppd">SPPD</label>
+                                <input type="file" class="form-control" id="sppd" name="file_upload" accept=".pdf,.doc,.docx,.jpg,.png" onchange="updateLabel('sppd_label', this)">
                                 @error('file_upload')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -249,11 +248,8 @@
                         </div>
 
                         <div class="text-center mt-4 d-flex flex-column align-items-center">
-                            <button type="submit" class="daftar-btn w-50 mb-3">
-                                Daftar
-                            </button>
-                            <a href="{{ route('kegiatan.daftar', $kegiatan->id) }}"
-                                class="btn btn-sm btn-outline-danger" style="width: 25%%;">
+                            <button type="submit" class="daftar-btn w-50 mb-3">Daftar</button>
+                            <a href="{{ route('kegiatan.daftar', $kegiatan->id) }}" class="btn btn-sm btn-outline-danger" style="width: 25%;">
                                 Kembali
                             </a>
                         </div>
@@ -319,4 +315,13 @@
         box-shadow: 0 8px 15px rgba(132, 250, 176, 0.3);
     }
 </style>
+@endsection
+
+@section('scripts')
+<script>
+    function updateLabel(labelId, input) {
+        const label = document.getElementById(labelId);
+        label.textContent = input.files.length > 0 ? input.files[0].name : 'Pilih File';
+    }
+</script>
 @endsection
