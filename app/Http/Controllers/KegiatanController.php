@@ -31,7 +31,6 @@ class KegiatanController extends Controller
      */
     public function store(Request $request)
     {
-
         // Validasi data kegiatan
         $request->validate([
             'pokja_id' => 'required|exists:pokjas,id',
@@ -76,7 +75,12 @@ class KegiatanController extends Controller
         ]);
 
         $peranData = $request->input('peran'); // Ambil data peran dari form
-        $nomorRekeningData = $request->input('nomor_rekening');
+        $jumlahPeserta = $request->input('jumlah_peserta');
+
+
+
+
+        // $nomorRekeningData = $request->input('nomor_rekening');
 
         // Cek apakah ada data peran
         if (is_array($peranData) && count($peranData) > 0) {
@@ -85,10 +89,14 @@ class KegiatanController extends Controller
                 PeranKegiatan::create([
                     'id_kegiatan' => $kegiatan->id, // Ambil id kegiatan yang baru dibuat
                     'peran' => $peran,
-                    'nomor_rekening' => $nomorRekeningData[$key] ?? null, // Ambil nomor rekening yang sesuai
+                    'jumlah_peserta' => $jumlahPeserta[$key] ?? 0,
+                    // 'nomor_rekening' => $nomorRekeningData[$key] ?? null, // Ambil nomor rekening yang sesuai
                 ]);
             }
         }
+
+
+
 
         return redirect()->route('kegiatan')->with('success', 'Kegiatan berhasil disimpan!');
     }
@@ -163,7 +171,8 @@ class KegiatanController extends Controller
 
         // Ambil data peran dan nomor rekening dari form
         $peranData = $request->input('peran');
-        $nomorRekeningData = $request->input('nomor_rekening');
+        $jumlahPeserta = $request->input('jumlah_peserta');
+        // $nomorRekeningData = $request->input('nomor_rekening');
 
         // Hapus semua peran terkait kegiatan ini sebelum menambahkan ulang
         PeranKegiatan::where('id_kegiatan', $kegiatan->id)->delete();
@@ -174,7 +183,7 @@ class KegiatanController extends Controller
                 PeranKegiatan::create([
                     'id_kegiatan' => $kegiatan->id,
                     'peran' => $peran,
-                    'nomor_rekening' => $nomorRekeningData[$key] ?? null,
+                    'jumlah_peserta' => $jumlahPeserta[$key] ?? 0,
                 ]);
             }
         }

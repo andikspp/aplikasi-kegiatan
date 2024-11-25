@@ -176,6 +176,7 @@ class DatabaseSeeder extends Seeder
             [
                 'id_kegiatan' => 1,
                 'peran' => 'Pembicara',
+                'jumlah_peserta' => 1,
                 'nomor_rekening' => 'Tidak',
                 'created_at' => now(),
                 'updated_at' => now(),

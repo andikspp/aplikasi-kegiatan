@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_kegiatan');
             $table->string('peran', 255);
+            $table->integer('jumlah_peserta')->default(0);
             $table->enum('nomor_rekening', ['Ya', 'Tidak'])->nullable();
 
             $table->foreign('id_kegiatan')->references('id')->on('kegiatans')->onDelete('cascade');

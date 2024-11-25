@@ -80,10 +80,13 @@
                 </select>
             </div>
 
-            <!-- Jumlah Peserta -->
+            {{-- Membutuhkan nomor rekening --}}
             <div class="mb-3">
-                <label for="jumlah_peserta" class="form-label">Jumlah Peserta <span class="text-danger">*</span></label>
-                <input type="number" name="jumlah_peserta" id="jumlah_peserta" class="form-control" required>
+                <label class="form-label">Membutuhkan Nomor Rekening <span class="text-danger">*</span></label>
+                <select name="membutuhkan_nomor_rekening" class="form-control" required>
+                    <option value="ya">Ya</option>
+                    <option value="tidak">Tidak</option>
+                </select>
             </div>
 
             <!-- Membutuhkan Lokasi -->
@@ -203,10 +206,12 @@
         <td>
             <input type="number" name="jumlah_peserta[]" class="form-control text-center" required>
         </td>
-        <td>
+        <td style='text-align: center;'>
             <button type="button" class="btn btn-danger" onclick="deleteRow(this)">Hapus</button>
         </td>
     `;
+
+            // 
 
             tableBody.appendChild(newRow);
             peranCounter++;

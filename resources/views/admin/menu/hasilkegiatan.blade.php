@@ -199,7 +199,7 @@
                         <tr>
                             <th class="text-center">No.</th>
                             <th class="text-center">Peran</th>
-                            {{-- <th class="text-center">Jumlah Peserta</th> --}}
+                            <th class="text-center">Jumlah Peserta</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -221,9 +221,10 @@
                                             Panitia</option>
                                     </select>
                                 </td>
-                                {{-- <td>
-                                    <input type="number" name="jumlah_peserta[]" class="form-control text-center">
-                                </td> --}}
+                                <td>
+                                    <input type="number" name="jumlah_peserta[]" value="{{ $peran->jumlah_peserta }}"
+                                        class="form-control text-center">
+                                </td>
                                 <td style="text-align: center;">
                                     <button type="button" class="btn btn-danger"
                                         onclick="deleteRow(this)">Hapus</button>
@@ -324,6 +325,10 @@
                 <option value="Fasilitator">Fasilitator</option>
                 <option value="Panitia">Panitia</option>
             </select>
+        </td>
+
+        <td>
+            <input type="number" name="jumlah_peserta[]" class="form-control text-center" required>
         </td>
         
         <td style="text-align: center;">

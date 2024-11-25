@@ -11,7 +11,7 @@ class PeranKegiatan extends Model
 
     protected $table = 'peran_kegiatan';
 
-    protected $fillable = ['id_kegiatan', 'peran', 'nomor_rekening'];
+    protected $fillable = ['id_kegiatan', 'peran', 'jumlah_peserta', 'nomor_rekening'];
 
     public function kegiatan()
     {
