@@ -97,7 +97,7 @@
                                     <strong>{{ $kegiatan->id }}</strong></span>
                             </td>
                             <td>{{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('d-m-Y') }}</td>
-                            <td>{{ $kegiatan->jumlah_jp }}</td>
+                            <td>{{ $kegiatan->jumlah_jp ?? 0 }}</td>
                             <td>{{ $kegiatan->pesertakegiatan->count() ?? 'Tidak Ada' }}</td>
                             <td>{{ $kegiatan->pokja->name }}</td>
                             <td>{{ $kegiatan->menggunakan_sertifikat === 'ya' ? 'Ada' : 'Tidak Ada' }}</td>
