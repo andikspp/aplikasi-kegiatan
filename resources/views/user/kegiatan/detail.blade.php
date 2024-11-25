@@ -19,7 +19,7 @@
                                 <div class="date-box mb-3">
                                     <strong>Tanggal Kegiatan</strong>
                                     <p>{{ \Carbon\Carbon::parse($kegiatan->tanggal_pendaftaran)->format('d M Y') }} -
-                                        {{ \Carbon\Carbon::parse($kegiatan->tanggal_selesai)->format('d M Y') }}</p>
+                                        {{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('d M Y') }}</p>
                                 </div>
                                 <div class="date-box mb-3">
                                     <strong>Tempat Kegiatan</strong>
