@@ -324,6 +324,7 @@
                 <option value="Narasumber">Narasumber</option>
                 <option value="Fasilitator">Fasilitator</option>
                 <option value="Panitia">Panitia</option>
+                <option value="Peserta">Peserta</option>
             </select>
         </td>
 
