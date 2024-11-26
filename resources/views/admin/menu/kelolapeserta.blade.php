@@ -177,11 +177,17 @@
                                         Tidak ada file
                                     @endif
                                 </td>
-                                <td>
-                                    <a href="{{ route('kegiatan.edit-peserta', $p->id) }}"
-                                        class="btn btn-sm btn-warning">Edit</a>
-                                    <button type="button" class="btn btn-sm btn-danger"
-                                        onclick="confirmDelete('{{ $p->id }}')">Hapus</button>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <a href="{{ route('kegiatan.edit-peserta', $p->id) }}"
+                                            class="btn btn-sm btn-warning">
+                                            Edit
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-danger"
+                                            onclick="confirmDelete('{{ $p->id }}')">
+                                            Hapus
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         @empty

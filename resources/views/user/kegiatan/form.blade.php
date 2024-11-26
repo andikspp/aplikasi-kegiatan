@@ -42,7 +42,8 @@
                                     <div class="date-box">
                                         <strong>NIP (jika PNS)</strong>
                                         <input type="text" class="form-control" id="nip" name="nip" required
-                                            pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                            pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                                            onblur="checkNIP()">
                                         @error('nip')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -290,6 +291,71 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function checkNIP() {
+            const nip = document.getElementById('nip').value;
+            if (nip) {
+                fetch(`{{ route('kegiatan.checkNip') }}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                        body: JSON.stringify({
+                            nip
+                        }),
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.success) {
+                            // Isi form dengan data yang ditemukan
+                            document.getElementById('nama_lengkap').value = data.nama_lengkap || '';
+                            document.getElementById('tempat_lahir').value = data.tempat_lahir || '';
+                            document.getElementById('tanggal_lahir').value = data.tanggal_lahir || '';
+                            document.getElementById('jenis_kelamin').value = data.jenis_kelamin || '';
+                            document.getElementById('agama').value = data.agama || '';
+                            document.getElementById('pendidikan_terakhir').value = data.pendidikan_terakhir || '';
+                            document.getElementById('jabatan').value = data.jabatan || '';
+                            document.getElementById('pangkat_golongan').value = data.pangkat_golongan || '';
+                            document.getElementById('unit_kerja').value = data.unit_kerja || '';
+                            document.getElementById('alamat_kantor').value = data.alamat_kantor || '';
+                            document.getElementById('telp_kantor').value = data.telp_kantor || '';
+                            document.getElementById('alamat_rumah').value = data.alamat_rumah || '';
+                            document.getElementById('telp_rumah').value = data.telp_rumah || '';
+                            document.getElementById('alamat_email').value = data.alamat_email || '';
+                            document.getElementById('npwp').value = data.npwp || '';
+                            document.getElementById('peran').value = data.peran_id || '';
+
+                            // SweetAlert untuk sukses
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Data ditemukan',
+                                text: 'Data NIP berhasil ditemukan dan formulir telah diisi.',
+                                confirmButtonText: 'OK',
+                            });
+                        } else {
+                            // SweetAlert untuk error
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'NIP tidak ditemukan',
+                                text: 'Pastikan NIP yang Anda masukkan benar.',
+                                confirmButtonText: 'OK',
+                            });
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Terjadi Kesalahan',
+                            text: 'Gagal memeriksa NIP. Silakan coba lagi nanti.',
+                            confirmButtonText: 'OK',
+                        });
+                    });
+            }
+        }
+    </script>
 @endsection
 
 @section('styles')

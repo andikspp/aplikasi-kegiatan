@@ -350,4 +350,34 @@ class KegiatanController extends Controller
 
         return redirect()->route('kegiatan.show', ['id' => $request->kegiatan_id])->with('success', 'Pendaftaran kegiatan berhasil!');
     }
+
+    public function checkNip(Request $request)
+    {
+        $nip = $request->nip;
+        $peserta = PesertaKegiatan::where('nip', $nip)->first();
+
+        if ($peserta) {
+            return response()->json([
+                'success' => true,
+                'nama_lengkap' => $peserta->nama_lengkap,
+                'tempat_lahir' => $peserta->tempat_lahir,
+                'tanggal_lahir' => $peserta->tanggal_lahir,
+                'jenis_kelamin' => $peserta->jenis_kelamin,
+                'agama' => $peserta->agama,
+                'pendidikan_terakhir' => $peserta->pendidikan_terakhir,
+                'jabatan' => $peserta->jabatan,
+                'pangkat_golongan' => $peserta->pangkat_golongan,
+                'unit_kerja' => $peserta->unit_kerja,
+                'alamat_kantor' => $peserta->alamat_kantor,
+                'telp_kantor' => $peserta->telp_kantor,
+                'alamat_rumah' => $peserta->alamat_rumah,
+                'telp_rumah' => $peserta->telp_rumah,
+                'alamat_email' => $peserta->alamat_email,
+                'npwp' => $peserta->npwp,
+                'peran_id' => $peserta->peran_id,
+            ]);
+        } else {
+            return response()->json(['success' => false]);
+        }
+    }
 }

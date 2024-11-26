@@ -83,3 +83,6 @@ Route::middleware(['user'])->group(function () {
 Route::get('/kegiatan/{id}', [KegiatanController::class, 'detailKegiatan'])->name('kegiatan.show');
 Route::get('/kegiatan/{id}/daftar', [KegiatanController::class, 'formKegiatan'])->name('kegiatan.daftar');
 Route::post('/kegiatan/{id}/daftar', [KegiatanController::class, 'daftarKegiatan'])->name('kegiatan.daftar.store');
+
+// route cek nip
+Route::post('/kegiatan/check-nip', [KegiatanController::class, 'checkNip'])->name('kegiatan.checkNip');
