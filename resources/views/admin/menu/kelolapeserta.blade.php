@@ -107,7 +107,11 @@
                             <th>Email</th>
                             <th>NPWP</th>
                             <th>Peran</th>
-                            <th>File</th>
+                            <th>Surat Tugas</th>
+                            <th>Tiket</th>
+                            <th>Boarding Pass</th>
+                            <th>Bukti Perjalanan</th>
+                            <th>SPPD</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -134,8 +138,41 @@
                                 <td>{{ $p->npwp }}</td>
                                 <td>{{ $p->peran }}</td>
                                 <td>
-                                    @if ($p->file_upload)
-                                        <a href="{{ asset('public/storage/' . $p->file_upload) }}" target="_blank">Lihat File</a>
+                                    @if ($p->surat_tugas)
+                                        <a href="{{ asset('storage/' . $p->surat_tugas) }}" target="_blank">Lihat
+                                            File</a>
+                                    @else
+                                        Tidak ada file
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($p->tiket)
+                                        <a href="{{ asset('storage/' . $p->tiket) }}" target="_blank">Lihat
+                                            File</a>
+                                    @else
+                                        Tidak ada file
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($p->boarding_pass)
+                                        <a href="{{ asset('storage/' . $p->boarding_pass) }}" target="_blank">Lihat
+                                            File</a>
+                                    @else
+                                        Tidak ada file
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($p->bukti_perjalanan)
+                                        <a href="{{ asset('storage/' . $p->bukti_perjalanan) }}" target="_blank">Lihat
+                                            File</a>
+                                    @else
+                                        Tidak ada file
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($p->sppd)
+                                        <a href="{{ asset('storage/' . $p->sppd) }}" target="_blank">Lihat
+                                            File</a>
                                     @else
                                         Tidak ada file
                                     @endif

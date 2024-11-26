@@ -255,6 +255,9 @@ class KegiatanController extends Controller
     {
         $kegiatan = Kegiatan::find($id);
 
+        $peranList = PeranKegiatan::where('id_kegiatan', $id)
+            ->pluck('peran', 'id');
+
         if (!$kegiatan) {
             return view('user.kegiatan.notfound');
         }
@@ -268,7 +271,7 @@ class KegiatanController extends Controller
         }
 
         // return $kegiatan;
-        return view('user.kegiatan.form', compact('kegiatan', 'id'));
+        return view('user.kegiatan.form', compact('kegiatan', 'id', 'peranList'));
     }
 
     /**

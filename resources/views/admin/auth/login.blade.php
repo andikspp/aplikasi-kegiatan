@@ -30,7 +30,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card-header text-center">
-                    <img src="{{ asset('public/assets/logo kemendikbudristek.png') }}" alt="Logo" class="img-fluid mb-3"
+                    <img src="{{ asset('/assets/logo kemendikbudristek.png') }}" alt="Logo" class="img-fluid mb-3"
                         style="max-width: 150px;">
                 </div>
                 <div class="card">

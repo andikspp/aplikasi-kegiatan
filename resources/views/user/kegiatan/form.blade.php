@@ -219,16 +219,14 @@
                                 <strong>Peran</strong>
                                 <select class="form-select" id="peran" name="peran" required>
                                     <option value="">Pilih Peran</option>
-                                    <option value="Peserta">Peserta</option>
-                                    <option value="Narasumber/Fasilitator">Narasumber/Fasilitator</option>
-                                    <option value="Pengarah">Pengarah</option>
-                                    <option value="Panitia">Panitia</option>
+                                    @foreach ($peranList as $id => $peran)
+                                        <option value="{{ $id }}">{{ $peran }}</option>
+                                    @endforeach
                                 </select>
                                 @error('peran')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
 
 
                             <div class="date-box">
@@ -281,7 +279,7 @@
 
                             <div class="text-center mt-4 d-flex flex-column align-items-center">
                                 <button type="submit" class="daftar-btn w-50 mb-3">Daftar</button>
-                                <a href="{{ route('kegiatan.daftar', $kegiatan->id) }}"
+                                <a href="{{ route('kegiatan.show', $kegiatan->id) }}"
                                     class="btn btn-sm btn-outline-danger" style="width: 25%;">
                                     Kembali
                                 </a>
