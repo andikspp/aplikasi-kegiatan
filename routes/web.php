@@ -39,6 +39,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/kegiatan/edit-peserta/{id}', [AdminController::class, 'editPeserta'])->name('kegiatan.edit-peserta');
     Route::put('/kegiatan/update-peserta/{id}', [AdminController::class, 'updatePeserta'])->name('kegiatan.update-peserta');
     Route::get('/kegiatan/kelolapeserta/delete/{id}', [AdminController::class, 'destroyPeserta'])->name('kegiatan.destroy-peserta');
+    Route::get('/kegiatan/cetak-biodata/{kegiatan_id}', [KelolapesertaController::class, 'cetakBiodata'])->name('peserta.cetak-biodata');
 
     // Kuis
     Route::get('/quizz', [QuizzController::class, 'index'])->name('quizz.index');

@@ -220,14 +220,15 @@
                                 <strong>Peran</strong>
                                 <select class="form-select" id="peran" name="peran" required>
                                     <option value="">Pilih Peran</option>
-                                    @foreach ($peranList as $id => $peran)
-                                        <option value="{{ $id }}">{{ $peran }}</option>
+                                    @foreach ($peranList as $peran)
+                                        <option value="{{ $peran }}">{{ $peran }}</option>
                                     @endforeach
                                 </select>
                                 @error('peran')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
 
 
                             <div class="date-box">

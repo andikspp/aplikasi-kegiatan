@@ -260,7 +260,7 @@ class KegiatanController extends Controller
         $kegiatan = Kegiatan::find($id);
 
         $peranList = PeranKegiatan::where('id_kegiatan', $id)
-            ->pluck('peran', 'id');
+            ->pluck('peran');
 
         if (!$kegiatan) {
             return view('user.kegiatan.notfound');
@@ -374,7 +374,7 @@ class KegiatanController extends Controller
                 'telp_rumah' => $peserta->telp_rumah,
                 'alamat_email' => $peserta->alamat_email,
                 'npwp' => $peserta->npwp,
-                'peran_id' => $peserta->peran_id,
+                'peran' => $peserta->peran,
             ]);
         } else {
             return response()->json(['success' => false]);

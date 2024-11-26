@@ -69,7 +69,10 @@
             </div>
 
             <div class="actions mb-4">
-                <button class="btn btn-outline-primary"><i class="fas fa-print"></i> Cetak Biodata</button>
+                <a href="{{ route('peserta.cetak-biodata', ['kegiatan_id' => $kegiatan->id]) }}" class="btn btn-primary">
+                    Cetak Biodata
+                </a>
+
                 <button class="btn btn-primary"><i class="fas fa-download"></i> Unduh</button>
                 <button class="btn btn-success"><i class="fas fa-upload"></i> Unggah</button>
             </div>
@@ -99,7 +102,6 @@
                             <th>Jabatan</th>
                             <th>Pangkat/Golongan</th>
                             <th>Unit Kerja</th>
-                            <th>Masa Kerja</th>
                             <th>Alamat Kantor</th>
                             <th>Telp Kantor</th>
                             <th>Alamat Rumah</th>
@@ -129,7 +131,6 @@
                                 <td>{{ $p->jabatan }}</td>
                                 <td>{{ $p->pangkat_golongan ?? '-' }}</td>
                                 <td>{{ $p->unit_kerja }}</td>
-                                <td>{{ $p->masa_kerja }}</td>
                                 <td>{{ $p->alamat_kantor }}</td>
                                 <td>{{ $p->telp_kantor }}</td>
                                 <td>{{ $p->alamat_rumah }}</td>
