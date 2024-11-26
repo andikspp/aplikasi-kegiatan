@@ -23,7 +23,6 @@ class PesertaKegiatan extends Model
         'jabatan',
         'pangkat_golongan',
         'unit_kerja',
-        'masa_kerja',
         'alamat_kantor',
         'telp_kantor',
         'alamat_rumah',

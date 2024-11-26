@@ -12,6 +12,8 @@ use App\Http\Controllers\KelolapesertaController;
 use App\Http\Controllers\UserController;
 use App\Models\Admin;
 use App\Http\Controllers\UserQuizController;
+use App\Http\Controllers\PesertaExportController;
+
 
 Route::get('/', function () {
     return view('admin.auth.login');
@@ -40,6 +42,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::put('/kegiatan/update-peserta/{id}', [AdminController::class, 'updatePeserta'])->name('kegiatan.update-peserta');
     Route::get('/kegiatan/kelolapeserta/delete/{id}', [AdminController::class, 'destroyPeserta'])->name('kegiatan.destroy-peserta');
     Route::get('/kegiatan/cetak-biodata/{kegiatan_id}', [KelolapesertaController::class, 'cetakBiodata'])->name('peserta.cetak-biodata');
+    Route::get('/export-peserta/{kegiatan_id}', [PesertaExportController::class, 'export'])->name('peserta.export');
 
     // Kuis
     Route::get('/quizz', [QuizzController::class, 'index'])->name('quizz.index');

@@ -73,7 +73,10 @@
                     Cetak Biodata
                 </a>
 
-                <button class="btn btn-primary"><i class="fas fa-download"></i> Unduh</button>
+                <a href="{{ route('peserta.export', ['kegiatan_id' => $kegiatan->id]) }}" class="btn btn-success">
+                    Unduh
+                </a>
+
                 <button class="btn btn-success"><i class="fas fa-upload"></i> Unggah</button>
             </div>
 
