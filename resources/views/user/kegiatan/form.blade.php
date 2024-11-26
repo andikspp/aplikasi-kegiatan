@@ -339,7 +339,7 @@
                             Swal.fire({
                                 icon: 'error',
                                 title: 'NIP tidak ditemukan',
-                                text: 'Pastikan NIP yang Anda masukkan benar.',
+                                text: 'Silakan masukkan data secara manual.',
                                 confirmButtonText: 'OK',
                             });
                         }
