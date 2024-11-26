@@ -186,7 +186,7 @@
                                 </td>
                                 <td>
                                     @if ($p->signature)
-                                        <a href="{{ asset('storage/' . $p->signature) }}" target="_blank">Lihat
+                                        <a href="{{ asset('public/storage/' . $p->signature) }}" target="_blank">Lihat
                                             File</a>
                                     @else
                                         Tidak ada file
