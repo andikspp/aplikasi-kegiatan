@@ -136,7 +136,15 @@
         </div>
 
         <div class="signature">
-            <p>Tanda Tangan</p><br><br><br>
+            <p>Tanda Tangan</p>
+            @if ($peserta->signature)
+                <img src="{{ public_path('storage/' . $peserta->signature) }}"
+                    style="max-width: 200px; max-height: 150px;">
+            @else
+                <p>Tanda tangan belum ada.</p>
+            @endif
+
+
             <p>{{ $peserta->nama_lengkap }}</p>
         </div>
 

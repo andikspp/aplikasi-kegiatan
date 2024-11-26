@@ -35,6 +35,7 @@ class PesertaKegiatan extends Model
         'boarding_pass',
         'bukti_perjalanan',
         'sppd',
+        'signature',
     ];
 
     public function kegiatan()

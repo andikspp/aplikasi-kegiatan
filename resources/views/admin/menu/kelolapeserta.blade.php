@@ -69,7 +69,8 @@
             </div>
 
             <div class="actions mb-4">
-                <a href="{{ route('peserta.cetak-biodata', ['kegiatan_id' => $kegiatan->id]) }}" class="btn btn-primary">
+                <a href="{{ route('peserta.cetak-biodata', ['kegiatan_id' => $kegiatan->id]) }}" class="btn btn-primary"
+                    target="_blank">
                     Cetak Biodata
                 </a>
 
@@ -117,6 +118,7 @@
                             <th>Boarding Pass</th>
                             <th>Bukti Perjalanan</th>
                             <th>SPPD</th>
+                            <th>TTD</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -177,6 +179,14 @@
                                 <td>
                                     @if ($p->sppd)
                                         <a href="{{ asset('public/storage/' . $p->sppd) }}" target="_blank">Lihat
+                                            File</a>
+                                    @else
+                                        Tidak ada file
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($p->signature)
+                                        <a href="{{ asset('storage/' . $p->signature) }}" target="_blank">Lihat
                                             File</a>
                                     @else
                                         Tidak ada file

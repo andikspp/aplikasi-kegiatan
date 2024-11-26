@@ -23,7 +23,7 @@
 
                     <div class="card-body m-3">
                         <form action="{{ route('kegiatan.daftar.store', ['id' => $id]) }}" method="POST"
-                            enctype="multipart/form-data">
+                            enctype="multipart/form-data" id="formPendaftaran">
                             @csrf
                             <input type="hidden" id="kegiatan_id" name="kegiatan_id" value="{{ $kegiatan->id }}">
 
@@ -279,6 +279,22 @@
                                 </div>
                             </div>
 
+                            <div class="col-12">
+                                <div class="box-ttd">
+                                    <strong>Tanda Tangan</strong>
+                                    <canvas id="canvas"></canvas>
+                                    <button id="clear" class="btn btn-danger mt-2">Hapus Tanda Tangan</button>
+
+                                    <!-- Input hidden untuk menyimpan data tanda tangan base64 -->
+                                    <input type="hidden" name="signature" id="signature" required>
+
+                                    @error('signature')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
                             <div class="text-center mt-4 d-flex flex-column align-items-center">
                                 <button type="submit" class="daftar-btn w-50 mb-3">Daftar</button>
                                 <a href="{{ route('kegiatan.show', $kegiatan->id) }}"
@@ -292,8 +308,141 @@
             </div>
         </div>
     </div>
+@endsection
 
+@section('styles')
+    <style>
+        body {
+            background-color: #f5f7ff;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        .card {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .date-box {
+            background: #f8faff;
+            border: 1px solid rgba(103, 126, 234, 0.1);
+            border-radius: 12px;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .date-box strong {
+            display: block;
+            color: #4b5563;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .date-box input,
+        .date-box select {
+            border: 1px solid #e0e6ed;
+            border-radius: 8px;
+        }
+
+        .daftar-btn {
+            background-color: #0090D4;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            color: #ffffff;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(132, 250, 176, 0.2);
+        }
+
+        .daftar-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(132, 250, 176, 0.3);
+        }
+
+        .box-ttd {
+            position: relative;
+            background-color: #f9f9f9;
+            /* Warna latar belakang terang untuk kotak */
+            padding: 20px;
+            border: 1px solid #ddd;
+            /* Border ringan di sekitar kotak */
+            border-radius: 8px;
+            /* Sudut yang membulat */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* Efek bayangan lembut untuk menambah kedalaman */
+        }
+
+        .box-ttd strong {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 10px;
+            /* Memberikan jarak antara judul dan konten */
+            font-weight: bold;
+            color: #333;
+            /* Warna teks yang lebih gelap untuk judul */
+        }
+
+        #canvas {
+            width: 100%;
+            height: 150px;
+            /* Sesuaikan tinggi canvas sesuai dengan preferensi Anda */
+            border: 1px solid #ccc;
+            /* Border ringan di sekitar area tanda tangan */
+            border-radius: 4px;
+            /* Sudut yang membulat untuk canvas */
+            background-color: #fff;
+            /* Warna latar belakang canvas */
+            touch-action: none;
+            /* Menonaktifkan zoom atau geser pada perangkat sentuh */
+            cursor: crosshair;
+            /* Menambahkan ikon kursor pensil ketika menggambar */
+            margin-bottom: 10px;
+            /* Memberikan jarak antara canvas dan tombol hapus */
+        }
+
+        #clear {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #d9534f;
+            /* Warna merah untuk tombol hapus */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #clear:hover {
+            background-color: #c9302c;
+            /* Mengubah warna tombol saat dihover */
+        }
+
+        #clear:focus {
+            outline: none;
+            /* Menghilangkan outline saat tombol terpilih */
+        }
+
+        .text-danger {
+            font-size: 12px;
+            color: #f44336;
+            /* Warna merah untuk pesan error */
+            margin-top: 10px;
+        }
+    </style>
+@endsection
+
+@section('scripts')
     <script>
+        function updateLabel(labelId, input) {
+            const label = document.getElementById(labelId);
+            label.textContent = input.files.length > 0 ? input.files[0].name : 'Pilih File';
+        }
+
         function checkNIP() {
             const nip = document.getElementById('nip').value;
             if (nip) {
@@ -356,70 +505,57 @@
                     });
             }
         }
-    </script>
-@endsection
 
-@section('styles')
-    <style>
-        body {
-            background-color: #f5f7ff;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-        }
+        $(document).ready(function() {
+            // Inisialisasi SignaturePad
+            const canvas = document.getElementById('canvas');
+            const signaturePad = new SignaturePad(canvas);
 
-        .card {
-            border: none;
-            border-radius: 20px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
+            // Set ukuran canvas
+            canvas.width = 400;
+            canvas.height = 150;
 
-        .date-box {
-            background: #f8faff;
-            border: 1px solid rgba(103, 126, 234, 0.1);
-            border-radius: 12px;
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-        }
+            // Hapus tanda tangan
+            $('#clear').click(function() {
+                signaturePad.clear();
+            });
 
-        .date-box strong {
-            display: block;
-            color: #4b5563;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
+            // Kirim form menggunakan AJAX
+            $('#formPendaftaran').submit(function(e) {
+                e.preventDefault(); // Mencegah pengiriman form secara default
 
-        .date-box input,
-        .date-box select {
-            border: 1px solid #e0e6ed;
-            border-radius: 8px;
-        }
+                // Cek jika tanda tangan kosong
+                if (signaturePad.isEmpty()) {
+                    alert("Tanda tangan harus diisi!");
+                    return;
+                }
 
-        .daftar-btn {
-            background-color: #0090D4;
-            border: none;
-            padding: 1rem 2.5rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            color: #ffffff;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 6px rgba(132, 250, 176, 0.2);
-        }
+                // Ambil data base64 dari signaturePad
+                const signatureData = signaturePad.toDataURL();
 
-        .daftar-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(132, 250, 176, 0.3);
-        }
-    </style>
-@endsection
+                // Set data base64 ke input hidden
+                $('#signature').val(signatureData);
 
-@section('scripts')
-    <script>
-        function updateLabel(labelId, input) {
-            const label = document.getElementById(labelId);
-            label.textContent = input.files.length > 0 ? input.files[0].name : 'Pilih File';
-        }
+                // Ambil data form
+                const formData = new FormData(this);
+
+                // Kirim data form menggunakan AJAX
+                $.ajax({
+                    url: $(this).attr('action'), // Ambil URL dari form action
+                    type: 'POST',
+                    data: formData,
+                    processData: false, // Jangan memproses data
+                    contentType: false, // Jangan set content type
+                    success: function(response) {
+                        // Redirect atau update halaman sesuai keinginan
+                        window.location.href = response.redirect_url;
+                    },
+                    error: function(response) {
+                        // Jika terjadi error, tampilkan pesan error
+                        alert('Terjadi kesalahan! Silakan coba lagi.');
+                    }
+                });
+            });
+        });
     </script>
 @endsection

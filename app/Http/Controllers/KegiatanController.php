@@ -314,6 +314,7 @@ class KegiatanController extends Controller
             'boarding_pass' => 'nullable|file|mimes:pdf,jpg,png|max:5120',
             'bukti_perjalanan' => 'nullable|file|mimes:pdf,jpg,png|max:5120',
             'sppd' => 'nullable|file|mimes:pdf,jpg,png|max:5120',
+            'signature' => 'required|string',
         ]);
 
         $peserta = PesertaKegiatan::create([
@@ -337,6 +338,29 @@ class KegiatanController extends Controller
             'peran' => $request->peran,
         ]);
 
+        if ($request->has('signature') && !empty($request->signature)) {
+            // Ambil data base64 dari tanda tangan
+            $signatureData = $request->signature;
+
+            // Hapus bagian awal base64 (data:image/png;base64,)
+            $signatureData = str_replace('data:image/png;base64,', '', $signatureData);
+            $signatureData = base64_decode($signatureData);
+
+            // Buat nama file untuk tanda tangan
+            $signatureFileName = 'signature_' . time() . '.png';
+
+            // Tentukan path folder 'ttd' di dalam 'storage/app/public'
+            $signaturePath = 'ttd/' . $signatureFileName;
+
+            // Simpan file tanda tangan di dalam folder 'ttd' di dalam 'public/storage'
+            Storage::disk('public')->put($signaturePath, $signatureData);
+
+            // Simpan path tanda tangan di database
+            $peserta->signature = $signaturePath;
+        }
+
+
+
         $fileColumns = ['surat_tugas', 'tiket', 'boarding_pass', 'bukti_perjalanan', 'sppd'];
 
         foreach ($fileColumns as $column) {
@@ -348,7 +372,22 @@ class KegiatanController extends Controller
         }
         $peserta->save();
 
-        return redirect()->route('kegiatan.show', ['id' => $request->kegiatan_id])->with('success', 'Pendaftaran kegiatan berhasil!');
+        if ($peserta) {
+            // Kirim respons dengan URL pengalihan
+
+            session()->flash('success', 'Pendaftaran kegiatan berhasil!');
+            return response()->json([
+                'success' => true,
+                'redirect_url' => route('kegiatan.show', ['id' => $request->kegiatan_id])
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Terjadi kesalahan saat mendaftar'
+        ]);
+
+        //return redirect()->route('kegiatan.show', ['id' => $request->kegiatan_id])->with('success', 'Pendaftaran kegiatan berhasil!');
     }
 
     public function checkNip(Request $request)
