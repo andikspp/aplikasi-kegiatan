@@ -71,6 +71,12 @@
             </div>
 
             <div class="mb-3">
+                <label for="selesai_kegiatan" class="form-label">Selesai Kegiatan</label>
+                <input type="date" class="form-control" id="selesai_kegiatan" name="selesai_kegiatan"
+                    value="{{ $kegiatan->selesai_kegiatan }}">
+            </div>
+
+            <div class="mb-3">
                 <label for="tempatKegiatan" class="form-label">Tempat Kegiatan</label>
                 <input type="text" class="form-control" id="tempat_kegiatan" name="tempat_kegiatan"
                     value="{{ $kegiatan->tempat_kegiatan }}">
@@ -80,12 +86,11 @@
                 <label for="jenis_kegiatan" class="form-label">Jenis Kegiatan <span class="text-danger">*</span></label>
                 <select name="jenis_kegiatan" id="jenis_kegiatan" class="form-control" required>
                     <option value="">Pilih Jenis Kegiatan</option>
-                    <option value="luring">Luring</option>
-                    <option value="daring">Daring</option>
-                    <option value="hybrid">Hybrid</option>
+                    <option value="luring" {{ $kegiatan->jenis_kegiatan == 'Luring' ? 'selected' : '' }}>Luring</option>
+                    <option value="daring" {{ $kegiatan->jenis_kegiatan == 'Daring' ? 'selected' : '' }}>Daring</option>
+                    <option value="hybrid" {{ $kegiatan->jenis_kegiatan == 'Hybrid' ? 'selected' : '' }}>Hybrid</option>
                 </select>
             </div>
-
 
             <div class="mb-3">
                 <label for="link_meeting" class="form-label">Link Web Meeting</label>

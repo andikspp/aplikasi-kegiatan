@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('tanggal_pendaftaran');
             $table->date('selesai_pendaftaran');
             $table->date('tanggal_kegiatan');
+            $table->date('selesai_kegiatan');
             $table->string('tempat_kegiatan');
             $table->string('jenis_kegiatan');
             $table->string('link_meeting')->nullable();

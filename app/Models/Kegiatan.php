@@ -17,6 +17,7 @@ class Kegiatan extends Model
         'tanggal_pendaftaran',
         'selesai_pendaftaran',
         'tanggal_kegiatan',
+        'selesai_kegiatan',
         'tempat_kegiatan',
         'jenis_kegiatan',
         'link_meeting',

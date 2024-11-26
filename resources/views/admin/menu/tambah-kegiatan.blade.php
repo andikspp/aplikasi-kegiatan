@@ -52,6 +52,11 @@
                 <label for="tanggal_kegiatan" class="form-label">Tanggal Kegiatan <span class="text-danger">*</span></label>
                 <input type="date" name="tanggal_kegiatan" id="tanggal_kegiatan" class="form-control" required>
             </div>
+            {{-- Tanggal Selesai Kegiatan --}}
+            <div class="mb-3">
+                <label for="selesai_kegiatan" class="form-label">Selesai Kegiatan <span class="text-danger">*</span></label>
+                <input type="date" name="selesai_kegiatan" id="selesai_kegiatan" class="form-control" required>
+            </div>
 
             <!-- Tempat Kegiatan -->
             <div class="mb-3">
@@ -65,9 +70,9 @@
                 <label for="jenis_kegiatan" class="form-label">Jenis Kegiatan <span class="text-danger">*</span></label>
                 <select name="jenis_kegiatan" id="jenis_kegiatan" class="form-control" required>
                     <option value="">Pilih Jenis Kegiatan</option>
-                    <option value="luring">Luring</option>
-                    <option value="daring">Daring</option>
-                    <option value="hybrid">Hybrid</option>
+                    <option value="Luring">Luring</option>
+                    <option value="Daring">Daring</option>
+                    <option value="Hybrid">Hybrid</option>
                 </select>
             </div>
 
