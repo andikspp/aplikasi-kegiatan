@@ -141,7 +141,6 @@
                 <img src="{{ public_path('storage/' . $peserta->signature) }}"
                     style="max-width: 200px; max-height: 150px;">
             @else --}}
-            <p>Tanda tangan belum ada.</p>
 
 
             <p>{{ $peserta->nama_lengkap }}</p>
