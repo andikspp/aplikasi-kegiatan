@@ -142,14 +142,13 @@
                     style="max-width: 200px; max-height: 150px;">
             @else --}}
             <p>Tanda tangan belum ada.</p>
-    @endif
 
 
-    <p>{{ $peserta->nama_lengkap }}</p>
-    </div>
+            <p>{{ $peserta->nama_lengkap }}</p>
+        </div>
 
-    <!-- Page Break -->
-    <div class="page-break"></div>
+        <!-- Page Break -->
+        <div class="page-break"></div>
     @endforeach
 </body>
 
