@@ -184,14 +184,14 @@
                                         Tidak ada file
                                     @endif
                                 </td>
-                                <td>
+                                {{-- <td>
                                     @if ($p->signature)
                                         <a href="{{ asset('public/storage/' . $p->signature) }}" target="_blank">Lihat
                                             File</a>
                                     @else
                                         Tidak ada file
                                     @endif
-                                </td>
+                                </td> --}}
                                 <td class="text-center">
                                     <div class="d-flex justify-content-center gap-2">
                                         <a href="{{ route('kegiatan.edit-peserta', $p->id) }}"
