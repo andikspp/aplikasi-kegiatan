@@ -31,6 +31,8 @@
                                             placeholder="Masukkan tautan" required>
                                         <button class="btn btn-primary btn-sm" id="generate-btn"><i
                                                 class="fas fa-qrcode"></i> Generate</button>
+                                        <button class="btn btn-success btn-sm d-none" id="download-btn" download="qrcode.png"><i
+                                                class="fas fa-download"></i> Download QR Code</button>
                                     </div>
                                     <div class="col-12 text-center mt-3 d-none" id="img-container">
                                         <img src="" id="img-result" width="320px">
@@ -52,6 +54,7 @@
             const imgResult = $('#img-result');
             const imgContainer = $('#img-container');
             const generateBtn = $('#generate-btn');
+            const downloadBtn = $('#download-btn');
 
             generateBtn.on('click', function() {
                 const urlValue = urlInput.val();
@@ -60,9 +63,19 @@
                     imgResult.attr('src',
                         `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(urlValue)}&size=200x200`
                         );
+                    downloadBtn.removeClass('d-none').attr('href', imgResult.attr('src'));
                 } else {
                     alert("Silakan masukkan tautan yang valid.");
                 }
+            });
+
+            downloadBtn.on('click', function() {
+                const link = document.createElement('a');
+                link.href = imgResult.attr('src');
+                link.download = 'qrcode.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
             });
         });
     </script>

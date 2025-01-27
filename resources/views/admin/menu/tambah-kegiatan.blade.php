@@ -82,13 +82,14 @@
                 <input type="url" name="link_meeting" id="link_meeting" class="form-control">
             </div>
 
-            <!-- Jumlah JP -->
+            <!-- Jumlah JP 
             <div class="mb-3">
                 <label for="jumlah_jp" class="form-label">Jumlah JP</label>
                 <input type="number" name="jumlah_jp" id="jumlah_jp" class="form-control">
             </div>
-
-            <!-- Membutuhkan Mapel -->
+            -->
+            
+            <!-- Membutuhkan Mapel 
             <div class="mb-3">
                 <label class="form-label">Membutuhkan Mapel <span class="text-danger">*</span></label>
                 <select name="membutuhkan_mapel" class="form-control" required>
@@ -96,6 +97,7 @@
                     <option value="tidak">Tidak</option>
                 </select>
             </div>
+            -->
 
             {{-- Membutuhkan nomor rekening --}}
             <div class="mb-3">
@@ -106,16 +108,16 @@
                 </select>
             </div>
 
-            <!-- Membutuhkan Lokasi -->
+            <!-- Membutuhkan Lokasi
             <div class="mb-3">
                 <label class="form-label">Membutuhkan Lokasi <span class="text-danger">*</span></label>
                 <select name="membutuhkan_lokasi" class="form-control" required>
                     <option value="ya">Ya</option>
                     <option value="tidak">Tidak</option>
                 </select>
-            </div>
+            </div> -->
 
-            <!-- Membutuhkan Foto Presensi -->
+            <!-- Membutuhkan Foto Presensi 
             <div class="mb-3">
                 <label class="form-label">Membutuhkan Foto Presensi <span class="text-danger">*</span></label>
                 <select name="membutuhkan_foto_presensi" class="form-control" required>
@@ -123,42 +125,44 @@
                     <option value="tidak">Tidak</option>
                 </select>
             </div>
+            -->
 
-            <!-- Menggunakan Sertifikat -->
+            
+            <!-- Menggunakan Sertifikat 
             <div class="mb-3">
                 <label class="form-label">Menggunakan Sertifikat <span class="text-danger">*</span></label>
                 <select name="menggunakan_sertifikat" class="form-control" required>
                     <option value="ya">Ya</option>
                     <option value="tidak">Tidak</option>
                 </select>
-            </div>
+            </div> -->
 
-            <!-- Nomor Sertifikat -->
+            <!-- Nomor Sertifikat 
             <div class="mb-3">
                 <label for="nomor_sertifikat" class="form-label">Nomor Sertifikat (Opsional)</label>
                 <input type="text" name="nomor_sertifikat" id="nomor_sertifikat" class="form-control"
                     maxlength="255">
-            </div>
+            </div> -->
 
-            <!-- Nomor Seri Sertifikat -->
+            <!-- Nomor Seri Sertifikat 
             <div class="mb-3">
                 <label for="nomor_seri_sertifikat" class="form-label">Nomor Seri Sertifikat (Opsional)</label>
                 <input type="text" name="nomor_seri_sertifikat" id="nomor_seri_sertifikat" class="form-control"
                     maxlength="255">
-            </div>
+            </div> -->
 
-            <!-- Template Sertifikat -->
+            <!-- Template Sertifikat 
             <div class="mb-3">
                 <label for="template_sertifikat" class="form-label">Template Sertifikat (Opsional)</label>
                 <input type="text" name="template_sertifikat" id="template_sertifikat" class="form-control"
                     maxlength="255">
-            </div>
+            </div> -->
 
-            <!-- Tanggal TTD Sertifikat -->
+            <!-- Tanggal TTD Sertifikat 
             <div class="mb-3">
                 <label for="tanggal_ttd_sertifikat" class="form-label">Tanggal TTD Sertifikat (Opsional)</label>
                 <input type="date" name="tanggal_ttd_sertifikat" id="tanggal_ttd_sertifikat" class="form-control">
-            </div>
+            </div> -->
 
             <!-- Table for adding Peran -->
             <div class="mb-3">

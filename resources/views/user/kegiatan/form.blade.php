@@ -484,14 +484,6 @@
                                 text: 'Data NIP berhasil ditemukan dan formulir telah diisi.',
                                 confirmButtonText: 'OK',
                             });
-                        } else {
-                            // SweetAlert untuk error
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'NIP tidak ditemukan',
-                                text: 'Silakan masukkan data secara manual.',
-                                confirmButtonText: 'OK',
-                            });
                         }
                     })
                     .catch((error) => {

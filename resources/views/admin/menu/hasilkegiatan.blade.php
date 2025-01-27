@@ -98,6 +98,7 @@
                     value="{{ $kegiatan->link_meeting }}">
             </div>
 
+            <!--
             <div class="mb-3">
                 <label class="form-label">Jumlah JP</label>
                 <input type="number" class="form-control" id="jumlah_jp" name="jumlah_jp"
@@ -114,7 +115,8 @@
                             {{ $kegiatan->membutuhkan_mapel == 'tidak' ? 'checked' : '' }} style="accent-color: blue;">
                         Tidak</label>
                 </div>
-            </div>
+            </div> 
+            -->
 
             <div class="mb-3">
                 <label class="form-label">Membutuhkan Nomor Rekening?</label>
@@ -129,7 +131,8 @@
                         Tidak</label>
                 </div>
             </div>
-
+            
+            <!--
             <div class="mb-3">
                 <label class="form-label">Membutuhkan Lokasi?</label>
                 <div>
@@ -168,35 +171,39 @@
                         Tidak</label>
                 </div>
             </div>
+             -->
 
-            <!-- Nomor Sertifikat -->
+            <!-- Nomor Sertifikat 
             <div class="mb-3">
                 <label for="nomor_sertifikat" class="form-label">Nomor Sertifikat (Opsional)</label>
                 <input type="text" name="nomor_sertifikat" id="nomor_sertifikat" class="form-control"
                     maxlength="255" value="{{ old('nomor_sertifikat', $kegiatan->nomor_sertifikat) }}">
             </div>
+            -->
 
-            <!-- Nomor Seri Sertifikat -->
+            <!-- Nomor Seri Sertifikat 
             <div class="mb-3">
                 <label for="nomor_seri_sertifikat" class="form-label">Nomor Seri Sertifikat (Opsional)</label>
                 <input type="text" name="nomor_seri_sertifikat" id="nomor_seri_sertifikat" class="form-control"
                     maxlength="255" value="{{ old('nomor_seri_sertifikat', $kegiatan->nomor_seri_sertifikat) }}">
             </div>
+            -->
 
-            <!-- Template Sertifikat -->
+            <!-- Template Sertifikat 
             <div class="mb-3">
                 <label for="template_sertifikat" class="form-label">Template Sertifikat (Opsional)</label>
                 <input type="text" name="template_sertifikat" id="template_sertifikat" class="form-control"
                     maxlength="255" value="{{ old('template_sertifikat', $kegiatan->template_sertifikat) }}">
             </div>
+            -->
 
-            <!-- Tanggal TTD Sertifikat -->
+            <!-- Tanggal TTD Sertifikat 
             <div class="mb-3">
                 <label for="tanggal_ttd_sertifikat" class="form-label">Tanggal TTD Sertifikat (Opsional)</label>
                 <input type="date" name="tanggal_ttd_sertifikat" id="tanggal_ttd_sertifikat" class="form-control"
                     value="{{ old('tanggal_ttd_sertifikat', $kegiatan->tanggal_ttd_sertifikat) }}">
             </div>
-
+            -->
 
             <!-- Table for editing Peran -->
             <div class="mb-3">

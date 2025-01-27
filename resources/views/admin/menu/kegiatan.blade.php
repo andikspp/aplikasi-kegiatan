@@ -197,8 +197,7 @@
                     window.location.href = deleteUrl;
                 }
             });
-
-
+        }
 
         const unsecuredCopyToClipboard = (text) => {
             const textArea = document.createElement("textarea");
@@ -212,8 +211,7 @@
                 console.error('Unable to copy to clipboard', err)
             }
             document.body.removeChild(textArea)
-        };
-
+        }
 
         function copyDaftarKegiatan(link) {
             if (window.isSecureContext && navigator.clipboard) {
