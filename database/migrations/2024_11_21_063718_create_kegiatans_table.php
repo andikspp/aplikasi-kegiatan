@@ -23,11 +23,11 @@ return new class extends Migration
             $table->string('jenis_kegiatan');
             $table->string('link_meeting')->nullable();
             $table->integer('jumlah_jp')->nullable();
-            $table->enum('membutuhkan_mapel', ['ya', 'tidak']);
+            $table->enum('membutuhkan_mapel', ['ya', 'tidak'])->nullable();
             $table->enum('membutuhkan_nomor_rekening', ['ya', 'tidak']);
-            $table->enum('membutuhkan_lokasi', ['ya', 'tidak']);
-            $table->enum('membutuhkan_foto_presensi', ['ya', 'tidak']);
-            $table->enum('menggunakan_sertifikat', ['ya', 'tidak']);
+            $table->enum('membutuhkan_lokasi', ['ya', 'tidak'])->nullable();
+            $table->enum('membutuhkan_foto_presensi', ['ya', 'tidak'])->nullable();
+            $table->enum('menggunakan_sertifikat', ['ya', 'tidak'])->nullable();
             $table->string('nomor_sertifikat')->nullable();
             $table->string('nomor_seri_sertifikat')->nullable();
             $table->string('template_sertifikat')->nullable();
