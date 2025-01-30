@@ -122,6 +122,7 @@
             <div class="mb-3">
                 <label class="form-label">Membutuhkan Nomor Rekening Peserta<span class="text-danger">*</span></label>
                 <select name="membutuhkan_nomor_rekening" class="form-control" required onchange="toggleRekeningField(this)">
+                    <option value="Pilih Penggunaan">Pilih Penggunaan</option>
                     <option value="ya">Ya</option>
                     <option value="tidak">Tidak</option>
                 </select>
