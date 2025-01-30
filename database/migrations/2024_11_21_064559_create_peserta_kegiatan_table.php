@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('telp_rumah');
             $table->string('alamat_email');
             $table->string('npwp');
+            $table->string('nomor_rekening')->nullable();
             $table->string('peran', 255);
             $table->string('surat_tugas')->nullable();
             $table->string('tiket')->nullable();

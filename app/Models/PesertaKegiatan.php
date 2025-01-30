@@ -29,6 +29,7 @@ class PesertaKegiatan extends Model
         'telp_rumah',
         'alamat_email',
         'npwp',
+        'nomor_rekening',
         'peran',
         'surat_tugas',
         'tiket',

@@ -112,6 +112,7 @@
                             <th>Telp Rumah</th>
                             <th>Email</th>
                             <th>NPWP</th>
+                            <th>Nomor Rekening</th>
                             <th>Peran</th>
                             <th>Surat Tugas</th>
                             <th>Tiket</th>
@@ -142,6 +143,7 @@
                                 <td>{{ $p->telp_rumah }}</td>
                                 <td>{{ $p->alamat_email }}</td>
                                 <td>{{ $p->npwp }}</td>
+                                <td>{{ $p->nomor_rekening }}</td>
                                 <td>{{ $p->peran }}</td>
                                 <td>
                                     @if ($p->surat_tugas)
