@@ -99,9 +99,9 @@
             </div>
             -->
 
-            {{-- Membutuhkan nomor rekening --}}
+            <!-- Membutuhkan nomor rekening -->
             <div class="mb-3">
-                <label class="form-label">Membutuhkan Nomor Rekening <span class="text-danger">*</span></label>
+                <label class="form-label">Membutuhkan Nomor Rekening Peserta<span class="text-danger">*</span></label>
                 <select name="membutuhkan_nomor_rekening" class="form-control" required>
                     <option value="ya">Ya</option>
                     <option value="tidak">Tidak</option>

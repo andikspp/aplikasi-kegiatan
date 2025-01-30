@@ -36,7 +36,7 @@
                     value="{{ Auth::user()->nama }}" placeholder="Masukkan Nama Lengkap" required readonly>
             </div>
             <div class="mb-3">
-                <label for="nip" class="form-label">NIP (jika PNS)</label>
+                <label for="nip" class="form-label">NIP (jika PNS)/ NIK (Non PNS)</label>
                 <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan NIP"
                     value="{{ Auth::user()->nip }}" required readonly>
             </div>

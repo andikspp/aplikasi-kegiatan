@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="date-box">
-                                        <strong>NIP (jika PNS)</strong>
+                                        <strong>NIP (Jika PNS)/NIK (Non PNS)</strong>
                                         <input type="text" class="form-control" id="nip" name="nip" required
                                             pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');"
                                             onblur="checkNIP()">
@@ -217,6 +217,11 @@
                             </div>
 
                             <div class="date-box">
+                                <strong>Nomor Rekening</strong>
+                                <input type="number" class="form-control" id="nomor_rekening" name="nomor_rekening" required>
+                            </div>
+                            
+                            <div class="date-box">
                                 <strong>Peran</strong>
                                 <select class="form-select" id="peran" name="peran" required>
                                     <option value="">Pilih Peran</option>
@@ -228,8 +233,6 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
-
 
                             <div class="date-box">
                                 <strong class="text-center" style="font-size: larger;">Bukti Perjalanan Dinas</strong>
@@ -279,7 +282,7 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="col-12">
+                            <div class="col-12">
                                 <div class="box-ttd">
                                     <strong>Tanda Tangan</strong>
                                     <canvas id="canvas"></canvas>
@@ -292,7 +295,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                            </div> --}}
+                            </div>
 
 
                             <div class="text-center mt-4 d-flex flex-column align-items-center">
@@ -498,56 +501,56 @@
             }
         }
 
-        // $(document).ready(function() {
-        //     // Inisialisasi SignaturePad
-        //     const canvas = document.getElementById('canvas');
-        //     const signaturePad = new SignaturePad(canvas);
+        $(document).ready(function() {
+             // Inisialisasi SignaturePad
+             const canvas = document.getElementById('canvas');
+             const signaturePad = new SignaturePad(canvas);
 
-        //     // Set ukuran canvas
-        //     canvas.width = 400;
-        //     canvas.height = 150;
+             // Set ukuran canvas
+             canvas.width = 400;
+             canvas.height = 150;
 
-        //     // Hapus tanda tangan
-        //     $('#clear').click(function() {
-        //         signaturePad.clear();
-        //     });
+             // Hapus tanda tangan
+             $('#clear').click(function() {
+                 signaturePad.clear();
+             });
 
-        //     // Kirim form menggunakan AJAX
-        //     $('#formPendaftaran').submit(function(e) {
-        //         e.preventDefault(); // Mencegah pengiriman form secara default
+             // Kirim form menggunakan AJAX
+             $('#formPendaftaran').submit(function(e) {
+                 e.preventDefault(); // Mencegah pengiriman form secara default
 
-        //         // Cek jika tanda tangan kosong
-        //         if (signaturePad.isEmpty()) {
-        //             alert("Tanda tangan harus diisi!");
-        //             return;
-        //         }
+                 // Cek jika tanda tangan kosong
+                 if (signaturePad.isEmpty()) {
+                     alert("Tanda tangan harus diisi!");
+                     return;
+                 }
 
-        //         // Ambil data base64 dari signaturePad
-        //         const signatureData = signaturePad.toDataURL();
+                 // Ambil data base64 dari signaturePad
+                 const signatureData = signaturePad.toDataURL();
 
-        //         // Set data base64 ke input hidden
-        //         $('#signature').val(signatureData);
+                 // Set data base64 ke input hidden
+                 $('#signature').val(signatureData);
 
-        //         // Ambil data form
-        //         const formData = new FormData(this);
+                 // Ambil data form
+                 const formData = new FormData(this);
 
-        //         // Kirim data form menggunakan AJAX
-        //         $.ajax({
-        //             url: $(this).attr('action'), // Ambil URL dari form action
-        //             type: 'POST',
-        //             data: formData,
-        //             processData: false, // Jangan memproses data
-        //             contentType: false, // Jangan set content type
-        //             success: function(response) {
-        //                 // Redirect atau update halaman sesuai keinginan
-        //                 window.location.href = response.redirect_url;
-        //             },
-        //             error: function(response) {
-        //                 // Jika terjadi error, tampilkan pesan error
-        //                 alert('Terjadi kesalahan! Silakan coba lagi.');
-        //             }
-        //         });
-        //     });
-        // });
+                 // Kirim data form menggunakan AJAX
+                 $.ajax({
+                     url: $(this).attr('action'), // Ambil URL dari form action
+                     type: 'POST',
+                     data: formData,
+                     processData: false, // Jangan memproses data
+                     contentType: false, // Jangan set content type
+                     success: function(response) {
+                         // Redirect atau update halaman sesuai keinginan
+                         window.location.href = response.redirect_url;
+                     },
+                     error: function(response) {
+                         // Jika terjadi error, tampilkan pesan error
+                         alert('Terjadi kesalahan! Silakan coba lagi.');
+                     }
+                 });
+             });
+         });
     </script>
 @endsection

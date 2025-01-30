@@ -118,18 +118,13 @@
             </div> 
             -->
 
+            <!-- Membutuhkan nomor rekening -->
             <div class="mb-3">
-                <label class="form-label">Membutuhkan Nomor Rekening?</label>
-                <div>
-                    <label><input type="radio" name="membutuhkan_nomor_rekening" value="ya"
-                            {{ $kegiatan->membutuhkan_nomor_rekening == 'ya' ? 'checked' : '' }}
-                            style="accent-color: blue;">
-                        Ya</label>
-                    <label><input type="radio" name="membutuhkan_nomor_rekening" value="tidak"
-                            {{ $kegiatan->membutuhkan_nomor_rekening == 'tidak' ? 'checked' : '' }}
-                            style="accent-color: blue;">
-                        Tidak</label>
-                </div>
+                <label class="form-label">Membutuhkan Nomor Rekening Peserta<span class="text-danger">*</span></label>
+                <select name="membutuhkan_nomor_rekening" class="form-control" required onchange="toggleRekeningField(this)">
+                    <option value="ya">Ya</option>
+                    <option value="tidak">Tidak</option>
+                </select>
             </div>
             
             <!--
