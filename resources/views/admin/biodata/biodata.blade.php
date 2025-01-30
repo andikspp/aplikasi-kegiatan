@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biodata Peserta</title>
     <style>
-        body {
+        .body {
             font-family: Arial, sans-serif;
             line-height: 1.5;
             margin: 30px;
@@ -14,6 +14,7 @@
 
         #judul {
             text-align: center;
+            margin-bottom: 10px;
         }
 
         .biodata-item {
@@ -56,13 +57,20 @@
                 page-break-before: always;
             }
         }
+
+        @page {
+            size: A4;
+            margin: 20mm; /* Atur margin sesuai kebutuhan */
+        }
     </style>
 </head>
 
 <body>
 
     @foreach ($pesertaList as $peserta)
-        <h2 id="judul">BIODATA</h2><br><br><br>
+        <h1 id="judul">BIODATA</h1>
+
+        <h3 id="judul">({{ $peserta->peran }})</h3><br><br><br>
 
         <div class="biodata-item">
             <p class="label">1. Nama</p>
@@ -70,7 +78,7 @@
         </div>
 
         <div class="biodata-item">
-            <p class="label">2. NIP</p>
+            <p class="label">2. NIP/NIK</p>
             <p class="value">: {{ $peserta->nip }}</p>
         </div>
 
@@ -128,12 +136,7 @@
         <div class="biodata-item">
             <p class="label">13. Alamat E-Mail</p>
             <p class="value">: {{ $peserta->alamat_email }}</p>
-        </div>
-
-        <div class="biodata-item">
-            <p class="label">14. Peran</p>
-            <p class="value">: {{ $peserta->peran }}</p>
-        </div>
+        </div><br><br><br><br>
 
         <div class="signature">
             <p>Tanda Tangan</p><br><br><br>
