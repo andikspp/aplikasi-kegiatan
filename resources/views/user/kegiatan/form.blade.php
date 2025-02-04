@@ -128,7 +128,7 @@
                                     <div class="date-box">
                                         <strong>Pangkat/Golongan</strong>
                                         <input type="text" class="form-control" id="pangkat_golongan"
-                                            name="pangkat_golongan" placeholder="Masukkan Pangkat/Golongan" required>
+                                            name="pangkat_golongan" placeholder="Masukkan Pangkat/Golongan">
                                         @error('pangkat_golongan')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -285,7 +285,7 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="col-12">
+                            <div class="col-12">
                                 <div class="box-ttd">
                                     <strong>Tanda Tangan</strong>
                                     <canvas id="canvas"></canvas>
@@ -298,7 +298,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                            </div> --}}
+                            </div>
 
 
                             <div class="text-center mt-4 d-flex flex-column align-items-center">
@@ -397,10 +397,10 @@
             width: 100%;
             height: 150px;
             /* Sesuaikan tinggi canvas sesuai dengan preferensi Anda */
-            border: 1px solid #ccc;
-            /* Border ringan di sekitar area tanda tangan */
-            border-radius: 4px;
-            /* Sudut yang membulat untuk canvas */
+            border: 2px solid #007bff;
+            /* Border lebih menonjol */
+            border-radius: 8px;
+            /* Sudut yang lebih membulat */
             background-color: #fff;
             /* Warna latar belakang canvas */
             touch-action: none;
@@ -409,6 +409,24 @@
             /* Menambahkan ikon kursor pensil ketika menggambar */
             margin-bottom: 10px;
             /* Memberikan jarak antara canvas dan tombol hapus */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Shadow ringan */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            /* Transisi halus */
+        }
+
+        #canvas:hover {
+            border-color: #0056b3;
+            /* Warna border lebih gelap saat hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* Shadow lebih tebal saat hover */
+        }
+
+        @media (max-width: 768px) {
+            #canvas {
+                height: 100px;
+                /* Tinggi lebih kecil untuk mobile */
+            }
         }
 
         #clear {
@@ -524,7 +542,11 @@
 
                 // Cek jika tanda tangan kosong
                 if (signaturePad.isEmpty()) {
-                    alert("Tanda tangan harus diisi!");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Tanda tangan harus diisi!',
+                    });
                     return;
                 }
 
@@ -545,12 +567,33 @@
                     processData: false, // Jangan memproses data
                     contentType: false, // Jangan set content type
                     success: function(response) {
-                        // Redirect atau update halaman sesuai keinginan
-                        window.location.href = response.redirect_url;
+                        // Tampilkan pesan sukses
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Sukses!',
+                            text: response.message, // Pesan sukses dari backend
+                            confirmButtonText: 'OK',
+                        }).then((result) => {
+                            // Redirect ke halaman yang ditentukan
+                            if (response.redirect_url) {
+                                window.location.href = response.redirect_url;
+                            } else {
+                                // Redirect ke halaman default jika redirect_url tidak terdefinisi
+                                window.location.href =
+                                '/kegiatan'; // Ganti dengan URL default
+                            }
+                        });
                     },
                     error: function(response) {
-                        // Jika terjadi error, tampilkan pesan error
-                        alert('Terjadi kesalahan! Silakan coba lagi.');
+                        let errorMessage = 'Terjadi kesalahan! Silakan coba lagi.';
+                        if (response.responseJSON && response.responseJSON.message) {
+                            errorMessage = response.responseJSON.message;
+                        }
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: errorMessage,
+                        });
                     }
                 });
             });

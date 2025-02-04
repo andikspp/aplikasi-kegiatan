@@ -317,7 +317,22 @@ class KegiatanController extends Controller
             'boarding_pass' => 'nullable|file|mimes:pdf,jpg,png|max:5120',
             'bukti_perjalanan' => 'nullable|file|mimes:pdf,jpg,png|max:5120',
             'sppd' => 'nullable|file|mimes:pdf,jpg,png|max:5120',
+            'signature' => 'required|string',
         ]);
+
+        if ($request->signature) {
+            $signatureData = $request->signature;
+            $signatureName = 'signature_' . time() . '.png'; // Nama file unik
+            $signaturePath = 'public/ttd/' . $signatureName; // Path file di storage
+
+            // Decode base64 dan simpan sebagai file
+            $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $signatureData));
+            Storage::put($signaturePath, $image); // Simpan file di storage/app/public/ttd
+
+            // Simpan path relatif ke database
+            $signaturePathForDatabase = 'ttd/' . $signatureName;
+        }
+
 
         $peserta = PesertaKegiatan::create([
             'kegiatan_id' => $request->kegiatan_id,
@@ -339,6 +354,7 @@ class KegiatanController extends Controller
             'npwp' => $request->npwp,
             'nomor_rekening' => $request->nomor_rekening,
             'peran' => $request->peran,
+            'signature' => $signaturePathForDatabase,
         ]);
 
         $fileColumns = ['surat_tugas', 'tiket', 'boarding_pass', 'bukti_perjalanan', 'sppd'];
@@ -354,7 +370,10 @@ class KegiatanController extends Controller
         $peserta->save();
 
         // Mengembalikan data kegiatan ke view
-        return redirect()->route('kegiatan.show', ['id' => $request->kegiatan_id])->with('success', 'Pendaftaran kegiatan berhasil!')->with(compact('kegiatan'));
+        return response()->json([
+            'redirect_url' => route('kegiatan.show', ['id' => $request->kegiatan_id]),
+            'message' => 'Pendaftaran berhasil!',
+        ]);
     }
 
     public function checkNip(Request $request)

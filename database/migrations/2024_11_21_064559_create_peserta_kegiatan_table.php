@@ -37,7 +37,7 @@ return new class extends Migration
             $table->string('boarding_pass')->nullable();
             $table->string('bukti_perjalanan')->nullable();
             $table->string('sppd')->nullable();
-            // $table->string('signature');
+            $table->string('signature');
             $table->timestamps();
 
             $table->foreign('kegiatan_id')->references('id')->on('kegiatans')->onDelete('cascade');

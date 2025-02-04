@@ -86,9 +86,9 @@
                 <label for="jenis_kegiatan" class="form-label">Jenis Kegiatan <span class="text-danger">*</span></label>
                 <select name="jenis_kegiatan" id="jenis_kegiatan" class="form-control" required>
                     <option value="">Pilih Jenis Kegiatan</option>
-                    <option value="luring" {{ $kegiatan->jenis_kegiatan == 'Luring' ? 'selected' : '' }}>Luring</option>
-                    <option value="daring" {{ $kegiatan->jenis_kegiatan == 'Daring' ? 'selected' : '' }}>Daring</option>
-                    <option value="hybrid" {{ $kegiatan->jenis_kegiatan == 'Hybrid' ? 'selected' : '' }}>Hybrid</option>
+                    <option value="Luring" {{ $kegiatan->jenis_kegiatan == 'Luring' ? 'selected' : '' }}>Luring</option>
+                    <option value="Daring" {{ $kegiatan->jenis_kegiatan == 'Daring' ? 'selected' : '' }}>Daring</option>
+                    <option value="Hybrid" {{ $kegiatan->jenis_kegiatan == 'Hybrid' ? 'selected' : '' }}>Hybrid</option>
                 </select>
             </div>
 
@@ -99,107 +99,110 @@
             </div>
 
             <!--
-            <div class="mb-3">
-                <label class="form-label">Jumlah JP</label>
-                <input type="number" class="form-control" id="jumlah_jp" name="jumlah_jp"
-                    value="{{ $kegiatan->jumlah_jp }}">
-            </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Jumlah JP</label>
+                                        <input type="number" class="form-control" id="jumlah_jp" name="jumlah_jp"
+                                            value="{{ $kegiatan->jumlah_jp }}">
+                                    </div>
 
-            <div class="mb-3">
-                <label class="form-label">Membutuhkan Mata Pelajaran?</label>
-                <div>
-                    <label><input type="radio" name="membutuhkan_mapel" value="ya"
-                            {{ $kegiatan->membutuhkan_mapel == 'ya' ? 'checked' : '' }} style="accent-color: blue;">
-                        Ya</label>
-                    <label><input type="radio" name="membutuhkan_mapel" value="tidak"
-                            {{ $kegiatan->membutuhkan_mapel == 'tidak' ? 'checked' : '' }} style="accent-color: blue;">
-                        Tidak</label>
-                </div>
-            </div> 
-            -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Membutuhkan Mata Pelajaran?</label>
+                                        <div>
+                                            <label><input type="radio" name="membutuhkan_mapel" value="ya"
+                                                    {{ $kegiatan->membutuhkan_mapel == 'ya' ? 'checked' : '' }} style="accent-color: blue;">
+                                                Ya</label>
+                                            <label><input type="radio" name="membutuhkan_mapel" value="tidak"
+                                                    {{ $kegiatan->membutuhkan_mapel == 'tidak' ? 'checked' : '' }} style="accent-color: blue;">
+                                                Tidak</label>
+                                        </div>
+                                    </div>
+                                    -->
 
             <!-- Membutuhkan nomor rekening -->
             <div class="mb-3">
                 <label class="form-label">Membutuhkan Nomor Rekening Peserta<span class="text-danger">*</span></label>
-                <select name="membutuhkan_nomor_rekening" class="form-control" required onchange="toggleRekeningField(this)">
-                    <option value="Pilih Penggunaan">Pilih Penggunaan</option>
-                    <option value="ya">Ya</option>
-                    <option value="tidak">Tidak</option>
+                <select name="membutuhkan_nomor_rekening" class="form-control" required
+                    onchange="toggleRekeningField(this)">
+                    <option value="Pilih Penggunaan" disabled selected>Pilih Penggunaan</option>
+                    <option value="ya" {{ $kegiatan->membutuhkan_nomor_rekening == 'ya' ? 'selected' : '' }}>Ya
+                    </option>
+                    <option value="tidak" {{ $kegiatan->membutuhkan_nomor_rekening == 'tidak' ? 'selected' : '' }}>Tidak
+                    </option>
                 </select>
             </div>
-            
+
             <!--
-            <div class="mb-3">
-                <label class="form-label">Membutuhkan Lokasi?</label>
-                <div>
-                    <label><input type="radio" name="membutuhkan_lokasi" value="ya"
-                            {{ $kegiatan->membutuhkan_lokasi == 'ya' ? 'checked' : '' }} style="accent-color: blue;">
-                        Ya</label>
-                    <label><input type="radio" name="membutuhkan_lokasi" value="tidak"
-                            {{ $kegiatan->membutuhkan_lokasi == 'tidak' ? 'checked' : '' }} style="accent-color: blue;">
-                        Tidak</label>
-                </div>
-            </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Membutuhkan Lokasi?</label>
+                                        <div>
+                                            <label><input type="radio" name="membutuhkan_lokasi" value="ya"
+                                                    {{ $kegiatan->membutuhkan_lokasi == 'ya' ? 'checked' : '' }} style="accent-color: blue;">
+                                                Ya</label>
+                                            <label><input type="radio" name="membutuhkan_lokasi" value="tidak"
+                                                    {{ $kegiatan->membutuhkan_lokasi == 'tidak' ? 'checked' : '' }} style="accent-color: blue;">
+                                                Tidak</label>
+                                        </div>
+                                    </div>
 
-            <div class="mb-3">
-                <label class="form-label">Membutuhkan foto presensi?</label>
-                <div>
-                    <label><input type="radio" name="membutuhkan_foto_presensi" value="ya"
-                            {{ $kegiatan->membutuhkan_foto_presensi == 'ya' ? 'checked' : '' }}
-                            style="accent-color: blue;">
-                        Ya</label>
-                    <label><input type="radio" name="membutuhkan_foto_presensi" value="tidak"
-                            {{ $kegiatan->membutuhkan_foto_presensi == 'tidak' ? 'checked' : '' }}
-                            style="accent-color: blue;">
-                        Tidak</label>
-                </div>
-            </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Membutuhkan foto presensi?</label>
+                                        <div>
+                                            <label><input type="radio" name="membutuhkan_foto_presensi" value="ya"
+                                                    {{ $kegiatan->membutuhkan_foto_presensi == 'ya' ? 'checked' : '' }}
+                                                    style="accent-color: blue;">
+                                                Ya</label>
+                                            <label><input type="radio" name="membutuhkan_foto_presensi" value="tidak"
+                                                    {{ $kegiatan->membutuhkan_foto_presensi == 'tidak' ? 'checked' : '' }}
+                                                    style="accent-color: blue;">
+                                                Tidak</label>
+                                        </div>
+                                    </div>
 
-            <div class="mb-3">
-                <label class="form-label">Menggunakan Sertifikat?</label>
-                <div>
-                    <label><input type="radio" name="menggunakan_sertifikat" value="ya"
-                            {{ $kegiatan->menggunakan_sertifikat == 'ya' ? 'checked' : '' }} style="accent-color: blue;">
-                        Ya</label>
-                    <label><input type="radio" name="menggunakan_sertifikat" value="tidak"
-                            {{ $kegiatan->menggunakan_sertifikat == 'tidak' ? 'checked' : '' }}
-                            style="accent-color: blue;">
-                        Tidak</label>
-                </div>
-            </div>
-             -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Menggunakan Sertifikat?</label>
+                                        <div>
+                                            <label><input type="radio" name="menggunakan_sertifikat" value="ya"
+                                                    {{ $kegiatan->menggunakan_sertifikat == 'ya' ? 'checked' : '' }} style="accent-color: blue;">
+                                                Ya</label>
+                                            <label><input type="radio" name="menggunakan_sertifikat" value="tidak"
+                                                    {{ $kegiatan->menggunakan_sertifikat == 'tidak' ? 'checked' : '' }}
+                                                    style="accent-color: blue;">
+                                                Tidak</label>
+                                        </div>
+                                    </div>
+                                     -->
 
-            <!-- Nomor Sertifikat 
-            <div class="mb-3">
-                <label for="nomor_sertifikat" class="form-label">Nomor Sertifikat (Opsional)</label>
-                <input type="text" name="nomor_sertifikat" id="nomor_sertifikat" class="form-control"
-                    maxlength="255" value="{{ old('nomor_sertifikat', $kegiatan->nomor_sertifikat) }}">
-            </div>
-            -->
+            <!-- Nomor Sertifikat
+                                    <div class="mb-3">
+                                        <label for="nomor_sertifikat" class="form-label">Nomor Sertifikat (Opsional)</label>
+                                        <input type="text" name="nomor_sertifikat" id="nomor_sertifikat" class="form-control"
+                                            maxlength="255" value="{{ old('nomor_sertifikat', $kegiatan->nomor_sertifikat) }}">
+                                    </div>
+                                    -->
 
-            <!-- Nomor Seri Sertifikat 
-            <div class="mb-3">
-                <label for="nomor_seri_sertifikat" class="form-label">Nomor Seri Sertifikat (Opsional)</label>
-                <input type="text" name="nomor_seri_sertifikat" id="nomor_seri_sertifikat" class="form-control"
-                    maxlength="255" value="{{ old('nomor_seri_sertifikat', $kegiatan->nomor_seri_sertifikat) }}">
-            </div>
-            -->
+            <!-- Nomor Seri Sertifikat
+                                    <div class="mb-3">
+                                        <label for="nomor_seri_sertifikat" class="form-label">Nomor Seri Sertifikat (Opsional)</label>
+                                        <input type="text" name="nomor_seri_sertifikat" id="nomor_seri_sertifikat" class="form-control"
+                                            maxlength="255" value="{{ old('nomor_seri_sertifikat', $kegiatan->nomor_seri_sertifikat) }}">
+                                    </div>
+                                    -->
 
-            <!-- Template Sertifikat 
-            <div class="mb-3">
-                <label for="template_sertifikat" class="form-label">Template Sertifikat (Opsional)</label>
-                <input type="text" name="template_sertifikat" id="template_sertifikat" class="form-control"
-                    maxlength="255" value="{{ old('template_sertifikat', $kegiatan->template_sertifikat) }}">
-            </div>
-            -->
+            <!-- Template Sertifikat
+                                    <div class="mb-3">
+                                        <label for="template_sertifikat" class="form-label">Template Sertifikat (Opsional)</label>
+                                        <input type="text" name="template_sertifikat" id="template_sertifikat" class="form-control"
+                                            maxlength="255" value="{{ old('template_sertifikat', $kegiatan->template_sertifikat) }}">
+                                    </div>
+                                    -->
 
-            <!-- Tanggal TTD Sertifikat 
-            <div class="mb-3">
-                <label for="tanggal_ttd_sertifikat" class="form-label">Tanggal TTD Sertifikat (Opsional)</label>
-                <input type="date" name="tanggal_ttd_sertifikat" id="tanggal_ttd_sertifikat" class="form-control"
-                    value="{{ old('tanggal_ttd_sertifikat', $kegiatan->tanggal_ttd_sertifikat) }}">
-            </div>
-            -->
+            <!-- Tanggal TTD Sertifikat
+                                    <div class="mb-3">
+                                        <label for="tanggal_ttd_sertifikat" class="form-label">Tanggal TTD Sertifikat (Opsional)</label>
+                                        <input type="date" name="tanggal_ttd_sertifikat" id="tanggal_ttd_sertifikat" class="form-control"
+                                            value="{{ old('tanggal_ttd_sertifikat', $kegiatan->tanggal_ttd_sertifikat) }}">
+                                    </div>
+                                    -->
 
             <!-- Table for editing Peran -->
             <div class="mb-3">

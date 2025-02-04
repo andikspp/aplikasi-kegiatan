@@ -147,7 +147,7 @@
                                 <td>{{ $p->peran }}</td>
                                 <td>
                                     @if ($p->surat_tugas)
-                                        <a href="{{ asset('public/storage/' . $p->surat_tugas) }}" target="_blank">Lihat
+                                        <a href="{{ asset('storage/' . $p->surat_tugas) }}" target="_blank">Lihat
                                             File</a>
                                     @else
                                         Tidak ada file
@@ -155,7 +155,7 @@
                                 </td>
                                 <td>
                                     @if ($p->tiket)
-                                        <a href="{{ asset('public/storage/' . $p->tiket) }}" target="_blank">Lihat
+                                        <a href="{{ asset('storage/' . $p->tiket) }}" target="_blank">Lihat
                                             File</a>
                                     @else
                                         Tidak ada file
@@ -163,7 +163,7 @@
                                 </td>
                                 <td>
                                     @if ($p->boarding_pass)
-                                        <a href="{{ asset('public/storage/' . $p->boarding_pass) }}" target="_blank">Lihat
+                                        <a href="{{ asset('storage/' . $p->boarding_pass) }}" target="_blank">Lihat
                                             File</a>
                                     @else
                                         Tidak ada file
@@ -171,8 +171,7 @@
                                 </td>
                                 <td>
                                     @if ($p->bukti_perjalanan)
-                                        <a href="{{ asset('public/storage/' . $p->bukti_perjalanan) }}"
-                                            target="_blank">Lihat
+                                        <a href="{{ asset('storage/' . $p->bukti_perjalanan) }}" target="_blank">Lihat
                                             File</a>
                                     @else
                                         Tidak ada file
@@ -180,20 +179,20 @@
                                 </td>
                                 <td>
                                     @if ($p->sppd)
-                                        <a href="{{ asset('public/storage/' . $p->sppd) }}" target="_blank">Lihat
+                                        <a href="{{ asset('storage/' . $p->sppd) }}" target="_blank">Lihat
                                             File</a>
                                     @else
                                         Tidak ada file
                                     @endif
                                 </td>
-                                {{-- <td>
+                                <td>
                                     @if ($p->signature)
-                                        <a href="{{ asset('public/storage/' . $p->signature) }}" target="_blank">Lihat
+                                        <a href="{{ asset('storage/' . $p->signature) }}" target="_blank">Lihat
                                             File</a>
                                     @else
                                         Tidak ada file
                                     @endif
-                                </td> --}}
+                                </td>
                                 <td class="text-center">
                                     <div class="d-flex justify-content-center gap-2">
                                         <a href="{{ route('kegiatan.edit-peserta', $p->id) }}"

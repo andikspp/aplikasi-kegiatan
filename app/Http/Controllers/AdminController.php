@@ -163,8 +163,11 @@ class AdminController extends Controller
         // Fetch the related Kegiatan if needed
         $kegiatan = Kegiatan::findOrFail($peserta->kegiatan_id);
 
+        $peranList = PeranKegiatan::where('id_kegiatan', $peserta->kegiatan_id)
+            ->pluck('peran');
+
         // Pass the peserta and kegiatan data to the view
-        return view('admin.menu.edit-peserta', compact('peserta', 'kegiatan'));
+        return view('admin.menu.edit-peserta', compact('peserta', 'kegiatan', 'peranList'));
     }
 
     public function updatePeserta(Request $request, $id)

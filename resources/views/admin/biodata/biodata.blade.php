@@ -60,7 +60,8 @@
 
         @page {
             size: A4;
-            margin: 20mm; /* Atur margin sesuai kebutuhan */
+            margin: 20mm;
+            /* Atur margin sesuai kebutuhan */
         }
     </style>
 </head>
@@ -140,18 +141,19 @@
 
         <div class="signature">
             <p>Tanda Tangan</p><br><br><br>
-            {{-- @if ($peserta->signature)
+            @if ($peserta->signature)
                 <img src="{{ public_path('storage/' . $peserta->signature) }}"
                     style="max-width: 200px; max-height: 150px;">
-            @else --}}
-
-
-            <p>{{ $peserta->nama_lengkap }}</p>
+                <p>{{ $peserta->nama_lengkap }}</p>
+            @else
+                <p>{{ $peserta->nama_lengkap }}</p>
+            @endif
         </div>
 
         <!-- Page Break -->
         <div class="page-break"></div>
     @endforeach
+
 </body>
 
 </html>
