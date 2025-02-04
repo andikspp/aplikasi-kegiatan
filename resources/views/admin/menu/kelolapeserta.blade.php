@@ -97,7 +97,7 @@
                         <tr>
                             <th>No.</th>
                             <th>Nama Lengkap</th>
-                            <th>NIP</th>
+                            <th>NIP/NIK</th>
                             <th>Tempat Lahir</th>
                             <th>Tanggal Lahir</th>
                             <th>Jenis Kelamin</th>
