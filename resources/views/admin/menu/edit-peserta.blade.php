@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="card-body m-3">
-                        <form action="{{ route('kegiatan.update', ['id' => $kegiatan->id]) }}" method="POST"
+                        <form action="{{ route('kegiatan.update-peserta', ['id' => $peserta->id]) }}" method="POST"
                             enctype="multipart/form-data" id="formPendaftaran">
                             @csrf
                             @method('PUT') <!-- Gunakan method PUT untuk update -->
@@ -304,7 +304,7 @@
 
                             <div class="text-center mt-4 d-flex flex-column align-items-center">
                                 <button type="submit" class="daftar-btn w-50 mb-3">Update</button>
-                                <a href="{{ route('kegiatan.show', $kegiatan->id) }}"
+                                <a href="{{ route('kelolapeserta', $kegiatan->id) }}"
                                     class="btn btn-sm btn-outline-danger" style="width: 25%;">
                                     Kembali
                                 </a>
