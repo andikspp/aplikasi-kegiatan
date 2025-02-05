@@ -137,10 +137,10 @@
         <div class="biodata-item">
             <p class="label">13. Alamat E-Mail</p>
             <p class="value">: {{ $peserta->alamat_email }}</p>
-        </div><br><br><br><br>
+        </div><br><br><br>
 
         <div class="signature">
-            <p>Tanda Tangan</p><br><br><br>
+            <p>Tanda Tangan</p>
             @if ($peserta->signature)
                 <img src="{{ public_path('storage/' . $peserta->signature) }}"
                     style="max-width: 200px; max-height: 150px;">
