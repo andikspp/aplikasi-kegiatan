@@ -8,13 +8,15 @@
             <div class="col-md-4">
                 <div class="card text-center shadow-sm bg-primary text-white mb-4">
                     <div class="card-body">
-                        <h5 class="card-title">
-                            <i class="fas fa-calendar-alt fa-2x"></i> <!-- Ikon Font Awesome -->
-                            <br>Total Kegiatan
-                        </h5>
-                        <p class="card-text mt-3">
-                            <strong>{{ $totalKegiatan }}</strong> <!-- Data total kegiatan -->
-                        </p>
+                        <a href="{{ route('kegiatan') }}" class="text-white">
+                            <h5 class="card-title">
+                                <i class="fas fa-calendar-alt fa-2x"></i> <!-- Ikon Font Awesome -->
+                                <br>Total Kegiatan
+                            </h5>
+                            <p class="card-text mt-3">
+                                <strong>{{ $totalKegiatan }}</strong> <!-- Data total kegiatan -->
+                            </p>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -53,13 +55,15 @@
             <div class="col-md-4">
                 <div class="card text-center shadow-sm bg-danger text-white mb-4">
                     <div class="card-body">
-                        <h5 class="card-title">
-                            <i class="fas fa-user fa-2x mb-2"></i> <!-- Ikon Font Awesome -->
-                            <br>Jumlah Peserta
-                        </h5>
-                        <p class="card-text mt-3">
-                            <strong>{{ $jumlahPeserta }}</strong> <!-- Data kegiatan selesai -->
-                        </p>
+                        <a href="{{ route('kegiatan') }}" class="text-white">
+                            <h5 class="card-title">
+                                <i class="fas fa-user fa-2x mb-2"></i> <!-- Ikon Font Awesome -->
+                                <br>Jumlah Peserta
+                            </h5>
+                            <p class="card-text mt-3">
+                                <strong>{{ $jumlahPeserta }}</strong> <!-- Data kegiatan selesai -->
+                            </p>
+                        </a>
                     </div>
                 </div>
             </div>

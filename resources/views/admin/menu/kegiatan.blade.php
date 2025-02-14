@@ -117,12 +117,13 @@
                                         <li><a class="dropdown-item"
                                                 href="{{ route('hasilkegiatan', ['id' => $kegiatan->id]) }}">Lihat/Ubah</a>
                                         </li>
-                                        <li><a class="dropdown-item" href="#">Daftar Peserta</a></li>
-                                        <li><a class="dropdown-item" href="#">Unggah Ajuan SK Sertifikat</a></li>
-                                        <li><a class="dropdown-item" href="#">Unduh Presensi</a></li>
-                                        <li><a class="dropdown-item" href="#">Unduh Biodata</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('kelolapeserta', ['id' => $kegiatan->id]) }}">Daftar Peserta</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('peserta.export', ['kegiatan_id' => $kegiatan->id]) }}">Unduh Presensi</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('peserta.cetak-biodata', ['kegiatan_id' => $kegiatan->id]) }}">Unduh Biodata</a></li>
+                                        <!--
                                         <li><a class="dropdown-item" href="#">Unduh Sertifikat</a></li>
                                         <li><a class="dropdown-item" href="#">Sebaran Peserta</a></li>
+                                        -->
                                         <li><a class="dropdown-item"
                                                 onclick="copyDaftarKegiatan('{{ route('kegiatan.show', $kegiatan->id) }}')">Salin
                                                 Link Kegiatan</a></li>
